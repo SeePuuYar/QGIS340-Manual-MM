@@ -1,0 +1,535 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>24.2. အချိန်နှင့်တစ်ပြေးညီ လမ်းကြောင်းဆွဲခြင်း (Live GPS tracking) &mdash; QGIS Documentation  documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/qgis_docs.css?v=5415a924" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/togglebutton.css?v=13237357" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
+
+  
+    <link rel="shortcut icon" href="../../../_static/qgis_logo.ico"/>
+    <link rel="canonical" href="https://docs.qgis.org/latest/en/docs/user_manual/working_with_gps/live_GPS_tracking.html"/>
+  <!--[if lt IE 9]>
+    <script src="../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../../../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../../../_static/documentation_options.js?v=5929fcd5"></script>
+        <script src="../../../_static/doctools.js?v=888ff710"></script>
+        <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+        <script src="../../../_static/clipboard.min.js?v=a7894cd8"></script>
+        <script src="../../../_static/copybutton.js?v=f281be69"></script>
+        <script>let toggleHintShow = 'Click to show';</script>
+        <script>let toggleHintHide = 'Click to hide';</script>
+        <script>let toggleOpenOnPrint = 'true';</script>
+        <script src="../../../_static/togglebutton.js?v=4a39c7ea"></script>
+        <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+        <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="next" title="25. အထောက်အထားစိစစ်ခြင်းစနစ် (Authentication System)" href="../auth_system/index.html" />
+    <link rel="prev" title="24.1. GNSS/GPS data များကိုမိတ်ဆက်ခြင်း (Introducing GNSS/GPS Data)" href="plugins_gps.html" />
+  <meta name="description" content="QGIS 3.40 documentation: 24.2. အချိန်နှင့်တစ်ပြေးညီ လမ်းကြောင်းဆွဲခြင်း (Live GPS tracking)">
+  <script>
+    var _paq = window._paq = window._paq || [];
+    _paq.push(["disableCookies"]);
+    _paq.push(['trackPageView']);
+    _paq.push(['enableLinkTracking']);
+    (function() {
+      var u="//matomo.qgis.org/";
+      _paq.push(['setTrackerUrl', u+'matomo.php']);
+      _paq.push(['setSiteId', '1']);
+      var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
+      g.async=true; g.src=u+'matomo.js'; s.parentNode.insertBefore(g,s);
+    })();
+  </script>
+</head>
+
+<body class="wy-body-for-nav">
+
+  <nav class="release_status_topbar">
+  </nav>
+
+   
+
+ 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+   
+
+          
+          
+          <a href="../../index.html" class="icon icon-home">
+            QGIS Documentation
+              <img src="../../../_static/logo.png" class="logo" alt="Logo"/>
+          </a>
+              <div class="version">
+                3.40
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+   <a href= "../../../genindex.html">Index</a>
+ 
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">အသုံးပြုသူများအတွက်</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">QGIS Desktop User Guide/Manual (QGIS 3.40)</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../preamble/preamble.html">1. စကားချီး (Preamble)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../preamble/foreword.html">2. အမှာစာ (Foreword)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../preamble/conventions.html">3. အသုံးအနှုန်းများ (Conventions)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../preamble/features.html">4. အသွင်အပြင်များ (Features)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../introduction/getting_started.html">5. စတင်အသုံးပြုခြင်း (Getting Started)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../introduction/project_files.html">6. Project Files များနှင့် အလုပ်လုပ်ခြင်း (Working with Project Files)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../introduction/qgis_gui.html">7. QGIS ၏အစိတ်အပိုင်းများ (QGIS GUI)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../introduction/browser.html">8. The Browser panel (ရှာဖွေကြည့်ရှုသည့် Panel)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../introduction/qgis_configuration.html">9. QGIS ပြင်ဆင်သတ်မှတ်ခြင်း/အခင်းအကျင်း (QGIS Configuration)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../working_with_projections/working_with_projections.html">10. မြေပုံအရိပ်ချစနစ်များနှင့် အလုပ်လုပ်ခြင်း (Working with Projections)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../map_views/index.html">11. မြေပုံများအား ပုံဖော်ကြည့်ရှုခြင်း (Visualizing Maps)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../introduction/general_tools.html">12. ယေဘုယျ tool များ (General Tools)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../expressions/index.html">13. Expression များဖြင့် အဆင့်မြှင့်တင်ဆောင်ရွက်ခြင်း (Level up with Expressions)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../style_library/index.html">14. Style နှင့်ပတ်သက်သည်များ ထားရှိရာနေရာ (The Style Library)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../managing_data_source/index.html">15. ဒေတာအရင်းအမြစ်များအား စီမံခန့်ခွဲခြင်း (Managing Data Source)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../working_with_vector/index.html">16. Vector data များဖြင့် အလုပ်လုပ်ခြင်း (Working with Vector Data)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../working_with_raster/index.html">17. Raster Data များဖြင့် အလုပ်လုပ်ခြင်း</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../working_with_mesh/mesh.html">18. Mesh Data များနှင့် အလုပ်လုပ်ခြင်း (Working with Mesh Data)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../working_with_vector_tiles/vector_tiles.html">19. Vector Tiles များနှင့်အလုပ်လုပ်ခြင်း (Working with Vector Tiles)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../working_with_point_clouds/point_clouds.html">20. Point Cloud များဖြင့် အလုပ်လုပ်ခြင်း (Working with Point Clouds)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../working_with_3d_tiles/3d_tiles.html">21. 3D Tile များဖြင့် အလုပ်လုပ်ခြင်း (Working with 3D Tiles)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../print_composer/index.html">22. မြေပုံအချောသပ်ပြင်ဆင်ခြင်း (Laying out the maps)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../working_with_ogc/ogc_client_support.html">23. OGC / ISO protocol များဖြင့် အလုပ်လုပ်ခြင်း</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="index.html">24. GPS Data များနှင့် အလုပ်လုပ်ခြင်း</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="plugins_gps.html">24.1. GNSS/GPS data များကိုမိတ်ဆက်ခြင်း (Introducing GNSS/GPS Data)</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">24.2. အချိန်နှင့်တစ်ပြေးညီ လမ်းကြောင်းဆွဲခြင်း (Live GPS tracking)</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#gps-toolbar">24.2.1. GPS toolbar</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#gps-panel-gps-information-panel">24.2.2. GPS အချက်အလက်ပြ Panel (GPS Information Panel)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#connect-to-a-bluetooth-gps-for-live-tracking-live-bluetooth-gps">24.2.3. Connect to a Bluetooth GPS for live tracking (Live လမ်းကြောင်းခြေရာခံရန်အတွက် bluetooth GPS သို့ချိတ်ဆက်ခြင်း)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#qgis-gps-device-examples-of-gps-devices-connection-in-qgis">24.2.4. QGIS ထဲတွင် GPS device များချိတ်ဆက်မှု ဥပမာများ (Examples of GPS devices connection in QGIS)</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../auth_system/index.html">25. အထောက်အထားစိစစ်ခြင်းစနစ် (Authentication System)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../grass_integration/grass_integration.html">26. GRASS GIS Integration (GRASS GIS နှင့်ပေါင်းစပ်အသုံးပြုခြင်း)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../processing/index.html">27. QGIS processing framework</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../processing_algs/index.html">28. Processing ဆိုင်ရာ ထောက်ပံ့ပေးသူများနှင့် Algorithm များ (Processing providers and algorithms)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../plugins/index.html">29. Plugin များ</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../preamble/help_and_support.html">30. အကူအညီနှင့်အထောက်အပံ့ (Help and Support)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../preamble/contributors.html">31. ပါဝင်အားဖြည့်သူများ (Contributors)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../appendices/index.html">32. Appendices (နောက်ဆက်တွဲများ)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../literature_web/literature_and_web_references.html">33. စာတမ်းများနှင့် Website ကိုးကားချက်များ (Literature and Web References)</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../server_manual/index.html">QGIS Server Guide/Manual (QGIS 3.40)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../training_manual/index.html">Training Manual</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../gentle_gis_introduction/index.html">A Gentle Introduction to GIS</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">ရေးသားသူများအတွက်</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../documentation_guidelines/index.html">Documentation Guidelines</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Developer များအတွက်</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../pyqgis_developer_cookbook/index.html">PyQGIS Cookbook (QGIS 3.40)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../developers_guide/index.html">Developers Guide</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">QGIS Documentation</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../index.html">QGIS အသုံးပြုသူလမ်းညွှန် (User Guide)</a></li>
+          <li class="breadcrumb-item"><a href="index.html"><span class="section-number">24. </span>GPS Data များနှင့် အလုပ်လုပ်ခြင်း</a></li>
+      <li class="breadcrumb-item active"><span class="section-number">24.2. </span>အချိန်နှင့်တစ်ပြေးညီ လမ်းကြောင်းဆွဲခြင်း (Live GPS tracking)</li>
+      <li class="wy-breadcrumbs-aside">
+              <a href="https://github.com/qgis/QGIS-Documentation/blob/master/docs/user_manual/working_with_gps/live_GPS_tracking.rst" class="fa fa-github"> Edit on GitHub</a>
+      </li>
+  </ul><div class="rst-breadcrumbs-buttons" role="navigation" aria-label="Sequential page navigation">
+        <a href="plugins_gps.html" class="btn btn-neutral float-left" title="24.1. GNSS/GPS data များကိုမိတ်ဆက်ခြင်း (Introducing GNSS/GPS Data)" accesskey="p"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="../auth_system/index.html" class="btn btn-neutral float-right" title="25. အထောက်အထားစိစစ်ခြင်းစနစ် (Authentication System)" accesskey="n">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+  </div>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <blockquote>
+<div></div></blockquote>
+<section id="live-gps-tracking">
+<span id="sec-gpstracking"></span><span id="index-0"></span><h1><span class="section-number">24.2. </span>အချိန်နှင့်တစ်ပြေးညီ လမ်းကြောင်းဆွဲခြင်း (Live GPS tracking)<a class="headerlink" href="#live-gps-tracking" title="Link to this heading"></a></h1>
+<nav class="contents local" id="contents">
+<ul class="simple">
+<li><p><a class="reference internal" href="#gps-toolbar" id="id6">GPS toolbar</a></p></li>
+<li><p><a class="reference internal" href="#gps-panel-gps-information-panel" id="id7">GPS အချက်အလက်ပြ Panel (GPS Information Panel)</a></p>
+<ul>
+<li><p><a class="reference internal" href="#position-and-additional-attributes" id="id8">နေရာနှင့်အပိုအချက်အလက်များ (Position and additional attributes)</a></p></li>
+<li><p><a class="reference internal" href="#signal" id="id9">အချက်ပြလှိုင်း (Signal)</a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="#connect-to-a-bluetooth-gps-for-live-tracking-live-bluetooth-gps" id="id10">Connect to a Bluetooth GPS for live tracking (Live လမ်းကြောင်းခြေရာခံရန်အတွက် bluetooth GPS သို့ချိတ်ဆက်ခြင်း)</a></p></li>
+<li><p><a class="reference internal" href="#qgis-gps-device-examples-of-gps-devices-connection-in-qgis" id="id11">QGIS ထဲတွင် GPS device များချိတ်ဆက်မှု ဥပမာများ (Examples of GPS devices connection in QGIS)</a></p>
+<ul>
+<li><p><a class="reference internal" href="#gpsmap-60cs-using-gpsmap-60cs" id="id12">GPSMAP 60cs ကိုအသုံးပြုခြင်း (Using GPSMAP 60cs)</a></p>
+<ul>
+<li><p><a class="reference internal" href="#ms-windows" id="id13">မိုက်ခရိုဆော့(ဖ်) ဝင်းဒိုး စနစ် (MS Windows)</a></p></li>
+<li><p><a class="reference internal" href="#ubuntu-mint-gnu-linux" id="id14">Ubuntu/Mint GNU/Linux</a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="#btgp-38km-datalogger-bluetooth" id="id15">BTGP-38KM datalogger ကိုအသုံးပြုခြင်း (Bluetooth ပစ္စည်းများအတွက်သာ)</a></p></li>
+<li><p><a class="reference internal" href="#bluemax-gps-4044-datalogger-bluetooth-usb" id="id16">BlueMax GPS-4044 datalogger ကိုအသုံးပြုခြင်း (Bluetooth နှင့် USB ၂ မျိုးလုံးအတွက် အလုပ်လုပ်သည်)</a></p>
+<ul>
+<li><p><a class="reference internal" href="#id2" id="id17">မိုက်ခရိုဆော့(ဖ်)ဝင်းဒိုး စနစ် (MS Windows)</a></p></li>
+<li><p><a class="reference internal" href="#id3" id="id18">Ubuntu/Mint GNU/Linux</a></p></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</nav>
+<p>QGIS တွင် GPS receiver တစ်ခုဖြင့် ကွင်းမြေပုံရေးဆွဲခြင်းလုပ်ဆောင်နိုင်ပါသည်။ ထိုကဲ့သို့သော အချိန်နှင့်တစ်ပြေးညီ လမ်းကြောင်းရေးဆွဲခြင်းကို <a class="reference internal" href="#gps-toolbar"><span class="std std-ref">GPS Toolbar</span></a> ကိုအသုံးပြုပြီးလုပ်ဆောင်နိုင်ပါသည်။ QGIS နှင့် GPS receiver တို့မချိတ်ဆက်မီတွင် <a class="reference internal" href="../introduction/qgis_configuration.html#gps-options"><span class="std std-ref">device configuration</span></a> အချို့ကို လုပ်ဆောင်ရန် လိုအပ်နိုင်ပါသည်။</p>
+<section id="gps-toolbar">
+<span id="id1"></span><h2><a class="toc-backref" href="#id6" role="doc-backlink"><span class="section-number">24.2.1. </span>GPS toolbar</a><a class="headerlink" href="#gps-toolbar" title="Link to this heading"></a></h2>
+<p><span class="guilabel">GPS Toolbar</span> တွင် အချိန်နှင့်တပြေးညီလမ်းကြောင်းရေးဆွဲခြင်းကို ထိန်းချုပ်ရန် အဓိက tool များပါရှိပါသည်။ ၎င်းကို <span class="menuselection">View ► Toolbars ► GPS</span> မှ activate လုပ်နိုင်ပါသည်။ ၎င်းသည် project ၊ GPS ၊ နှင့် လက်ရှိ GPS track အခြေအနေကိုလိုက်ပြီး အဓိပ္ပါယ်ရှိသောအခါမှသာ action များကို လုပ်ဆောင်ပါသည်။ ကိရိယာကို QGIS မှ ရှာဖွေတွေ့ရှိသည်နှင့် အောက်ပါတို့ကို အပြန်အလှန်လုပ်ဆောင်နိုင်ပါလိမ့်မည်-</p>
+<ul>
+<li><p><a class="reference internal" href="../../../_images/mIconGpsConnect.png"><img alt="gpsConnect" src="../../../_images/mIconGpsConnect.png" style="width: 1.5em;" /></a> <sup>Connect to GPS</sup> (GPS သို့ချိတ်ဆက်ခြင်း)</p></li>
+<li><p><a class="reference internal" href="../../../_images/mIconGpsDisconnect.png"><img alt="gpsDisconnect" src="../../../_images/mIconGpsDisconnect.png" style="width: 1.5em;" /></a> <sup>Disconnect from GPS</sup> (GPS နှင့်အချိတ်အဆက်ဖြုတ်ခြင်း)</p></li>
+<li><p><a class="reference internal" href="../../../_images/mActionRecenter.png"><img alt="recenter" src="../../../_images/mActionRecenter.png" style="width: 1.5em;" /></a> <sup>Recenter map on GPS location</sup> - <a class="reference internal" href="#gps-recenter"><span class="std std-ref">အလိုအလျောက် အလယ်ဗဟိုပြန်လုပ်ခြင်း parameter</span></a> ကိုထည့်သွင်းမစဉ်းစားပဲ လက်ရှိ GPS တည်နေရာတွင် မြေပုံကိုချက်ချင်း ဗဟိုပြုပါလိမ့်မည်။</p></li>
+<li><p><a class="reference internal" href="../../../_images/mIconGpsDestinationLayer.png"><img alt="gpsDestinationLayer" src="../../../_images/mIconGpsDestinationLayer.png" style="width: 1.5em;" /></a> <sup>Set destination layer for GPS digitized features</sup> - Feature digitize ပြုလုပ်သောအခါ QGIS သည် Default အနေဖြင့် <span class="guilabel">active layer</span> ကိုကြည့်ပါလိမ့်မည်၊ ဆိုလိုသ်ညမှာ GPS digitizing tool များသည် <span class="guilabel">Layers</span> panel ထဲတွင် select လုပ်ထားသော layer တွင်သာလုပ်ဆောင်ပြီး ဖန်တီးထားသော feature များကို ၎င်း layer ထဲတွင် သိမ်းဆည်းပါလိမ့်မည်။ ဤအရာသည် အချို့သောအကြောင်းအရာများတွင် အသုံးဝင်နိုင်ပါသည်၊ ထို့အပြင် ၎င်းသည် မလိုအပ်သော layer များထဲတွင် feature များမတော်တဆ သိမ်းဆည်းမိခြင်းမဖြစ်စေရန် အခြားသော layer များနှင့်လည်း ဂရုတစိုက်အပြန်အလှန်လုပ်ဆောင်ရန်အတွက်လည်း ရည်ရွယ်ပါသည်။ ဤ option သည် အချိန်နှင့်တပြေးညီခြေရာခံခြင်းအတွင်း data သိမ်းဆည်းရန်အတွက် layer ကို ရှင်းရှင်းလင်းလင်းညွှန်ပြစေနိုင်ပါသည်၊ သင်လိုအပ်ချက်ပေါ်မူတည်ပြီး ပြောင်းလဲပေးနိုင်ပါသည်။ Tool များသည် ရွေးချယ်ထားသော layer အမျိုးအစားနှင့်လည်း လိုက်လျောညီထွေဖြစ်စေပါလိမ့်သည်။</p>
+<p>Feature တစ်ခုကို ဖန်တီးသောအခါ GPS destination layer ကို အလိုအလျောက် တည်းဖြတ်ပြင်ဆင်နိုင်အောင် လုပ်ဆောင်ပေးပြီး အသုံးပြုသူကိုလည်း အကြောင်းကြားပေးပါသည်။</p>
+</li>
+<li><p>Feature ဖန်တီးခြင်းအတွက် action များ-</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="../../../_images/mActionAddTrackPoint.png"><img alt="addTrackPoint" src="../../../_images/mActionAddTrackPoint.png" style="width: 1.5em;" /></a> <sup>Add vertex to GPS track using GPS current location</sup> (GPS လက်ရှိတည်နေရာကိုအသုံးပြုပြီး GPS track တွင် vertex ထည့်သွင်းခြင်း)</p></li>
+<li><p><a class="reference internal" href="../../../_images/mActionCapturePoint.png"><img alt="capturePoint" src="../../../_images/mActionCapturePoint.png" style="width: 1.5em;" /></a> <sup>Create a new point feature at current GPS location</sup> (လက်ရှိ GPS တည်နေရာတွင် point feature အသစ်တစ်ခုဖန်တီးခြင်း)</p></li>
+<li><p><a class="reference internal" href="../../../_images/mActionCaptureLine.png"><img alt="captureLine" src="../../../_images/mActionCaptureLine.png" style="width: 1.5em;" /></a> <sup>Create a new line feature using the current GPS track</sup> (လက်ရှိ GPS track ကိုအသုံးပြုပြီး line feature အသစ်တစ်ခုဖန်တီးခြင်း)</p></li>
+<li><p><a class="reference internal" href="../../../_images/mActionCapturePolygon.png"><img alt="capturePolygon" src="../../../_images/mActionCapturePolygon.png" style="width: 1.5em;" /></a> <sup>Create a new polygon feature using the current GPS track</sup> (လက်ရှိ GPS track ကိုအသုံးပြုပြီး polygon feature အသစ်တစ်ခုဖန်တီးခြင်း)</p></li>
+<li><p><a class="reference internal" href="../../../_images/mActionReset.png"><img alt="reset" src="../../../_images/mActionReset.png" style="width: 1.5em;" /></a> <sup>Reset track</sup> (Track ကို အစမှပြန်စခြင်း)</p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="../../../_images/metadata.png"><img alt="metadata" src="../../../_images/metadata.png" style="width: 1.5em;" /></a> <sup>Show GPS information</sup> - <a class="reference internal" href="#gps-information-panel"><span class="std std-ref">GPS Information</span></a> panel ကိုဖွင့်ပေးပါသည်</p></li>
+<li><p>သင်ကြည့်လိုသော GPS အချက်အလက်များကို အလျင်အမြန်ကြည့်ရှုရန်အတွက် display box တစ်ခုတွင်-</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="../../../_images/unchecked.png"><img alt="unchecked" src="../../../_images/unchecked.png" style="width: 1.3em;" /></a> <sup>Show location</sup></p></li>
+<li><p><a class="reference internal" href="../../../_images/unchecked.png"><img alt="unchecked" src="../../../_images/unchecked.png" style="width: 1.3em;" /></a> <sup>Show altitude (Geoid)</sup></p></li>
+<li><p><a class="reference internal" href="../../../_images/unchecked.png"><img alt="unchecked" src="../../../_images/unchecked.png" style="width: 1.3em;" /></a> <sup>Show altitude (WGS 84 ellipsoid)</sup></p></li>
+<li><p><a class="reference internal" href="../../../_images/unchecked.png"><img alt="unchecked" src="../../../_images/unchecked.png" style="width: 1.3em;" /></a> <sup>Show ground speed</sup></p></li>
+<li><p><a class="reference internal" href="../../../_images/unchecked.png"><img alt="unchecked" src="../../../_images/unchecked.png" style="width: 1.3em;" /></a> <sup>Show bearing</sup></p></li>
+<li><p><a class="reference internal" href="../../../_images/unchecked.png"><img alt="unchecked" src="../../../_images/unchecked.png" style="width: 1.3em;" /></a> <sup>Show total track length</sup></p></li>
+<li><p><a class="reference internal" href="../../../_images/unchecked.png"><img alt="unchecked" src="../../../_images/unchecked.png" style="width: 1.3em;" /></a> <sup>Show distance from start of track</sup></p></li>
+</ul>
+</li>
+</ul>
+<ul id="tracking-settings">
+<li><p><a class="reference internal" href="../../../_images/mActionOptions.png"><img alt="options" src="../../../_images/mActionOptions.png" style="width: 1em;" /></a> <sup>Settings</sup> ခလုတ်ကိုနှိပ်လျှင် အသုံးများသော setting များပါဝင်သည့် drop-down menu တစ်ခုကို ပွင့်လာပါမည်၊ များသောအားဖြင့် ထို setting များကို session အလယ်ပိုင်းတွင် မွမ်းမံပြင်ဆင်ကြပါသည်-</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="../../../_images/unchecked.png"><img alt="unchecked" src="../../../_images/unchecked.png" style="width: 1.3em;" /></a> <span class="guilabel">Show location marker</span></p></li>
+<li><p><a class="reference internal" href="../../../_images/unchecked.png"><img alt="unchecked" src="../../../_images/unchecked.png" style="width: 1.3em;" /></a> <span class="guilabel">Show bearing line</span></p></li>
+<li><p><a class="reference internal" href="../../../_images/unchecked.png"><img alt="unchecked" src="../../../_images/unchecked.png" style="width: 1.3em;" /></a> <span class="guilabel">Rotate map to match GPS direction</span></p></li>
+</ul>
+<ul class="simple" id="gps-recenter">
+<li><p>မြေပုံ recentering ကိုထိန်းချုပ်ရန် ရွေးချယ်စရာများမှာ-</p>
+<ul>
+<li><p><a class="reference internal" href="../../../_images/radiobuttonoff.png"><img alt="radioButtonOff" src="../../../_images/radiobuttonoff.png" style="width: 1.5em;" /></a> <span class="guilabel">Always recenter map</span> - GPS တည်နေရာသည် မြေပုံမြင်ကွင်းအလယ်မှ အကွာအဝေးတစ်ခု (မြေပုံမြင်ကွင်း extent ၏ အချိုးတစ်ခုအနေဖြင့်) ရွေ့သွားသောအခါ မြေပုံကို အမြဲတမ်း recenter (ဗဟိုပြန်လုပ်) ပြုလုပ်မည်ဖြစ်သည်။</p></li>
+<li><p><a class="reference internal" href="../../../_images/radiobuttonon.png"><img alt="radioButtonOn" src="../../../_images/radiobuttonon.png" style="width: 1.5em;" /></a> <span class="guilabel">Recenter map when leaving extent</span> - extent ကိုကျော်လွန်သောအခါ မြေပုံကို recenter ပြုလုပ်ပါမည်။</p></li>
+<li><p><a class="reference internal" href="../../../_images/radiobuttonoff.png"><img alt="radioButtonOff" src="../../../_images/radiobuttonoff.png" style="width: 1.5em;" /></a> <span class="guilabel">Never recenter</span> - ဘယ်သောအခါ မြေပုံကို recenter မပြုလုပ်ပါ။</p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="../../../_images/unchecked.png"><img alt="unchecked" src="../../../_images/unchecked.png" style="width: 1.3em;" /></a> <span class="guilabel">Automatically add track vertices</span> - GPS ကိရိယာမှ တည်နေရာအသစ်များ လက်ခံရရှိသည့်အခါတိုင်း track vertex များအလိုအလျောက်ထည့်သွင်းပါသည်။</p></li>
+<li><p><a class="reference internal" href="../../../_images/unchecked.png"><img alt="unchecked" src="../../../_images/unchecked.png" style="width: 1.3em;" /></a> <span class="guilabel">Automatically save added features</span> - GPS တည်နေရာများမှ ဖန်တီးထားသော feature များကို ၎င်းတို့၏ targer layer များသို့ ချက်ချင်းပို့ဆောင်ပါသည် (လုပ်နေကျ layer edit အဆင့်ကိုကျော်လိုက်ပြီး)</p></li>
+<li><p><span class="guilabel">Time stamp destination</span> - time fix သိမ်းဆည်းရန်အတွက် field ကို ချိန်ညှိရန်</p></li>
+</ul>
+<ul id="gps-logging">
+<li><p><a class="reference internal" href="../../../_images/unchecked.png"><img alt="unchecked" src="../../../_images/unchecked.png" style="width: 1.3em;" /></a> <span class="guilabel">Log to GeoPackage/SpatiaLite…</span> - အမှန်ခြစ်ထားသောအခါ အသုံးပြုသူအား ရှိနေပြီးသား GeoPackage/SpatiaLite ဖိုင်တစ်ခုကိုရွေးချယ်ရန် သို့မဟုတ် ဖိုင်နာမည်အသစ်တစ်ခုထည့်ပေးရန် မေးမြန်းပါလိမ့်မည်။ <code class="docutils literal notranslate"><span class="pre">gps_points</span></code> နှင့် <code class="docutils literal notranslate"><span class="pre">gps_tracks</span></code> ဇယားတစ်ခုကို ကြိုတင်သတ်မှတ်ထားသောဖွဲ့စည်းပုံဖြင့် ဖိုင်ထဲတွင် ဖန်တီးပေးပါလိမ့်မည်။</p>
+<p>ဝင်ရောက်လာသော GPS message များအားလုံးကို GPS မှ အမြန်နှုန်း၊ လားရာ၊ အမြင့်နှင့် တိကျမှုအချက်အလက်များနှင့်အတူ <code class="docutils literal notranslate"><span class="pre">gps_points</span></code> layer တွင် မှတ်တမ်းတင်ပါလိမ့်မည်၊</p>
+<p>GPS သည် အချိတ်အဆက်ပြုတ်သွားသောအခါ (သို့မဟုတ် QGIS ကိုပိတ်လိုက်သောအခါ) record လုပ်ထားသော GPS track တစ်ခုလုံးကို <code class="docutils literal notranslate"><span class="pre">gps_tracks</span></code> ဇယားထဲသို့ ထည့်သွင်းပေးပါလိမ့်မည် (track အလျား၊ စချိန်နှင့် ဆုံးချိန် ကဲ့သို့ တွက်ချက်ထားသောအချက်အလက်အချို့နှင့်အတူ)။</p>
+</li>
+<li><p><a class="reference internal" href="../../../_images/unchecked.png"><img alt="unchecked" src="../../../_images/unchecked.png" style="width: 1.3em;" /></a> <span class="guilabel">Log NMEA sentences…</span> - ကိရိယာမှ raw NMEA စာသားများအားလုံးကို text ဖိုင်တစ်ခုထဲသို့ မှတ်တမ်းသွင်းပေးပါသည်။</p></li>
+<li><p><a class="reference internal" href="../../../_images/mActionOptions.png"><img alt="options" src="../../../_images/mActionOptions.png" style="width: 1em;" /></a> <span class="guilabel">GPS settings…</span> - GPS <a class="reference internal" href="../introduction/qgis_configuration.html#gps-options"><span class="std std-ref">global options</span></a> dialog ကိုအသုံးပြုစေနိုင်ပါသည်။</p></li>
+</ul>
+</li>
+</ul>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p><strong>တည်နေရာအချက်အလက်အကြောင်း အချိန်နှင့်တပြေးညီပြသသည့်ဘား</strong></p>
+<p>GPS စက်တစ်လုံးကိုချိတ်ဆက်လိုက်ပြီး mouse cursor ကို map canvas ပေါ်တွင် ရွှေ့လိုက်သောအခါ mouse cursor မှ GPS တည်နေရာသို့ အကွာအဝေးနှင့် bearing (လားရာအညွှန်းထောင့်) ကို live (အချိန်နှင့်တပြေးညီ) message ဖြင့် ပြသပေးပါသည်။ Project အကွာဝေးနှင့် bearing အပြင်အဆင်များကို ဤမျက်နှာပြင်တွင် ပြသပေးပါသည်။
+Touch screen အသုံးပြုနိုင်သော စက်များတွင် live status ကိုကြည့်ရန်အတွက် ထိပြီးဖိထားလိုက်ပါ။</p>
+</div>
+</section>
+<section id="gps-panel-gps-information-panel">
+<span id="gps-information-panel"></span><h2><a class="toc-backref" href="#id7" role="doc-backlink"><span class="section-number">24.2.2. </span>GPS အချက်အလက်ပြ Panel (GPS Information Panel)</a><a class="headerlink" href="#gps-panel-gps-information-panel" title="Link to this heading"></a></h2>
+<p>QGIS ထဲတွင် အချိန်နှင့်တပြေးညီခြေရာခံခြင်းတစ်ခုကို အပြည့်အဝစောင့်ကြည့်ရန်အတွက် <span class="guilabel">GPS Information Panel</span> ကိုဖွင့်ထားပေးရန်လိုအပ်ပါသည် (<span class="menuselection">View ► Panels ►</span> သို့မဟုတ် <kbd class="kbd compound docutils literal notranslate"><kbd class="kbd docutils literal notranslate">Ctrl</kbd>+<kbd class="kbd docutils literal notranslate">0</kbd></kbd> ကိုနှိပ်ပါ)။</p>
+<p>QGIS နှင့် plug တပ်ထားသော GPS ကိရိယာအကြား ချိတ်ဆက်မှုစတင်ရန် <span class="guilabel">GPS Information Panel</span> ၏ ညာဘက်အပေါ်ထောင့်ရှိ <span class="guilabel">Connect</span> ကိုနှိပ်ပါ၊ သို့မဟုတ် အချိတ်အဆက်ဖြုတ်ရန် <span class="guilabel">Disconnect</span> ကိုနှိပ်ပါ။</p>
+<p>Panel ၏ ဘယ်ဘက်အပေါ်တွင် အောက်ပါခလုတ်များရှိပါသည်-</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="../../../_images/metadata.png"><img alt="metadata" src="../../../_images/metadata.png" style="width: 1.5em;" /></a> <sup>Position</sup> - GPS တည်နေရာနှင့် sensor များအကြောင်း အသေးစိတ်တိုက်ရိုက်ပြသမှု</p></li>
+<li><p><a class="reference internal" href="../../../_images/gpstrack_barchart.png"><img alt="gpsTrackBarChart" src="../../../_images/gpstrack_barchart.png" style="width: 1.5em;" /></a> <sup>Signal</sup> - ဂြိုလ်တုချိတ်ဆက်မှုများ၏ အချက်ပြမှုပြင်းအား (signal strength)</p></li>
+<li><p><a class="reference internal" href="../../../_images/mActionOptions.png"><img alt="options" src="../../../_images/mActionOptions.png" style="width: 1em;" /></a> <sup>Settings</sup> - Session တစ်ခုအတွင်း မွမ်းမံပြင်ဆင်ရန် လိုအပ်ကောင်းလိုအပ်နိုင်မည့် <a class="reference internal" href="#tracking-settings"><span class="std std-ref">live tracking options</span></a> drop-down menu</p></li>
+</ul>
+<section id="position-and-additional-attributes">
+<h3><a class="toc-backref" href="#id8" role="doc-backlink"><span class="section-number">24.2.2.1. </span>နေရာနှင့်အပိုအချက်အလက်များ (Position and additional attributes)</a><a class="headerlink" href="#position-and-additional-attributes" title="Link to this heading"></a></h3>
+<p><a class="reference internal" href="../../../_images/metadata.png"><img alt="metadata" src="../../../_images/metadata.png" style="width: 1.5em;" /></a> <sup>Position</sup> tab ထဲတွင် GPS သည် ဂြိုလ်တုမှ အချက်ပြမှုများကို လက်ခံရယူနေလျှင် တည်နေရာ၏ လတ္တီကျု၊ လောင်ဂျီကျု နှင့် အမြင့်များကို ထပ်ပေါင်းအချက်အလက်များနှင့်အတူ တွေ့မြင်ရပါမည်။</p>
+<figure class="align-center" id="id4">
+<span id="figure-gps-position"></span><img alt="../../../_images/gpstrack_main.png" src="../../../_images/gpstrack_main.png" />
+<figcaption>
+<p><span class="caption-number">Fig. 24.3 </span><span class="caption-text">GPS လမ်းကြောင်းဆွဲခြင်းတည်နေရာနှင့် ထပ်ဆောင်းအချက်အလက်များ</span><a class="headerlink" href="#id4" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<ul class="simple">
+<li><p><span class="guilabel">Latitude</span></p></li>
+<li><p><span class="guilabel">Longitude</span></p></li>
+<li><p><span class="guilabel">Altitude (Geoid)</span> - ပျမ်းမျှပင်လယ်ရေမျက်နှာပြင် အထက် သို့မဟုတ် အောက်ရှိ Altitude/elevation</p></li>
+<li><p><span class="guilabel">Altitude (WGS 84 ellipsoid)</span> - WGS-84 Earth ellipsoid အထက် သို့မဟုတ် အောက်ရှိ Altitude/elevation</p></li>
+<li><p><span class="guilabel">Geoidal separation</span> - WGS-84 Earth ellipsoid နှင့် ပျမ်းမျှပင်လယ်ရေမျက်နှာပြင် (geoid) အကြားခြားနားချက်၊ <code class="docutils literal notranslate"><span class="pre">-</span></code> သည် ပျမ်းမျှပင်လယ်ရေမျက်နှာပြင်သည် ellipsoid အောက် ရောက်သည်ဟု ဆိုလိုပါသည်။</p></li>
+<li><p><span class="guilabel">Time of fix</span></p></li>
+<li><p><span class="guilabel">Speed</span> - မြေပြင်အမြန်နှုန်း</p></li>
+<li><p><span class="guilabel">Direction</span> - True north မှ သွားလာသည့်လားရာသို့ နာရီလက်တံအတိုင်း ဒီဂရီဖြင့်တိုင်းတာသော Bearing</p></li>
+<li><p><span class="guilabel">HDOP</span> - Horizontal dilution of precision (ရေပြင်ညီအတိုင်း တိကျမှု လျော့ကျခြင်း)</p></li>
+<li><p><span class="guilabel">VDOP</span> - Vertical dilution of precision (ဒေါင်လိုက်အတိုင်း တိကျမှု လျော့ကျခြင်း)</p></li>
+<li><p><span class="guilabel">PDOP</span> - Dilution of precision (တိကျမှု လျော့ကျခြင်း)</p></li>
+<li><p><span class="guilabel">H accuracy</span> - မီတာဖြင့် ရေပြင်ညီတိကျမှု</p></li>
+<li><p><span class="guilabel">V accuracy</span> - မီတာဖြင့် ဒေါင်လိုက်တိကျမှု</p></li>
+<li><p><span class="guilabel">3D accuracy</span> - မီတာဖြင့် 3D Root Mean Square (RMS)</p></li>
+<li><p><span class="guilabel">Mode</span> - GPS receiver configuration 2D/3D mode ၊ <code class="docutils literal notranslate"><span class="pre">automatic</span></code> သို့မဟုတ် <code class="docutils literal notranslate"><span class="pre">manual</span></code> ဖြစ်နိုင်ပါသည်</p></li>
+<li><p><span class="guilabel">Dimensions</span> - Position fix dimension ၊ <code class="docutils literal notranslate"><span class="pre">2D</span></code> ၊ <code class="docutils literal notranslate"><span class="pre">3D</span></code> သို့မဟုတ် <code class="docutils literal notranslate"><span class="pre">No</span> <span class="pre">fix</span></code> ဖြစ်နိုင်ပါသည်</p></li>
+<li><p><span class="guilabel">Quality</span> - တည်နေရာပြသမှု အရည်အသွေးအညွှန်း</p></li>
+<li><p><span class="guilabel">Status</span> - Position fix status ၊ <code class="docutils literal notranslate"><span class="pre">Valid</span></code> သို့မဟုတ် <code class="docutils literal notranslate"><span class="pre">Invalid</span></code> ဖြစ်နိုင်ပါသည်</p></li>
+<li><p><span class="guilabel">Satellites</span> - မူသေတည်နေရာရရှိရန်အတွက် အသုံးပြုသော ဂြိုလ်တုအရေအတွက်</p></li>
+<li><p><span class="guilabel">Total track length</span> - လက်ရှိ GPS track ၏ စုစုပေါင်းအကွာအဝေး</p></li>
+<li><p><span class="guilabel">Distance from start of track</span> - လက်ရှိ GPS track ရှိ ပထမဆုံး vertex မှ နောက်ဆုံး vertex သို့ တိုက်ရိုက်အကွာအဝေး</p></li>
+</ul>
+</section>
+<section id="signal">
+<h3><a class="toc-backref" href="#id9" role="doc-backlink"><span class="section-number">24.2.2.2. </span>အချက်ပြလှိုင်း (Signal)</a><a class="headerlink" href="#signal" title="Link to this heading"></a></h3>
+<p><a class="reference internal" href="../../../_images/gpstrack_barchart.png"><img alt="gpsTrackBarChart" src="../../../_images/gpstrack_barchart.png" style="width: 1.5em;" /></a> <sup>Signal</sup> tab ထဲတွင် အချက်ပြလှိုင်းများ ထုတ်လွှင့်နေသော ဂြိုလ်တုများ၏ အချက်ပြမှုပြင်းအား (signal strength) ကို မြင်တွေ့နိုင်ပါသည်။</p>
+<figure class="align-center" id="id5">
+<span id="figure-gps-strength"></span><img alt="../../../_images/gpstrack_strength.png" src="../../../_images/gpstrack_strength.png" />
+<figcaption>
+<p><span class="caption-number">Fig. 24.4 </span><span class="caption-text">GPS tracking အချက်ပြမှုပြင်းအား</span><a class="headerlink" href="#id5" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+</section>
+</section>
+<section id="connect-to-a-bluetooth-gps-for-live-tracking-live-bluetooth-gps">
+<h2><a class="toc-backref" href="#id10" role="doc-backlink"><span class="section-number">24.2.3. </span>Connect to a Bluetooth GPS for live tracking (Live လမ်းကြောင်းခြေရာခံရန်အတွက် bluetooth GPS သို့ချိတ်ဆက်ခြင်း)</a><a class="headerlink" href="#connect-to-a-bluetooth-gps-for-live-tracking-live-bluetooth-gps" title="Link to this heading"></a></h2>
+<p>ကွင်း data များကောက်ယူစုဆောင်းခြင်းအတွက် QGIS နှင့် bluetooth GPS ကိုချိတ်ဆက်နိုင်ပါသည်။ ထိုသို့လုပ်ဆောင်ရန် GPS Bluetooth device တစ်ခုနှင့် ကွန်ပျူတာတွင် Bluetooth receiver တစ်ခုလိုအပ်ပါသည်။</p>
+<p>ပထမဆုံးအနေခြင့် GPS device ကို ကွန်ပျူတာက သိအောင်လုပ်ပြီး ကွန်ပျူတာနှင့် ချိတ်ဆက်ရပါမည်။ GPS ကိုဖွင့်ပြီး notification area ထဲရှိ Bluetooth icon ကိုသွား၍ device အသစ်တစ်ခုကိုရှာပါ။</p>
+<p>အသုံးပြုနိုင်သောစာရင်းထဲတွင် မိမိ၏ GPS ပေါ်နေစေရန် Device ၏ ညာဘက်ခြမ်းတွင် ရွေးချယ်ခြင်း mask သည် device များအားလုံးရွေးချယ်ထားခြင်းကို သေချာအောင်လုပ်ဆောင်ပေးပါသည်။ နောက်တစ်ဆင့်တွင် serial connecion service ရရှိသင့်မည်ဖြစ်ပြီး ၎င်းကိုရွေးချယ်ကာ <span class="guilabel">Configure (စိတ်ကြိုက်ပြင်ဆင်ခြင်း)</span> ခလုတ်ကိုနှိပ်ပါ။</p>
+<p>Bluetooth property များဖြင့်ရလာသော GPS ချိတ်ဆက်မှုကိုသတ်မှတ်ပေးထားသော COM port အရေအတွက်ကို မှတ်သားထားပါ။</p>
+<p>GPS ကို ကွန်ပျူတာမှ သိရှိပြီးသည်နှင့် ချိတ်ဆက်ခြင်းလုပ်ဆောင်ပါ။ များသောအားဖြင့် ချိတ်ဆက်ရန်အသုံးပြုသော ဂဏန်းမှာ <code class="docutils literal notranslate"><span class="pre">0000</span></code> ဖြစ်ပါသည်။</p>
+<p><span class="guilabel">GPS information</span> panel ကိုဖွင့်ပြီး <a class="reference internal" href="../../../_images/mActionOptions.png"><img alt="options" src="../../../_images/mActionOptions.png" style="width: 1em;" /></a> GPS options screen သို့ပြောင်းလဲပါ။ GPS ချိတ်ဆက်မှုအတွက် သတ်မှတ်ပေးထားသော COM port ကိုရွေးချယ်ပြီး <span class="guilabel">Connect (ချိတ်ဆက်ပါ)</span> ကို နှိပ်ပါ။ ခဏကြာပြီးနောက် မိမိ၏တည်နေရာကိုဖော်ပြနေသည့် cursor တည်နေရာတစ်ခု ပေါ်လာပါလိမ့်မည်။</p>
+<p>QGIS သည် GPS data များကိုလက်မခံနိုင်လျှင် GPS ကို ပိတ်ပြီးပြန်ဖွင့်သင့်ပါသည်။ ၅ စက္ကန့်မှ ၁၀ စက္ကန့်လောက်ထိ စောင့်ပြီး ထပ်မံချိတ်ဆက်ကြည့်ပါ။ များသောအားဖြင့် ဒီနည်းလမ်းဖြင့် ပြဿနာကိုဖြေရှင်းနိုင်ပါသည်။ ချိတ်ဆက်မှုပြဿနာထပ်မံရှိနေဆဲဆိုလျှင် ၎င်း GPS ချိတ်ဆက်နေသော တခြား Bluetooth device တစ်ခု အနီးအနားတွင် ရှိမရှိ စစ်ဆေးပြီး ချိတ်ဆက်မှုဖြုတ်ပစ်ပါ။</p>
+</section>
+<section id="qgis-gps-device-examples-of-gps-devices-connection-in-qgis">
+<h2><a class="toc-backref" href="#id11" role="doc-backlink"><span class="section-number">24.2.4. </span>QGIS ထဲတွင် GPS device များချိတ်ဆက်မှု ဥပမာများ (Examples of GPS devices connection in QGIS)</a><a class="headerlink" href="#qgis-gps-device-examples-of-gps-devices-connection-in-qgis" title="Link to this heading"></a></h2>
+<section id="gpsmap-60cs-using-gpsmap-60cs">
+<h3><a class="toc-backref" href="#id12" role="doc-backlink"><span class="section-number">24.2.4.1. </span>GPSMAP 60cs ကိုအသုံးပြုခြင်း (Using GPSMAP 60cs)</a><a class="headerlink" href="#gpsmap-60cs-using-gpsmap-60cs" title="Link to this heading"></a></h3>
+<section id="ms-windows">
+<h4><a class="toc-backref" href="#id13" role="doc-backlink">မိုက်ခရိုဆော့(ဖ်) ဝင်းဒိုး စနစ် (MS Windows)</a><a class="headerlink" href="#ms-windows" title="Link to this heading"></a></h4>
+<p>၎င်းအလုပ်လုပ်ဆောင်ရန် အလွယ်ကူဆုံးနည်းလမ်းမှာ <cite>GPSGate &lt;https://gpsgate.com/gpsgate-splitter&gt;</cite> ဟုခေါ်သော middleware (freeware၊ not open) ကိုအသုံးပြုခြင်းဖြစ်ပါသည်။</p>
+<p>Program ကိုဖွင့်ပြီး GPS device များကိုရှာပါ (USB နှင့် bluetooth ၂ မျိုးလုံးအတွက် အလုပ်လုပ်ပါသည်)၊ ထို့နောက် QGIS ထဲတွင်-</p>
+<ol class="arabic simple">
+<li><p><span class="menuselection">Settings ► Options ► GPS</span> ထဲတွင် plug တပ်ထားသော ကိရိယာကို ရှာဖွေပါ။ <a class="reference internal" href="../../../_images/radiobuttonon.png"><img alt="radioButtonOn" src="../../../_images/radiobuttonon.png" style="width: 1.5em;" /></a> <span class="guilabel">Autodetect</span> mode ကိုအသုံးပြုနိုင်ပါသည်။</p></li>
+<li><p><span class="guilabel">GPS Information</span> panel ထဲတွင် <span class="guilabel">Connect</span> ကိုနှိပ်ပါ။</p></li>
+</ol>
+</section>
+<section id="ubuntu-mint-gnu-linux">
+<h4><a class="toc-backref" href="#id14" role="doc-backlink">Ubuntu/Mint GNU/Linux</a><a class="headerlink" href="#ubuntu-mint-gnu-linux" title="Link to this heading"></a></h4>
+<p>Window ကွန်ပျူတာများအတွက်ကဲ့သို့ အလွယ်ကူဆုံးနည်းလမ်းမှာ အလယ်ရှိ server တစ်ခုကို အသုံးပြုရန်ဖြစ်ပြီး ယခု OS များအတွက်တော့ GPSD ဖြစ်ပါသည်။ ထို့ကြောင့် -</p>
+<ol class="arabic">
+<li><p>Install the program</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">sudo</span> <span class="n">apt</span> <span class="n">install</span> <span class="n">gpsd</span>
+</pre></div>
+</div>
+</li>
+<li><p>ထို့နောက် <code class="docutils literal notranslate"><span class="pre">garmin_gps</span></code> kernel module ကိုခေါ်ယူထည့်သွင်းပါ။</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">sudo</span> <span class="n">modprobe</span> <span class="n">garmin_gps</span>
+</pre></div>
+</div>
+</li>
+<li><p>ထို့နောက် unit ကိုချိတ်ဆက်ပါ။ Unit မှ အသုံးပြုနေသော တကယ့် device ကို <code class="docutils literal notranslate"><span class="pre">dmesg</span></code> ဖြင့်စစ်ဆေးပါ၊ ဥပမာ- <code class="docutils literal notranslate"><span class="pre">/dev/ttyUSB0</span></code>။</p></li>
+<li><p>ထို့နောက် gpsd ကို စတင်ဖွင့်နိုင်ပါပြီ။</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">gpsd</span> <span class="o">/</span><span class="n">dev</span><span class="o">/</span><span class="n">ttyUSB0</span>
+</pre></div>
+</div>
+</li>
+<li><p>နောက်ဆုံးအဆင့်အဖြစ် QGIS live tracking tool နှင့်ချိတ်ဆက်ပါ။</p></li>
+</ol>
+</section>
+</section>
+<section id="btgp-38km-datalogger-bluetooth">
+<h3><a class="toc-backref" href="#id15" role="doc-backlink"><span class="section-number">24.2.4.2. </span>BTGP-38KM datalogger ကိုအသုံးပြုခြင်း (Bluetooth ပစ္စည်းများအတွက်သာ)</a><a class="headerlink" href="#btgp-38km-datalogger-bluetooth" title="Link to this heading"></a></h3>
+<p>Linux အတွက် GPSD ကို အသုံးပြုခြင်း သို့မဟုတ် Window အတွက် GPSGate သည် အားစိုက်ထုတ်ရန်မလိုအပ်ပါ။</p>
+</section>
+<section id="bluemax-gps-4044-datalogger-bluetooth-usb">
+<h3><a class="toc-backref" href="#id16" role="doc-backlink"><span class="section-number">24.2.4.3. </span>BlueMax GPS-4044 datalogger ကိုအသုံးပြုခြင်း (Bluetooth နှင့် USB ၂ မျိုးလုံးအတွက် အလုပ်လုပ်သည်)</a><a class="headerlink" href="#bluemax-gps-4044-datalogger-bluetooth-usb" title="Link to this heading"></a></h3>
+<section id="id2">
+<h4><a class="toc-backref" href="#id17" role="doc-backlink">မိုက်ခရိုဆော့(ဖ်)ဝင်းဒိုး စနစ် (MS Windows)</a><a class="headerlink" href="#id2" title="Link to this heading"></a></h4>
+<p>GPSGate သို့မဟုတ် ၎င်းမပါလျှင်ပင် live tracking သည် USB နှင့် Bluetooth ၂ မျိုးလုံးအတွက် အလုပ်လုပ်ပါသည်။ <a class="reference internal" href="../../../_images/radiobuttonon.png"><img alt="radioButtonOn" src="../../../_images/radiobuttonon.png" style="width: 1.5em;" /></a> <span class="guilabel">Autodetect</span> mode ကို အသုံးပြုပါ သို့မဟုတ် မှန်ကန်သော port ကို ညွှန်ပေးပါ။</p>
+</section>
+<section id="id3">
+<h4><a class="toc-backref" href="#id18" role="doc-backlink">Ubuntu/Mint GNU/Linux</a><a class="headerlink" href="#id3" title="Link to this heading"></a></h4>
+<p><strong>USB အတွက် (For USB)</strong></p>
+<p>Live tracking သည် QGIS live tracking tool ကို device နှင့် တိုက်ရိုက်ချိတ်ဆက်ခြင်းဖြင့် GPSD အသုံးပြုပြီးသော်လည်းကောင်း သို့မဟုတ် GPSD မသုံးပဲသော်လည်းကောင်း  ၂ မျိုးလုံးနှင့် အလုပ်လုပ်ပါသည်။ (ဥပမာ- <code class="docutils literal notranslate"><span class="pre">/dev/ttyACM3</span></code>)</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">gpsd</span> <span class="o">/</span><span class="n">dev</span><span class="o">/</span><span class="n">ttyACM3</span>
+</pre></div>
+</div>
+<p><strong>Bluetooth အတွက် (For Bluetooth)</strong></p>
+<p>Live tracking သည် QGIS live tracking tool ကို device နှင့် တိုက်ရိုက်ချိတ်ဆက်ခြင်းဖြင့် GPSD အသုံးပြုပြီးသော်လည်းကောင်း သို့မဟုတ် GPSD မသုံးပဲသော်လည်းကောင်း  ၂ မျိုးလုံးနှင့် အလုပ်လုပ်ပါသည်။ (ဥပမာ- <code class="docutils literal notranslate"><span class="pre">/dev/rfcomm0</span></code>)</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">gpsd</span> <span class="o">/</span><span class="n">dev</span><span class="o">/</span><span class="n">rfcomm0</span>
+</pre></div>
+</div>
+</section>
+</section>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="plugins_gps.html" class="btn btn-neutral float-left" title="24.1. GNSS/GPS data များကိုမိတ်ဆက်ခြင်း (Introducing GNSS/GPS Data)" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="../auth_system/index.html" class="btn btn-neutral float-right" title="25. အထောက်အထားစိစစ်ခြင်းစနစ် (Authentication System)" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2002-now, QGIS project.
+      <span class="lastupdated">Last updated on 2025 Feb 19, 10:27 +0630.
+      </span></p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <!-- Transifex follows a particular logic to build target pages:
+Expected French translation link for https://docs.qgis.org/3.28/en/docs/user_manual/print_composer/overview_composer.html
+would return https://app.transifex.com/qgis/qgis-documentation/translate/#fr/aa6d8bc653526d38b295ca94bf8eee5e
+with the md5 value of "github#qgis/QGIS-Documentation#release_3.28#locale/en/LC_MESSAGES/docs/user_manual/print_composer/overview_composer.po"-->
+<!--Make sure that mismatching language codes between Transifex and Sphinx are converted-->
+
+
+  <div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      <span class="fa fa-info-circle"> QGIS Documentation </span>
+      v: 3.40
+      <span class="fa fa-caret-down"></span>
+    </span>
+
+    <div class="rst-other-versions">
+      <dl>
+        <dt>Languages</dt>
+        
+          <dd><a href="https://docs.qgis.org/3.40/en/docs/user_manual/working_with_gps/live_GPS_tracking.html">en</a></dd>
+        
+      </dl>
+
+      <dl>
+        <dt>Versions</dt>
+        
+          <dd><a href="https://docs.qgis.org/testing/en/docs/user_manual/working_with_gps/live_GPS_tracking.html">testing</a></dd>
+        
+          <dd><a href="https://docs.qgis.org/latest/en/docs/user_manual/working_with_gps/live_GPS_tracking.html">latest</a></dd>
+        
+          <dd><a href="https://docs.qgis.org/3.40/en/docs/user_manual/working_with_gps/live_GPS_tracking.html">3.40</a></dd>
+        
+          <dd><a href="https://docs.qgis.org/3.34/en/docs/user_manual/working_with_gps/live_GPS_tracking.html">3.34</a></dd>
+        
+          <dd><a href="https://docs.qgis.org/3.28/en/docs/user_manual/working_with_gps/live_GPS_tracking.html">3.28</a></dd>
+        
+          <dd><a href="https://docs.qgis.org/3.22/en/docs/user_manual/working_with_gps/live_GPS_tracking.html">3.22</a></dd>
+        
+          <dd><a href="https://docs.qgis.org/3.16/en/docs/user_manual/working_with_gps/live_GPS_tracking.html">3.16</a></dd>
+        
+          <dd><a href="https://docs.qgis.org/3.10/en/docs/user_manual/working_with_gps/live_GPS_tracking.html">3.10</a></dd>
+        
+          <dd><a href="https://docs.qgis.org/3.4/en/docs/user_manual/working_with_gps/live_GPS_tracking.html">3.4</a></dd>
+        
+          <dd><a href="https://docs.qgis.org/2.18/en/docs/user_manual/working_with_gps/live_GPS_tracking.html">2.18</a></dd>
+        
+      </dl>
+
+       
+       <dl>
+        <dt>Downloads</dt>
+        
+          <dd><a href="https://docs.qgis.org/3.40/pdf">PDF</a></dd>
+        
+          <dd><a href="https://docs.qgis.org/3.40/zip">HTML</a></dd>
+        
+      </dl>
+      
+
+      
+       
+      <dl>
+        <dt>Contribute to Docs</dt>
+          <dd>
+            <a href="https://github.com/qgis/QGIS-Documentation/edit/master/docs/user_manual/working_with_gps/live_GPS_tracking.rst" target="_blank" rel="noopener noreferrer">Edit on GitHub</a>
+          </dd>
+          
+          
+          <dd>
+            <a href="https://app.transifex.com/qgis/qgis-documentation/translate/#en/1fdcef4962058a371fc28f13a3f81d32" target="_blank" rel="noopener noreferrer">Translate Page</a>
+          </dd>
+          
+          <dd>
+            <a href="https://github.com/qgis/QGIS-Documentation/issues" target="_blank" rel="noopener noreferrer">Report Issue</a>
+          </dd>
+      </dl>
+      
+
+      <dl>
+        <dt>On QGIS Project</dt>
+          <dd>
+            <a href="https://qgis.org" target="_blank" rel="noopener noreferrer">Home</a>
+          </dd>
+          <dd>
+            <a href="https://qgis.org/api/3.40" target="_blank" rel="noopener noreferrer">C++ API</a>
+          </dd>
+          <dd>
+            <a href="https://qgis.org/pyqgis/3.40" target="_blank" rel="noopener noreferrer">PyQGIS API</a>
+          </dd>
+          <dd>
+            <a href="https://github.com/qgis/QGIS/tree/release-3_40" target="_blank" rel="noopener noreferrer">Source</a>
+          </dd>
+      </dl>
+
+    </div>
+  </div><script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

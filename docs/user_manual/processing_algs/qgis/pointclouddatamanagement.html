@@ -1,0 +1,1486 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>28.1.13. Point Cloud Data စီမံခန့်ခွဲခြင်း (Point Cloud Data Management) &mdash; QGIS Documentation  documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/css/qgis_docs.css?v=5415a924" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/togglebutton.css?v=13237357" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/copybutton.css?v=76b2166b" />
+
+  
+    <link rel="shortcut icon" href="../../../../_static/qgis_logo.ico"/>
+    <link rel="canonical" href="https://docs.qgis.org/latest/en/docs/user_manual/processing_algs/qgis/pointclouddatamanagement.html"/>
+  <!--[if lt IE 9]>
+    <script src="../../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../../../../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../../../../_static/documentation_options.js?v=5929fcd5"></script>
+        <script src="../../../../_static/doctools.js?v=888ff710"></script>
+        <script src="../../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+        <script src="../../../../_static/clipboard.min.js?v=a7894cd8"></script>
+        <script src="../../../../_static/copybutton.js?v=f281be69"></script>
+        <script>let toggleHintShow = 'Click to show';</script>
+        <script>let toggleHintHide = 'Click to hide';</script>
+        <script>let toggleOpenOnPrint = 'true';</script>
+        <script src="../../../../_static/togglebutton.js?v=4a39c7ea"></script>
+        <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+        <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../search.html" />
+    <link rel="next" title="28.1.14. Point Cloud ထဲမှ ဆွဲထုတ်ခြင်း (Point Cloud Extraction)" href="pointcloudextraction.html" />
+    <link rel="prev" title="28.1.12. Point Cloud ပြောင်းလဲခြင်း (Point Cloud Conversion)" href="pointcloudconversion.html" />
+  <meta name="description" content="QGIS 3.40 documentation: 28.1.13. Point Cloud Data စီမံခန့်ခွဲခြင်း (Point Cloud Data Management)">
+  <script>
+    var _paq = window._paq = window._paq || [];
+    _paq.push(["disableCookies"]);
+    _paq.push(['trackPageView']);
+    _paq.push(['enableLinkTracking']);
+    (function() {
+      var u="//matomo.qgis.org/";
+      _paq.push(['setTrackerUrl', u+'matomo.php']);
+      _paq.push(['setSiteId', '1']);
+      var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
+      g.async=true; g.src=u+'matomo.js'; s.parentNode.insertBefore(g,s);
+    })();
+  </script>
+</head>
+
+<body class="wy-body-for-nav">
+
+  <nav class="release_status_topbar">
+  </nav>
+
+   
+
+ 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+   
+
+          
+          
+          <a href="../../../index.html" class="icon icon-home">
+            QGIS Documentation
+              <img src="../../../../_static/logo.png" class="logo" alt="Logo"/>
+          </a>
+              <div class="version">
+                3.40
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+   <a href= "../../../../genindex.html">Index</a>
+ 
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">အသုံးပြုသူများအတွက်</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="../../index.html">QGIS Desktop User Guide/Manual (QGIS 3.40)</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../../preamble/preamble.html">1. စကားချီး (Preamble)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../preamble/foreword.html">2. အမှာစာ (Foreword)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../preamble/conventions.html">3. အသုံးအနှုန်းများ (Conventions)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../preamble/features.html">4. အသွင်အပြင်များ (Features)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../introduction/getting_started.html">5. စတင်အသုံးပြုခြင်း (Getting Started)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../introduction/project_files.html">6. Project Files များနှင့် အလုပ်လုပ်ခြင်း (Working with Project Files)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../introduction/qgis_gui.html">7. QGIS ၏အစိတ်အပိုင်းများ (QGIS GUI)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../introduction/browser.html">8. The Browser panel (ရှာဖွေကြည့်ရှုသည့် Panel)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../introduction/qgis_configuration.html">9. QGIS ပြင်ဆင်သတ်မှတ်ခြင်း/အခင်းအကျင်း (QGIS Configuration)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../working_with_projections/working_with_projections.html">10. မြေပုံအရိပ်ချစနစ်များနှင့် အလုပ်လုပ်ခြင်း (Working with Projections)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../map_views/index.html">11. မြေပုံများအား ပုံဖော်ကြည့်ရှုခြင်း (Visualizing Maps)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../introduction/general_tools.html">12. ယေဘုယျ tool များ (General Tools)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../expressions/index.html">13. Expression များဖြင့် အဆင့်မြှင့်တင်ဆောင်ရွက်ခြင်း (Level up with Expressions)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../style_library/index.html">14. Style နှင့်ပတ်သက်သည်များ ထားရှိရာနေရာ (The Style Library)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../managing_data_source/index.html">15. ဒေတာအရင်းအမြစ်များအား စီမံခန့်ခွဲခြင်း (Managing Data Source)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../working_with_vector/index.html">16. Vector data များဖြင့် အလုပ်လုပ်ခြင်း (Working with Vector Data)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../working_with_raster/index.html">17. Raster Data များဖြင့် အလုပ်လုပ်ခြင်း</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../working_with_mesh/mesh.html">18. Mesh Data များနှင့် အလုပ်လုပ်ခြင်း (Working with Mesh Data)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../working_with_vector_tiles/vector_tiles.html">19. Vector Tiles များနှင့်အလုပ်လုပ်ခြင်း (Working with Vector Tiles)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../working_with_point_clouds/point_clouds.html">20. Point Cloud များဖြင့် အလုပ်လုပ်ခြင်း (Working with Point Clouds)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../working_with_3d_tiles/3d_tiles.html">21. 3D Tile များဖြင့် အလုပ်လုပ်ခြင်း (Working with 3D Tiles)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../print_composer/index.html">22. မြေပုံအချောသပ်ပြင်ဆင်ခြင်း (Laying out the maps)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../working_with_ogc/ogc_client_support.html">23. OGC / ISO protocol များဖြင့် အလုပ်လုပ်ခြင်း</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../working_with_gps/index.html">24. GPS Data များနှင့် အလုပ်လုပ်ခြင်း</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../auth_system/index.html">25. အထောက်အထားစိစစ်ခြင်းစနစ် (Authentication System)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../grass_integration/grass_integration.html">26. GRASS GIS Integration (GRASS GIS နှင့်ပေါင်းစပ်အသုံးပြုခြင်း)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../processing/index.html">27. QGIS processing framework</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../index.html">28. Processing ဆိုင်ရာ ထောက်ပံ့ပေးသူများနှင့် Algorithm များ (Processing providers and algorithms)</a><ul class="current">
+<li class="toctree-l3 current"><a class="reference internal" href="index.html">28.1. QGIS algorithm ထောက်ပံ့ပေးသူ (QGIS algorithm provider)</a><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="3dtiles.html">28.1.1. 3D Tile များ</a></li>
+<li class="toctree-l4"><a class="reference internal" href="cartography.html">28.1.2. မြေပုံရေးဆွဲခြင်းအတတ်ပညာ (Cartography)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="database.html">28.1.3. Database</a></li>
+<li class="toctree-l4"><a class="reference internal" href="filetools.html">28.1.4. File ကိရိယာများ (File tools)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="gps.html">28.1.5. ကမ္ဘာလုံးဆိုင်ရာတည်နေရာပြစနစ် (GPS)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="interpolation.html">28.1.6. သွယ်ဝိုက်တွက်ချက်ခြင်း (Interpolation)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="layertools.html">28.1.7. Layer ကိရိယာများ (Layer tools)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="mesh.html">28.1.8. ဝါယာကွန်ယက် (Mesh)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="modelertools.html">28.1.9. Modeler ကိရိယာများ (Modeler tools)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="networkanalysis.html">28.1.10. လမ်းကြောင်းကွန်ယက်ဆိုင်ရာ တွက်ချက်မှု (Network analysis)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="plots.html">28.1.11. Plot များ</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pointcloudconversion.html">28.1.12. Point Cloud ပြောင်းလဲခြင်း (Point Cloud Conversion)</a></li>
+<li class="toctree-l4 current"><a class="current reference internal" href="#">28.1.13. Point Cloud Data စီမံခန့်ခွဲခြင်း (Point Cloud Data Management)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pointcloudextraction.html">28.1.14. Point Cloud ထဲမှ ဆွဲထုတ်ခြင်း (Point Cloud Extraction)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="rasteranalysis.html">28.1.15. Raster ဖြင့်ဆန်းစစ်လေ့လာခြင်း (Raster analysis)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="rastercreation.html">28.1.16. Raster Creation</a></li>
+<li class="toctree-l4"><a class="reference internal" href="rasterterrainanalysis.html">28.1.17. Raster မြေမျက်နှာသွင်ပြင်ဆိုင်ရာ ဆန်းစစ်လေ့လာခြင်း (Raster terrain analysis)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="rastertools.html">28.1.18. Raster ကိရိယာများ (Raster tools)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="vectoranalysis.html">28.1.19. Vector ဆန်းစစ်လေ့လာခြင်း (Vector analysis)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="vectorcoverage.html">28.1.20. Vector လွှမ်းခြုံမှု (Vector coverage)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="vectorcreation.html">28.1.21. Vector ဖန်တီးခြင်း (Vector creation)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="vectorgeneral.html">28.1.22. Vector ဆိုင်ရာ အထွေထွေ (Vector general)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="vectorgeometry.html">28.1.23. Vector ဂျီဩမေတြီ (Vector geometry)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="vectoroverlay.html">28.1.24. Vector အလွှာထပ်တွက်ချက်ခြင်း (Vector overlay)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="vectorselection.html">28.1.25. Vector တွင်ရွေးချယ်ခြင်း (Vector selection)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="vectortable.html">28.1.26. Vector ဇယား (Vector table)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="vectortiles.html">28.1.27. Vector tile များ</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../gdal/index.html">28.2. GDAL algorithm ထောက်ပံ့ပေးသူ (GDAL algorithm provider)</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/index.html">29. Plugin များ</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../preamble/help_and_support.html">30. အကူအညီနှင့်အထောက်အပံ့ (Help and Support)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../preamble/contributors.html">31. ပါဝင်အားဖြည့်သူများ (Contributors)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../appendices/index.html">32. Appendices (နောက်ဆက်တွဲများ)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../literature_web/literature_and_web_references.html">33. စာတမ်းများနှင့် Website ကိုးကားချက်များ (Literature and Web References)</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../server_manual/index.html">QGIS Server Guide/Manual (QGIS 3.40)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../training_manual/index.html">Training Manual</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../gentle_gis_introduction/index.html">A Gentle Introduction to GIS</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">ရေးသားသူများအတွက်</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../documentation_guidelines/index.html">Documentation Guidelines</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Developer များအတွက်</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../pyqgis_developer_cookbook/index.html">PyQGIS Cookbook (QGIS 3.40)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../developers_guide/index.html">Developers Guide</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">QGIS Documentation</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../../index.html">QGIS အသုံးပြုသူလမ်းညွှန် (User Guide)</a></li>
+          <li class="breadcrumb-item"><a href="../index.html"><span class="section-number">28. </span>Processing ဆိုင်ရာ ထောက်ပံ့ပေးသူများနှင့် Algorithm များ (Processing providers and algorithms)</a></li>
+          <li class="breadcrumb-item"><a href="index.html"><span class="section-number">28.1. </span>QGIS algorithm ထောက်ပံ့ပေးသူ (QGIS algorithm provider)</a></li>
+      <li class="breadcrumb-item active"><span class="section-number">28.1.13. </span>Point Cloud Data စီမံခန့်ခွဲခြင်း (Point Cloud Data Management)</li>
+      <li class="wy-breadcrumbs-aside">
+              <a href="https://github.com/qgis/QGIS-Documentation/blob/master/docs/user_manual/processing_algs/qgis/pointclouddatamanagement.rst" class="fa fa-github"> Edit on GitHub</a>
+      </li>
+  </ul><div class="rst-breadcrumbs-buttons" role="navigation" aria-label="Sequential page navigation">
+        <a href="pointcloudconversion.html" class="btn btn-neutral float-left" title="28.1.12. Point Cloud ပြောင်းလဲခြင်း (Point Cloud Conversion)" accesskey="p"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="pointcloudextraction.html" class="btn btn-neutral float-right" title="28.1.14. Point Cloud ထဲမှ ဆွဲထုတ်ခြင်း (Point Cloud Extraction)" accesskey="n">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+  </div>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <blockquote>
+<div></div></blockquote>
+<section id="point-cloud-data-point-cloud-data-management">
+<h1><span class="section-number">28.1.13. </span>Point Cloud Data စီမံခန့်ခွဲခြင်း (Point Cloud Data Management)<a class="headerlink" href="#point-cloud-data-point-cloud-data-management" title="Link to this heading"></a></h1>
+<nav class="contents local" id="contents">
+<ul class="simple">
+<li><p><a class="reference internal" href="#assign-projection" id="id40">အရိပ်ချစနစ်သတ်မှတ်ခြင်း (Assign projection)</a></p></li>
+<li><p><a class="reference internal" href="#virtual-point-cloud-build-virtual-point-cloud-vpc" id="id41">Virtual point cloud တည်ဆောက်ခြင်း (Build virtual point cloud (VPC))</a></p></li>
+<li><p><a class="reference internal" href="#clip" id="id42">ဖြတ်တောက်ခြင်း (Clip)</a></p></li>
+<li><p><a class="reference internal" href="#copc-create-copc" id="id43">COPC ဖန်တီးခြင်း (Create COPC)</a></p></li>
+<li><p><a class="reference internal" href="#information" id="id44">သတင်းအချက်အလက် (Information)</a></p></li>
+<li><p><a class="reference internal" href="#merge" id="id45">ပေါင်းစည်းခြင်း (Merge)</a></p></li>
+<li><p><a class="reference internal" href="#project-reproject" id="id46">Project ပြောင်းလဲခြင်း (Reproject)</a></p></li>
+<li><p><a class="reference internal" href="#thin-by-sampling-radius" id="id47">Thin (by sampling radius)</a></p></li>
+<li><p><a class="reference internal" href="#thin-by-skipping-points" id="id48">Thin (by skipping points)</a></p></li>
+<li><p><a class="reference internal" href="#tile" id="id49">Tile</a></p></li>
+</ul>
+</nav>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>QGIS သည် PDAL library version 2.5.0 သို့မဟုတ် version အသစ်ကို အသုံးပြုမှသာ ဤ algorithm များကို ရရှိနိုင်မည်ဖြစ်သည်။</p>
+</div>
+<section id="assign-projection">
+<span id="pdalassignprojection"></span><h2><a class="toc-backref" href="#id40" role="doc-backlink"><span class="section-number">28.1.13.1. </span>အရိပ်ချစနစ်သတ်မှတ်ခြင်း (Assign projection)</a><a class="headerlink" href="#assign-projection" title="Link to this heading"></a></h2>
+<p>Point cloud layer တစ်ခုတွင် CRS မရှိပါက သို့မဟုတ် CRS မှားယွင်းနေပါက Coordinate Reference System (CRS) တစ်ခုကိုသတ်မှတ်ပေးပါသည်။ Layer အသစ်တစ်ခုကို ဖန်တီးပေးမည်ဖြစ်ပါသည်။</p>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p><a class="reference internal" href="#pdalreproject"><span class="std std-ref">Project ပြောင်းလဲခြင်း (Reproject)</span></a></p>
+</div>
+<section id="parameters">
+<h3>သတ်မှတ်ချက်များ (Parameters)<a class="headerlink" href="#parameters" title="Link to this heading"></a></h3>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 20.0%" />
+<col style="width: 20.0%" />
+<col style="width: 20.0%" />
+<col style="width: 40.0%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>အညွှန်း</p></th>
+<th class="head"><p>အမည်</p></th>
+<th class="head"><p>အမျိုးအစား</p></th>
+<th class="head"><p>ရှင်းလင်းဖော်ပြချက်</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><strong>Input layer</strong> <strong>(ထည့်သွင်းအသုံးပြုသော layer)</strong></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">INPUT</span></code></p></td>
+<td><p>[point cloud]</p></td>
+<td><p>CRS တစ်ခုသတ်မှတ်ပေးမည့် input point cloud layer</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Desired CRS</strong> <strong>(အလိုရှိသော CRS)</strong></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">CRS</span></code></p></td>
+<td><p>[crs]</p></td>
+<td><p>Layer တွင် အသုံးပြုမည့် CRS</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>Output layer</strong> <strong>(ရလာဒ် layer)</strong></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">OUTPUT</span></code></p></td>
+<td><p>[point cloud]</p>
+<p>Default: <code class="docutils literal notranslate"><span class="pre">[Save</span> <span class="pre">to</span> <span class="pre">temporary</span> <span class="pre">file]</span></code></p>
+</td>
+<td><p>Output အနေဖြင့် အသုံးပြုမည့် point cloud ဖိုင်ကို သတ်မှတ်ပါ။ အောက်ပါတို့ထဲမှ တစ်ခုခုဖြစ်ပါသည်-</p>
+<ul class="simple">
+<li><p>ယာယီ file တစ်ခုတွင် သိမ်းဆည်းပါ</p></li>
+<li><p>File တွင်သိမ်းဆည်းပါ</p></li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="outputs">
+<h3>ရလာဒ်များ (Outputs)<a class="headerlink" href="#outputs" title="Link to this heading"></a></h3>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 20.0%" />
+<col style="width: 20.0%" />
+<col style="width: 20.0%" />
+<col style="width: 40.0%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>အညွှန်း</p></th>
+<th class="head"><p>အမည်</p></th>
+<th class="head"><p>အမျိုးအစား</p></th>
+<th class="head"><p>ရှင်းလင်းဖော်ပြချက်</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><strong>Converted</strong> <strong>(ပြောင်းလဲထားပြီးသော)</strong></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">OUTPUT</span></code></p></td>
+<td><p>[point cloud]</p></td>
+<td><p>CRS အသစ်တစ်ခုဖြင့် output point cloud layer ။ လက်ရှိ ရရှိနိုင်သော format များမှာ <code class="file docutils literal notranslate"><span class="pre">.LAS</span></code> ၊ <code class="file docutils literal notranslate"><span class="pre">.LAZ</span></code> ၊ <code class="file docutils literal notranslate"><span class="pre">.COPC.LAZ</span></code> နှင့် <code class="file docutils literal notranslate"><span class="pre">.VPC</span></code> တို့ဖြစ်ပါသည်။</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="python-code">
+<h3>Python code<a class="headerlink" href="#python-code" title="Link to this heading"></a></h3>
+<p><strong>Algorithm ID</strong>: <code class="docutils literal notranslate"><span class="pre">pdal:assignprojection</span></code></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">processing</span>
+<span class="n">processing</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="s2">&quot;algorithm_id&quot;</span><span class="p">,</span> <span class="p">{</span><span class="n">parameter_dictionary</span><span class="p">})</span>
+</pre></div>
+</div>
+<p>Processing Toolbox ထဲရှိ algorithm ပေါ်တွင် mouse ကိုတင်ထားလျှင် <em>algorithm id</em> ကိုပြသပေးပါသည်။ <em>parameter dictionary</em> သည် parameter နာမည်များနှင့် တန်ဖိုးများကို ပေးပါသည်။ Python console မှ algorithm များကို မည်သို့လုပ်ဆောင်ရမည် ဆိုသည့် အသေးစိတ်ကို သိရှိလိုလျှင် <a class="reference internal" href="../../processing/console.html#processing-console"><span class="std std-ref">Console တွင် processing algorithm များကို အသုံးပြုခြင်း (Using processing algorithms from the console)</span></a> တွင်ကြည့်ပါ။</p>
+</section>
+</section>
+<section id="virtual-point-cloud-build-virtual-point-cloud-vpc">
+<span id="pdalvirtualpointcloud"></span><h2><a class="toc-backref" href="#id41" role="doc-backlink"><span class="section-number">28.1.13.2. </span>Virtual point cloud တည်ဆောက်ခြင်း (Build virtual point cloud (VPC))</a><a class="headerlink" href="#virtual-point-cloud-build-virtual-point-cloud-vpc" title="Link to this heading"></a></h2>
+<p>Input point cloud data မှ <a class="reference internal" href="../../working_with_point_clouds/point_clouds.html#virtual-point-cloud"><span class="std std-ref">virtual point cloud (VPC)</span></a> တစ်ခုကို ဖန်တီးပေးပါသည်။</p>
+<p>Optional parameter (မဖြစ်မနေထည့်သွင်းရန်မလိုသော သတ်မှတ်ချက်များ) ကို အမှန်မဖြစ်ပဲ ထားပါက algorithm သည် input ဖိုင်များ၏ metadata များကိုသာ ဖတ်ရှုမည်ဖြစ်သောအကြောင့် VPC ဖိုင်ကို အလွန်လျင်မြန်စွာ တည်ဆောက်ပေးပါလိမ့်မည်။ Optional parameter တစ်ခုခုကို သုံးထားပါက algorithm သည် point များအားလုံးကို ဖတ်ရှုရမည်ဖြစ်ပြီး အချိန်ကြာမြင့်နိုင်ပါသည်။</p>
+<figure class="align-center" id="id37">
+<a class="reference internal image-reference" href="../../../../_images/point_cloud_buildvpc.png"><img alt="../../../../_images/point_cloud_buildvpc.png" src="../../../../_images/point_cloud_buildvpc.png" style="width: 100%;" /></a>
+<figcaption>
+<p><span class="caption-number">Fig. 28.13 </span><span class="caption-text">Point cloud tile များအစုတစ်ခုမှ Virtual Point Cloud ထုတ်ယူခြင်း</span><a class="headerlink" href="#id37" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p><a class="reference internal" href="#pdalmerge"><span class="std std-ref">ပေါင်းစည်းခြင်း (Merge)</span></a></p>
+</div>
+<section id="id1">
+<h3>သတ်မှတ်ချက်များ (Parameters)<a class="headerlink" href="#id1" title="Link to this heading"></a></h3>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 20.0%" />
+<col style="width: 20.0%" />
+<col style="width: 20.0%" />
+<col style="width: 40.0%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>အညွှန်း</p></th>
+<th class="head"><p>အမည်</p></th>
+<th class="head"><p>အမျိုးအစား</p></th>
+<th class="head"><p>ရှင်းလင်းဖော်ပြချက်</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><strong>Input layers</strong> <strong>(ထည့်သွင်းအသုံးပြုသော layer)</strong></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">LAYERS</span></code></p></td>
+<td><p>[point cloud] [list]</p></td>
+<td><p>Virtual point cloud layer တစ်ခုအတွင်းတွင် ပေါင်းစည်းမည့် input point cloud layer များ</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Calculate boundary polygon</strong> <strong>(နယ်နိမိတ် polygon ကိုတွက်ချက်ခြင်း)</strong></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">BOUNDARY</span></code></p></td>
+<td><p>[boolean]</p>
+<p>Default: False</p>
+</td>
+<td><p>True အဖြစ်သတ်မှတ်ထားပါက data များ၏ နယ်နိမိတ်အတိအကျကို ပြသပေးပါသည် (ထောင့်မှန်စတုဂံ extent ကိုသာ ပြသခြင်းမဟုတ်ပဲ)</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>Calculate statistics</strong> <strong>(စာရင်းအင်းအချက်အလက်များတွက်ချက်ခြင်း)</strong></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">STATISTICS</span></code></p></td>
+<td><p>[boolean]</p>
+<p>Default: False</p>
+</td>
+<td><p>True အဖြစ်သတ်မှတ်ထားပါက အမျိုးမျိုးသော attribute များ၏ တန်ဖိုးအပိုင်းအခြားများကို နားလည်စေရန် တွက်ချက်ပေးမည်ဖြစ်သည်။</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Build overview point cloud</strong> <strong>(Overview point cloud တည်ဆောက်ခြင်း)</strong></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">OVERVIEW</span></code></p></td>
+<td><p>[boolean]</p>
+<p>Default: False</p>
+</td>
+<td><p>Input data များအားလုံး၏ “thinned (ပါးလွှာသော)” point cloud တစ်ခုကို ထုတ်ပေးပါသည် (မူရင်း data မှ အကြိမ် ၁ဝဝဝ မြောက် point တိုင်းကိုသာ အသုံးပြုပြီး)။</p>
+<p>Overview point cloud ကို VPC ဖိုင်နောက်တွင် ဖန်တီးပါလိမ့်မည်- ဥပမာအားဖြင့် <code class="file docutils literal notranslate"><span class="pre">mydata.vpc</span></code> အတွက်  overview point cloud ကို <code class="file docutils literal notranslate"><span class="pre">mydata-overview.copc.laz</span></code> ဟုနာမည်ပေးပါလိမ့်မည်။</p>
+</td>
+</tr>
+<tr class="row-even"><td><p><strong>Virtual point cloud</strong></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">OUTPUT</span></code></p></td>
+<td><p>[point cloud]</p>
+<p>Default: <code class="docutils literal notranslate"><span class="pre">[Save</span> <span class="pre">to</span> <span class="pre">temporary</span> <span class="pre">file]</span></code></p>
+</td>
+<td><p>Data များထည့်သွင်းတည်ဆောက်မည့် point cloud ဖိုင်ကို သတ်မှတ်ပါ။ အောက်ပါတို့ထဲမှ တစ်ခုခုဖြစ်ပါသည်-</p>
+<ul class="simple">
+<li><p>ယာယီ file တစ်ခုတွင် သိမ်းဆည်းပါ</p></li>
+<li><p>File တွင်သိမ်းဆည်းပါ</p></li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="id2">
+<h3>ရလာဒ်များ (Outputs)<a class="headerlink" href="#id2" title="Link to this heading"></a></h3>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 20.0%" />
+<col style="width: 20.0%" />
+<col style="width: 20.0%" />
+<col style="width: 40.0%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>အညွှန်း</p></th>
+<th class="head"><p>အမည်</p></th>
+<th class="head"><p>အမျိုးအစား</p></th>
+<th class="head"><p>ရှင်းလင်းဖော်ပြချက်</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><strong>Virtual point cloud</strong></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">OUTPUT</span></code></p></td>
+<td><p>[raster]</p></td>
+<td><p>Input data များအားလုံးကို ပေါင်းစည်းထားသော virtual ဖိုင်တစ်ခုအနေဖြင့်ရှိသည့် output point cloud layer</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="id3">
+<h3>Python code<a class="headerlink" href="#id3" title="Link to this heading"></a></h3>
+<p><strong>Algorithm ID</strong>: <code class="docutils literal notranslate"><span class="pre">pdal:virtualpointcloud</span></code></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">processing</span>
+<span class="n">processing</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="s2">&quot;algorithm_id&quot;</span><span class="p">,</span> <span class="p">{</span><span class="n">parameter_dictionary</span><span class="p">})</span>
+</pre></div>
+</div>
+<p>Processing Toolbox ထဲရှိ algorithm ပေါ်တွင် mouse ကိုတင်ထားလျှင် <em>algorithm id</em> ကိုပြသပေးပါသည်။ <em>parameter dictionary</em> သည် parameter နာမည်များနှင့် တန်ဖိုးများကို ပေးပါသည်။ Python console မှ algorithm များကို မည်သို့လုပ်ဆောင်ရမည် ဆိုသည့် အသေးစိတ်ကို သိရှိလိုလျှင် <a class="reference internal" href="../../processing/console.html#processing-console"><span class="std std-ref">Console တွင် processing algorithm များကို အသုံးပြုခြင်း (Using processing algorithms from the console)</span></a> တွင်ကြည့်ပါ။</p>
+</section>
+</section>
+<section id="clip">
+<span id="pdalclip"></span><h2><a class="toc-backref" href="#id42" role="doc-backlink"><span class="section-number">28.1.13.3. </span>ဖြတ်တောက်ခြင်း (Clip)</a><a class="headerlink" href="#clip" title="Link to this heading"></a></h2>
+<p>Point cloud layer တစ်ခုအား polygon layer တစ်ခုဖြင့် clip လုပ်ပေးပါသည်၊ ထို့ကြောင့် ရလာဒ် point cloud တွင် polygon များအတွင်း ကျရောက်သော point များသာ ပါရှိမည်ဖြစ်သည်။</p>
+<figure class="align-center" id="id38">
+<img alt="../../../../_images/point_cloud_clip.png" src="../../../../_images/point_cloud_clip.png" />
+<figcaption>
+<p><span class="caption-number">Fig. 28.14 </span><span class="caption-text">Polygon coverage တစ်ခုဖြင့် input point cloud layer တစ်ခုအား ဖြတ်တောက်ခြင်း</span><a class="headerlink" href="#id38" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<section id="id4">
+<h3>သတ်မှတ်ချက်များ (Parameters)<a class="headerlink" href="#id4" title="Link to this heading"></a></h3>
+<section id="basic-parameters">
+<h4>အခြေခံသတ်မှတ်ချက်များ (Basic parameters)<a class="headerlink" href="#basic-parameters" title="Link to this heading"></a></h4>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 20.0%" />
+<col style="width: 20.0%" />
+<col style="width: 20.0%" />
+<col style="width: 40.0%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>အညွှန်း</p></th>
+<th class="head"><p>အမည်</p></th>
+<th class="head"><p>အမျိုးအစား</p></th>
+<th class="head"><p>ရှင်းလင်းဖော်ပြချက်</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><strong>Input layer</strong> <strong>(ထည့်သွင်းအသုံးပြုသော layer)</strong></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">INPUT</span></code></p></td>
+<td><p>[point cloud]</p></td>
+<td><p>Clip လုပ်မည့် input point cloud layer</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Clipping polygons</strong></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">OVERLAY</span></code></p></td>
+<td><p>[vector: polygon]</p></td>
+<td><p>Point များကို clip လုပ်ခြင်းအတွက် အသုံးပြုမည့် Polygon vector layer</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>Clipped</strong></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">OUTPUT</span></code></p></td>
+<td><p>[point cloud]</p>
+<p>Default: <code class="docutils literal notranslate"><span class="pre">[Save</span> <span class="pre">to</span> <span class="pre">temporary</span> <span class="pre">file]</span></code></p>
+</td>
+<td><p>Clip လုပ်ထားသော point များကို export ထုတ်ယူမည့် point cloud ဖိုင်ကိုသတ်မှတ်ပါ။ အောက်ပါတို့ထဲမှ တစ်ခုခုဖြစ်ပါသည်-</p>
+<ul class="simple">
+<li><p>ယာယီ file တစ်ခုတွင် သိမ်းဆည်းပါ</p></li>
+<li><p>File တွင်သိမ်းဆည်းပါ</p></li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="advanced-parameters">
+<h4>အဆင့်မြင့်သတ်မှတ်ချက်များ (Advanced parameters)<a class="headerlink" href="#advanced-parameters" title="Link to this heading"></a></h4>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 20.0%" />
+<col style="width: 20.0%" />
+<col style="width: 20.0%" />
+<col style="width: 40.0%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>အညွှန်း</p></th>
+<th class="head"><p>အမည်</p></th>
+<th class="head"><p>အမျိုးအစား</p></th>
+<th class="head"><p>ရှင်းလင်းဖော်ပြချက်</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><strong>Filter expression</strong></p>
+<p>Optional (မဖြစ်မနေလုပ်ဆောင်ရန်မလိုပါ)</p>
+</td>
+<td><p><code class="docutils literal notranslate"><span class="pre">FILTER_EXPRESSION</span></code></p></td>
+<td><p>[expression]</p></td>
+<td><p>Point cloud data ထဲရှိ feature များအစုတစ်ခုကို ရွေးချယ်ရန်အတွက် <a class="reference internal" href="../../working_with_point_clouds/point_clouds.html#pdal-expressions"><span class="std std-ref">PDAL expression</span></a> တစ်ခု။</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Cropping extent</strong> <strong>(ဖြတ်ထုတ်မည့် နယ်ပယ်အကျယ်အဝန်း)</strong></p>
+<p>Optional (မဖြစ်မနေလုပ်ဆောင်ရန်မလိုပါ)</p>
+</td>
+<td><p><code class="docutils literal notranslate"><span class="pre">FILTER_EXTENT</span></code></p></td>
+<td><p>[extent]</p></td>
+<td><p>Point cloud data ထဲရှိ feature များအစုတစ်ခုကို ရွေးချယ်ရန်အတွက် မြေပုံ နယ်ပယ်အကျယ်အဝန်း (extent)။</p>
+<p>အသုံးပြုနိုင်သော နည်းလမ်းများမှာ -</p>
+<ul class="simple">
+<li><p>Layer မှ တွက်ချက်ခြင်း - လက်ရှိ project ထဲတွင်ထည့်သွင်းထားသော layer ၏ extent (နယ်ပယ်အကျယ်အဝန်း)ကိုအသုံးပြုပါသည်။</p></li>
+<li><p>Layout map မှ တွက်ချက်ခြင်း - အသုံးပြုနေသော project ထဲရှိ <a class="reference internal" href="../../print_composer/composer_items/composer_map.html#layout-map-item"><span class="std std-ref">layout map item</span></a> တစ်ခု၏ extent အသုံးပြုပါသည်။</p></li>
+<li><p>Bookmark မှ တွက်ချက်ခြင်း - မှတ်ထားသော <a class="reference internal" href="../../map_views/map_view.html#sec-bookmarks"><span class="std std-ref">bookmark</span></a> တစ်ခု၏ extent ကိုအသုံးပြုပါသည်။</p></li>
+<li><p>မြေပုံ canvas extent ကိုအသုံးပြုခြင်း</p></li>
+<li><p>Canvas ပေါ်တွင်ရေးဆွဲခြင်း - တွက်ချက်လိုသည့် ဧရိယာကို ထောင့်မှန်စတုဂံပုံဆွဲခြင်း။</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">x</span> <span class="pre">အနည်းဆုံး၊</span> <span class="pre">x</span> <span class="pre">အများဆုံး၊</span> <span class="pre">y</span> <span class="pre">အနည်းဆုံး၊</span>&#160; <span class="pre">y</span> <span class="pre">အများဆုံး</span></code> တို့အဖြစ် ကိုဩဒိနိတ်များကို ထည့်သွင်းခြင်း။</p></li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</section>
+</section>
+<section id="id5">
+<h3>ရလာဒ်များ (Outputs)<a class="headerlink" href="#id5" title="Link to this heading"></a></h3>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 20.0%" />
+<col style="width: 20.0%" />
+<col style="width: 20.0%" />
+<col style="width: 40.0%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>အညွှန်း</p></th>
+<th class="head"><p>အမည်</p></th>
+<th class="head"><p>အမျိုးအစား</p></th>
+<th class="head"><p>ရှင်းလင်းဖော်ပြချက်</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><strong>Clipped</strong></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">OUTPUT</span></code></p></td>
+<td><p>[raster]</p></td>
+<td><p>Coverage polygon layer အတွင်းကျရောက်သည့် point feature များပါရှိသော output point cloud</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="id6">
+<h3>Python code<a class="headerlink" href="#id6" title="Link to this heading"></a></h3>
+<p><strong>Algorithm ID</strong>: <code class="docutils literal notranslate"><span class="pre">pdal:clip</span></code></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">processing</span>
+<span class="n">processing</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="s2">&quot;algorithm_id&quot;</span><span class="p">,</span> <span class="p">{</span><span class="n">parameter_dictionary</span><span class="p">})</span>
+</pre></div>
+</div>
+<p>Processing Toolbox ထဲရှိ algorithm ပေါ်တွင် mouse ကိုတင်ထားလျှင် <em>algorithm id</em> ကိုပြသပေးပါသည်။ <em>parameter dictionary</em> သည် parameter နာမည်များနှင့် တန်ဖိုးများကို ပေးပါသည်။ Python console မှ algorithm များကို မည်သို့လုပ်ဆောင်ရမည် ဆိုသည့် အသေးစိတ်ကို သိရှိလိုလျှင် <a class="reference internal" href="../../processing/console.html#processing-console"><span class="std std-ref">Console တွင် processing algorithm များကို အသုံးပြုခြင်း (Using processing algorithms from the console)</span></a> တွင်ကြည့်ပါ။</p>
+</section>
+</section>
+<section id="copc-create-copc">
+<span id="pdalcreatecopc"></span><h2><a class="toc-backref" href="#id43" role="doc-backlink"><span class="section-number">28.1.13.4. </span>COPC ဖန်တီးခြင်း (Create COPC)</a><a class="headerlink" href="#copc-create-copc" title="Link to this heading"></a></h2>
+<p>Batch mode တစ်ခုထဲတွင် Input point cloud ဖိုင်များအားလုံးအတွက် index (အညွှန်း) ကို ဖန်တီးပေးပါသည်။</p>
+<section id="id7">
+<h3>သတ်မှတ်ချက်များ (Parameters)<a class="headerlink" href="#id7" title="Link to this heading"></a></h3>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 20.0%" />
+<col style="width: 20.0%" />
+<col style="width: 20.0%" />
+<col style="width: 40.0%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>အညွှန်း</p></th>
+<th class="head"><p>အမည်</p></th>
+<th class="head"><p>အမျိုးအစား</p></th>
+<th class="head"><p>ရှင်းလင်းဖော်ပြချက်</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><strong>Input layers</strong> <strong>(ထည့်သွင်းအသုံးပြုသော layer)</strong></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">LAYERS</span></code></p></td>
+<td><p>[point cloud] [list]</p></td>
+<td><p>Index တစ်ခုဖန်တီးရန်အတွက် input point cloud layer များ</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Output directory</strong> <strong>(ရလာဒ် ဖိုင်လမ်းကြောင်း)</strong></p>
+<p>Optional (မဖြစ်မနေလုပ်ဆောင်ရန် မလိုအပ်ပါ)</p>
+</td>
+<td><p><code class="docutils literal notranslate"><span class="pre">OUTPUT</span></code></p></td>
+<td><p>[folder]</p>
+<p>Default: <code class="docutils literal notranslate"><span class="pre">[Skip</span> <span class="pre">output]</span></code></p>
+</td>
+<td><p>ဖိုင်အသစ်များကို ထားရှိမည့် folder ကိုသတ်မှတ်ပါ။ အောက်ပါတို့ထဲမှ တစ်ခုခုဖြစ်ပါသည်-</p>
+<ul class="simple">
+<li><p>Output ကိုကျော်ပစ်ခြင်း</p></li>
+<li><p>ယာယီ လမ်းကြောင်းတစ်ခုတွင် သိမ်းဆည်းပါ</p></li>
+<li><p>လမ်းကြောင်းတွင်သိမ်းဆည်းပါ</p></li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="id8">
+<h3>ရလာဒ်များ (Outputs)<a class="headerlink" href="#id8" title="Link to this heading"></a></h3>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 20.0%" />
+<col style="width: 20.0%" />
+<col style="width: 20.0%" />
+<col style="width: 40.0%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>အညွှန်း</p></th>
+<th class="head"><p>အမည်</p></th>
+<th class="head"><p>အမျိုးအစား</p></th>
+<th class="head"><p>ရှင်းလင်းဖော်ပြချက်</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><strong>Output directory</strong></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">OUTPUT</span></code></p></td>
+<td><p>[folder]</p></td>
+<td><p>တွဲဖက် COPC index ဖိုင်များဖြင့် point cloud layer များပါဝင်သော output folder</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="id9">
+<h3>Python code<a class="headerlink" href="#id9" title="Link to this heading"></a></h3>
+<p><strong>Algorithm ID</strong>: <code class="docutils literal notranslate"><span class="pre">pdal:createcopc</span></code></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">processing</span>
+<span class="n">processing</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="s2">&quot;algorithm_id&quot;</span><span class="p">,</span> <span class="p">{</span><span class="n">parameter_dictionary</span><span class="p">})</span>
+</pre></div>
+</div>
+<p>Processing Toolbox ထဲရှိ algorithm ပေါ်တွင် mouse ကိုတင်ထားလျှင် <em>algorithm id</em> ကိုပြသပေးပါသည်။ <em>parameter dictionary</em> သည် parameter နာမည်များနှင့် တန်ဖိုးများကို ပေးပါသည်။ Python console မှ algorithm များကို မည်သို့လုပ်ဆောင်ရမည် ဆိုသည့် အသေးစိတ်ကို သိရှိလိုလျှင် <a class="reference internal" href="../../processing/console.html#processing-console"><span class="std std-ref">Console တွင် processing algorithm များကို အသုံးပြုခြင်း (Using processing algorithms from the console)</span></a> တွင်ကြည့်ပါ။</p>
+</section>
+</section>
+<section id="information">
+<span id="pdalinfo"></span><h2><a class="toc-backref" href="#id44" role="doc-backlink"><span class="section-number">28.1.13.5. </span>သတင်းအချက်အလက် (Information)</a><a class="headerlink" href="#information" title="Link to this heading"></a></h2>
+<p>Input point cloud ဖိုင်တစ်ခုမှ အခြေခံ metadata ကိုထုတ်ပေးပါသည်။</p>
+<p>Output သတင်းအချက်အလက် ဥပမာ-</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>LAS           1.4
+point format  6
+count         56736130
+scale         0.001 0.001 0.001
+offset        431749.999 5440919.999 968.898
+extent        431250 5440420 424.266
+              432249.999 5441419.999 1513.531
+crs           ETRS89 / UTM zone 34N (N-E) (EPSG:3046)  (vertical CRS missing!)
+units         horizontal=metre  vertical=unknown
+
+Attributes:
+- X floating 8
+- Y floating 8
+- Z floating 8
+- Intensity unsigned 2
+- ReturnNumber unsigned 1
+- NumberOfReturns unsigned 1
+- ScanDirectionFlag unsigned 1
+- EdgeOfFlightLine unsigned 1
+- Classification unsigned 1
+- ScanAngleRank floating 4
+- UserData unsigned 1
+- PointSourceId unsigned 2
+- GpsTime floating 8
+- ScanChannel unsigned 1
+- ClassFlags unsigned 1
+</pre></div>
+</div>
+<section id="id10">
+<h3>သတ်မှတ်ချက်များ (Parameters)<a class="headerlink" href="#id10" title="Link to this heading"></a></h3>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 20.0%" />
+<col style="width: 20.0%" />
+<col style="width: 20.0%" />
+<col style="width: 40.0%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>အညွှန်း</p></th>
+<th class="head"><p>အမည်</p></th>
+<th class="head"><p>အမျိုးအစား</p></th>
+<th class="head"><p>ရှင်းလင်းဖော်ပြချက်</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><strong>Input layer</strong> <strong>(ထည့်သွင်းအသုံးပြုသော layer)</strong></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">INPUT</span></code></p></td>
+<td><p>[point cloud]</p></td>
+<td><p>Metadata သတင်းအချက်အလက်များ ထုတ်ယူမည့် input point cloud layer</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Layer information</strong> <strong>(Layer သတင်းအချက်အလက်)</strong></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">OUTPUT</span></code></p></td>
+<td><p>[file]</p>
+<p>Default: <code class="docutils literal notranslate"><span class="pre">[Save</span> <span class="pre">to</span> <span class="pre">temporary</span> <span class="pre">file]</span></code></p>
+</td>
+<td><p>Metadata သတင်းအချက်အလက်များကို သိမ်းဆည်းမည့် ဖိုင်ကို သတ်မှတ်ပါ။ အောက်ပါတို့ထဲမှ တစ်ခုခုဖြစ်ပါသည်-</p>
+<ul class="simple">
+<li><p>ယာယီ file တစ်ခုတွင် သိမ်းဆည်းပါ</p></li>
+<li><p>File တွင်သိမ်းဆည်းပါ</p></li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="id11">
+<h3>ရလာဒ်များ (Outputs)<a class="headerlink" href="#id11" title="Link to this heading"></a></h3>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 20.0%" />
+<col style="width: 20.0%" />
+<col style="width: 20.0%" />
+<col style="width: 40.0%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>အညွှန်း</p></th>
+<th class="head"><p>အမည်</p></th>
+<th class="head"><p>အမျိုးအစား</p></th>
+<th class="head"><p>ရှင်းလင်းဖော်ပြချက်</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><strong>Layer information</strong></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">OUTPUT</span></code></p></td>
+<td><p>[vector]</p></td>
+<td><p>Metadata သတင်းအချက်အလက်များကို သိမ်းဆည်းမည့် <code class="file docutils literal notranslate"><span class="pre">HTML</span></code> ဖိုင်။</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="id12">
+<h3>Python code<a class="headerlink" href="#id12" title="Link to this heading"></a></h3>
+<p><strong>Algorithm ID</strong>: <code class="docutils literal notranslate"><span class="pre">pdal:info</span></code></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">processing</span>
+<span class="n">processing</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="s2">&quot;algorithm_id&quot;</span><span class="p">,</span> <span class="p">{</span><span class="n">parameter_dictionary</span><span class="p">})</span>
+</pre></div>
+</div>
+<p>Processing Toolbox ထဲရှိ algorithm ပေါ်တွင် mouse ကိုတင်ထားလျှင် <em>algorithm id</em> ကိုပြသပေးပါသည်။ <em>parameter dictionary</em> သည် parameter နာမည်များနှင့် တန်ဖိုးများကို ပေးပါသည်။ Python console မှ algorithm များကို မည်သို့လုပ်ဆောင်ရမည် ဆိုသည့် အသေးစိတ်ကို သိရှိလိုလျှင် <a class="reference internal" href="../../processing/console.html#processing-console"><span class="std std-ref">Console တွင် processing algorithm များကို အသုံးပြုခြင်း (Using processing algorithms from the console)</span></a> တွင်ကြည့်ပါ။</p>
+</section>
+</section>
+<section id="merge">
+<span id="pdalmerge"></span><h2><a class="toc-backref" href="#id45" role="doc-backlink"><span class="section-number">28.1.13.6. </span>ပေါင်းစည်းခြင်း (Merge)</a><a class="headerlink" href="#merge" title="Link to this heading"></a></h2>
+<p>Point cloud ဖိုင်များစွာကို တစ်ခုတည်းအဖြစ်သို့ ပေါင်းစည်းပေးပါသည်။</p>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p><a class="reference internal" href="#pdalvirtualpointcloud"><span class="std std-ref">Virtual point cloud တည်ဆောက်ခြင်း (Build virtual point cloud (VPC))</span></a></p>
+</div>
+<section id="id13">
+<h3>သတ်မှတ်ချက်များ (Parameters)<a class="headerlink" href="#id13" title="Link to this heading"></a></h3>
+<section id="id14">
+<h4>အခြေခံသတ်မှတ်ချက်များ (Basic parameters)<a class="headerlink" href="#id14" title="Link to this heading"></a></h4>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 20.0%" />
+<col style="width: 20.0%" />
+<col style="width: 20.0%" />
+<col style="width: 40.0%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>အညွှန်း</p></th>
+<th class="head"><p>အမည်</p></th>
+<th class="head"><p>အမျိုးအစား</p></th>
+<th class="head"><p>ရှင်းလင်းဖော်ပြချက်</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><strong>Input layers</strong> <strong>(ထည့်သွင်းအသုံးပြုသော layer)</strong></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">LAYERS</span></code></p></td>
+<td><p>[point cloud] [list]</p></td>
+<td><p>ဖိုင်တစ်ခုတည်းအဖြစ်သို့ ပေါင်းစည်းမည့် input point cloud layer များ</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Merged</strong></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">OUTPUT</span></code></p></td>
+<td><p>[point cloud]</p>
+<p>Default: <code class="docutils literal notranslate"><span class="pre">[Save</span> <span class="pre">to</span> <span class="pre">temporary</span> <span class="pre">file]</span></code></p>
+</td>
+<td><p>Input ဖိုင်များကို ပေါင်းစည်းထားသော output point cloud ကိုသတ်မှတ်ပါ။ အောက်ပါတို့ထဲမှ တစ်ခုခုဖြစ်ပါသည်-</p>
+<ul class="simple">
+<li><p>ယာယီ file တစ်ခုတွင် သိမ်းဆည်းပါ</p></li>
+<li><p>File တွင်သိမ်းဆည်းပါ</p></li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="id15">
+<h4>အဆင့်မြင့်သတ်မှတ်ချက်များ (Advanced parameters)<a class="headerlink" href="#id15" title="Link to this heading"></a></h4>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 20.0%" />
+<col style="width: 20.0%" />
+<col style="width: 20.0%" />
+<col style="width: 40.0%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>အညွှန်း</p></th>
+<th class="head"><p>အမည်</p></th>
+<th class="head"><p>အမျိုးအစား</p></th>
+<th class="head"><p>ရှင်းလင်းဖော်ပြချက်</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><strong>Filter expression</strong></p>
+<p>Optional (မဖြစ်မနေလုပ်ဆောင်ရန်မလိုပါ)</p>
+</td>
+<td><p><code class="docutils literal notranslate"><span class="pre">FILTER_EXPRESSION</span></code></p></td>
+<td><p>[expression]</p></td>
+<td><p>Point cloud data ထဲရှိ feature များအစုတစ်ခုကို ရွေးချယ်ရန်အတွက် <a class="reference internal" href="../../working_with_point_clouds/point_clouds.html#pdal-expressions"><span class="std std-ref">PDAL expression</span></a> တစ်ခု။</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Cropping extent</strong> <strong>(ဖြတ်ထုတ်မည့် နယ်ပယ်အကျယ်အဝန်း)</strong></p>
+<p>Optional (မဖြစ်မနေလုပ်ဆောင်ရန်မလိုပါ)</p>
+</td>
+<td><p><code class="docutils literal notranslate"><span class="pre">FILTER_EXTENT</span></code></p></td>
+<td><p>[extent]</p></td>
+<td><p>Point cloud data ထဲရှိ feature များအစုတစ်ခုကို ရွေးချယ်ရန်အတွက် မြေပုံ နယ်ပယ်အကျယ်အဝန်း (extent)။</p>
+<p>အသုံးပြုနိုင်သော နည်းလမ်းများမှာ -</p>
+<ul class="simple">
+<li><p>Layer မှ တွက်ချက်ခြင်း - လက်ရှိ project ထဲတွင်ထည့်သွင်းထားသော layer ၏ extent (နယ်ပယ်အကျယ်အဝန်း)ကိုအသုံးပြုပါသည်။</p></li>
+<li><p>Layout map မှ တွက်ချက်ခြင်း - အသုံးပြုနေသော project ထဲရှိ <a class="reference internal" href="../../print_composer/composer_items/composer_map.html#layout-map-item"><span class="std std-ref">layout map item</span></a> တစ်ခု၏ extent အသုံးပြုပါသည်။</p></li>
+<li><p>Bookmark မှ တွက်ချက်ခြင်း - မှတ်ထားသော <a class="reference internal" href="../../map_views/map_view.html#sec-bookmarks"><span class="std std-ref">bookmark</span></a> တစ်ခု၏ extent ကိုအသုံးပြုပါသည်။</p></li>
+<li><p>မြေပုံ canvas extent ကိုအသုံးပြုခြင်း</p></li>
+<li><p>Canvas ပေါ်တွင်ရေးဆွဲခြင်း - တွက်ချက်လိုသည့် ဧရိယာကို ထောင့်မှန်စတုဂံပုံဆွဲခြင်း။</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">x</span> <span class="pre">အနည်းဆုံး၊</span> <span class="pre">x</span> <span class="pre">အများဆုံး၊</span> <span class="pre">y</span> <span class="pre">အနည်းဆုံး၊</span>&#160; <span class="pre">y</span> <span class="pre">အများဆုံး</span></code> တို့အဖြစ် ကိုဩဒိနိတ်များကို ထည့်သွင်းခြင်း။</p></li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</section>
+</section>
+<section id="id16">
+<h3>ရလာဒ်များ (Outputs)<a class="headerlink" href="#id16" title="Link to this heading"></a></h3>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 20.0%" />
+<col style="width: 20.0%" />
+<col style="width: 20.0%" />
+<col style="width: 40.0%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>အညွှန်း</p></th>
+<th class="head"><p>အမည်</p></th>
+<th class="head"><p>အမျိုးအစား</p></th>
+<th class="head"><p>ရှင်းလင်းဖော်ပြချက်</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><strong>Merged</strong></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">OUTPUT</span></code></p></td>
+<td><p>[point cloud]</p></td>
+<td><p>Input ဖိုင်များအားလုံးကို ပေါင်းစည်းထားသော output point cloud layer။</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="id17">
+<h3>Python code<a class="headerlink" href="#id17" title="Link to this heading"></a></h3>
+<p><strong>Algorithm ID</strong>: <code class="docutils literal notranslate"><span class="pre">pdal:merge</span></code></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">processing</span>
+<span class="n">processing</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="s2">&quot;algorithm_id&quot;</span><span class="p">,</span> <span class="p">{</span><span class="n">parameter_dictionary</span><span class="p">})</span>
+</pre></div>
+</div>
+<p>Processing Toolbox ထဲရှိ algorithm ပေါ်တွင် mouse ကိုတင်ထားလျှင် <em>algorithm id</em> ကိုပြသပေးပါသည်။ <em>parameter dictionary</em> သည် parameter နာမည်များနှင့် တန်ဖိုးများကို ပေးပါသည်။ Python console မှ algorithm များကို မည်သို့လုပ်ဆောင်ရမည် ဆိုသည့် အသေးစိတ်ကို သိရှိလိုလျှင် <a class="reference internal" href="../../processing/console.html#processing-console"><span class="std std-ref">Console တွင် processing algorithm များကို အသုံးပြုခြင်း (Using processing algorithms from the console)</span></a> တွင်ကြည့်ပါ။</p>
+</section>
+</section>
+<section id="project-reproject">
+<span id="pdalreproject"></span><h2><a class="toc-backref" href="#id46" role="doc-backlink"><span class="section-number">28.1.13.7. </span>Project ပြောင်းလဲခြင်း (Reproject)</a><a class="headerlink" href="#project-reproject" title="Link to this heading"></a></h2>
+<p>Point cloud တစ်ခုအား မတူညီသော Coordinate Reference System (CRS) တစ်ခုသို့ projection ပြောင်းလဲပေးပါသည်။</p>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p><a class="reference internal" href="#pdalassignprojection"><span class="std std-ref">အရိပ်ချစနစ်သတ်မှတ်ခြင်း (Assign projection)</span></a></p>
+</div>
+<section id="id18">
+<h3>သတ်မှတ်ချက်များ (Parameters)<a class="headerlink" href="#id18" title="Link to this heading"></a></h3>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 20.0%" />
+<col style="width: 20.0%" />
+<col style="width: 20.0%" />
+<col style="width: 40.0%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>အညွှန်း</p></th>
+<th class="head"><p>အမည်</p></th>
+<th class="head"><p>အမျိုးအစား</p></th>
+<th class="head"><p>ရှင်းလင်းဖော်ပြချက်</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><strong>Input layer</strong> <strong>(ထည့်သွင်းအသုံးပြုသော layer)</strong></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">INPUT</span></code></p></td>
+<td><p>[point cloud]</p></td>
+<td><p>မတူညီသော CRS တစ်ခုသို့ reproject လုပ်မည့် input point cloud layer</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Target CRS</strong> <strong>(ပြောင်းလဲလိုသော CRS)</strong></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">CRS</span></code></p></td>
+<td><p>[crs]</p></td>
+<td><p>Layer တွင် အသုံးပြုမည့် CRS</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>Reprojected</strong></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">OUTPUT</span></code></p></td>
+<td><p>[point cloud]</p>
+<p>Default: <code class="docutils literal notranslate"><span class="pre">[Save</span> <span class="pre">to</span> <span class="pre">temporary</span> <span class="pre">file]</span></code></p>
+</td>
+<td><p>Project ပြောင်းလဲထားသော point cloud ဖိုင်ကို သတ်မှတ်ပါ။ အောက်ပါတို့ထဲမှ တစ်ခုခုဖြစ်ပါသည်-</p>
+<ul class="simple">
+<li><p>ယာယီ file တစ်ခုတွင် သိမ်းဆည်းပါ</p></li>
+<li><p>File တွင်သိမ်းဆည်းပါ</p></li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<section id="id19">
+<h4>အဆင့်မြင့်သတ်မှတ်ချက်များ (Advanced parameters)<a class="headerlink" href="#id19" title="Link to this heading"></a></h4>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 20.0%" />
+<col style="width: 20.0%" />
+<col style="width: 20.0%" />
+<col style="width: 40.0%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>အညွှန်း</p></th>
+<th class="head"><p>အမည်</p></th>
+<th class="head"><p>အမျိုးအစား</p></th>
+<th class="head"><p>ရှင်းလင်းဖော်ပြချက်</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><strong>Coordinate operation</strong> <strong>(ကိုဩဒိနိတ် လုပ်ဆောင်ချက်)</strong></p>
+<p>Optional (မဖြစ်မနေလုပ်ဆောင်ရန် မလိုအပ်ပါ)</p>
+</td>
+<td><p><code class="docutils literal notranslate"><span class="pre">OPERATION</span></code></p></td>
+<td><p>[datum]</p></td>
+<td><p>မူလ CRS နှင့် ပြောင်းလဲမည့် CRS အကြား projection ပြောင်းလဲရာတွင် အသုံးပြုမည့် <a class="reference internal" href="../../working_with_projections/working_with_projections.html#datum-transformation"><span class="std std-ref">datum transformation</span></a></p></td>
+</tr>
+</tbody>
+</table>
+</section>
+</section>
+<section id="id20">
+<h3>ရလာဒ်များ (Outputs)<a class="headerlink" href="#id20" title="Link to this heading"></a></h3>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 20.0%" />
+<col style="width: 20.0%" />
+<col style="width: 20.0%" />
+<col style="width: 40.0%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>အညွှန်း</p></th>
+<th class="head"><p>အမည်</p></th>
+<th class="head"><p>အမျိုးအစား</p></th>
+<th class="head"><p>ရှင်းလင်းဖော်ပြချက်</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><strong>REPROJECTED</strong></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">OUTPUT</span></code></p></td>
+<td><p>[point cloud]</p></td>
+<td><p>ပြောင်းလဲထားသော CRS ဖြင့် output point cloud layer</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="id21">
+<h3>Python code<a class="headerlink" href="#id21" title="Link to this heading"></a></h3>
+<p><strong>Algorithm ID</strong>: <code class="docutils literal notranslate"><span class="pre">pdal:reproject</span></code></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">processing</span>
+<span class="n">processing</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="s2">&quot;algorithm_id&quot;</span><span class="p">,</span> <span class="p">{</span><span class="n">parameter_dictionary</span><span class="p">})</span>
+</pre></div>
+</div>
+<p>Processing Toolbox ထဲရှိ algorithm ပေါ်တွင် mouse ကိုတင်ထားလျှင် <em>algorithm id</em> ကိုပြသပေးပါသည်။ <em>parameter dictionary</em> သည် parameter နာမည်များနှင့် တန်ဖိုးများကို ပေးပါသည်။ Python console မှ algorithm များကို မည်သို့လုပ်ဆောင်ရမည် ဆိုသည့် အသေးစိတ်ကို သိရှိလိုလျှင် <a class="reference internal" href="../../processing/console.html#processing-console"><span class="std std-ref">Console တွင် processing algorithm များကို အသုံးပြုခြင်း (Using processing algorithms from the console)</span></a> တွင်ကြည့်ပါ။</p>
+</section>
+</section>
+<section id="thin-by-sampling-radius">
+<span id="pdalthinbyradius"></span><h2><a class="toc-backref" href="#id47" role="doc-backlink"><span class="section-number">28.1.13.8. </span>Thin (by sampling radius)</a><a class="headerlink" href="#thin-by-sampling-radius" title="Link to this heading"></a></h2>
+<p>အကွာအဝေး point ဖြင့် sampling ပြုလုပ်ပြီး point cloud အပါး တစ်ခုကို ဖန်တီးပေးပါသည် (အချင်းဝက်တစ်ခုအတွင်း point အရေအတွက်ကို လျှော့ချပေးပါသည်)။</p>
+<figure class="align-center" id="id39">
+<img alt="../../../../_images/point_cloud_thin.gif" src="../../../../_images/point_cloud_thin.gif" />
+<figcaption>
+<p><span class="caption-number">Fig. 28.15 </span><span class="caption-text">Sampling radius ဖြင့် ပါးအောင်လုပ်ထားသော point cloud</span><a class="headerlink" href="#id39" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p><a class="reference internal" href="#pdalthinbydecimate"><span class="std std-ref">Thin (by skipping points)</span></a></p>
+</div>
+<section id="id22">
+<h3>သတ်မှတ်ချက်များ (Parameters)<a class="headerlink" href="#id22" title="Link to this heading"></a></h3>
+<section id="id23">
+<h4>အခြေခံသတ်မှတ်ချက်များ (Basic parameters)<a class="headerlink" href="#id23" title="Link to this heading"></a></h4>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 20.0%" />
+<col style="width: 20.0%" />
+<col style="width: 20.0%" />
+<col style="width: 40.0%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>အညွှန်း</p></th>
+<th class="head"><p>အမည်</p></th>
+<th class="head"><p>အမျိုးအစား</p></th>
+<th class="head"><p>ရှင်းလင်းဖော်ပြချက်</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><strong>Input layer</strong> <strong>(ထည့်သွင်းအသုံးပြုသော layer)</strong></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">INPUT</span></code></p></td>
+<td><p>[point cloud]</p></td>
+<td><p>ပါးလွှာသော ဗားရှင်းတစ်ခုကို ဖန်တီးမည့် input point cloud layer</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Sampling radius (in map units)</strong> <strong>(Sampling အချင်းဝက် (မြေပုံယူနစ်များဖြင့်))</strong></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">SAMPLING_RADIUS</span></code></p></td>
+<td><p>[number]</p>
+<p>Default: 1.0</p>
+</td>
+<td><p>အကွာအဝေး၊ ထိုအကွာအဝေးအတွင်းရှိ point များကို သိသာကွဲပြားသော (unique) point တစ်ခုသို့ sample ပြုလုပ်မည်ဖြစ်သည်။</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>Thinned (by radius)</strong> <strong>(ပါးအောင်လုပ်ထားသော (အချင်းဝက်ဖြင့်))</strong></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">OUTPUT</span></code></p></td>
+<td><p>[point cloud]</p>
+<p>Default: <code class="docutils literal notranslate"><span class="pre">[Save</span> <span class="pre">to</span> <span class="pre">temporary</span> <span class="pre">file]</span></code></p>
+</td>
+<td><p>Point များလျှော့ချထားသော output point cloud ကိုသတ်မှတ်ပါ။ အောက်ပါတို့ထဲမှ တစ်ခုခုဖြစ်ပါသည်-</p>
+<ul class="simple">
+<li><p>ယာယီ file တစ်ခုတွင် သိမ်းဆည်းပါ</p></li>
+<li><p>File တွင်သိမ်းဆည်းပါ</p></li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="id24">
+<h4>အဆင့်မြင့်သတ်မှတ်ချက်များ (Advanced parameters)<a class="headerlink" href="#id24" title="Link to this heading"></a></h4>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 20.0%" />
+<col style="width: 20.0%" />
+<col style="width: 20.0%" />
+<col style="width: 40.0%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>အညွှန်း</p></th>
+<th class="head"><p>အမည်</p></th>
+<th class="head"><p>အမျိုးအစား</p></th>
+<th class="head"><p>ရှင်းလင်းဖော်ပြချက်</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><strong>Filter expression</strong></p>
+<p>Optional (မဖြစ်မနေလုပ်ဆောင်ရန်မလိုပါ)</p>
+</td>
+<td><p><code class="docutils literal notranslate"><span class="pre">FILTER_EXPRESSION</span></code></p></td>
+<td><p>[expression]</p></td>
+<td><p>Point cloud data ထဲရှိ feature များအစုတစ်ခုကို ရွေးချယ်ရန်အတွက် <a class="reference internal" href="../../working_with_point_clouds/point_clouds.html#pdal-expressions"><span class="std std-ref">PDAL expression</span></a> တစ်ခု။</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Cropping extent</strong> <strong>(ဖြတ်ထုတ်မည့် နယ်ပယ်အကျယ်အဝန်း)</strong></p>
+<p>Optional (မဖြစ်မနေလုပ်ဆောင်ရန်မလိုပါ)</p>
+</td>
+<td><p><code class="docutils literal notranslate"><span class="pre">FILTER_EXTENT</span></code></p></td>
+<td><p>[extent]</p></td>
+<td><p>Point cloud data ထဲရှိ feature များအစုတစ်ခုကို ရွေးချယ်ရန်အတွက် မြေပုံ နယ်ပယ်အကျယ်အဝန်း (extent)။</p>
+<p>အသုံးပြုနိုင်သော နည်းလမ်းများမှာ -</p>
+<ul class="simple">
+<li><p>Layer မှ တွက်ချက်ခြင်း - လက်ရှိ project ထဲတွင်ထည့်သွင်းထားသော layer ၏ extent (နယ်ပယ်အကျယ်အဝန်း)ကိုအသုံးပြုပါသည်။</p></li>
+<li><p>Layout map မှ တွက်ချက်ခြင်း - အသုံးပြုနေသော project ထဲရှိ <a class="reference internal" href="../../print_composer/composer_items/composer_map.html#layout-map-item"><span class="std std-ref">layout map item</span></a> တစ်ခု၏ extent အသုံးပြုပါသည်။</p></li>
+<li><p>Bookmark မှ တွက်ချက်ခြင်း - မှတ်ထားသော <a class="reference internal" href="../../map_views/map_view.html#sec-bookmarks"><span class="std std-ref">bookmark</span></a> တစ်ခု၏ extent ကိုအသုံးပြုပါသည်။</p></li>
+<li><p>မြေပုံ canvas extent ကိုအသုံးပြုခြင်း</p></li>
+<li><p>Canvas ပေါ်တွင်ရေးဆွဲခြင်း - တွက်ချက်လိုသည့် ဧရိယာကို ထောင့်မှန်စတုဂံပုံဆွဲခြင်း။</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">x</span> <span class="pre">အနည်းဆုံး၊</span> <span class="pre">x</span> <span class="pre">အများဆုံး၊</span> <span class="pre">y</span> <span class="pre">အနည်းဆုံး၊</span>&#160; <span class="pre">y</span> <span class="pre">အများဆုံး</span></code> တို့အဖြစ် ကိုဩဒိနိတ်များကို ထည့်သွင်းခြင်း။</p></li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</section>
+</section>
+<section id="id25">
+<h3>ရလာဒ်များ (Outputs)<a class="headerlink" href="#id25" title="Link to this heading"></a></h3>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 20.0%" />
+<col style="width: 20.0%" />
+<col style="width: 20.0%" />
+<col style="width: 40.0%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>အညွှန်း</p></th>
+<th class="head"><p>အမည်</p></th>
+<th class="head"><p>အမျိုးအစား</p></th>
+<th class="head"><p>ရှင်းလင်းဖော်ပြချက်</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><strong>Thinned (by radius)</strong></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">OUTPUT</span></code></p></td>
+<td><p>[point cloud]</p></td>
+<td><p>လျှော့ချထားသော point များဖြင့် output point cloud layer</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="id26">
+<h3>Python code<a class="headerlink" href="#id26" title="Link to this heading"></a></h3>
+<p><strong>Algorithm ID</strong>: <code class="docutils literal notranslate"><span class="pre">pdal:thinbyradius</span></code></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">processing</span>
+<span class="n">processing</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="s2">&quot;algorithm_id&quot;</span><span class="p">,</span> <span class="p">{</span><span class="n">parameter_dictionary</span><span class="p">})</span>
+</pre></div>
+</div>
+<p>Processing Toolbox ထဲရှိ algorithm ပေါ်တွင် mouse ကိုတင်ထားလျှင် <em>algorithm id</em> ကိုပြသပေးပါသည်။ <em>parameter dictionary</em> သည် parameter နာမည်များနှင့် တန်ဖိုးများကို ပေးပါသည်။ Python console မှ algorithm များကို မည်သို့လုပ်ဆောင်ရမည် ဆိုသည့် အသေးစိတ်ကို သိရှိလိုလျှင် <a class="reference internal" href="../../processing/console.html#processing-console"><span class="std std-ref">Console တွင် processing algorithm များကို အသုံးပြုခြင်း (Using processing algorithms from the console)</span></a> တွင်ကြည့်ပါ။</p>
+</section>
+</section>
+<section id="thin-by-skipping-points">
+<span id="pdalthinbydecimate"></span><h2><a class="toc-backref" href="#id48" role="doc-backlink"><span class="section-number">28.1.13.9. </span>Thin (by skipping points)</a><a class="headerlink" href="#thin-by-skipping-points" title="Link to this heading"></a></h2>
+<p>N အကြိမ်မြောက် (N-th) point တိုင်းကိုသာ ဆက်လက်ထားရှိပြီး ပါးလွှာသော point cloud ဗားရှင်းတစ်ခုကို ဖန်တီးပေးပါသည် (အနီးအနားရှိ point များကို ကျော်သွားပြီး point အရေအတွက်ကို လျှော့ချပေးပါသည်)။</p>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p><a class="reference internal" href="#pdalthinbyradius"><span class="std std-ref">Thin (by sampling radius)</span></a></p>
+</div>
+<section id="id27">
+<h3>သတ်မှတ်ချက်များ (Parameters)<a class="headerlink" href="#id27" title="Link to this heading"></a></h3>
+<section id="id28">
+<h4>အခြေခံသတ်မှတ်ချက်များ (Basic parameters)<a class="headerlink" href="#id28" title="Link to this heading"></a></h4>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 20.0%" />
+<col style="width: 20.0%" />
+<col style="width: 20.0%" />
+<col style="width: 40.0%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>အညွှန်း</p></th>
+<th class="head"><p>အမည်</p></th>
+<th class="head"><p>အမျိုးအစား</p></th>
+<th class="head"><p>ရှင်းလင်းဖော်ပြချက်</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><strong>Input layer</strong> <strong>(ထည့်သွင်းအသုံးပြုသော layer)</strong></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">INPUT</span></code></p></td>
+<td><p>[point cloud]</p></td>
+<td><p>Input point cloud layer to create a thinned version from</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Number of points to skip</strong> <strong>(ကျော်ပစ်မည့် point အရေအတွက်)</strong></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">POINTS_NUMBER</span></code></p></td>
+<td><p>[number]</p>
+<p>Default: 1</p>
+</td>
+<td><p>Input layer ထဲရှိ N အကြိမ်မြောက် (N-th) point တိုင်းကိုသာ ဆက်လက်ထားရှိပါမည်။</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>Thinned (by decimation)</strong></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">OUTPUT</span></code></p></td>
+<td><p>[point cloud]</p>
+<p>Default: <code class="docutils literal notranslate"><span class="pre">[Save</span> <span class="pre">to</span> <span class="pre">temporary</span> <span class="pre">file]</span></code></p>
+</td>
+<td><p>လျှော့ချထားသော point များပါဝင်သည့် output point cloud ကိုသတ်မှတ်ပါ။ အောက်ပါတို့ထဲမှ တစ်ခုခုဖြစ်ပါသည်-</p>
+<ul class="simple">
+<li><p>ယာယီ file တစ်ခုတွင် သိမ်းဆည်းပါ</p></li>
+<li><p>File တွင်သိမ်းဆည်းပါ</p></li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="id29">
+<h4>အဆင့်မြင့်သတ်မှတ်ချက်များ (Advanced parameters)<a class="headerlink" href="#id29" title="Link to this heading"></a></h4>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 20.0%" />
+<col style="width: 20.0%" />
+<col style="width: 20.0%" />
+<col style="width: 40.0%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>အညွှန်း</p></th>
+<th class="head"><p>အမည်</p></th>
+<th class="head"><p>အမျိုးအစား</p></th>
+<th class="head"><p>ရှင်းလင်းဖော်ပြချက်</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><strong>Filter expression</strong></p>
+<p>Optional (မဖြစ်မနေလုပ်ဆောင်ရန်မလိုပါ)</p>
+</td>
+<td><p><code class="docutils literal notranslate"><span class="pre">FILTER_EXPRESSION</span></code></p></td>
+<td><p>[expression]</p></td>
+<td><p>Point cloud data ထဲရှိ feature များအစုတစ်ခုကို ရွေးချယ်ရန်အတွက် <a class="reference internal" href="../../working_with_point_clouds/point_clouds.html#pdal-expressions"><span class="std std-ref">PDAL expression</span></a> တစ်ခု။</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Cropping extent</strong> <strong>(ဖြတ်ထုတ်မည့် နယ်ပယ်အကျယ်အဝန်း)</strong></p>
+<p>Optional (မဖြစ်မနေလုပ်ဆောင်ရန်မလိုပါ)</p>
+</td>
+<td><p><code class="docutils literal notranslate"><span class="pre">FILTER_EXTENT</span></code></p></td>
+<td><p>[extent]</p></td>
+<td><p>Point cloud data ထဲရှိ feature များအစုတစ်ခုကို ရွေးချယ်ရန်အတွက် မြေပုံ နယ်ပယ်အကျယ်အဝန်း (extent)။</p>
+<p>အသုံးပြုနိုင်သော နည်းလမ်းများမှာ -</p>
+<ul class="simple">
+<li><p>Layer မှ တွက်ချက်ခြင်း - လက်ရှိ project ထဲတွင်ထည့်သွင်းထားသော layer ၏ extent (နယ်ပယ်အကျယ်အဝန်း)ကိုအသုံးပြုပါသည်။</p></li>
+<li><p>Layout map မှ တွက်ချက်ခြင်း - အသုံးပြုနေသော project ထဲရှိ <a class="reference internal" href="../../print_composer/composer_items/composer_map.html#layout-map-item"><span class="std std-ref">layout map item</span></a> တစ်ခု၏ extent အသုံးပြုပါသည်။</p></li>
+<li><p>Bookmark မှ တွက်ချက်ခြင်း - မှတ်ထားသော <a class="reference internal" href="../../map_views/map_view.html#sec-bookmarks"><span class="std std-ref">bookmark</span></a> တစ်ခု၏ extent ကိုအသုံးပြုပါသည်။</p></li>
+<li><p>မြေပုံ canvas extent ကိုအသုံးပြုခြင်း</p></li>
+<li><p>Canvas ပေါ်တွင်ရေးဆွဲခြင်း - တွက်ချက်လိုသည့် ဧရိယာကို ထောင့်မှန်စတုဂံပုံဆွဲခြင်း။</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">x</span> <span class="pre">အနည်းဆုံး၊</span> <span class="pre">x</span> <span class="pre">အများဆုံး၊</span> <span class="pre">y</span> <span class="pre">အနည်းဆုံး၊</span>&#160; <span class="pre">y</span> <span class="pre">အများဆုံး</span></code> တို့အဖြစ် ကိုဩဒိနိတ်များကို ထည့်သွင်းခြင်း။</p></li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</section>
+</section>
+<section id="id30">
+<h3>ရလာဒ်များ (Outputs)<a class="headerlink" href="#id30" title="Link to this heading"></a></h3>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 20.0%" />
+<col style="width: 20.0%" />
+<col style="width: 20.0%" />
+<col style="width: 40.0%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>အညွှန်း</p></th>
+<th class="head"><p>အမည်</p></th>
+<th class="head"><p>အမျိုးအစား</p></th>
+<th class="head"><p>ရှင်းလင်းဖော်ပြချက်</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><strong>Thinned (by decimation)</strong></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">OUTPUT</span></code></p></td>
+<td><p>[point cloud]</p></td>
+<td><p>လျှော့ချထားသော point များဖြင့် output point cloud layer</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="id31">
+<h3>Python code<a class="headerlink" href="#id31" title="Link to this heading"></a></h3>
+<p><strong>Algorithm ID</strong>: <code class="docutils literal notranslate"><span class="pre">pdal:thinbydecimate</span></code></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">processing</span>
+<span class="n">processing</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="s2">&quot;algorithm_id&quot;</span><span class="p">,</span> <span class="p">{</span><span class="n">parameter_dictionary</span><span class="p">})</span>
+</pre></div>
+</div>
+<p>Processing Toolbox ထဲရှိ algorithm ပေါ်တွင် mouse ကိုတင်ထားလျှင် <em>algorithm id</em> ကိုပြသပေးပါသည်။ <em>parameter dictionary</em> သည် parameter နာမည်များနှင့် တန်ဖိုးများကို ပေးပါသည်။ Python console မှ algorithm များကို မည်သို့လုပ်ဆောင်ရမည် ဆိုသည့် အသေးစိတ်ကို သိရှိလိုလျှင် <a class="reference internal" href="../../processing/console.html#processing-console"><span class="std std-ref">Console တွင် processing algorithm များကို အသုံးပြုခြင်း (Using processing algorithms from the console)</span></a> တွင်ကြည့်ပါ။</p>
+</section>
+</section>
+<section id="tile">
+<span id="pdaltile"></span><h2><a class="toc-backref" href="#id49" role="doc-backlink"><span class="section-number">28.1.13.10. </span>Tile</a><a class="headerlink" href="#tile" title="Link to this heading"></a></h2>
+<p>Input point cloud ဖိုင်များမှ tile များကို ဖန်တီးပေးပါသည်၊ QGIS ထဲတွင် အကောင်းဆုံးစွမ်းဆောင်ရည် (ပြသခြင်း သို့မဟုတ် ခွဲခြမ်းစိတ်ဖြာခြင်းများတွင်) ရရှိရန်အတွက် အဆိုပါ dataset မျိုးကို အသုံးပြုရန် အကြံပြုပါသည်။</p>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p><a class="reference internal" href="#pdalvirtualpointcloud"><span class="std std-ref">Virtual point cloud တည်ဆောက်ခြင်း (Build virtual point cloud (VPC))</span></a> ၊ <a class="reference internal" href="#pdalcreatecopc"><span class="std std-ref">COPC ဖန်တီးခြင်း (Create COPC)</span></a></p>
+</div>
+<section id="id32">
+<h3>သတ်မှတ်ချက်များ (Parameters)<a class="headerlink" href="#id32" title="Link to this heading"></a></h3>
+<section id="id33">
+<h4>အခြေခံသတ်မှတ်ချက်များ (Basic parameters)<a class="headerlink" href="#id33" title="Link to this heading"></a></h4>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 20.0%" />
+<col style="width: 20.0%" />
+<col style="width: 20.0%" />
+<col style="width: 40.0%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>အညွှန်း</p></th>
+<th class="head"><p>အမည်</p></th>
+<th class="head"><p>အမျိုးအစား</p></th>
+<th class="head"><p>ရှင်းလင်းဖော်ပြချက်</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><strong>Input layers</strong> <strong>(ထည့်သွင်းအသုံးပြုသော layer)</strong></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">LAYERS</span></code></p></td>
+<td><p>[point cloud] [list]</p></td>
+<td><p>Tile များဖန်တီးမည့် input point cloud layer များ</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Tile length</strong> <strong>(Tile အလျား)</strong></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">LENGTH</span></code></p></td>
+<td><p>[number]</p>
+<p>Default: 1000.0</p>
+</td>
+<td><p>ထုတ်ယူထားသော tile တစ်ခုချင်းစီ၏ edge (ထောင့်စွန်း) အရွယ်အစား</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>Output directory</strong> <strong>(ရလာဒ် ဖိုင်လမ်းကြောင်း)</strong></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">OUTPUT</span></code></p></td>
+<td><p>[folder]</p>
+<p>Default: <code class="docutils literal notranslate"><span class="pre">[Save</span> <span class="pre">to</span> <span class="pre">temporary</span> <span class="pre">folder]</span></code></p>
+</td>
+<td><p>ထုတ်ယူထားသော tile များကို သိမ်းဆည်းရန် folder ကိုသတ်မှတ်ပါ။ အောက်ပါတို့ထဲမှ တစ်ခုခုဖြစ်ပါသည်-</p>
+<ul class="simple">
+<li><p>ယာယီ လမ်းကြောင်းတစ်ခုတွင် သိမ်းဆည်းပါ</p></li>
+<li><p>လမ်းကြောင်းတွင်သိမ်းဆည်းပါ</p></li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="id34">
+<h4>အဆင့်မြင့်သတ်မှတ်ချက်များ (Advanced parameters)<a class="headerlink" href="#id34" title="Link to this heading"></a></h4>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 20.0%" />
+<col style="width: 20.0%" />
+<col style="width: 20.0%" />
+<col style="width: 40.0%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>အညွှန်း</p></th>
+<th class="head"><p>အမည်</p></th>
+<th class="head"><p>အမျိုးအစား</p></th>
+<th class="head"><p>ရှင်းလင်းဖော်ပြချက်</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><strong>Assign CRS</strong> <strong>(CRS သတ်မှတ်ခြင်း)</strong></p>
+<p>Optional (မဖြစ်မနေလုပ်ဆောင်ရန် မလိုအပ်ပါ)</p>
+</td>
+<td><p><code class="docutils literal notranslate"><span class="pre">CRS</span></code></p></td>
+<td><p>[crs]</p></td>
+<td><p>Layer တွင် အသုံးပြုမည့် CRS</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+</section>
+<section id="id35">
+<h3>ရလာဒ်များ (Outputs)<a class="headerlink" href="#id35" title="Link to this heading"></a></h3>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 20.0%" />
+<col style="width: 20.0%" />
+<col style="width: 20.0%" />
+<col style="width: 40.0%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>အညွှန်း</p></th>
+<th class="head"><p>အမည်</p></th>
+<th class="head"><p>အမျိုးအစား</p></th>
+<th class="head"><p>ရှင်းလင်းဖော်ပြချက်</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><strong>Output directory</strong> <strong>(ရလာဒ် ဖိုင်လမ်းကြောင်း)</strong></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">OUTPUT</span></code></p></td>
+<td><p>[folder]</p></td>
+<td><p>Input ဖိုင်များမှ ထုတ်ယူထားသော tile များပါဝင်သော output folder</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="id36">
+<h3>Python code<a class="headerlink" href="#id36" title="Link to this heading"></a></h3>
+<p><strong>Algorithm ID</strong>: <code class="docutils literal notranslate"><span class="pre">pdal:tile</span></code></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">processing</span>
+<span class="n">processing</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="s2">&quot;algorithm_id&quot;</span><span class="p">,</span> <span class="p">{</span><span class="n">parameter_dictionary</span><span class="p">})</span>
+</pre></div>
+</div>
+<p>Processing Toolbox ထဲရှိ algorithm ပေါ်တွင် mouse ကိုတင်ထားလျှင် <em>algorithm id</em> ကိုပြသပေးပါသည်။ <em>parameter dictionary</em> သည် parameter နာမည်များနှင့် တန်ဖိုးများကို ပေးပါသည်။ Python console မှ algorithm များကို မည်သို့လုပ်ဆောင်ရမည် ဆိုသည့် အသေးစိတ်ကို သိရှိလိုလျှင် <a class="reference internal" href="../../processing/console.html#processing-console"><span class="std std-ref">Console တွင် processing algorithm များကို အသုံးပြုခြင်း (Using processing algorithms from the console)</span></a> တွင်ကြည့်ပါ။</p>
+</section>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="pointcloudconversion.html" class="btn btn-neutral float-left" title="28.1.12. Point Cloud ပြောင်းလဲခြင်း (Point Cloud Conversion)" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="pointcloudextraction.html" class="btn btn-neutral float-right" title="28.1.14. Point Cloud ထဲမှ ဆွဲထုတ်ခြင်း (Point Cloud Extraction)" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2002-now, QGIS project.
+      <span class="lastupdated">Last updated on 2025 Feb 19, 10:27 +0630.
+      </span></p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <!-- Transifex follows a particular logic to build target pages:
+Expected French translation link for https://docs.qgis.org/3.28/en/docs/user_manual/print_composer/overview_composer.html
+would return https://app.transifex.com/qgis/qgis-documentation/translate/#fr/aa6d8bc653526d38b295ca94bf8eee5e
+with the md5 value of "github#qgis/QGIS-Documentation#release_3.28#locale/en/LC_MESSAGES/docs/user_manual/print_composer/overview_composer.po"-->
+<!--Make sure that mismatching language codes between Transifex and Sphinx are converted-->
+
+
+  <div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      <span class="fa fa-info-circle"> QGIS Documentation </span>
+      v: 3.40
+      <span class="fa fa-caret-down"></span>
+    </span>
+
+    <div class="rst-other-versions">
+      <dl>
+        <dt>Languages</dt>
+        
+          <dd><a href="https://docs.qgis.org/3.40/en/docs/user_manual/processing_algs/qgis/pointclouddatamanagement.html">en</a></dd>
+        
+      </dl>
+
+      <dl>
+        <dt>Versions</dt>
+        
+          <dd><a href="https://docs.qgis.org/testing/en/docs/user_manual/processing_algs/qgis/pointclouddatamanagement.html">testing</a></dd>
+        
+          <dd><a href="https://docs.qgis.org/latest/en/docs/user_manual/processing_algs/qgis/pointclouddatamanagement.html">latest</a></dd>
+        
+          <dd><a href="https://docs.qgis.org/3.40/en/docs/user_manual/processing_algs/qgis/pointclouddatamanagement.html">3.40</a></dd>
+        
+          <dd><a href="https://docs.qgis.org/3.34/en/docs/user_manual/processing_algs/qgis/pointclouddatamanagement.html">3.34</a></dd>
+        
+          <dd><a href="https://docs.qgis.org/3.28/en/docs/user_manual/processing_algs/qgis/pointclouddatamanagement.html">3.28</a></dd>
+        
+          <dd><a href="https://docs.qgis.org/3.22/en/docs/user_manual/processing_algs/qgis/pointclouddatamanagement.html">3.22</a></dd>
+        
+          <dd><a href="https://docs.qgis.org/3.16/en/docs/user_manual/processing_algs/qgis/pointclouddatamanagement.html">3.16</a></dd>
+        
+          <dd><a href="https://docs.qgis.org/3.10/en/docs/user_manual/processing_algs/qgis/pointclouddatamanagement.html">3.10</a></dd>
+        
+          <dd><a href="https://docs.qgis.org/3.4/en/docs/user_manual/processing_algs/qgis/pointclouddatamanagement.html">3.4</a></dd>
+        
+          <dd><a href="https://docs.qgis.org/2.18/en/docs/user_manual/processing_algs/qgis/pointclouddatamanagement.html">2.18</a></dd>
+        
+      </dl>
+
+       
+       <dl>
+        <dt>Downloads</dt>
+        
+          <dd><a href="https://docs.qgis.org/3.40/pdf">PDF</a></dd>
+        
+          <dd><a href="https://docs.qgis.org/3.40/zip">HTML</a></dd>
+        
+      </dl>
+      
+
+      
+       
+      <dl>
+        <dt>Contribute to Docs</dt>
+          <dd>
+            <a href="https://github.com/qgis/QGIS-Documentation/edit/master/docs/user_manual/processing_algs/qgis/pointclouddatamanagement.rst" target="_blank" rel="noopener noreferrer">Edit on GitHub</a>
+          </dd>
+          
+          
+          <dd>
+            <a href="https://app.transifex.com/qgis/qgis-documentation/translate/#en/2cb603569ae18481452b2a34d89bc964" target="_blank" rel="noopener noreferrer">Translate Page</a>
+          </dd>
+          
+          <dd>
+            <a href="https://github.com/qgis/QGIS-Documentation/issues" target="_blank" rel="noopener noreferrer">Report Issue</a>
+          </dd>
+      </dl>
+      
+
+      <dl>
+        <dt>On QGIS Project</dt>
+          <dd>
+            <a href="https://qgis.org" target="_blank" rel="noopener noreferrer">Home</a>
+          </dd>
+          <dd>
+            <a href="https://qgis.org/api/3.40" target="_blank" rel="noopener noreferrer">C++ API</a>
+          </dd>
+          <dd>
+            <a href="https://qgis.org/pyqgis/3.40" target="_blank" rel="noopener noreferrer">PyQGIS API</a>
+          </dd>
+          <dd>
+            <a href="https://github.com/qgis/QGIS/tree/release-3_40" target="_blank" rel="noopener noreferrer">Source</a>
+          </dd>
+      </dl>
+
+    </div>
+  </div><script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

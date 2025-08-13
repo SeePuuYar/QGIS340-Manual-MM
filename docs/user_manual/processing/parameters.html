@@ -1,0 +1,687 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>27.10. Processing Algorithm များအတွက် Input နှင့် Output အမျိုးအစားများ (Input and output types for Processing Algorithms) &mdash; QGIS Documentation  documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/qgis_docs.css?v=5415a924" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/togglebutton.css?v=13237357" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
+
+  
+    <link rel="shortcut icon" href="../../../_static/qgis_logo.ico"/>
+    <link rel="canonical" href="https://docs.qgis.org/latest/en/docs/user_manual/processing/parameters.html"/>
+  <!--[if lt IE 9]>
+    <script src="../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../../../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../../../_static/documentation_options.js?v=5929fcd5"></script>
+        <script src="../../../_static/doctools.js?v=888ff710"></script>
+        <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+        <script src="../../../_static/clipboard.min.js?v=a7894cd8"></script>
+        <script src="../../../_static/copybutton.js?v=f281be69"></script>
+        <script>let toggleHintShow = 'Click to show';</script>
+        <script>let toggleHintHide = 'Click to hide';</script>
+        <script>let toggleOpenOnPrint = 'true';</script>
+        <script src="../../../_static/togglebutton.js?v=4a39c7ea"></script>
+        <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+        <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="next" title="27.11. ပြင်ပ application များကို ပြင်ဆင်သတ်မှတ်ခြင်း (Configuring external applications)" href="3rdParty.html" />
+    <link rel="prev" title="27.9. Processing algorithm အသစ်များကို Python script များအဖြစ် ရေးသားခြင်း" href="scripts.html" />
+  <meta name="description" content="QGIS 3.40 documentation: 27.10. Processing Algorithm များအတွက် Input နှင့် Output အမျိုးအစားများ (Input and output types for Processing Algorithms)">
+  <script>
+    var _paq = window._paq = window._paq || [];
+    _paq.push(["disableCookies"]);
+    _paq.push(['trackPageView']);
+    _paq.push(['enableLinkTracking']);
+    (function() {
+      var u="//matomo.qgis.org/";
+      _paq.push(['setTrackerUrl', u+'matomo.php']);
+      _paq.push(['setSiteId', '1']);
+      var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
+      g.async=true; g.src=u+'matomo.js'; s.parentNode.insertBefore(g,s);
+    })();
+  </script>
+</head>
+
+<body class="wy-body-for-nav">
+
+  <nav class="release_status_topbar">
+  </nav>
+
+   
+
+ 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+   
+
+          
+          
+          <a href="../../index.html" class="icon icon-home">
+            QGIS Documentation
+              <img src="../../../_static/logo.png" class="logo" alt="Logo"/>
+          </a>
+              <div class="version">
+                3.40
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+   <a href= "../../../genindex.html">Index</a>
+ 
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">အသုံးပြုသူများအတွက်</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">QGIS Desktop User Guide/Manual (QGIS 3.40)</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../preamble/preamble.html">1. စကားချီး (Preamble)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../preamble/foreword.html">2. အမှာစာ (Foreword)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../preamble/conventions.html">3. အသုံးအနှုန်းများ (Conventions)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../preamble/features.html">4. အသွင်အပြင်များ (Features)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../introduction/getting_started.html">5. စတင်အသုံးပြုခြင်း (Getting Started)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../introduction/project_files.html">6. Project Files များနှင့် အလုပ်လုပ်ခြင်း (Working with Project Files)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../introduction/qgis_gui.html">7. QGIS ၏အစိတ်အပိုင်းများ (QGIS GUI)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../introduction/browser.html">8. The Browser panel (ရှာဖွေကြည့်ရှုသည့် Panel)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../introduction/qgis_configuration.html">9. QGIS ပြင်ဆင်သတ်မှတ်ခြင်း/အခင်းအကျင်း (QGIS Configuration)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../working_with_projections/working_with_projections.html">10. မြေပုံအရိပ်ချစနစ်များနှင့် အလုပ်လုပ်ခြင်း (Working with Projections)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../map_views/index.html">11. မြေပုံများအား ပုံဖော်ကြည့်ရှုခြင်း (Visualizing Maps)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../introduction/general_tools.html">12. ယေဘုယျ tool များ (General Tools)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../expressions/index.html">13. Expression များဖြင့် အဆင့်မြှင့်တင်ဆောင်ရွက်ခြင်း (Level up with Expressions)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../style_library/index.html">14. Style နှင့်ပတ်သက်သည်များ ထားရှိရာနေရာ (The Style Library)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../managing_data_source/index.html">15. ဒေတာအရင်းအမြစ်များအား စီမံခန့်ခွဲခြင်း (Managing Data Source)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../working_with_vector/index.html">16. Vector data များဖြင့် အလုပ်လုပ်ခြင်း (Working with Vector Data)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../working_with_raster/index.html">17. Raster Data များဖြင့် အလုပ်လုပ်ခြင်း</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../working_with_mesh/mesh.html">18. Mesh Data များနှင့် အလုပ်လုပ်ခြင်း (Working with Mesh Data)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../working_with_vector_tiles/vector_tiles.html">19. Vector Tiles များနှင့်အလုပ်လုပ်ခြင်း (Working with Vector Tiles)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../working_with_point_clouds/point_clouds.html">20. Point Cloud များဖြင့် အလုပ်လုပ်ခြင်း (Working with Point Clouds)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../working_with_3d_tiles/3d_tiles.html">21. 3D Tile များဖြင့် အလုပ်လုပ်ခြင်း (Working with 3D Tiles)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../print_composer/index.html">22. မြေပုံအချောသပ်ပြင်ဆင်ခြင်း (Laying out the maps)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../working_with_ogc/ogc_client_support.html">23. OGC / ISO protocol များဖြင့် အလုပ်လုပ်ခြင်း</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../working_with_gps/index.html">24. GPS Data များနှင့် အလုပ်လုပ်ခြင်း</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../auth_system/index.html">25. အထောက်အထားစိစစ်ခြင်းစနစ် (Authentication System)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../grass_integration/grass_integration.html">26. GRASS GIS Integration (GRASS GIS နှင့်ပေါင်းစပ်အသုံးပြုခြင်း)</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="index.html">27. QGIS processing framework</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="intro.html">27.1. မိတ်ဆက် (Introduction)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="configuration.html">27.2. Processing Framework ကို ပြင်ဆင်သတ်မှတ်ခြင်း (Configuring the Processing Framework)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="toolbox.html">27.3. ကိရိယာများအစု (The Toolbox)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="history.html">27.4. ရှေ့တွင်လုပ်ခဲ့သည့်အဆင့်များကို စီမံခန့်ခွဲရာနေရာ (The history manager)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="modeler.html">27.5. Model design ပြုလုပ်ရာနေရာ (The model designer)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="batch.html">27.6. လုပ်ဆောင်ချက်များ အပြိုင်ပြုလုပ်ရန်နေရာ (The batch processing interface)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="console.html">27.7. Console တွင် processing algorithm များကို အသုံးပြုခြင်း (Using processing algorithms from the console)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="standalone.html">27.8. Command line မှ processing ပြုလုပ်ခြင်း (Using processing from the command line)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="scripts.html">27.9. Processing algorithm အသစ်များကို Python script များအဖြစ် ရေးသားခြင်း</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">27.10. Processing Algorithm များအတွက် Input နှင့် Output အမျိုးအစားများ (Input and output types for Processing Algorithms)</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#input-types">27.10.1. Input types (ထည့်သွင်းအသုံးပြုသည့်အချက်အလက် အမျိုးအစားများ)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#output-types">27.10.2. Output types (ရလာဒ်အမျိုးအစားများ)</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="3rdParty.html">27.11. ပြင်ပ application များကို ပြင်ဆင်သတ်မှတ်ခြင်း (Configuring external applications)</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../processing_algs/index.html">28. Processing ဆိုင်ရာ ထောက်ပံ့ပေးသူများနှင့် Algorithm များ (Processing providers and algorithms)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../plugins/index.html">29. Plugin များ</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../preamble/help_and_support.html">30. အကူအညီနှင့်အထောက်အပံ့ (Help and Support)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../preamble/contributors.html">31. ပါဝင်အားဖြည့်သူများ (Contributors)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../appendices/index.html">32. Appendices (နောက်ဆက်တွဲများ)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../literature_web/literature_and_web_references.html">33. စာတမ်းများနှင့် Website ကိုးကားချက်များ (Literature and Web References)</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../server_manual/index.html">QGIS Server Guide/Manual (QGIS 3.40)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../training_manual/index.html">Training Manual</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../gentle_gis_introduction/index.html">A Gentle Introduction to GIS</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">ရေးသားသူများအတွက်</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../documentation_guidelines/index.html">Documentation Guidelines</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Developer များအတွက်</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../pyqgis_developer_cookbook/index.html">PyQGIS Cookbook (QGIS 3.40)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../developers_guide/index.html">Developers Guide</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">QGIS Documentation</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../index.html">QGIS အသုံးပြုသူလမ်းညွှန် (User Guide)</a></li>
+          <li class="breadcrumb-item"><a href="index.html"><span class="section-number">27. </span>QGIS processing framework</a></li>
+      <li class="breadcrumb-item active"><span class="section-number">27.10. </span>Processing Algorithm များအတွက် Input နှင့် Output အမျိုးအစားများ (Input and output types for Processing Algorithms)</li>
+      <li class="wy-breadcrumbs-aside">
+              <a href="https://github.com/qgis/QGIS-Documentation/blob/master/docs/user_manual/processing/parameters.rst" class="fa fa-github"> Edit on GitHub</a>
+      </li>
+  </ul><div class="rst-breadcrumbs-buttons" role="navigation" aria-label="Sequential page navigation">
+        <a href="scripts.html" class="btn btn-neutral float-left" title="27.9. Processing algorithm အသစ်များကို Python script များအဖြစ် ရေးသားခြင်း" accesskey="p"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="3rdParty.html" class="btn btn-neutral float-right" title="27.11. ပြင်ပ application များကို ပြင်ဆင်သတ်မှတ်ခြင်း (Configuring external applications)" accesskey="n">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+  </div>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <blockquote>
+<div></div></blockquote>
+<section id="processing-algorithm-input-output-input-and-output-types-for-processing-algorithms">
+<span id="processing-algs-input-output"></span><h1><span class="section-number">27.10. </span>Processing Algorithm များအတွက် Input နှင့် Output အမျိုးအစားများ (Input and output types for Processing Algorithms)<a class="headerlink" href="#processing-algorithm-input-output-input-and-output-types-for-processing-algorithms" title="Link to this heading"></a></h1>
+<p>သက်ဆိုင်သော alg decorator ကိန်းသေများပါဝင်ပြီး processing ထဲတွင် လုပ်ဆောင်နိုင်သော Input နှင့် Output အမျိုးအစားများစာရင်းကို အောက်တွင် ဖော်ပြထားပါသည်။</p>
+<section id="input-types">
+<h2><span class="section-number">27.10.1. </span>Input types (ထည့်သွင်းအသုံးပြုသည့်အချက်အလက် အမျိုးအစားများ)<a class="headerlink" href="#input-types" title="Link to this heading"></a></h2>
+<table class="longtable docutils align-default">
+<colgroup>
+<col style="width: 21.1%" />
+<col style="width: 26.3%" />
+<col style="width: 21.1%" />
+<col style="width: 31.6%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Input နာမည်</p></th>
+<th class="head"><p>Class</p></th>
+<th class="head"><p>Alg constant</p></th>
+<th class="head"><p>ရှင်းလင်းဖော်ပြချက်</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Annotation (မှတ်စာ) layer</p></td>
+<td><p><a class="reference external" href="https://qgis.org/pyqgis/3.40/core/QgsProcessingParameterAnnotationLayer.html#qgis.core.QgsProcessingParameterAnnotationLayer" title="(in QGIS Python API v3.40)"><code class="xref py py-class docutils literal notranslate"><span class="pre">QgsProcessingParameterAnnotationLayer</span></code></a></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">alg.ANNOTATION_LAYER</span></code></p></td>
+<td><p>Annotation (မှတ်စာ) layer တစ်ခု</p></td>
+</tr>
+<tr class="row-odd"><td><p>Area (ဧရိယာ)</p></td>
+<td><p><a class="reference external" href="https://qgis.org/pyqgis/3.40/core/QgsProcessingParameterArea.html#qgis.core.QgsProcessingParameterArea" title="(in QGIS Python API v3.40)"><code class="xref py py-class docutils literal notranslate"><span class="pre">QgsProcessingParameterArea</span></code></a></p></td>
+<td></td>
+<td><p>ဧရိယာအတိုင်းအတာတစ်ခုကို ကိုယ်စားပြုသော ကိန်းဂဏန်း parameter တစ်ခု</p></td>
+</tr>
+<tr class="row-even"><td><p>Authentication Configuration (အစစ်အမှန်ဖြစ်ခြင်းဆိုင်ရာ ပြင်ဆင်သတ်မှတ်ခြင်း)</p></td>
+<td><p><a class="reference external" href="https://qgis.org/pyqgis/3.40/core/QgsProcessingParameterAuthConfig.html#qgis.core.QgsProcessingParameterAuthConfig" title="(in QGIS Python API v3.40)"><code class="xref py py-class docutils literal notranslate"><span class="pre">QgsProcessingParameterAuthConfig</span></code></a></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">alg.AUTH_CFG</span></code></p></td>
+<td><p>ပေးထားသော authentication configuration များမှ ရွေးချယ်နိုင်ပါသည် သို့မဟုတ် authentication configuration အသစ်ကို ဖန်တီးနိုင်ပါသည်။</p></td>
+</tr>
+<tr class="row-odd"><td><p>Raster band</p></td>
+<td><p><a class="reference external" href="https://qgis.org/pyqgis/3.40/core/QgsProcessingParameterBand.html#qgis.core.QgsProcessingParameterBand" title="(in QGIS Python API v3.40)"><code class="xref py py-class docutils literal notranslate"><span class="pre">QgsProcessingParameterBand</span></code></a></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">alg.BAND</span></code></p></td>
+<td><p>Raster layer ၏ band တစ်ခု</p></td>
+</tr>
+<tr class="row-even"><td><p>Boolean (အမှန် သို့မဟုတ် အမှား)</p></td>
+<td><p><a class="reference external" href="https://qgis.org/pyqgis/3.40/core/QgsProcessingParameterBoolean.html#qgis.core.QgsProcessingParameterBoolean" title="(in QGIS Python API v3.40)"><code class="xref py py-class docutils literal notranslate"><span class="pre">QgsProcessingParameterBoolean</span></code></a></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">alg.BOOL</span></code></p></td>
+<td><p>Boolean တန်ဖိုး</p></td>
+</tr>
+<tr class="row-odd"><td><p>Connection Name (ချိတ်ဆက်မှုနာမည်)</p></td>
+<td><p><a class="reference external" href="https://qgis.org/pyqgis/3.40/core/QgsProcessingParameterProviderConnection.html#qgis.core.QgsProcessingParameterProviderConnection" title="(in QGIS Python API v3.40)"><code class="xref py py-class docutils literal notranslate"><span class="pre">QgsProcessingParameterProviderConnection</span></code></a></p></td>
+<td></td>
+<td><p>သီးခြား data ပံ့ပိုးသူတစ်ခုအတွက် register လုပ်ထားသော ချိတ်ဆက်မှုများမှ ရွေးချယ်ခြင်း</p></td>
+</tr>
+<tr class="row-even"><td><p>Color (အရောင်)</p></td>
+<td><p><a class="reference external" href="https://qgis.org/pyqgis/3.40/core/QgsProcessingParameterColor.html#qgis.core.QgsProcessingParameterColor" title="(in QGIS Python API v3.40)"><code class="xref py py-class docutils literal notranslate"><span class="pre">QgsProcessingParameterColor</span></code></a></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">alg.COLOR</span></code></p></td>
+<td><p>အရောင်တစ်မျိုး</p></td>
+</tr>
+<tr class="row-odd"><td><p>Coordinate Operation (ကိုဩဒိနိတ် လုပ်ဆောင်ချက်)</p></td>
+<td><p><a class="reference external" href="https://qgis.org/pyqgis/3.40/core/QgsProcessingParameterCoordinateOperation.html#qgis.core.QgsProcessingParameterCoordinateOperation" title="(in QGIS Python API v3.40)"><code class="xref py py-class docutils literal notranslate"><span class="pre">QgsProcessingParameterCoordinateOperation</span></code></a></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">alg.COORDINATE_OPERATION</span></code></p></td>
+<td><p>Coordinate operation တစ်ခု (CRS transformation များအတွက်)</p></td>
+</tr>
+<tr class="row-even"><td><p>CRS</p></td>
+<td><p><a class="reference external" href="https://qgis.org/pyqgis/3.40/core/QgsProcessingParameterCrs.html#qgis.core.QgsProcessingParameterCrs" title="(in QGIS Python API v3.40)"><code class="xref py py-class docutils literal notranslate"><span class="pre">QgsProcessingParameterCrs</span></code></a></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">alg.CRS</span></code></p></td>
+<td><p>Coordinate Reference System (ကိုဩဒိနိတ်ရည်ညွှန်းစနစ်) တစ်ခု</p></td>
+</tr>
+<tr class="row-odd"><td><p>Database Schema</p></td>
+<td><p><a class="reference external" href="https://qgis.org/pyqgis/3.40/core/QgsProcessingParameterDatabaseSchema.html#qgis.core.QgsProcessingParameterDatabaseSchema" title="(in QGIS Python API v3.40)"><code class="xref py py-class docutils literal notranslate"><span class="pre">QgsProcessingParameterDatabaseSchema</span></code></a></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">alg.DATABASE_SCHEMA</span></code></p></td>
+<td><p>Database schema တစ်ခု</p></td>
+</tr>
+<tr class="row-even"><td><p>Database Table</p></td>
+<td><p><a class="reference external" href="https://qgis.org/pyqgis/3.40/core/QgsProcessingParameterDatabaseTable.html#qgis.core.QgsProcessingParameterDatabaseTable" title="(in QGIS Python API v3.40)"><code class="xref py py-class docutils literal notranslate"><span class="pre">QgsProcessingParameterDatabaseTable</span></code></a></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">alg.DATABASE_TABLE</span></code></p></td>
+<td><p>Database ဇယားတစ်ခု</p></td>
+</tr>
+<tr class="row-odd"><td><p>Date (ရက်စွဲ)</p></td>
+<td><p><a class="reference external" href="https://qgis.org/pyqgis/3.40/core/Qgis.html#qgis.core.Qgis.ProcessingDateTimeParameterDataType" title="(in QGIS Python API v3.40)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ProcessingDateTimeParameterDataType.Date</span></code></a></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">alg.DATE</span></code></p></td>
+<td><p>ရက်စွဲသီးသန့်တစ်ခု</p></td>
+</tr>
+<tr class="row-even"><td><p>Datetime (ရက်စွဲအချိန်)</p></td>
+<td><p><a class="reference external" href="https://qgis.org/pyqgis/3.40/core/Qgis.html#qgis.core.Qgis.ProcessingDateTimeParameterDataType" title="(in QGIS Python API v3.40)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ProcessingDateTimeParameterDataType.DateTime</span></code></a></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">alg.DATETIME</span></code></p></td>
+<td><p>Datetime တစ်ခု</p></td>
+</tr>
+<tr class="row-odd"><td><p>Distance (အကွာအဝေး)</p></td>
+<td><p><a class="reference external" href="https://qgis.org/pyqgis/3.40/core/QgsProcessingParameterDistance.html#qgis.core.QgsProcessingParameterDistance" title="(in QGIS Python API v3.40)"><code class="xref py py-class docutils literal notranslate"><span class="pre">QgsProcessingParameterDistance</span></code></a></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">alg.DISTANCE</span></code></p></td>
+<td><p>အကွာအဝေးတန်ဖိုးများအတွက် double အမျိုးအစား ကိန်းဂဏန်း parameter တစ်ခု</p></td>
+</tr>
+<tr class="row-even"><td><p>DXF Layers</p></td>
+<td><p><a class="reference external" href="https://qgis.org/pyqgis/3.40/core/QgsProcessingParameterDxfLayers.html#qgis.core.QgsProcessingParameterDxfLayers" title="(in QGIS Python API v3.40)"><code class="xref py py-class docutils literal notranslate"><span class="pre">QgsProcessingParameterDxfLayers</span></code></a></p></td>
+<td></td>
+<td><p>DXF ဖိုင်အနေဖြင့် export ထုတ်ရန် vector layer များစာရင်း</p></td>
+</tr>
+<tr class="row-odd"><td><p>Enum</p></td>
+<td><p><a class="reference external" href="https://qgis.org/pyqgis/3.40/core/QgsProcessingParameterEnum.html#qgis.core.QgsProcessingParameterEnum" title="(in QGIS Python API v3.40)"><code class="xref py py-class docutils literal notranslate"><span class="pre">QgsProcessingParameterEnum</span></code></a></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">alg.ENUM</span></code></p></td>
+<td><p>ကြိုတင်သတ်မှတ်ထားသောတန်ဖိုးများအစုမှ ရွေးချယ်နိုင်သော enumeration (ရေတွက်မှု) တစ်ခု</p></td>
+</tr>
+<tr class="row-even"><td><p>Expression</p></td>
+<td><p><a class="reference external" href="https://qgis.org/pyqgis/3.40/core/QgsProcessingParameterExpression.html#qgis.core.QgsProcessingParameterExpression" title="(in QGIS Python API v3.40)"><code class="xref py py-class docutils literal notranslate"><span class="pre">QgsProcessingParameterExpression</span></code></a></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">alg.EXPRESSION</span></code></p></td>
+<td><p>Expression တစ်ခု</p></td>
+</tr>
+<tr class="row-odd"><td><p>Extent (နယ်ပယ်အကျယ်အဝန်း)</p></td>
+<td><p><a class="reference external" href="https://qgis.org/pyqgis/3.40/core/QgsProcessingParameterExtent.html#qgis.core.QgsProcessingParameterExtent" title="(in QGIS Python API v3.40)"><code class="xref py py-class docutils literal notranslate"><span class="pre">QgsProcessingParameterExtent</span></code></a></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">alg.EXTENT</span></code></p></td>
+<td><p>အနည်းဆုံး x တန်ဖိုး၊ အများဆုံး x တန်ဖိုး၊ အနည်းဆုံး y တန်ဖိုး၊ အများဆုံး y တန်ဖိုး တို့ဖြင့်သတ်မှတ်ထားသော တည်နေရာအကျယ်အဝန်းတစ်ခု</p></td>
+</tr>
+<tr class="row-even"><td></td>
+<td><p><a class="reference external" href="https://qgis.org/pyqgis/3.40/core/QgsProcessingParameterField.html#qgis.core.QgsProcessingParameterField" title="(in QGIS Python API v3.40)"><code class="xref py py-class docutils literal notranslate"><span class="pre">QgsProcessingParameterField</span></code></a></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">alg.FIELD</span></code></p></td>
+<td><p>Vector layer တစ်ခု၏ attribute ဇယားထဲရှိ field တစ်ခု</p></td>
+</tr>
+<tr class="row-odd"><td><p>Field Aggregates (Field အစုအပေါင်းများ)</p></td>
+<td><p><a class="reference external" href="https://qgis.org/pyqgis/3.40/core/QgsProcessingParameterAggregate.html#qgis.core.QgsProcessingParameterAggregate" title="(in QGIS Python API v3.40)"><code class="xref py py-class docutils literal notranslate"><span class="pre">QgsProcessingParameterAggregate</span></code></a></p></td>
+<td></td>
+<td><p>“aggregate” configuration အတွက် parameter တစ်ခုဖြစ်ပြီး လိုချင်သော output field များ၊ အမျိုးအစားများနှင့် အသုံးပြုသည့် aggregate ၏ အဓိပ္ပါယ်သတ်မှတ်ချက်ပါဝင်ပါသည်။</p></td>
+</tr>
+<tr class="row-even"><td><p>Fields Mapper</p></td>
+<td><p><a class="reference external" href="https://qgis.org/pyqgis/3.40/core/QgsProcessingParameterFieldMapping.html#qgis.core.QgsProcessingParameterFieldMapping" title="(in QGIS Python API v3.40)"><code class="xref py py-class docutils literal notranslate"><span class="pre">QgsProcessingParameterFieldMapping</span></code></a></p></td>
+<td></td>
+<td><p>“field mapping” configuration အတွက် parameter တစ်ခုဖြစ်ပြီး လိုချင်သော output field များ၊ အမျိုးအစားများနှင့် အသုံးပြုသည့် expression များ၏ အဓိပ္ပါယ်သတ်မှတ်ချက်ပါဝင်ပါသည်။</p></td>
+</tr>
+<tr class="row-odd"><td><p>File/Folder</p></td>
+<td><p><a class="reference external" href="https://qgis.org/pyqgis/3.40/core/QgsProcessingParameterFile.html#qgis.core.QgsProcessingParameterFile" title="(in QGIS Python API v3.40)"><code class="xref py py-class docutils literal notranslate"><span class="pre">QgsProcessingParameterFile</span></code></a></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">alg.FILE</span></code></p></td>
+<td><p>ရှိပြီးသားဖိုင်တစ်ခု၏ ဖိုင်နာမည်</p></td>
+</tr>
+<tr class="row-even"><td></td>
+<td><p><a class="reference external" href="https://qgis.org/pyqgis/3.40/core/QgsProcessingParameterFileDestination.html#qgis.core.QgsProcessingParameterFileDestination" title="(in QGIS Python API v3.40)"><code class="xref py py-class docutils literal notranslate"><span class="pre">QgsProcessingParameterFileDestination</span></code></a></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">alg.FILE_DEST</span></code></p></td>
+<td><p>အသစ်ဖန်တီးထားသော output ဖိုင်အတွက် ဖိုင်နာမည်တစ်ခု</p></td>
+</tr>
+<tr class="row-odd"><td></td>
+<td><p><a class="reference external" href="https://qgis.org/pyqgis/3.40/core/QgsProcessingParameterFolderDestination.html#qgis.core.QgsProcessingParameterFolderDestination" title="(in QGIS Python API v3.40)"><code class="xref py py-class docutils literal notranslate"><span class="pre">QgsProcessingParameterFolderDestination</span></code></a></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">alg.FOLDER_DEST</span></code></p></td>
+<td><p>Folder တစ်ခု (သိမ်းဆည်းမည့် folder)</p></td>
+</tr>
+<tr class="row-even"><td><p>Geometry (ဂျီဩမေတြီ)</p></td>
+<td><p><a class="reference external" href="https://qgis.org/pyqgis/3.40/core/QgsProcessingParameterGeometry.html#qgis.core.QgsProcessingParameterGeometry" title="(in QGIS Python API v3.40)"><code class="xref py py-class docutils literal notranslate"><span class="pre">QgsProcessingParameterGeometry</span></code></a></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">alg.GEOMETRY</span></code></p></td>
+<td><p>ဂျီဩမေတြီ</p></td>
+</tr>
+<tr class="row-odd"><td></td>
+<td><p><a class="reference external" href="https://qgis.org/pyqgis/3.40/core/Qgis.html#qgis.core.Qgis.ProcessingNumberParameterType" title="(in QGIS Python API v3.40)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ProcessingNumberParameterType.Integer</span></code></a></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">alg.INT</span></code></p></td>
+<td><p>Integer (ကိန်းပြည့်) တစ်ခု</p></td>
+</tr>
+<tr class="row-even"><td><p>Print Layout (ပုံထုတ်အပြင်အဆင်)</p></td>
+<td><p><a class="reference external" href="https://qgis.org/pyqgis/3.40/core/QgsProcessingParameterLayout.html#qgis.core.QgsProcessingParameterLayout" title="(in QGIS Python API v3.40)"><code class="xref py py-class docutils literal notranslate"><span class="pre">QgsProcessingParameterLayout</span></code></a></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">alg.LAYOUT</span></code></p></td>
+<td><p>Layout တစ်ခု</p></td>
+</tr>
+<tr class="row-odd"><td><p>Print Layout Item</p></td>
+<td><p><a class="reference external" href="https://qgis.org/pyqgis/3.40/core/QgsProcessingParameterLayoutItem.html#qgis.core.QgsProcessingParameterLayoutItem" title="(in QGIS Python API v3.40)"><code class="xref py py-class docutils literal notranslate"><span class="pre">QgsProcessingParameterLayoutItem</span></code></a></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">alg.LAYOUT_ITEM</span></code></p></td>
+<td><p>Layout item တစ်ခု</p></td>
+</tr>
+<tr class="row-even"><td><p>Map Layer (မြေပုံ layer)</p></td>
+<td><p><a class="reference external" href="https://qgis.org/pyqgis/3.40/core/QgsProcessingParameterMapLayer.html#qgis.core.QgsProcessingParameterMapLayer" title="(in QGIS Python API v3.40)"><code class="xref py py-class docutils literal notranslate"><span class="pre">QgsProcessingParameterMapLayer</span></code></a></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">alg.MAPLAYER</span></code></p></td>
+<td><p>မြေပုံ layer တစ်ခု</p></td>
+</tr>
+<tr class="row-odd"><td><p>Map Theme</p></td>
+<td><p><a class="reference external" href="https://qgis.org/pyqgis/3.40/core/QgsProcessingParameterMapTheme.html#qgis.core.QgsProcessingParameterMapTheme" title="(in QGIS Python API v3.40)"><code class="xref py py-class docutils literal notranslate"><span class="pre">QgsProcessingParameterMapTheme</span></code></a></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">alg.MAP_THEME</span></code></p></td>
+<td><p>Project map theme တစ်ခု</p></td>
+</tr>
+<tr class="row-even"><td><p>Matrix</p></td>
+<td><p><a class="reference external" href="https://qgis.org/pyqgis/3.40/core/QgsProcessingParameterMatrix.html#qgis.core.QgsProcessingParameterMatrix" title="(in QGIS Python API v3.40)"><code class="xref py py-class docutils literal notranslate"><span class="pre">QgsProcessingParameterMatrix</span></code></a></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">alg.MATRIX</span></code></p></td>
+<td><p>Matrix တစ်ခု</p></td>
+</tr>
+<tr class="row-odd"><td><p>Mesh Dataset Groups</p></td>
+<td><p><a class="reference external" href="https://qgis.org/pyqgis/3.40/core/QgsProcessingParameterMeshDatasetGroups.html#qgis.core.QgsProcessingParameterMeshDatasetGroups" title="(in QGIS Python API v3.40)"><code class="xref py py-class docutils literal notranslate"><span class="pre">QgsProcessingParameterMeshDatasetGroups</span></code></a></p></td>
+<td></td>
+<td><p>Mesh layer dataset အုပ်စုများ</p></td>
+</tr>
+<tr class="row-even"><td><p>Mesh Dataset Time</p></td>
+<td><p><a class="reference external" href="https://qgis.org/pyqgis/3.40/core/QgsProcessingParameterMeshDatasetTime.html#qgis.core.QgsProcessingParameterMeshDatasetTime" title="(in QGIS Python API v3.40)"><code class="xref py py-class docutils literal notranslate"><span class="pre">QgsProcessingParameterMeshDatasetTime</span></code></a></p></td>
+<td></td>
+<td><p>အချိန်သတ်မှတ်ချက်အရ mesh layer တစ်ခုမှ Dataset index</p></td>
+</tr>
+<tr class="row-odd"><td><p>Mesh Layer</p></td>
+<td><p><a class="reference external" href="https://qgis.org/pyqgis/3.40/core/QgsProcessingParameterMeshLayer.html#qgis.core.QgsProcessingParameterMeshLayer" title="(in QGIS Python API v3.40)"><code class="xref py py-class docutils literal notranslate"><span class="pre">QgsProcessingParameterMeshLayer</span></code></a></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">alg.MESH_LAYER</span></code></p></td>
+<td><p>Mesh layer တစ်ခု</p></td>
+</tr>
+<tr class="row-even"><td><p>Multiple Input (Input အများအပြား)</p></td>
+<td><p><a class="reference external" href="https://qgis.org/pyqgis/3.40/core/QgsProcessingParameterMultipleLayers.html#qgis.core.QgsProcessingParameterMultipleLayers" title="(in QGIS Python API v3.40)"><code class="xref py py-class docutils literal notranslate"><span class="pre">QgsProcessingParameterMultipleLayers</span></code></a></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">alg.MULTILAYER</span></code></p></td>
+<td><p>Layer များအစုတစ်ခု</p></td>
+</tr>
+<tr class="row-odd"><td><p>Number (ကိန်းဂဏန်း)</p></td>
+<td><p><a class="reference external" href="https://qgis.org/pyqgis/3.40/core/Qgis.html#qgis.core.Qgis.ProcessingNumberParameterType" title="(in QGIS Python API v3.40)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ProcessingNumberParameterType.Double</span></code></a></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">alg.NUMBER</span></code></p></td>
+<td><p>ကိန်းဂဏန်းတန်ဖိုးတစ်ခု</p></td>
+</tr>
+<tr class="row-even"><td><p>Point</p></td>
+<td><p><a class="reference external" href="https://qgis.org/pyqgis/3.40/core/QgsProcessingParameterPoint.html#qgis.core.QgsProcessingParameterPoint" title="(in QGIS Python API v3.40)"><code class="xref py py-class docutils literal notranslate"><span class="pre">QgsProcessingParameterPoint</span></code></a></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">alg.POINT</span></code></p></td>
+<td><p>Point တစ်ခု</p></td>
+</tr>
+<tr class="row-odd"><td><p>Point Cloud Attribute</p></td>
+<td><p><a class="reference external" href="https://qgis.org/pyqgis/3.40/core/QgsProcessingParameterPointCloudAttribute.html#qgis.core.QgsProcessingParameterPointCloudAttribute" title="(in QGIS Python API v3.40)"><code class="xref py py-class docutils literal notranslate"><span class="pre">QgsProcessingParameterPointCloudAttribute</span></code></a></p></td>
+<td></td>
+<td><p>Point cloud layer တစ်ခုမှ အချက်အလက်တစ်ခု</p></td>
+</tr>
+<tr class="row-even"><td></td>
+<td><p><a class="reference external" href="https://qgis.org/pyqgis/3.40/core/QgsProcessingParameterPointCloudDestination.html#qgis.core.QgsProcessingParameterPointCloudDestination" title="(in QGIS Python API v3.40)"><code class="xref py py-class docutils literal notranslate"><span class="pre">QgsProcessingParameterPointCloudDestination</span></code></a></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">alg.POINTCLOUD_LAYER_DEST</span></code></p></td>
+<td><p>Point cloud layer အတွက် နေရာ parameter ၊ algorithm ဖြင့်ဖန်တီးထားသော point cloud layer တစ်ခုအတွက် တည်နေရာလမ်းကြောင်း ကိုသတ်မှတ်ခြင်းအတွက်။</p></td>
+</tr>
+<tr class="row-odd"><td><p>Point Cloud Layer</p></td>
+<td><p><a class="reference external" href="https://qgis.org/pyqgis/3.40/core/QgsProcessingParameterPointCloudLayer.html#qgis.core.QgsProcessingParameterPointCloudLayer" title="(in QGIS Python API v3.40)"><code class="xref py py-class docutils literal notranslate"><span class="pre">QgsProcessingParameterPointCloudLayer</span></code></a></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">alg.POINTCLOUD_LAYER</span></code></p></td>
+<td><p>Point cloud layer တစ်ခု</p></td>
+</tr>
+<tr class="row-even"><td></td>
+<td><p><a class="reference external" href="https://qgis.org/pyqgis/3.40/core/QgsProcessingParameterProviderConnection.html#qgis.core.QgsProcessingParameterProviderConnection" title="(in QGIS Python API v3.40)"><code class="xref py py-class docutils literal notranslate"><span class="pre">QgsProcessingParameterProviderConnection</span></code></a></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">alg.PROVIDER_CONNECTION</span></code></p></td>
+<td><p>Database provider တစ်ခုအတွက် ရရှိနိုင်သော ချိတ်ဆက်မှုတစ်ခု</p></td>
+</tr>
+<tr class="row-odd"><td><p>Range (အပိုင်းအခြား)</p></td>
+<td><p><a class="reference external" href="https://qgis.org/pyqgis/3.40/core/QgsProcessingParameterRange.html#qgis.core.QgsProcessingParameterRange" title="(in QGIS Python API v3.40)"><code class="xref py py-class docutils literal notranslate"><span class="pre">QgsProcessingParameterRange</span></code></a></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">alg.RANGE</span></code></p></td>
+<td><p>ကိန်းဂဏန်းအပိုင်းအခြားတစ်ခု</p></td>
+</tr>
+<tr class="row-even"><td><p>Raster Layer</p></td>
+<td><p><a class="reference external" href="https://qgis.org/pyqgis/3.40/core/QgsProcessingParameterRasterLayer.html#qgis.core.QgsProcessingParameterRasterLayer" title="(in QGIS Python API v3.40)"><code class="xref py py-class docutils literal notranslate"><span class="pre">QgsProcessingParameterRasterLayer</span></code></a></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">alg.RASTER_LAYER</span></code></p></td>
+<td><p>Raster Layer တစ်ခု</p></td>
+</tr>
+<tr class="row-odd"><td></td>
+<td><p><a class="reference external" href="https://qgis.org/pyqgis/3.40/core/QgsProcessingParameterRasterDestination.html#qgis.core.QgsProcessingParameterRasterDestination" title="(in QGIS Python API v3.40)"><code class="xref py py-class docutils literal notranslate"><span class="pre">QgsProcessingParameterRasterDestination</span></code></a></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">alg.RASTER_LAYER_DEST</span></code></p></td>
+<td><p>Raster layer တစ်ခုအတွက် နေရာ parameter ၊ algorithm ဖြင့်ဖန်တီးထားသော raster layer တစ်ခုအတွက် တည်နေရာလမ်းကြောင်း ကိုသတ်မှတ်ခြင်းအတွက်။</p></td>
+</tr>
+<tr class="row-even"><td><p>Scale (စကေး)</p></td>
+<td><p><a class="reference external" href="https://qgis.org/pyqgis/3.40/core/QgsProcessingParameterScale.html#qgis.core.QgsProcessingParameterScale" title="(in QGIS Python API v3.40)"><code class="xref py py-class docutils literal notranslate"><span class="pre">QgsProcessingParameterScale</span></code></a></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">alg.SCALE</span></code></p></td>
+<td><p>မြေပုံ စကေးတစ်ခု</p></td>
+</tr>
+<tr class="row-odd"><td></td>
+<td><p><a class="reference external" href="https://qgis.org/pyqgis/3.40/core/QgsProcessingParameterFeatureSink.html#qgis.core.QgsProcessingParameterFeatureSink" title="(in QGIS Python API v3.40)"><code class="xref py py-class docutils literal notranslate"><span class="pre">QgsProcessingParameterFeatureSink</span></code></a></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">alg.SINK</span></code></p></td>
+<td><p>Feature sink တစ်ခု</p></td>
+</tr>
+<tr class="row-even"><td><p>String (စာသား)</p></td>
+<td><p><a class="reference external" href="https://qgis.org/pyqgis/3.40/core/QgsProcessingParameterString.html#qgis.core.QgsProcessingParameterString" title="(in QGIS Python API v3.40)"><code class="xref py py-class docutils literal notranslate"><span class="pre">QgsProcessingParameterString</span></code></a></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">alg.STRING</span></code></p></td>
+<td><p>စာသားတစ်ခု</p></td>
+</tr>
+<tr class="row-odd"><td><p>TIN Creation Layers (TIN ဖန်တီးခြင်း layer များ)</p></td>
+<td><p><a class="reference external" href="https://qgis.org/pyqgis/3.40/core/QgsProcessingParameterTinInputLayers.html#qgis.core.QgsProcessingParameterTinInputLayers" title="(in QGIS Python API v3.40)"><code class="xref py py-class docutils literal notranslate"><span class="pre">QgsProcessingParameterTinInputLayers</span></code></a></p></td>
+<td></td>
+<td><p>Vertex များ နှင့်/သို့မဟုတ် break line (အဖြတ်မျဉ်းများ) များဖြင့် TIN တစ်ခုဖန်တီးရန် layer များစွာ ရွေးချယ်ခြင်း</p></td>
+</tr>
+<tr class="row-even"><td><p>Time</p></td>
+<td><p><a class="reference external" href="https://qgis.org/pyqgis/3.40/core/Qgis.html#qgis.core.Qgis.ProcessingDateTimeParameterDataType" title="(in QGIS Python API v3.40)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ProcessingDateTimeParameterDataType.Time</span></code></a></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">alg.TIME</span></code></p></td>
+<td><p>အချိန်သီးသန့်</p></td>
+</tr>
+<tr class="row-odd"><td><p>Vector Features</p></td>
+<td><p><a class="reference external" href="https://qgis.org/pyqgis/3.40/core/QgsProcessingParameterFeatureSource.html#qgis.core.QgsProcessingParameterFeatureSource" title="(in QGIS Python API v3.40)"><code class="xref py py-class docutils literal notranslate"><span class="pre">QgsProcessingParameterFeatureSource</span></code></a></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">alg.SOURCE</span></code></p></td>
+<td><p>Feature ရင်းမြစ်တစ်ခု</p></td>
+</tr>
+<tr class="row-even"><td><p>Vector Layer</p></td>
+<td><p><a class="reference external" href="https://qgis.org/pyqgis/3.40/core/QgsProcessingParameterVectorLayer.html#qgis.core.QgsProcessingParameterVectorLayer" title="(in QGIS Python API v3.40)"><code class="xref py py-class docutils literal notranslate"><span class="pre">QgsProcessingParameterVectorLayer</span></code></a></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">alg.VECTOR_LAYER</span></code></p></td>
+<td><p>Vector Layer တစ်ခု</p></td>
+</tr>
+<tr class="row-odd"><td></td>
+<td><p><a class="reference external" href="https://qgis.org/pyqgis/3.40/core/QgsProcessingParameterVectorDestination.html#qgis.core.QgsProcessingParameterVectorDestination" title="(in QGIS Python API v3.40)"><code class="xref py py-class docutils literal notranslate"><span class="pre">QgsProcessingParameterVectorDestination</span></code></a></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">alg.VECTOR_LAYER_DEST</span></code></p></td>
+<td><p>Vector layer တစ်ခုအတွက် နေရာ parameter ၊ algorithm ဖြင့်ဖန်တီးထားသော vector layer တစ်ခုအတွက် တည်နေရာလမ်းကြောင်း ကိုသတ်မှတ်ခြင်းအတွက်။</p></td>
+</tr>
+<tr class="row-even"><td><p>Vector Tile Writer Layers</p></td>
+<td><p><a class="reference external" href="https://qgis.org/pyqgis/3.40/core/QgsProcessingParameterVectorTileDestination.html#qgis.core.QgsProcessingParameterVectorTileDestination" title="(in QGIS Python API v3.40)"><code class="xref py py-class docutils literal notranslate"><span class="pre">QgsProcessingParameterVectorTileDestination</span></code></a></p></td>
+<td></td>
+<td><p>Vector tile layer တစ်ခုအတွက် နေရာ parameter ၊ algorithm ဖြင့်ဖန်တီးထားသော vector tile layer တစ်ခုအတွက် တည်နေရာလမ်းကြောင်း ကိုသတ်မှတ်ခြင်းအတွက်။</p></td>
+</tr>
+<tr class="row-odd"><td><p>Volume</p></td>
+<td><p><a class="reference external" href="https://qgis.org/pyqgis/3.40/core/QgsProcessingParameterVolume.html#qgis.core.QgsProcessingParameterVolume" title="(in QGIS Python API v3.40)"><code class="xref py py-class docutils literal notranslate"><span class="pre">QgsProcessingParameterVolume</span></code></a></p></td>
+<td></td>
+<td><p>ထုထည်အတိုင်းအတာတစ်ခုအတွက် ကိုယ်စားပြုသော ကိန်းဂဏန်း parameter တစ်ခု</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="output-types">
+<h2><span class="section-number">27.10.2. </span>Output types (ရလာဒ်အမျိုးအစားများ)<a class="headerlink" href="#output-types" title="Link to this heading"></a></h2>
+<table class="longtable docutils align-default">
+<colgroup>
+<col style="width: 47.0%" />
+<col style="width: 24.0%" />
+<col style="width: 29.0%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Class</p></th>
+<th class="head"><p>Alg constant</p></th>
+<th class="head"><p>ရှင်းလင်းဖော်ပြချက်</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><a class="reference external" href="https://qgis.org/pyqgis/3.40/core/QgsProcessingOutputBoolean.html#qgis.core.QgsProcessingOutputBoolean" title="(in QGIS Python API v3.40)"><code class="xref py py-class docutils literal notranslate"><span class="pre">QgsProcessingOutputBoolean</span></code></a></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">alg.BOOL</span></code></p></td>
+<td><p>အမှား/အမှန် တန်ဖိုးတစ်ခု</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference external" href="https://qgis.org/pyqgis/3.40/core/QgsProcessingOutputNumber.html#qgis.core.QgsProcessingOutputNumber" title="(in QGIS Python API v3.40)"><code class="xref py py-class docutils literal notranslate"><span class="pre">QgsProcessingOutputNumber</span></code></a></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">alg.DISTANCE</span></code></p></td>
+<td><p>အကွာအဝေးတန်ဖိုးများအတွက် ဒဿမကိန်းဂဏန်း parameter တစ်ခု</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference external" href="https://qgis.org/pyqgis/3.40/core/QgsProcessingOutputFile.html#qgis.core.QgsProcessingOutputFile" title="(in QGIS Python API v3.40)"><code class="xref py py-class docutils literal notranslate"><span class="pre">QgsProcessingOutputFile</span></code></a></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">alg.FILE</span></code></p></td>
+<td><p>ရှိပြီးသားဖိုင်တစ်ခု၏ ဖိုင်နာမည်တစ်ခု</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference external" href="https://qgis.org/pyqgis/3.40/core/QgsProcessingOutputFolder.html#qgis.core.QgsProcessingOutputFolder" title="(in QGIS Python API v3.40)"><code class="xref py py-class docutils literal notranslate"><span class="pre">QgsProcessingOutputFolder</span></code></a></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">alg.FOLDER</span></code></p></td>
+<td><p>Folder တစ်ခု</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference external" href="https://qgis.org/pyqgis/3.40/core/QgsProcessingOutputHtml.html#qgis.core.QgsProcessingOutputHtml" title="(in QGIS Python API v3.40)"><code class="xref py py-class docutils literal notranslate"><span class="pre">QgsProcessingOutputHtml</span></code></a></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">alg.HTML</span></code></p></td>
+<td><p>HTML</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference external" href="https://qgis.org/pyqgis/3.40/core/QgsProcessingOutputNumber.html#qgis.core.QgsProcessingOutputNumber" title="(in QGIS Python API v3.40)"><code class="xref py py-class docutils literal notranslate"><span class="pre">QgsProcessingOutputNumber</span></code></a></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">alg.INT</span></code></p></td>
+<td><p>ကိန်းပြည့်တစ်ခု</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference external" href="https://qgis.org/pyqgis/3.40/core/QgsProcessingOutputLayerDefinition.html#qgis.core.QgsProcessingOutputLayerDefinition" title="(in QGIS Python API v3.40)"><code class="xref py py-class docutils literal notranslate"><span class="pre">QgsProcessingOutputLayerDefinition</span></code></a></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">alg.LAYERDEF</span></code></p></td>
+<td><p>Layer အဓိပ္ပါယ်ဖွင့်ဆိုချက်တစ်ခု</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference external" href="https://qgis.org/pyqgis/3.40/core/QgsProcessingOutputMapLayer.html#qgis.core.QgsProcessingOutputMapLayer" title="(in QGIS Python API v3.40)"><code class="xref py py-class docutils literal notranslate"><span class="pre">QgsProcessingOutputMapLayer</span></code></a></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">alg.MAPLAYER</span></code></p></td>
+<td><p>မြေပုံ layer တစ်ခု</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference external" href="https://qgis.org/pyqgis/3.40/core/QgsProcessingOutputMultipleLayers.html#qgis.core.QgsProcessingOutputMultipleLayers" title="(in QGIS Python API v3.40)"><code class="xref py py-class docutils literal notranslate"><span class="pre">QgsProcessingOutputMultipleLayers</span></code></a></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">alg.MULTILAYER</span></code></p></td>
+<td><p>Layer အစုတစ်ခု</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference external" href="https://qgis.org/pyqgis/3.40/core/QgsProcessingOutputNumber.html#qgis.core.QgsProcessingOutputNumber" title="(in QGIS Python API v3.40)"><code class="xref py py-class docutils literal notranslate"><span class="pre">QgsProcessingOutputNumber</span></code></a></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">alg.NUMBER</span></code></p></td>
+<td><p>ကိန်းဂဏန်းတန်ဖိုး တစ်ခု</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference external" href="https://qgis.org/pyqgis/3.40/core/QgsProcessingOutputPointCloudLayer.html#qgis.core.QgsProcessingOutputPointCloudLayer" title="(in QGIS Python API v3.40)"><code class="xref py py-class docutils literal notranslate"><span class="pre">QgsProcessingOutputPointCloudLayer</span></code></a></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">alg.POINTCLOUD_LAYER</span></code></p></td>
+<td><p>Point cloud layer တစ်ခု</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference external" href="https://qgis.org/pyqgis/3.40/core/QgsProcessingOutputRasterLayer.html#qgis.core.QgsProcessingOutputRasterLayer" title="(in QGIS Python API v3.40)"><code class="xref py py-class docutils literal notranslate"><span class="pre">QgsProcessingOutputRasterLayer</span></code></a></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">alg.RASTER_LAYER</span></code></p></td>
+<td><p>Raster layer တစ်ခု</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference external" href="https://qgis.org/pyqgis/3.40/core/QgsProcessingOutputString.html#qgis.core.QgsProcessingOutputString" title="(in QGIS Python API v3.40)"><code class="xref py py-class docutils literal notranslate"><span class="pre">QgsProcessingOutputString</span></code></a></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">alg.STRING</span></code></p></td>
+<td><p>စာသားတစ်ခု</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference external" href="https://qgis.org/pyqgis/3.40/core/QgsProcessingOutputVectorLayer.html#qgis.core.QgsProcessingOutputVectorLayer" title="(in QGIS Python API v3.40)"><code class="xref py py-class docutils literal notranslate"><span class="pre">QgsProcessingOutputVectorLayer</span></code></a></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">alg.VECTOR_LAYER</span></code></p></td>
+<td><p>Vector layer တစ်ခု</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference external" href="https://qgis.org/pyqgis/3.40/core/QgsProcessingOutputVectorTileLayer.html#qgis.core.QgsProcessingOutputVectorTileLayer" title="(in QGIS Python API v3.40)"><code class="xref py py-class docutils literal notranslate"><span class="pre">QgsProcessingOutputVectorTileLayer</span></code></a></p></td>
+<td></td>
+<td><p>Vector tile layer တစ်ခု</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="scripts.html" class="btn btn-neutral float-left" title="27.9. Processing algorithm အသစ်များကို Python script များအဖြစ် ရေးသားခြင်း" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="3rdParty.html" class="btn btn-neutral float-right" title="27.11. ပြင်ပ application များကို ပြင်ဆင်သတ်မှတ်ခြင်း (Configuring external applications)" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2002-now, QGIS project.
+      <span class="lastupdated">Last updated on 2025 Feb 19, 10:27 +0630.
+      </span></p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <!-- Transifex follows a particular logic to build target pages:
+Expected French translation link for https://docs.qgis.org/3.28/en/docs/user_manual/print_composer/overview_composer.html
+would return https://app.transifex.com/qgis/qgis-documentation/translate/#fr/aa6d8bc653526d38b295ca94bf8eee5e
+with the md5 value of "github#qgis/QGIS-Documentation#release_3.28#locale/en/LC_MESSAGES/docs/user_manual/print_composer/overview_composer.po"-->
+<!--Make sure that mismatching language codes between Transifex and Sphinx are converted-->
+
+
+  <div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      <span class="fa fa-info-circle"> QGIS Documentation </span>
+      v: 3.40
+      <span class="fa fa-caret-down"></span>
+    </span>
+
+    <div class="rst-other-versions">
+      <dl>
+        <dt>Languages</dt>
+        
+          <dd><a href="https://docs.qgis.org/3.40/en/docs/user_manual/processing/parameters.html">en</a></dd>
+        
+      </dl>
+
+      <dl>
+        <dt>Versions</dt>
+        
+          <dd><a href="https://docs.qgis.org/testing/en/docs/user_manual/processing/parameters.html">testing</a></dd>
+        
+          <dd><a href="https://docs.qgis.org/latest/en/docs/user_manual/processing/parameters.html">latest</a></dd>
+        
+          <dd><a href="https://docs.qgis.org/3.40/en/docs/user_manual/processing/parameters.html">3.40</a></dd>
+        
+          <dd><a href="https://docs.qgis.org/3.34/en/docs/user_manual/processing/parameters.html">3.34</a></dd>
+        
+          <dd><a href="https://docs.qgis.org/3.28/en/docs/user_manual/processing/parameters.html">3.28</a></dd>
+        
+          <dd><a href="https://docs.qgis.org/3.22/en/docs/user_manual/processing/parameters.html">3.22</a></dd>
+        
+          <dd><a href="https://docs.qgis.org/3.16/en/docs/user_manual/processing/parameters.html">3.16</a></dd>
+        
+          <dd><a href="https://docs.qgis.org/3.10/en/docs/user_manual/processing/parameters.html">3.10</a></dd>
+        
+          <dd><a href="https://docs.qgis.org/3.4/en/docs/user_manual/processing/parameters.html">3.4</a></dd>
+        
+          <dd><a href="https://docs.qgis.org/2.18/en/docs/user_manual/processing/parameters.html">2.18</a></dd>
+        
+      </dl>
+
+       
+       <dl>
+        <dt>Downloads</dt>
+        
+          <dd><a href="https://docs.qgis.org/3.40/pdf">PDF</a></dd>
+        
+          <dd><a href="https://docs.qgis.org/3.40/zip">HTML</a></dd>
+        
+      </dl>
+      
+
+      
+       
+      <dl>
+        <dt>Contribute to Docs</dt>
+          <dd>
+            <a href="https://github.com/qgis/QGIS-Documentation/edit/master/docs/user_manual/processing/parameters.rst" target="_blank" rel="noopener noreferrer">Edit on GitHub</a>
+          </dd>
+          
+          
+          <dd>
+            <a href="https://app.transifex.com/qgis/qgis-documentation/translate/#en/4fabb573c93ad864bd2b0b0ce52f479d" target="_blank" rel="noopener noreferrer">Translate Page</a>
+          </dd>
+          
+          <dd>
+            <a href="https://github.com/qgis/QGIS-Documentation/issues" target="_blank" rel="noopener noreferrer">Report Issue</a>
+          </dd>
+      </dl>
+      
+
+      <dl>
+        <dt>On QGIS Project</dt>
+          <dd>
+            <a href="https://qgis.org" target="_blank" rel="noopener noreferrer">Home</a>
+          </dd>
+          <dd>
+            <a href="https://qgis.org/api/3.40" target="_blank" rel="noopener noreferrer">C++ API</a>
+          </dd>
+          <dd>
+            <a href="https://qgis.org/pyqgis/3.40" target="_blank" rel="noopener noreferrer">PyQGIS API</a>
+          </dd>
+          <dd>
+            <a href="https://github.com/qgis/QGIS/tree/release-3_40" target="_blank" rel="noopener noreferrer">Source</a>
+          </dd>
+      </dl>
+
+    </div>
+  </div><script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

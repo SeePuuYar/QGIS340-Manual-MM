@@ -1,0 +1,438 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>21. 3D Tile များဖြင့် အလုပ်လုပ်ခြင်း (Working with 3D Tiles) &mdash; QGIS Documentation  documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/qgis_docs.css?v=5415a924" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/togglebutton.css?v=13237357" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
+
+  
+    <link rel="shortcut icon" href="../../../_static/qgis_logo.ico"/>
+    <link rel="canonical" href="https://docs.qgis.org/latest/en/docs/user_manual/working_with_3d_tiles/3d_tiles.html"/>
+  <!--[if lt IE 9]>
+    <script src="../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../../../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../../../_static/documentation_options.js?v=5929fcd5"></script>
+        <script src="../../../_static/doctools.js?v=888ff710"></script>
+        <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+        <script src="../../../_static/clipboard.min.js?v=a7894cd8"></script>
+        <script src="../../../_static/copybutton.js?v=f281be69"></script>
+        <script>let toggleHintShow = 'Click to show';</script>
+        <script>let toggleHintHide = 'Click to hide';</script>
+        <script>let toggleOpenOnPrint = 'true';</script>
+        <script src="../../../_static/togglebutton.js?v=4a39c7ea"></script>
+        <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+        <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="next" title="22. မြေပုံအချောသပ်ပြင်ဆင်ခြင်း (Laying out the maps)" href="../print_composer/index.html" />
+    <link rel="prev" title="20. Point Cloud များဖြင့် အလုပ်လုပ်ခြင်း (Working with Point Clouds)" href="../working_with_point_clouds/point_clouds.html" />
+  <meta name="description" content="QGIS 3.40 documentation: 21. 3D Tile များဖြင့် အလုပ်လုပ်ခြင်း (Working with 3D Tiles)">
+  <script>
+    var _paq = window._paq = window._paq || [];
+    _paq.push(["disableCookies"]);
+    _paq.push(['trackPageView']);
+    _paq.push(['enableLinkTracking']);
+    (function() {
+      var u="//matomo.qgis.org/";
+      _paq.push(['setTrackerUrl', u+'matomo.php']);
+      _paq.push(['setSiteId', '1']);
+      var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
+      g.async=true; g.src=u+'matomo.js'; s.parentNode.insertBefore(g,s);
+    })();
+  </script>
+</head>
+
+<body class="wy-body-for-nav">
+
+  <nav class="release_status_topbar">
+  </nav>
+
+   
+
+ 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+   
+
+          
+          
+          <a href="../../index.html" class="icon icon-home">
+            QGIS Documentation
+              <img src="../../../_static/logo.png" class="logo" alt="Logo"/>
+          </a>
+              <div class="version">
+                3.40
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+   <a href= "../../../genindex.html">Index</a>
+ 
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">အသုံးပြုသူများအတွက်</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">QGIS Desktop User Guide/Manual (QGIS 3.40)</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../preamble/preamble.html">1. စကားချီး (Preamble)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../preamble/foreword.html">2. အမှာစာ (Foreword)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../preamble/conventions.html">3. အသုံးအနှုန်းများ (Conventions)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../preamble/features.html">4. အသွင်အပြင်များ (Features)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../introduction/getting_started.html">5. စတင်အသုံးပြုခြင်း (Getting Started)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../introduction/project_files.html">6. Project Files များနှင့် အလုပ်လုပ်ခြင်း (Working with Project Files)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../introduction/qgis_gui.html">7. QGIS ၏အစိတ်အပိုင်းများ (QGIS GUI)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../introduction/browser.html">8. The Browser panel (ရှာဖွေကြည့်ရှုသည့် Panel)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../introduction/qgis_configuration.html">9. QGIS ပြင်ဆင်သတ်မှတ်ခြင်း/အခင်းအကျင်း (QGIS Configuration)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../working_with_projections/working_with_projections.html">10. မြေပုံအရိပ်ချစနစ်များနှင့် အလုပ်လုပ်ခြင်း (Working with Projections)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../map_views/index.html">11. မြေပုံများအား ပုံဖော်ကြည့်ရှုခြင်း (Visualizing Maps)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../introduction/general_tools.html">12. ယေဘုယျ tool များ (General Tools)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../expressions/index.html">13. Expression များဖြင့် အဆင့်မြှင့်တင်ဆောင်ရွက်ခြင်း (Level up with Expressions)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../style_library/index.html">14. Style နှင့်ပတ်သက်သည်များ ထားရှိရာနေရာ (The Style Library)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../managing_data_source/index.html">15. ဒေတာအရင်းအမြစ်များအား စီမံခန့်ခွဲခြင်း (Managing Data Source)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../working_with_vector/index.html">16. Vector data များဖြင့် အလုပ်လုပ်ခြင်း (Working with Vector Data)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../working_with_raster/index.html">17. Raster Data များဖြင့် အလုပ်လုပ်ခြင်း</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../working_with_mesh/mesh.html">18. Mesh Data များနှင့် အလုပ်လုပ်ခြင်း (Working with Mesh Data)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../working_with_vector_tiles/vector_tiles.html">19. Vector Tiles များနှင့်အလုပ်လုပ်ခြင်း (Working with Vector Tiles)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../working_with_point_clouds/point_clouds.html">20. Point Cloud များဖြင့် အလုပ်လုပ်ခြင်း (Working with Point Clouds)</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">21. 3D Tile များဖြင့် အလုပ်လုပ်ခြင်း (Working with 3D Tiles)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#d-tile-what-are-3d-tiles">21.1. 3D Tile ဆိုသည်မှာ ဘယ်လိုအရာတွေလဲ (What are 3D Tiles?)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#d-tiles-3d-tiles-properties">21.2. 3D Tiles ဂုဏ်သတ္တိများ (3D Tiles Properties)</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#information-properties">21.2.1. သတင်းအချက်အလက်ဂုဏ်သတ္တိများ (Information Properties)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#source-properties">21.2.2. ရင်းမြစ်ဆိုင်ရာ ဂုဏ်သတ္တိများ (Source Properties)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#symbology-properties">21.2.3. သင်္ကေတ ဂုဏ်သတ္တိများ (Symbology Properties)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#d-3d-view-properties">21.2.4. 3D မြင်ကွင်းဂုဏ်သတ္တိများ (3D View Properties)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#rendering-properties">21.2.5. ပုံဖော်ပြသခြင်းဆိုင်ရာ ဂုဏ်သတ္တိများ (Rendering Properties)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#elevation-properties">21.2.6. မြေပြင်အနိမ့်အမြင့်ဆိုင်ရာ ဂုဏ်သတ္တိများ (Elevation Properties)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#metadata-metadata-properties">21.2.7. Metadata ဂုဏ်သတ္တိများ (Metadata Properties)</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../print_composer/index.html">22. မြေပုံအချောသပ်ပြင်ဆင်ခြင်း (Laying out the maps)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../working_with_ogc/ogc_client_support.html">23. OGC / ISO protocol များဖြင့် အလုပ်လုပ်ခြင်း</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../working_with_gps/index.html">24. GPS Data များနှင့် အလုပ်လုပ်ခြင်း</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../auth_system/index.html">25. အထောက်အထားစိစစ်ခြင်းစနစ် (Authentication System)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../grass_integration/grass_integration.html">26. GRASS GIS Integration (GRASS GIS နှင့်ပေါင်းစပ်အသုံးပြုခြင်း)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../processing/index.html">27. QGIS processing framework</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../processing_algs/index.html">28. Processing ဆိုင်ရာ ထောက်ပံ့ပေးသူများနှင့် Algorithm များ (Processing providers and algorithms)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../plugins/index.html">29. Plugin များ</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../preamble/help_and_support.html">30. အကူအညီနှင့်အထောက်အပံ့ (Help and Support)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../preamble/contributors.html">31. ပါဝင်အားဖြည့်သူများ (Contributors)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../appendices/index.html">32. Appendices (နောက်ဆက်တွဲများ)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../literature_web/literature_and_web_references.html">33. စာတမ်းများနှင့် Website ကိုးကားချက်များ (Literature and Web References)</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../server_manual/index.html">QGIS Server Guide/Manual (QGIS 3.40)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../training_manual/index.html">Training Manual</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../gentle_gis_introduction/index.html">A Gentle Introduction to GIS</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">ရေးသားသူများအတွက်</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../documentation_guidelines/index.html">Documentation Guidelines</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Developer များအတွက်</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../pyqgis_developer_cookbook/index.html">PyQGIS Cookbook (QGIS 3.40)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../developers_guide/index.html">Developers Guide</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">QGIS Documentation</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../index.html">QGIS အသုံးပြုသူလမ်းညွှန် (User Guide)</a></li>
+      <li class="breadcrumb-item active"><span class="section-number">21. </span>3D Tile များဖြင့် အလုပ်လုပ်ခြင်း (Working with 3D Tiles)</li>
+      <li class="wy-breadcrumbs-aside">
+              <a href="https://github.com/qgis/QGIS-Documentation/blob/master/docs/user_manual/working_with_3d_tiles/3d_tiles.rst" class="fa fa-github"> Edit on GitHub</a>
+      </li>
+  </ul><div class="rst-breadcrumbs-buttons" role="navigation" aria-label="Sequential page navigation">
+        <a href="../working_with_point_clouds/point_clouds.html" class="btn btn-neutral float-left" title="20. Point Cloud များဖြင့် အလုပ်လုပ်ခြင်း (Working with Point Clouds)" accesskey="p"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="../print_composer/index.html" class="btn btn-neutral float-right" title="22. မြေပုံအချောသပ်ပြင်ဆင်ခြင်း (Laying out the maps)" accesskey="n">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+  </div>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <blockquote>
+<div></div></blockquote>
+<section id="d-tile-working-with-3d-tiles">
+<span id="label-3d-tiles"></span><span id="index-0"></span><h1><span class="section-number">21. </span>3D Tile များဖြင့် အလုပ်လုပ်ခြင်း (Working with 3D Tiles)<a class="headerlink" href="#d-tile-working-with-3d-tiles" title="Link to this heading"></a></h1>
+<nav class="contents local" id="contents">
+<ul class="simple">
+<li><p><a class="reference internal" href="#d-tile-what-are-3d-tiles" id="id5">3D Tile ဆိုသည်မှာ ဘယ်လိုအရာတွေလဲ (What are 3D Tiles?)</a></p></li>
+<li><p><a class="reference internal" href="#d-tiles-3d-tiles-properties" id="id6">3D Tiles ဂုဏ်သတ္တိများ (3D Tiles Properties)</a></p>
+<ul>
+<li><p><a class="reference internal" href="#information-properties" id="id7">သတင်းအချက်အလက်ဂုဏ်သတ္တိများ (Information Properties)</a></p></li>
+<li><p><a class="reference internal" href="#source-properties" id="id8">ရင်းမြစ်ဆိုင်ရာ ဂုဏ်သတ္တိများ (Source Properties)</a></p></li>
+<li><p><a class="reference internal" href="#symbology-properties" id="id9">သင်္ကေတ ဂုဏ်သတ္တိများ (Symbology Properties)</a></p></li>
+<li><p><a class="reference internal" href="#d-3d-view-properties" id="id10">3D မြင်ကွင်းဂုဏ်သတ္တိများ (3D View Properties)</a></p></li>
+<li><p><a class="reference internal" href="#rendering-properties" id="id11">ပုံဖော်ပြသခြင်းဆိုင်ရာ ဂုဏ်သတ္တိများ (Rendering Properties)</a></p></li>
+<li><p><a class="reference internal" href="#elevation-properties" id="id12">မြေပြင်အနိမ့်အမြင့်ဆိုင်ရာ ဂုဏ်သတ္တိများ (Elevation Properties)</a></p></li>
+<li><p><a class="reference internal" href="#metadata-metadata-properties" id="id13">Metadata ဂုဏ်သတ္တိများ (Metadata Properties)</a></p></li>
+</ul>
+</li>
+</ul>
+</nav>
+<section id="d-tile-what-are-3d-tiles">
+<h2><a class="toc-backref" href="#id5" role="doc-backlink"><span class="section-number">21.1. </span>3D Tile ဆိုသည်မှာ ဘယ်လိုအရာတွေလဲ (What are 3D Tiles?)</a><a class="headerlink" href="#d-tile-what-are-3d-tiles" title="Link to this heading"></a></h2>
+<p>3D tile များသည် အကြီးစား 3D ပထဝီဝင်ဆိုင်ရာ dataset များကို တိုက်ရိုက်ကြည့်ရှုခြင်းနှင့် ပုံဖော်ပြသခြင်းများအတွက် သတ်မှတ်ချက်များဖြစ်ပါသည်။ ၎င်းတို့သည် 3D အကြောင်းအရာများကို ထိထိရောက်ရောက် စီမံနိုင်ရန်နှင့် ပြသနိုင်ရန်အတွက် hierarchical structure (အစဉ်လိုက်စီထားသော ဖွဲ့စည်းပုံ) တစ်ခုကိုအသုံးပြုပြီး အသေးစိတ် level များကို ဆီလျော်အောင်ပြောင်းလဲပြသပေးသောကြောင့် စွမ်းဆောင်ရည်ကို ကောင်းမွန်စေပါသည်။ ဤနည်းပညာကို မြို့ပြစီမံကိန်း၊ ဗိသုကာပညာ၊ သရုပ်သကန်ဖန်တီးခြင်း (simulation) ၊ ဂိမ်းများ နှင့် virtual reality (VR) များတွင် တွင်ကျယ်စွာ အသုံးပြုပြီး ရှုပ်ထွေးသော ပထဝီဝင်ဆိုင်ရာ data များကို ပုံဖော်ကြည့်ရှုရန်အတွက် စံဖြစ်ပြီး အပြန်အလှန်လုပ်ဆောင်နိုင်သော ဖြေရှင်းနည်းတစ်ခုဖြစ်ပါသည်။</p>
+<figure class="align-center" id="id1">
+<span id="figure-3d-tiles-example"></span><img alt="../../../_images/3d_tiles.png" src="../../../_images/3d_tiles.png" />
+<figcaption>
+<p><span class="caption-number">Fig. 21.1 </span><span class="caption-text">3D tiles ဥပမာ</span><a class="headerlink" href="#id1" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<p>QGIS တွင် လက်ရှိ 3D tile format ၂ မျိုးအသုံးပြုနိုင်ပါသည်-</p>
+<ul class="simple">
+<li><p><a class="reference external" href="https://cesium.com/why-cesium/3d-tiles/">Cesium 3D tiles</a> များကို အဆောက်အဦများ သို့မဟုတ် မြို့တစ်မြို့လုံး၏ ရှုပ်ထွေးသော 3D model များအတွက် အဓိက အသုံးပြုပါသည်။ အဆိုပါ dataset များကို Cesium Ion သို့မဟုတ် Google (<em>Photorealistic 3D Tiles</em>) ကဲ့သို့ cloud-based platform များမှ ပံ့ပိုးပေးထားနိုင်ပါသည်။</p></li>
+<li><p><a class="reference external" href="https://github.com/CesiumGS/quantized-mesh">Quantized Mesh tiles</a> များကို မြေမျက်နှာသွင်ပြင် အနိမ့်အမြင့် data အတွက် အသုံးပြုပါသည်။</p></li>
+</ul>
+<p>ဤ data ရင်းမြစ်များကို QGIS ထဲသို့ ထည့်သွင်းနည်းကို <a class="reference internal" href="../managing_data_source/opening_data.html#d-tiles"><span class="std std-ref">3D tile scene ဝန်ဆောင်မှုများကို အသုံးပြုခြင်း (Using 3D tiled scene services)</span></a> တွင်ကြည့်ရှုပါ။</p>
+</section>
+<section id="d-tiles-3d-tiles-properties">
+<span id="dtiles-properties"></span><h2><a class="toc-backref" href="#id6" role="doc-backlink"><span class="section-number">21.2. </span>3D Tiles ဂုဏ်သတ္တိများ (3D Tiles Properties)</a><a class="headerlink" href="#d-tiles-3d-tiles-properties" title="Link to this heading"></a></h2>
+<p>3D tiles <span class="guilabel">Layer Properties</span> dialog တွင် အောက်ပါကဏ္ဍများပါဝင်ပါသည်-</p>
+<table class="docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="../../../_images/metadata.png"><img alt="metadata" src="../../../_images/metadata.png" style="width: 1.5em;" /></a> <a class="reference internal" href="#dtilesinformationmenu"><span class="std std-ref">Information</span></a></p></td>
+<td><p><a class="reference internal" href="../../../_images/system.png"><img alt="system" src="../../../_images/system.png" style="width: 1.5em;" /></a> <a class="reference internal" href="#dtilessourcemenu"><span class="std std-ref">Source</span></a></p></td>
+<td><p><a class="reference internal" href="../../../_images/symbology.png"><img alt="symbology" src="../../../_images/symbology.png" style="width: 2em;" /></a> <a class="reference internal" href="#dtilessymbologymenu"><span class="std std-ref">Symbology</span></a><sup>[1]</sup></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="../../../_images/3d.png"><img alt="3d" src="../../../_images/3d.png" style="width: 1.5em;" /></a> <a class="reference internal" href="#dtiles3dviewmenu"><span class="std std-ref">3D View</span></a><sup>[1]</sup></p></td>
+<td><p><a class="reference internal" href="../../../_images/rendering.png"><img alt="rendering" src="../../../_images/rendering.png" style="width: 1.5em;" /></a> <a class="reference internal" href="#dtilesrenderingmenu"><span class="std std-ref">Rendering</span></a></p></td>
+<td><p><a class="reference internal" href="../../../_images/elevationscale.png"><img alt="elevationscale" src="../../../_images/elevationscale.png" style="width: 1.5em;" /></a> <a class="reference internal" href="#dtileselevationmenu"><span class="std std-ref">Elevation</span></a><sup>[1]</sup></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="../../../_images/editmetadata.png"><img alt="editMetadata" src="../../../_images/editmetadata.png" style="width: 1.2em;" /></a> <a class="reference internal" href="#dtilesmetadatamenu"><span class="std std-ref">Metadata</span></a></p></td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p><sup>[1]</sup> သည် <a class="reference internal" href="../introduction/general_tools.html#layer-styling-panel"><span class="std std-ref">Layer styling panel</span></a> တွင်လည်း ရရှိနိုင်ပါသည်။</p>
+<section id="information-properties">
+<span id="dtilesinformationmenu"></span><h3><a class="toc-backref" href="#id7" role="doc-backlink"><span class="section-number">21.2.1. </span>သတင်းအချက်အလက်ဂုဏ်သတ္တိများ (Information Properties)</a><a class="headerlink" href="#information-properties" title="Link to this heading"></a></h3>
+<p><span class="guilabel">Information</span> tab သည် ဖတ်ရှုရုံသာ ဖြစ်ပြီး လက်ရှိအလွှာ၏ အကျဉ်းချုပ်အချက်အလက်နှင့်
+Metadata ကို ခပ်မြန်မြန်ကြည့်ရှုနိုင်သည့် စိတ်ဝင်စားစရာနေရာတစ်ခုဖြစ်ပါသည်။ ကြည့်ရှုနိုင်သည့် အချက်အလက်များမှာ-</p>
+<ul class="simple">
+<li><p>အလွှာဖန်တီးသူပေါ်မူတည်ပြီး - အမည်၊ URI၊ အရင်းအမြစ်ပုံစံနှင့် ဖိုင်လမ်းကြောင်း၊ Zoom-levels အရေအတွက်</p></li>
+<li><p>စိတ်ကြိုက်ဂုဏ်သတ္တိများ- active project ထဲတွင် layer အကြောင်း အချက်အလက်အပိုများ သိမ်းဆည်းလေ့ရှိပါသည်။ နောက်ထပ်ဂုဏ်သတ္တိများကို PyQGIS ၊ အထူးသဖြင့် <a class="reference external" href="https://qgis.org/pyqgis/3.40/qgis.core.QgsMapLayer.setCustomProperty">setCustomProperty()</a> နည်းလမ်းများမှ သီးခြားစီ ဖန်တီးနိုင်ပြီး စီမံခန့်ခွဲနိုင်ပါသည်။</p></li>
+<li><p>Coordinate Reference System - အမည်၊ ယူနစ်များ၊ နည်းလမ်း၊ တိကျမှု၊ အကိုးအကား (ပုံသေအငြိမ်ဖြစ်သော (static) သို့မဟုတ် ပြောင်းလဲနိုင်သော (dynamic) ကိုဆိုလိုပါသည်)</p></li>
+<li><p><a class="reference internal" href="../working_with_vector_tiles/vector_tiles.html#vectortilesmetadatamenu"><span class="std std-ref">ဖြည့်သွင်းထားသည့် metadata</span></a> မှ ထုတ်ယူထားသော - အသုံးပြုခွင့်၊ အကျယ်အဝန်း၊ အချိတ်အဆက်များ (links)၊ အဆက်အသွယ်၊ data ၏သမိုင်းကြောင်း၊ အစရှိသည်….</p></li>
+</ul>
+</section>
+<section id="source-properties">
+<span id="dtilessourcemenu"></span><h3><a class="toc-backref" href="#id8" role="doc-backlink"><span class="section-number">21.2.2. </span>ရင်းမြစ်ဆိုင်ရာ ဂုဏ်သတ္တိများ (Source Properties)</a><a class="headerlink" href="#source-properties" title="Link to this heading"></a></h3>
+<p><a class="reference internal" href="../../../_images/system.png"><img alt="system" src="../../../_images/system.png" style="width: 1.5em;" /></a> <span class="guilabel">Source</span> tab တွင် ရွေးချယ်ထားသော 3D tile နှင့်ပတ်သက်သော အခြေခံသတင်းအချက်အလက်များကို ပြသပေးပါသည်၊ အောက်ပါတို့ပါဝင်ပါသည်-</p>
+<ul class="simple">
+<li><p><span class="guilabel">Layers Panel</span> ထဲတွင် ပြသမည့် <span class="guilabel">Layer name</span> ၊</p></li>
+<li><p><span class="guilabel">Coordinate Reference System</span> - layer ၏ <a class="reference internal" href="../working_with_projections/working_with_projections.html#layer-crs"><span class="std std-ref">Coordinate Reference System (CRS)</span></a> ကိုပြသပေးပါသည်။ Drop-down စာရင်းထဲတွင် လတ်တလော အသုံးပြုခဲ့သော CRS ကို ရွေးချယ်နိုင်ခြင်းဖြင့် သို့မဟုတ် <a class="reference internal" href="../../../_images/mActionSetProjection.png"><img alt="setProjection" src="../../../_images/mActionSetProjection.png" style="width: 1.5em;" /></a> <sup>Select CRS</sup> ခလုတ်ကို နှိပ်ခြင်းဖြင့် layer ၏ CRS ကိုပြောင်းလဲပေးနိုင်ပါသည် (<a class="reference internal" href="../working_with_projections/working_with_projections.html#crs-selector"><span class="std std-ref">ကိုသြဒိနိတ်ရည်ညွှန်းစနစ်ရွေးချယ်ရာ (Coordinate Reference System Selector)</span></a> တွင်ကြည့်ပါ)။ Layer CRS မှားယွင်းနေမှသာ သို့မဟုတ် CRS သတ်မှတ်ထားခြင်းမရှိမှသာ ဤလုပ်ငန်းစဉ်ကို အသုံးပြုပါ။</p></li>
+</ul>
+</section>
+<section id="symbology-properties">
+<span id="dtilessymbologymenu"></span><h3><a class="toc-backref" href="#id9" role="doc-backlink"><span class="section-number">21.2.3. </span>သင်္ကေတ ဂုဏ်သတ္တိများ (Symbology Properties)</a><a class="headerlink" href="#symbology-properties" title="Link to this heading"></a></h3>
+<figure class="align-center" id="id2">
+<span id="figure-3d-tiles-symbology"></span><img alt="../../../_images/3d_tiles_symbology.png" src="../../../_images/3d_tiles_symbology.png" />
+<figcaption>
+<p><span class="caption-number">Fig. 21.2 </span><span class="caption-text">3D Tile Layer Symbology</span><a class="headerlink" href="#id2" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<p>Default အားဖြင့် texture အသုံးပြုပြီး layer ကိုစတိုင်ပြုလုပ်ပါသည်၊ သို့သော် scene ၏နောက်ကွယ်ရှိ wirefram mesh ကိုကြည့်ရှုနိုင်ရန် drop-down menu ထဲရှိ <span class="guilabel">Wireframe</span> ကိုရွေးချယ်ပြီး ၎င်းစတိုင်ကို ပြောင်းလဲပေးနိုင်ပါသည်။ ထို့အပြင် vector polygon များနှင့်ဆင်တူသော mesh fill နှင့် line သင်္ကေတများကိုလည်း ပြောင်းလဲပေးနိုင်ပါသည်။ <a class="reference internal" href="../../../_images/checkbox.png"><img alt="checkbox" src="../../../_images/checkbox.png" style="width: 1.3em;" /></a> <span class="guilabel">Use texture colors</span> ကို အမှန်ခြစ်ပါက mesh element တစ်ခုချင်းကို texture အပြည့်အစုံ၏ ပျမ်းမျှတန်ဖိုးဖြင့် ပုံဖော်ပြသပေးပါလိမ့်မည်။ ဤနည်းလမ်းသည် ကြီးမားသော dataset များနှင့်လုပ်ဆောင်ပြီး data ကို မြန်မြန်ခြုံငုံကြည့်ရှုလိုပါက ကောင်းမွန်သောရွေးချယ်စရာတစ်ခုဖြစ်ပါသည်။</p>
+<figure class="align-center" id="id3">
+<span id="figure-3d-tiles-textured-and-wireframe"></span><img alt="../../../_images/3d_tiles_textured_and_wireframe.png" src="../../../_images/3d_tiles_textured_and_wireframe.png" />
+<figcaption>
+<p><span class="caption-number">Fig. 21.3 </span><span class="caption-text">3D Tiles - textured နှင့် wireframe</span><a class="headerlink" href="#id3" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<p>Data ကိုကြည့်ရှုရန် <a class="reference internal" href="../../../_images/mActionNew3DMap.png"><img alt="new3DMap" src="../../../_images/mActionNew3DMap.png" style="width: 1.5em;" /></a> <span class="guilabel">New 3D map view</span> ကိုဖွင့်နိုင်ပါသည်။</p>
+<figure class="align-center" id="id4">
+<span id="figure-3d-tiles-map-view"></span><img alt="../../../_images/3d_tiles_map_view.png" src="../../../_images/3d_tiles_map_view.png" />
+<figcaption>
+<p><span class="caption-number">Fig. 21.4 </span><span class="caption-text">3D Map View</span><a class="headerlink" href="#id4" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<p><span class="guilabel">Symbology</span> tab တွင် layer ၏ feature များအားလုံးပေါ်တွင် အမြဲသက်ရောက်မည့် ရွေးချယ်စရာအချို့ကိုလည်း သတ်မှတ်ပေးနိုင်ပါသည်-</p>
+<ul class="simple">
+<li><p><span class="guilabel">Maximum error</span> (အများဆုံးအမှား) - ဤ parameter သည် 3D model ထဲတွင် ပြသသော အသေးစိတ် level ကို ဆုံးဖြတ်ပေးပါသည်။ Point cloud နှင့်အလားတူပင် 3D tile များတွင် ပုံဖော်ပြသခြင်းအတွက် လိုအပ်သည်ထက်ပိုသော အချက်အလက်များ ပိုမိုပါဝင်လေ့ရှိပါသည်။ ဤ setting ကို ချိန်ညှိခြင်းဖြင့် ပြသခြင်း သိပ်သည်းမှု (display density) နှင့် ပုံဖော်ပြသမှုနှုန်း (rendering speed) အကြား မျှခြေကို ထိန်းချုပ်နိုင်ပါသည်။ တန်ဖိုးအကြီးတစ်ခု (ဥပမာ- 5 mm) သည် element များအကြား သိသာသော gap များရှိစေနိုင်ပြီး တန်ဖိုးအသေးတစ်ခု (ဥပမာ- 0.1 mm) သည် အသေးစိတ်အချက်အလက်အများအပြားကို ပုံဖော်ပြသပေးကာ rendering process ကို နှေးကွေးသွားစေနိုင်ပါသည်။ သင်၏ သီးသန့်လိုအပ်ချက်များအတိုင်း setting တွင် မတူညီသော ယူနစ်များကို ရွေးချယ်ပေးနိုင်ပါသည်။</p></li>
+<li><p><span class="guilabel">Opacity</span> (အလင်းပိတ်နှုန်း) - Map canvas ထဲရှိ အောက်တွင်ရှိနေသော layer ကို မြင်ရစေရန် ဒီ tool ကို အသုံးပြုနိုင်ပါသည်။ မိမိကြည့်လိုသော မြင်ရနိုင်မှု အတိုင်းအတာအထိ slider ကို ရွှေ့ကြည့်ပါ။ မြင်ရနိုင်စွမ်း ရာခိုင်နှုန်းအတိအကျ သတ်မှတ်ပေးလိုလျှင် slider ၏ဘေးရှိ menu တွင် သတ်မှတ်ပေးနိုင်ပါသည်။</p></li>
+<li><p><span class="guilabel">Blending mode</span> (ရောစပ်ခြင်း) - ဤ tool ကိုအသုံးပြုပြီး အထူး rendering effect များကိုလုပ်ဆောင်နိုင်ပါသည်။ အထက်နှင့်အောက် ထပ်နေသော layer များ၏ pixel များကို <a class="reference internal" href="../introduction/general_tools.html#blend-modes"><span class="std std-ref">ရောစပ်ခြင်းနည်းလမ်းများ (Blending Modes)</span></a> တွင်ဖော်ပြထားသော setting များဖြင့် ရောစပ်လိုက်ပါသည်။</p></li>
+</ul>
+</section>
+<section id="d-3d-view-properties">
+<span id="dtiles3dviewmenu"></span><h3><a class="toc-backref" href="#id10" role="doc-backlink"><span class="section-number">21.2.4. </span>3D မြင်ကွင်းဂုဏ်သတ္တိများ (3D View Properties)</a><a class="headerlink" href="#d-3d-view-properties" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p><span class="guilabel">Maximum screen space error</span> သည် terrain tile များကို ပိုမိုအသေးစိတ်သောအရာများဖြင့် နေရာလဲလှယ်ရန်အတွက် threshold (သတ်မှတ်ချက်) ကိုဆုံးဖြတ်ပေးပါသည် (အပြန်အလှန်အားဖြင့် ပိုမိုအသေးစိတ်သောအရာများကို terrain tile များဖြင့် နေရာလဲလှယ်ခြင်း) - ဆိုလိုသည်မှာ 3D မြင်ကွင်းသည် အရည်အသွေးမြင့် tile များကို မည်မျှကြာကြာ အသုံးပြုမည်ကို ဆုံးဖြတ်ပေးပါသည်။ နံပါတ် အနိမ့်သည် မြင်ကွင်းတွင် ပိုမိုအသေးစိတ်ပြသပြီး rendering ကိုပိုမိုရှုပ်ထွေးလာစေပါသည်။</p></li>
+<li><p><a class="reference internal" href="../../../_images/unchecked.png"><img alt="unchecked" src="../../../_images/unchecked.png" style="width: 1.3em;" /></a> <span class="guilabel">Show bounding boxes</span> သည် terrain tile များ၏ 3D လေးမျက်နှာအကျယ်အဝန်းနယ်များ (bounding box) ကို ပြသပေးပါသည် (terrain ပြဿနာများကို ဖြေရှင်းခြင်းအတွက် အသုံးဝင်ပါသည်)။</p></li>
+</ul>
+</section>
+<section id="rendering-properties">
+<span id="dtilesrenderingmenu"></span><h3><a class="toc-backref" href="#id11" role="doc-backlink"><span class="section-number">21.2.5. </span>ပုံဖော်ပြသခြင်းဆိုင်ရာ ဂုဏ်သတ္တိများ (Rendering Properties)</a><a class="headerlink" href="#rendering-properties" title="Link to this heading"></a></h3>
+<p><span class="guilabel">Scale dependent visibility</span> (စကေးပေါ်မူတည်သည့် မြင်ရနိုင်မှု) အောက်တွင် <span class="guilabel">အများဆုံး (သူ့အောက်ဆိုရင် မြင်ရ)</span> နှင့် <span class="guilabel">အနည်းဆုံး (သူ့အောက်ဆိုရင် မမြင်ရ)</span> စကေးကို သတ်မှတ်ပေးနိုင်ပါသည်။ ၎င်းသည် mesh element များကိုမြင်ရနိုင်သော စကေးအပိုင်းအခြားကို သတ်မှတ်ပေးမည်ဖြစ်သည်။ ထိုစကေးအပိုင်းအခြားအတွင်း မဝင်လျှင် layer များကို မြင်ရမည်မဟုတ်ပါ။
+<a class="reference internal" href="../../../_images/mActionMapIdentification.png"><img alt="mapIdentification" src="../../../_images/mActionMapIdentification.png" style="width: 1.5em;" /></a> <sup>Set to current canvas scale</sup> (လက်ရှိမြေပုံ canvas စကေးအတိုင်းသတ်မှတ်ခြင်း) ခလုတ်ကိုနှိပ်ပြီး လက်ရှိမြေပုံ canvas စကေးကို မြင်ရနိုင်သည့် စကေးအပိုင်းအခြားအဖြစ်သတ်မှတ်ပေးနိုင်ပါသည်။ ပိုမိုသိရှိလိုသည်များအတွက် <a class="reference internal" href="../introduction/general_tools.html#label-scaledepend"><span class="std std-ref">မြင်ရနိုင်သောစကေး ရွေးချယ်ပေးသည့်အရာ (Visibility Scale Selector)</span></a> တွင် ကြည့်ရှုပါ။</p>
+</section>
+<section id="elevation-properties">
+<span id="dtileselevationmenu"></span><h3><a class="toc-backref" href="#id12" role="doc-backlink"><span class="section-number">21.2.6. </span>မြေပြင်အနိမ့်အမြင့်ဆိုင်ရာ ဂုဏ်သတ္တိများ (Elevation Properties)</a><a class="headerlink" href="#elevation-properties" title="Link to this heading"></a></h3>
+<p><a class="reference internal" href="../../../_images/elevationscale.png"><img alt="elevationscale" src="../../../_images/elevationscale.png" style="width: 1.5em;" /></a> <span class="guilabel">Elevation</span> tab တွင် <a class="reference internal" href="../map_views/3d_map_view.html#label-3dmapview"><span class="std std-ref">3D map view</span></a> တစ်ခုအတွင်း layer elevation ဂုဏ်သတ္တိများကို ထိန်းချုပ်နိုင်ရန် ရွေးချယ်စရာများပါဝင်ပါသည်။ အထူးသဖြင့် အောက်ပါကို သတ်မှတ်ပေးနိုင်ပါသည်-</p>
+<ul class="simple">
+<li><p><span class="guilabel">Elevation Surface</span> - 3D layer vertex များ၏ Z တန်ဖိုးများကို terrain elevation (မြေမျက်နှာသွင်ပြင် အနိမ့်အမြင့်) အဖြစ် မည်ကဲ့သို့ အဓိပ္ပါယ်ဖော်သင့်သည်ကို ဆုံးဖြတ်ပေးပါသည်။ <span class="guilabel">Scale</span> factor တစ်ခု နှင့် <span class="guilabel">Offset</span> တစ်ခုကို အသုံးပြုပေးနိုင်ပါသည်။</p></li>
+</ul>
+</section>
+<section id="metadata-metadata-properties">
+<span id="dtilesmetadatamenu"></span><span id="index-1"></span><h3><a class="toc-backref" href="#id13" role="doc-backlink"><span class="section-number">21.2.7. </span>Metadata ဂုဏ်သတ္တိများ (Metadata Properties)</a><a class="headerlink" href="#metadata-metadata-properties" title="Link to this heading"></a></h3>
+<p><a class="reference internal" href="../../../_images/editmetadata.png"><img alt="editMetadata" src="../../../_images/editmetadata.png" style="width: 1.2em;" /></a> <span class="guilabel">Metadata</span> tab တွင် layer နဲ့ပတ်သက်သည့် Metadata report ကို ဖန်တီးခြင်းနှင့် ပြင်ဆင်ခြင်းများ လုပ်ဆောင်နိုင်ပါသည်။
+ပိုမိုသိရှိလိုသည်များအတွက် <a class="reference internal" href="../introduction/general_tools.html#metadatamenu"><span class="std std-ref">Metadata</span></a> တွင် ကြည့်ရှုပါ။</p>
+</section>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="../working_with_point_clouds/point_clouds.html" class="btn btn-neutral float-left" title="20. Point Cloud များဖြင့် အလုပ်လုပ်ခြင်း (Working with Point Clouds)" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="../print_composer/index.html" class="btn btn-neutral float-right" title="22. မြေပုံအချောသပ်ပြင်ဆင်ခြင်း (Laying out the maps)" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2002-now, QGIS project.
+      <span class="lastupdated">Last updated on 2025 Feb 19, 10:27 +0630.
+      </span></p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <!-- Transifex follows a particular logic to build target pages:
+Expected French translation link for https://docs.qgis.org/3.28/en/docs/user_manual/print_composer/overview_composer.html
+would return https://app.transifex.com/qgis/qgis-documentation/translate/#fr/aa6d8bc653526d38b295ca94bf8eee5e
+with the md5 value of "github#qgis/QGIS-Documentation#release_3.28#locale/en/LC_MESSAGES/docs/user_manual/print_composer/overview_composer.po"-->
+<!--Make sure that mismatching language codes between Transifex and Sphinx are converted-->
+
+
+  <div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      <span class="fa fa-info-circle"> QGIS Documentation </span>
+      v: 3.40
+      <span class="fa fa-caret-down"></span>
+    </span>
+
+    <div class="rst-other-versions">
+      <dl>
+        <dt>Languages</dt>
+        
+          <dd><a href="https://docs.qgis.org/3.40/en/docs/user_manual/working_with_3d_tiles/3d_tiles.html">en</a></dd>
+        
+      </dl>
+
+      <dl>
+        <dt>Versions</dt>
+        
+          <dd><a href="https://docs.qgis.org/testing/en/docs/user_manual/working_with_3d_tiles/3d_tiles.html">testing</a></dd>
+        
+          <dd><a href="https://docs.qgis.org/latest/en/docs/user_manual/working_with_3d_tiles/3d_tiles.html">latest</a></dd>
+        
+          <dd><a href="https://docs.qgis.org/3.40/en/docs/user_manual/working_with_3d_tiles/3d_tiles.html">3.40</a></dd>
+        
+          <dd><a href="https://docs.qgis.org/3.34/en/docs/user_manual/working_with_3d_tiles/3d_tiles.html">3.34</a></dd>
+        
+          <dd><a href="https://docs.qgis.org/3.28/en/docs/user_manual/working_with_3d_tiles/3d_tiles.html">3.28</a></dd>
+        
+          <dd><a href="https://docs.qgis.org/3.22/en/docs/user_manual/working_with_3d_tiles/3d_tiles.html">3.22</a></dd>
+        
+          <dd><a href="https://docs.qgis.org/3.16/en/docs/user_manual/working_with_3d_tiles/3d_tiles.html">3.16</a></dd>
+        
+          <dd><a href="https://docs.qgis.org/3.10/en/docs/user_manual/working_with_3d_tiles/3d_tiles.html">3.10</a></dd>
+        
+          <dd><a href="https://docs.qgis.org/3.4/en/docs/user_manual/working_with_3d_tiles/3d_tiles.html">3.4</a></dd>
+        
+          <dd><a href="https://docs.qgis.org/2.18/en/docs/user_manual/working_with_3d_tiles/3d_tiles.html">2.18</a></dd>
+        
+      </dl>
+
+       
+       <dl>
+        <dt>Downloads</dt>
+        
+          <dd><a href="https://docs.qgis.org/3.40/pdf">PDF</a></dd>
+        
+          <dd><a href="https://docs.qgis.org/3.40/zip">HTML</a></dd>
+        
+      </dl>
+      
+
+      
+       
+      <dl>
+        <dt>Contribute to Docs</dt>
+          <dd>
+            <a href="https://github.com/qgis/QGIS-Documentation/edit/master/docs/user_manual/working_with_3d_tiles/3d_tiles.rst" target="_blank" rel="noopener noreferrer">Edit on GitHub</a>
+          </dd>
+          
+          
+          <dd>
+            <a href="https://app.transifex.com/qgis/qgis-documentation/translate/#en/af56c582d530fadd75e2e8601fd8bd02" target="_blank" rel="noopener noreferrer">Translate Page</a>
+          </dd>
+          
+          <dd>
+            <a href="https://github.com/qgis/QGIS-Documentation/issues" target="_blank" rel="noopener noreferrer">Report Issue</a>
+          </dd>
+      </dl>
+      
+
+      <dl>
+        <dt>On QGIS Project</dt>
+          <dd>
+            <a href="https://qgis.org" target="_blank" rel="noopener noreferrer">Home</a>
+          </dd>
+          <dd>
+            <a href="https://qgis.org/api/3.40" target="_blank" rel="noopener noreferrer">C++ API</a>
+          </dd>
+          <dd>
+            <a href="https://qgis.org/pyqgis/3.40" target="_blank" rel="noopener noreferrer">PyQGIS API</a>
+          </dd>
+          <dd>
+            <a href="https://github.com/qgis/QGIS/tree/release-3_40" target="_blank" rel="noopener noreferrer">Source</a>
+          </dd>
+      </dl>
+
+    </div>
+  </div><script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

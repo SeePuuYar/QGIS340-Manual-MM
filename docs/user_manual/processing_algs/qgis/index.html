@@ -1,0 +1,752 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>28.1. QGIS algorithm ထောက်ပံ့ပေးသူ (QGIS algorithm provider) &mdash; QGIS Documentation  documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/css/qgis_docs.css?v=5415a924" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/togglebutton.css?v=13237357" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/copybutton.css?v=76b2166b" />
+
+  
+    <link rel="shortcut icon" href="../../../../_static/qgis_logo.ico"/>
+    <link rel="canonical" href="https://docs.qgis.org/latest/en/docs/user_manual/processing_algs/qgis/index.html"/>
+  <!--[if lt IE 9]>
+    <script src="../../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../../../../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../../../../_static/documentation_options.js?v=5929fcd5"></script>
+        <script src="../../../../_static/doctools.js?v=888ff710"></script>
+        <script src="../../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+        <script src="../../../../_static/clipboard.min.js?v=a7894cd8"></script>
+        <script src="../../../../_static/copybutton.js?v=f281be69"></script>
+        <script>let toggleHintShow = 'Click to show';</script>
+        <script>let toggleHintHide = 'Click to hide';</script>
+        <script>let toggleOpenOnPrint = 'true';</script>
+        <script src="../../../../_static/togglebutton.js?v=4a39c7ea"></script>
+        <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+        <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../search.html" />
+    <link rel="next" title="28.1.1. 3D Tile များ" href="3dtiles.html" />
+    <link rel="prev" title="28. Processing ဆိုင်ရာ ထောက်ပံ့ပေးသူများနှင့် Algorithm များ (Processing providers and algorithms)" href="../index.html" />
+  <meta name="description" content="QGIS 3.40 documentation: 28.1. QGIS algorithm ထောက်ပံ့ပေးသူ (QGIS algorithm provider)">
+  <script>
+    var _paq = window._paq = window._paq || [];
+    _paq.push(["disableCookies"]);
+    _paq.push(['trackPageView']);
+    _paq.push(['enableLinkTracking']);
+    (function() {
+      var u="//matomo.qgis.org/";
+      _paq.push(['setTrackerUrl', u+'matomo.php']);
+      _paq.push(['setSiteId', '1']);
+      var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
+      g.async=true; g.src=u+'matomo.js'; s.parentNode.insertBefore(g,s);
+    })();
+  </script>
+</head>
+
+<body class="wy-body-for-nav">
+
+  <nav class="release_status_topbar">
+  </nav>
+
+   
+
+ 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+   
+
+          
+          
+          <a href="../../../index.html" class="icon icon-home">
+            QGIS Documentation
+              <img src="../../../../_static/logo.png" class="logo" alt="Logo"/>
+          </a>
+              <div class="version">
+                3.40
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+   <a href= "../../../../genindex.html">Index</a>
+ 
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">အသုံးပြုသူများအတွက်</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="../../index.html">QGIS Desktop User Guide/Manual (QGIS 3.40)</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../../preamble/preamble.html">1. စကားချီး (Preamble)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../preamble/foreword.html">2. အမှာစာ (Foreword)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../preamble/conventions.html">3. အသုံးအနှုန်းများ (Conventions)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../preamble/features.html">4. အသွင်အပြင်များ (Features)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../introduction/getting_started.html">5. စတင်အသုံးပြုခြင်း (Getting Started)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../introduction/project_files.html">6. Project Files များနှင့် အလုပ်လုပ်ခြင်း (Working with Project Files)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../introduction/qgis_gui.html">7. QGIS ၏အစိတ်အပိုင်းများ (QGIS GUI)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../introduction/browser.html">8. The Browser panel (ရှာဖွေကြည့်ရှုသည့် Panel)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../introduction/qgis_configuration.html">9. QGIS ပြင်ဆင်သတ်မှတ်ခြင်း/အခင်းအကျင်း (QGIS Configuration)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../working_with_projections/working_with_projections.html">10. မြေပုံအရိပ်ချစနစ်များနှင့် အလုပ်လုပ်ခြင်း (Working with Projections)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../map_views/index.html">11. မြေပုံများအား ပုံဖော်ကြည့်ရှုခြင်း (Visualizing Maps)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../introduction/general_tools.html">12. ယေဘုယျ tool များ (General Tools)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../expressions/index.html">13. Expression များဖြင့် အဆင့်မြှင့်တင်ဆောင်ရွက်ခြင်း (Level up with Expressions)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../style_library/index.html">14. Style နှင့်ပတ်သက်သည်များ ထားရှိရာနေရာ (The Style Library)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../managing_data_source/index.html">15. ဒေတာအရင်းအမြစ်များအား စီမံခန့်ခွဲခြင်း (Managing Data Source)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../working_with_vector/index.html">16. Vector data များဖြင့် အလုပ်လုပ်ခြင်း (Working with Vector Data)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../working_with_raster/index.html">17. Raster Data များဖြင့် အလုပ်လုပ်ခြင်း</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../working_with_mesh/mesh.html">18. Mesh Data များနှင့် အလုပ်လုပ်ခြင်း (Working with Mesh Data)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../working_with_vector_tiles/vector_tiles.html">19. Vector Tiles များနှင့်အလုပ်လုပ်ခြင်း (Working with Vector Tiles)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../working_with_point_clouds/point_clouds.html">20. Point Cloud များဖြင့် အလုပ်လုပ်ခြင်း (Working with Point Clouds)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../working_with_3d_tiles/3d_tiles.html">21. 3D Tile များဖြင့် အလုပ်လုပ်ခြင်း (Working with 3D Tiles)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../print_composer/index.html">22. မြေပုံအချောသပ်ပြင်ဆင်ခြင်း (Laying out the maps)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../working_with_ogc/ogc_client_support.html">23. OGC / ISO protocol များဖြင့် အလုပ်လုပ်ခြင်း</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../working_with_gps/index.html">24. GPS Data များနှင့် အလုပ်လုပ်ခြင်း</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../auth_system/index.html">25. အထောက်အထားစိစစ်ခြင်းစနစ် (Authentication System)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../grass_integration/grass_integration.html">26. GRASS GIS Integration (GRASS GIS နှင့်ပေါင်းစပ်အသုံးပြုခြင်း)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../processing/index.html">27. QGIS processing framework</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../index.html">28. Processing ဆိုင်ရာ ထောက်ပံ့ပေးသူများနှင့် Algorithm များ (Processing providers and algorithms)</a><ul class="current">
+<li class="toctree-l3 current"><a class="current reference internal" href="#">28.1. QGIS algorithm ထောက်ပံ့ပေးသူ (QGIS algorithm provider)</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="3dtiles.html">28.1.1. 3D Tile များ</a></li>
+<li class="toctree-l4"><a class="reference internal" href="cartography.html">28.1.2. မြေပုံရေးဆွဲခြင်းအတတ်ပညာ (Cartography)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="database.html">28.1.3. Database</a></li>
+<li class="toctree-l4"><a class="reference internal" href="filetools.html">28.1.4. File ကိရိယာများ (File tools)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="gps.html">28.1.5. ကမ္ဘာလုံးဆိုင်ရာတည်နေရာပြစနစ် (GPS)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="interpolation.html">28.1.6. သွယ်ဝိုက်တွက်ချက်ခြင်း (Interpolation)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="layertools.html">28.1.7. Layer ကိရိယာများ (Layer tools)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="mesh.html">28.1.8. ဝါယာကွန်ယက် (Mesh)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="modelertools.html">28.1.9. Modeler ကိရိယာများ (Modeler tools)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="networkanalysis.html">28.1.10. လမ်းကြောင်းကွန်ယက်ဆိုင်ရာ တွက်ချက်မှု (Network analysis)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="plots.html">28.1.11. Plot များ</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pointcloudconversion.html">28.1.12. Point Cloud ပြောင်းလဲခြင်း (Point Cloud Conversion)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pointclouddatamanagement.html">28.1.13. Point Cloud Data စီမံခန့်ခွဲခြင်း (Point Cloud Data Management)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pointcloudextraction.html">28.1.14. Point Cloud ထဲမှ ဆွဲထုတ်ခြင်း (Point Cloud Extraction)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="rasteranalysis.html">28.1.15. Raster ဖြင့်ဆန်းစစ်လေ့လာခြင်း (Raster analysis)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="rastercreation.html">28.1.16. Raster Creation</a></li>
+<li class="toctree-l4"><a class="reference internal" href="rasterterrainanalysis.html">28.1.17. Raster မြေမျက်နှာသွင်ပြင်ဆိုင်ရာ ဆန်းစစ်လေ့လာခြင်း (Raster terrain analysis)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="rastertools.html">28.1.18. Raster ကိရိယာများ (Raster tools)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="vectoranalysis.html">28.1.19. Vector ဆန်းစစ်လေ့လာခြင်း (Vector analysis)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="vectorcoverage.html">28.1.20. Vector လွှမ်းခြုံမှု (Vector coverage)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="vectorcreation.html">28.1.21. Vector ဖန်တီးခြင်း (Vector creation)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="vectorgeneral.html">28.1.22. Vector ဆိုင်ရာ အထွေထွေ (Vector general)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="vectorgeometry.html">28.1.23. Vector ဂျီဩမေတြီ (Vector geometry)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="vectoroverlay.html">28.1.24. Vector အလွှာထပ်တွက်ချက်ခြင်း (Vector overlay)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="vectorselection.html">28.1.25. Vector တွင်ရွေးချယ်ခြင်း (Vector selection)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="vectortable.html">28.1.26. Vector ဇယား (Vector table)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="vectortiles.html">28.1.27. Vector tile များ</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../gdal/index.html">28.2. GDAL algorithm ထောက်ပံ့ပေးသူ (GDAL algorithm provider)</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/index.html">29. Plugin များ</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../preamble/help_and_support.html">30. အကူအညီနှင့်အထောက်အပံ့ (Help and Support)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../preamble/contributors.html">31. ပါဝင်အားဖြည့်သူများ (Contributors)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../appendices/index.html">32. Appendices (နောက်ဆက်တွဲများ)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../literature_web/literature_and_web_references.html">33. စာတမ်းများနှင့် Website ကိုးကားချက်များ (Literature and Web References)</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../server_manual/index.html">QGIS Server Guide/Manual (QGIS 3.40)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../training_manual/index.html">Training Manual</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../gentle_gis_introduction/index.html">A Gentle Introduction to GIS</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">ရေးသားသူများအတွက်</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../documentation_guidelines/index.html">Documentation Guidelines</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Developer များအတွက်</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../pyqgis_developer_cookbook/index.html">PyQGIS Cookbook (QGIS 3.40)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../developers_guide/index.html">Developers Guide</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">QGIS Documentation</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../../index.html">QGIS အသုံးပြုသူလမ်းညွှန် (User Guide)</a></li>
+          <li class="breadcrumb-item"><a href="../index.html"><span class="section-number">28. </span>Processing ဆိုင်ရာ ထောက်ပံ့ပေးသူများနှင့် Algorithm များ (Processing providers and algorithms)</a></li>
+      <li class="breadcrumb-item active"><span class="section-number">28.1. </span>QGIS algorithm ထောက်ပံ့ပေးသူ (QGIS algorithm provider)</li>
+      <li class="wy-breadcrumbs-aside">
+              <a href="https://github.com/qgis/QGIS-Documentation/blob/master/docs/user_manual/processing_algs/qgis/index.rst" class="fa fa-github"> Edit on GitHub</a>
+      </li>
+  </ul><div class="rst-breadcrumbs-buttons" role="navigation" aria-label="Sequential page navigation">
+        <a href="../index.html" class="btn btn-neutral float-left" title="28. Processing ဆိုင်ရာ ထောက်ပံ့ပေးသူများနှင့် Algorithm များ (Processing providers and algorithms)" accesskey="p"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="3dtiles.html" class="btn btn-neutral float-right" title="28.1.1. 3D Tile များ" accesskey="n">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+  </div>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <blockquote>
+<div></div></blockquote>
+<section id="qgis-algorithm-qgis-algorithm-provider">
+<span id="qgis-algorithms"></span><h1><span class="section-number">28.1. </span>QGIS algorithm ထောက်ပံ့ပေးသူ (QGIS algorithm provider)<a class="headerlink" href="#qgis-algorithm-qgis-algorithm-provider" title="Link to this heading"></a></h1>
+<p>QGIS algorithm provider သည် များသောအားဖြင့် QGIS API ကိုသာအသုံးပြုပြီး မျိုးစုံသော လေ့လာဆန်းစစ်မှုများနှင့် ပထဝီဝင်ဆိုင်ရာလုပ်ဆောင်ချက်များကို အကောင်အထည်ဖော်ပေးပါသည်။ ထို့ကြောင့် ဤ provider မှ algorithm များအားလုံးနီးပါးသည် အခြားထပ်ဆောင်း ပြင်ဆင်သတ်မှတ်ခြင်းများမလိုအပ်ပဲ အသုံးချနိုင်စွမ်းရှိမည်ဖြစ်သည်။</p>
+<p>ဤ provider သည် plugin များမှအချို့သော algorithm များနှင့် ပူးပေါင်းလုပ်ဆောင်နိုင်ပြီး ၎င်း၏ ကိုယ်ပိုင် algorithm များကိုလည်း ပေါင်းထည့်ပါသည်။</p>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="3dtiles.html">28.1.1. 3D Tile များ</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="3dtiles.html#b3dm-gltf-convert-b3dm-to-gltf">28.1.1.1. B3DM မှ GLTF သို့ ပြောင်းလဲခြင်း (Convert B3DM to GLTF)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="3dtiles.html#gltf-vector-feature-convert-gltf-to-vector-features">28.1.1.2. GLTF မှ vector feature များသို့ ပြောင်းလဲခြင်း (Convert GLTF to vector features)</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="cartography.html">28.1.2. မြေပုံရေးဆွဲခြင်းအတတ်ပညာ (Cartography)</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="cartography.html#point-feature-align-points-to-features">28.1.2.1. Point များကို feature များနှင့်ညီအောင် ညှိခြင်း (Align points to features)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cartography.html#style-database-combine-style-databases">28.1.2.2. Style database များကိုပေါင်းခြင်း (Combine style databases)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cartography.html#style-create-categorized-renderer-from-styles">28.1.2.3. အမျိုးအစားခွဲခြားပုံဖော်ခြင်းကို Style များမှ ဖန်တီးခြင်း (Create categorized renderer from styles)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cartography.html#project-style-database-create-style-database-from-project">28.1.2.4. Project မှ style database ဖန်တီးခြင်း (Create style database from project)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cartography.html#export-atlas-layout-as-image">28.1.2.5. မြေပုံစီးရီး ကို ပုံအဖြစ်ထုတ်ခြင်း (Export atlas layout as image)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cartography.html#altas-layout-pdf-export-atlas-layout-as-pdf-multiple-files">28.1.2.6. Altas layout ကို PDF ဖိုင်များအဖြစ်ထုတ်ခြင်း (Export atlas layout as PDF (multiple files))</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cartography.html#altas-layout-pdf-export-atlas-layout-as-pdf-single-file">28.1.2.7. Altas layout ကို PDF ဖိုင်တစ်ခုအဖြစ်ထုတ်ခြင်း (Export atlas layout as PDF (single file))</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cartography.html#print-layout-export-print-layout-as-image">28.1.2.8. Print layout ကို ပုံတစ်ပုံအဖြစ်ထုတ်ယူခြင်း (Export print layout as image)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cartography.html#print-layout-pdf-export-print-layout-as-pdf">28.1.2.9. Print layout ကို PDF အဖြစ်ထုတ်ခြင်း (Export print layout as PDF)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cartography.html#extract-labels">28.1.2.10. အညွှန်းစာများထုတ်ယူခြင်း (Extract labels)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cartography.html#layout-layer-print-layout-map-extent-to-layer">28.1.2.11. Layout မြေပုံနယ်ပယ်အကျယ်အဝန်းကို layer အဖြစ်ထုတ်ခြင်း (Print layout map extent to layer)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cartography.html#layer-style-set-layer-style">28.1.2.12. Layer style သတ်မှတ်ခြင်း (Set layer style)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cartography.html#topological-coloring">28.1.2.13. ဆက်စပ်တည်ရှိမှုအရ အရောင်ခြယ်သခြင်း (Topological coloring)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cartography.html#layer-transfer-annotations-from-main-layer">28.1.2.14. အဓိက layer မှ မှတ်ချက်/မှတ်စာများကို ရွှေ့ပြောင်းခြင်း (Transfer annotations from main layer)</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="database.html">28.1.3. Database</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="database.html#postgresql-export-to-postgresql">28.1.3.1. PostgreSQL အဖြစ်ထုတ်ယူခြင်း (Export to PostgreSQL)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="database.html#spatialite-export-to-spatialite">28.1.3.2. SpatiaLite အဖြစ်ထုတ်ယူခြင်း (Export to SpatiaLite)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="database.html#package-layer">28.1.3.3. Package layer များ</a></li>
+<li class="toctree-l2"><a class="reference internal" href="database.html#postgresql-sql-postgresql-execute-and-load-sql">28.1.3.4. PostgreSQL စေခိုင်းခြင်းနှင့် SQL ကိုခေါ်ယူထည့်သွင်းခြင်း (PostgreSQL execute and load SQL)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="database.html#postgresql-sql-postgresql-execute-sql">28.1.3.5. PostgreSQL မှ SQL ကိုစေခိုင်းလုပ်ဆောင်ခြင်း (PostgreSQL execute SQL)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="database.html#spatialite-sql-spatialite-execute-sql">28.1.3.6. SpatiaLite တွင် SQL ကိုစေခိုင်းလုပ်ဆောင်ခြင်း (SpatiaLite execute SQL)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="database.html#patialite-sql-spatialite-execute-sql-registered-db">28.1.3.7. patiaLite တွင် SQL ကိုစေခိုင်းလုပ်ဆောင်ခြင်း (SpatiaLite execute SQL (registered DB))</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="filetools.html">28.1.4. File ကိရိယာများ (File tools)</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="filetools.html#http-s-download-file-via-http-s">28.1.4.1. HTTP(S) မှတဆင့် ဖိုင်ကို ဒေါင်းလုဒ် ပြုလုပ်ခြင်း (Download file via HTTP(S))</a></li>
+<li class="toctree-l2"><a class="reference internal" href="filetools.html#http-s-post-get-request">28.1.4.2. HTTP(S) POST/GET request</a></li>
+<li class="toctree-l2"><a class="reference internal" href="filetools.html#url-open-file-or-url">28.1.4.3. ဖိုင် သို့မဟုတ် URL ကိုဖွင့်ခြင်း (Open file or URL)</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="gps.html">28.1.5. ကမ္ဘာလုံးဆိုင်ရာတည်နေရာပြစနစ် (GPS)</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="gps.html#gps-data-convert-gps-data">28.1.5.1. GPS data ကိုအခြားဒေတာအဖြစ်ပြောင်းခြင်း (Convert GPS data)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="gps.html#gpx-feature-convert-gpx-feature-type">28.1.5.2. GPX feature အမျိုးအစားပြောင်းခြင်း (Convert GPX feature type)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="gps.html#gps-data-download-download-gps-data-from-device">28.1.5.3. GPS data များကို download ရယူခြင်း (Download GPS data from device)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="gps.html#gps-data-upload-gps-data-to-device">28.1.5.4. GPS ကိရိယာထဲသို့ data များထည့်ခြင်း (Upload GPS data to device)</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="interpolation.html">28.1.6. သွယ်ဝိုက်တွက်ချက်ခြင်း (Interpolation)</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="interpolation.html#heatmap-kernel-density-estimation">28.1.6.1. Heatmap (kernel density estimation)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="interpolation.html#qgisidwinterpolation">28.1.6.2. IDW နည်းဖြင့် တွက်ချက်ခြင်း (IDW Interpolation)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="interpolation.html#line-density">28.1.6.3. မျဉ်း သိပ်သည်းမှု (Line Density)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="interpolation.html#tin-tin-interpolation">28.1.6.4. TIN တွက်ချက်ဖန်တီးခြင်း (TIN Interpolation)</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="layertools.html">28.1.7. Layer ကိရိယာများ (Layer tools)</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="layertools.html#layer-export-layer-s-information">28.1.7.1. Layer များ၏အချက်အလက်များကို ထုတ်ယူခြင်း (Export layer(s) information)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="layertools.html#spreadsheet-export-to-spreadsheet">28.1.7.2. Spreadsheet အဖြစ်ထုတ်ခြင်း (Export to spreadsheet)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="layertools.html#layer-extract-layer-extent">28.1.7.3. Layer ၏ အကျယ်အဝန်းကို ထုတ်ယူခြင်း (Extract layer extent)</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="mesh.html">28.1.8. ဝါယာကွန်ယက် (Mesh)</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="mesh.html#export-contours">28.1.8.1. ကွန်တိုများထုတ်ယူခြင်း (Export contours)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="mesh.html#mesh-line-export-cross-section-dataset-values-on-lines-from-mesh">28.1.8.2. Mesh မှ line များပေါ်မှ ဖြတ်ပိုင်းပုံဒေတာများကို ထုတ်ယူခြင်း (Export cross section dataset values on lines from mesh)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="mesh.html#mesh-export-mesh-edges">28.1.8.3. Mesh အနားသတ်များကိုထုတ်ယူခြင်း (Export mesh edges)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="mesh.html#mesh-export-mesh-faces">28.1.8.4. Mesh မျက်နှာပြင်များထုတ်ယူခြင်း (Export mesh faces)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="mesh.html#grid-mesh-export-mesh-on-grid">28.1.8.5. Grid ပေါ်တွင် mesh ကိုထုတ်ယူခြင်း (Export mesh on grid)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="mesh.html#mesh-export-mesh-vertices">28.1.8.6. Mesh မျဉ်းအဆစ်များကိုထုတ်ယူခြင်း (Export mesh vertices)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="mesh.html#mesh-dataset-point-export-time-series-values-from-points-of-a-mesh-dataset">28.1.8.7. Mesh dataset တစ်ခု၏ point များမှ အချိန်တန်ဖိုးများကို ထုတ်ယူခြင်း (Export time series values from points of a mesh dataset)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="mesh.html#mesh-dataset-raster-rasterize-mesh-dataset">28.1.8.8. Mesh dataset ကို raster အဖြစ် ပြောင်းလဲခြင်း (Rasterize mesh dataset)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="mesh.html#tin-mesh-tin-mesh-creation">28.1.8.9. TIN mesh ဖန်တီးခြင်း (TIN mesh creation)</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="modelertools.html">28.1.9. Modeler ကိရိယာများ (Modeler tools)</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="modelertools.html#expression-calculate-expression">28.1.9.1. Expression တွက်ချက်ခြင်း (Calculate expression)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modelertools.html#conditional-branch">28.1.9.2. အခြေအနေအခွဲ (Conditional branch)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modelertools.html#create-directory">28.1.9.3. ဖိုင်လမ်းကြောင်းကိုဖန်တီးခြင်း (Create directory)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modelertools.html#feature-feature-filter">28.1.9.4. Feature များကိုစစ်ထုတ်ရာ (Feature filter)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modelertools.html#layer-filter-layers-by-type">28.1.9.5. Layer အမျိုးအစားဖြင့် စစ်ထုတ်ခြင်း (Filter layers by type)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modelertools.html#layer-project-load-layer-into-project">28.1.9.6. Layer ကို project ထဲသို့ထည့်သွင်းခြင်း (Load layer into project)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modelertools.html#raise-exception">28.1.9.7. ချွင်းချက်ထုတ်ခြင်း (Raise exception)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modelertools.html#raise-message">28.1.9.8. စာတိုဖော်ပြခြင်း (Raise message)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modelertools.html#raise-warning">28.1.9.9. သတိပေးချက်ဖော်ပြခြင်း (Raise warning)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modelertools.html#layer-rename-layer">28.1.9.10. Layer အမည်ပြောင်းခြင်း (Rename layer)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modelertools.html#log-file-save-log-to-file">28.1.9.11. Log ကို file အဖြစ်သိမ်းဆည်းခြင်း (Save log to file)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modelertools.html#project-set-project-variable">28.1.9.12. Project ကိန်းရှင်ကို သတ်မှတ်ခြင်း (Set project variable)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modelertools.html#string-concatenation">28.1.9.13. စာသားများချိတ်ဆက်ပေါင်းစပ်ခြင်း (String concatenation)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modelertools.html#variable-distance-buffer">28.1.9.14. အကျယ်မတူသည့် ကြားခံနယ်များ ပြုလုပ်ခြင်း (Variable distance buffer)</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="networkanalysis.html">28.1.10. လမ်းကြောင်းကွန်ယက်ဆိုင်ရာ တွက်ချက်မှု (Network analysis)</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="networkanalysis.html#layer-service-area-from-layer">28.1.10.1. ဝန်ဆောင်မှု ဧရိယာ (layer မှ) (Service area (from layer))</a></li>
+<li class="toctree-l2"><a class="reference internal" href="networkanalysis.html#point-service-area-from-point">28.1.10.2. ဝန်ဆောင်မှု ဧရိယာ (point မှ) (Service area (from point))</a></li>
+<li class="toctree-l2"><a class="reference internal" href="networkanalysis.html#layer-point-shortest-path-layer-to-point">28.1.10.3. အတိုဆုံးလမ်းကြောင်း (layer မှ point သို့) (Shortest path (layer to point))</a></li>
+<li class="toctree-l2"><a class="reference internal" href="networkanalysis.html#point-layer-shortest-path-point-to-layer">28.1.10.4. အတိုဆုံးလမ်းကြောင်း (point မှ layer သို့) (Shortest path (point to layer))</a></li>
+<li class="toctree-l2"><a class="reference internal" href="networkanalysis.html#point-point-shortest-path-point-to-point">28.1.10.5. အတိုဆုံးလမ်းကြောင်း (point မှ point သို့) (Shortest path (point to point))</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="plots.html">28.1.11. Plot များ</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="plots.html#bar-plot">28.1.11.1. ဘားဂရပ် (Bar plot)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="plots.html#box-plot">28.1.11.2. Box plot</a></li>
+<li class="toctree-l2"><a class="reference internal" href="plots.html#mean-and-standard-deviation-plot">28.1.11.3. ပျမ်းမျှ နှင့် စံသွေဖယ်မှု ပြပုံ (Mean and standard deviation plot)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="plots.html#data-plot-polar-plot">28.1.11.4. Data ကိုဖြာထွက်ဖြန့်ကျက်ပြသသော plot (Polar plot)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="plots.html#raster-layer-raster-layer-histogram">28.1.11.5. Raster layer ကြိမ်နှုန်းပြဂရပ် (Raster layer histogram)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="plots.html#vector-layer-vector-layer-histogram">28.1.11.6. Vector layer အတွက် ကြိမ်နှုန်းပြဂရပ် (Vector layer histogram)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="plots.html#vector-layer-vector-layer-scatterplot">28.1.11.7. Vector layer အတွက် ကိန်းရှင်နှစ်ခုကြားဆက်နွယ်မှုပြဂရပ် (Vector layer scatterplot)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="plots.html#vector-layer-vector-layer-scatterplot-3d">28.1.11.8. Vector layer အတွက် ကိန်းရှင်နှစ်ခုကြားဆက်နွယ်မှုပြ သုံးဘက်မြင်ဂရပ် (Vector layer scatterplot 3D)</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="pointcloudconversion.html">28.1.12. Point Cloud ပြောင်းလဲခြင်း (Point Cloud Conversion)</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="pointcloudconversion.html#format-convert-format">28.1.12.1. Format ပြောင်းလဲခြင်း (Convert format)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pointcloudconversion.html#raster-export-to-raster">28.1.12.2. Raster အဖြစ် ထုတ်ယူခြင်း (Export to raster)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pointcloudconversion.html#raster-triangulation-export-raster-using-triangulation">28.1.12.3. Raster အဖြစ်သို့ ထုတ်ယူခြင်း (Triangulation ကိုအသုံးပြု၍) (Export raster (using triangulation))</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pointcloudconversion.html#vector-export-to-vector">28.1.12.4. Vector အဖြစ်သို့ ထုတ်ယူခြင်း (Export to vector)</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="pointclouddatamanagement.html">28.1.13. Point Cloud Data စီမံခန့်ခွဲခြင်း (Point Cloud Data Management)</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="pointclouddatamanagement.html#assign-projection">28.1.13.1. အရိပ်ချစနစ်သတ်မှတ်ခြင်း (Assign projection)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pointclouddatamanagement.html#virtual-point-cloud-build-virtual-point-cloud-vpc">28.1.13.2. Virtual point cloud တည်ဆောက်ခြင်း (Build virtual point cloud (VPC))</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pointclouddatamanagement.html#clip">28.1.13.3. ဖြတ်တောက်ခြင်း (Clip)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pointclouddatamanagement.html#copc-create-copc">28.1.13.4. COPC ဖန်တီးခြင်း (Create COPC)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pointclouddatamanagement.html#information">28.1.13.5. သတင်းအချက်အလက် (Information)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pointclouddatamanagement.html#merge">28.1.13.6. ပေါင်းစည်းခြင်း (Merge)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pointclouddatamanagement.html#project-reproject">28.1.13.7. Project ပြောင်းလဲခြင်း (Reproject)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pointclouddatamanagement.html#thin-by-sampling-radius">28.1.13.8. Thin (by sampling radius)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pointclouddatamanagement.html#thin-by-skipping-points">28.1.13.9. Thin (by skipping points)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pointclouddatamanagement.html#tile">28.1.13.10. Tile</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="pointcloudextraction.html">28.1.14. Point Cloud ထဲမှ ဆွဲထုတ်ခြင်း (Point Cloud Extraction)</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="pointcloudextraction.html#boundary">28.1.14.1. နယ်နိမိတ် (Boundary)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pointcloudextraction.html#density">28.1.14.2. သိပ်သည်းမှု (Density)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pointcloudextraction.html#filter">28.1.14.3. စစ်ထုတ်ခြင်း (Filter)</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="rasteranalysis.html">28.1.15. Raster ဖြင့်ဆန်းစစ်လေ့လာခြင်း (Raster analysis)</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="rasteranalysis.html#cell-cell-stack-percent-rank-from-value">28.1.15.1. တန်ဖိုးအရထပ်နေသည့် cell များ၏တန်ဖိုးများအတွင်း ကျသည့် အဆင့်ရာခိုင်နှုန်း (Cell stack percent rank from value)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="rasteranalysis.html#cell-cell-stack-percentile">28.1.15.2. ထပ်နေသည့် Cell များ၏ ရာခိုင်နှုန်းအစု (Cell stack percentile)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="rasteranalysis.html#raster-layer-cell-cell-stack-percentrank-from-raster-layer">28.1.15.3. Raster layer အရ ထပ်နေသည့် cell များ၏တန်ဖိုးများအတွင်းကျသည့် အဆင့်ရာခိုင်နှုန်း (Cell stack percentrank from raster layer)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="rasteranalysis.html#cell-cell-statistics">28.1.15.4. Cell တန်ဖိုးများ၏ ကိန်းဂဏန်းအချက်အလက်များ (Cell statistics)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="rasteranalysis.html#equal-to-frequency">28.1.15.5. ကြိမ်နှုန်းနှင့်အညီ (Equal to frequency)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="rasteranalysis.html#fuzzify-raster-gaussian-membership">28.1.15.6. Fuzzify raster (gaussian membership)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="rasteranalysis.html#fuzzify-raster-large-membership">28.1.15.7. Fuzzify raster (large membership)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="rasteranalysis.html#fuzzify-raster-linear-membership">28.1.15.8. Fuzzify raster (linear membership)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="rasteranalysis.html#fuzzify-raster-near-membership">28.1.15.9. Fuzzify raster (near membership)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="rasteranalysis.html#fuzzify-raster-power-membership">28.1.15.10. Fuzzify raster (power membership)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="rasteranalysis.html#fuzzify-raster-small-membership">28.1.15.11. Fuzzify raster (small membership)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="rasteranalysis.html#greater-than-frequency">28.1.15.12. ကြိမ်နှုန်းထက် ပိုကြီးသော (Greater than frequency)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="rasteranalysis.html#raster-cell-highest-position-in-raster-stack">28.1.15.13. Raster cell အထပ်ထဲရှိ အကြီးဆုံးတန်ဖိုးရှိရာအလွှာ၏နေရာ (Highest position in raster stack)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="rasteranalysis.html#less-than-frequency">28.1.15.14. ကြိမ်နှုန်းထက် ပိုနည်းသော (Less than frequency)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="rasteranalysis.html#raster-cell-lowest-position-in-raster-stack">28.1.15.15. Raster cell အထပ်ထဲရှိ အနိမ့်ဆုံးတန်ဖိုးရှိရာအလွှာ၏နေရာ (Lowest position in raster stack)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="rasteranalysis.html#raster-boolean-and">28.1.15.16. Raster boolean AND</a></li>
+<li class="toctree-l2"><a class="reference internal" href="rasteranalysis.html#raster-boolean-or">28.1.15.17. Raster boolean OR</a></li>
+<li class="toctree-l2"><a class="reference internal" href="rasteranalysis.html#raster-raster-calculator">28.1.15.18. Raster တွက်စက် (Raster calculator)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="rasteranalysis.html#raster-calculator-virtual">28.1.15.19. Raster calculator (virtual)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="rasteranalysis.html#raster-layer-raster-layer-properties">28.1.15.20. Raster layer ဂုဏ်သတ္တိများ (Raster layer properties)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="rasteranalysis.html#raster-layer-raster-layer-statistics">28.1.15.21. Raster layer ဆိုင်ရာ စာရင်းအင်းအချက်အလက်များ (Raster layer statistics)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="rasteranalysis.html#raster-layer-raster-layer-unique-values-report">28.1.15.22. Raster layer ထဲရှိ ထပ်တူမရှိတန်ဖိုးများ အစီရင်ခံစာ (Raster layer unique values report)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="rasteranalysis.html#raster-layer-raster-layer-zonal-statistics">28.1.15.23. Raster layer ၏ နယ်ခွဲများအလိုက် အနှစ်ချုပ်အချက်အလက်များ (Raster layer zonal statistics)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="rasteranalysis.html#raster-raster-surface-volume">28.1.15.24. Raster မျက်နှာပြင်အောက်ရှိ ထုထည်တွက်ခြင်း (Raster surface volume)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="rasteranalysis.html#layer-reclassify-by-layer">28.1.15.25. Layer ဖြင့် အတန်းအစားပြန်လည်ခွဲခြားခြင်း (Reclassify by layer)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="rasteranalysis.html#reclassify-by-table">28.1.15.26. ဇယားဖြင့် အတန်းအစားပြန်လည်ခွဲခြားခြင်း (Reclassify by table)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="rasteranalysis.html#raster-rescale-raster">28.1.15.27. Raster စကေးပြန်လည်ချိန်ညှိခြင်း (Rescale raster)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="rasteranalysis.html#raster-round-raster">28.1.15.28. Raster တန်ဖိုးများကို လုံးခြင်း (Round raster)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="rasteranalysis.html#raster-sample-raster-values">28.1.15.29. Raster တန်ဖိုးများကို နူမူနာကောက်ယူခြင်း (Sample raster values)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="rasteranalysis.html#zonal-histogram">28.1.15.30. ဇုံ ဟစ်စတိုဂရမ်/ကြိမ်နှုန်းပြဂရပ် (Zonal histogram)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="rasteranalysis.html#zonal-statistics">28.1.15.31. ဇုံ စာရင်းအင်းအချက်အလက်များ (Zonal statistics)</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="rastercreation.html">28.1.16. Raster Creation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="rastercreation.html#raster-layer-create-constant-raster-layer">28.1.16.1. ပုံသေ raster layer ဖန်တီးခြင်း (Create constant raster layer)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="rastercreation.html#raster-layer-binomial-distribution">28.1.16.2. ကျပန်း raster layer ဖန်တီးခြင်း (binomial distribution နည်း)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="rastercreation.html#raster-layer-exponential-distribution">28.1.16.3. ကျပန်း raster layer ဖန်တီးခြင်း (exponential distribution နည်း)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="rastercreation.html#raster-layer-gamma-distribution">28.1.16.4. ကျပန်း raster layer ဖန်တီးခြင်း (gamma distribution နည်း)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="rastercreation.html#raster-layer-geometric-distribution">28.1.16.5. ကျပန်း raster layer ဖန်တီးခြင်း (geometric distribution နည်း)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="rastercreation.html#raster-layer-negative-binomial-distribution">28.1.16.6. ကျပန်း raster layer ဖန်တီးခြင်း (negative binomial distribution နည်း)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="rastercreation.html#raster-layer-normal-distribution">28.1.16.7. ကျပန်း raster layer ဖန်တီးခြင်း (normal distribution နည်း)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="rastercreation.html#raster-layer-poisson-distribution">28.1.16.8. ကျပန်း raster layer ဖန်တီးခြင်း (poisson distribution နည်း)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="rastercreation.html#raster-layer-uniform-distribution">28.1.16.9. ကျပန်း raster layer ဖန်တီးခြင်း (uniform distribution နည်း)</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="rasterterrainanalysis.html">28.1.17. Raster မြေမျက်နှာသွင်ပြင်ဆိုင်ရာ ဆန်းစစ်လေ့လာခြင်း (Raster terrain analysis)</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="rasterterrainanalysis.html#aspect">28.1.17.1. မျက်နှာမူရာအရပ် (Aspect)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="rasterterrainanalysis.html#dtm-filter-slope-based">28.1.17.2. DTM filter (slope-based)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="rasterterrainanalysis.html#hillshade">28.1.17.3. တောင်အရိပ် (Hillshade)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="rasterterrainanalysis.html#hypsometric-curves">28.1.17.4. အမြင့် နှင့် ဧရိယာဆက်သွယ်မှုကို ပြသသော အချက်အလက်များ (Hypsometric curves)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="rasterterrainanalysis.html#relief">28.1.17.5. အနိမ့်အမြင့်ထင်ရှားမှု (Relief)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="rasterterrainanalysis.html#ruggedness-index">28.1.17.6. မြေမျက်နှာပြင်မညီညာမှုပြ အညွှန်းကိန်း (Ruggedness index)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="rasterterrainanalysis.html#slope">28.1.17.7. လျှောစောက် (Slope)</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="rastertools.html">28.1.18. Raster ကိရိယာများ (Raster tools)</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="rastertools.html#raster-align-raster">28.1.18.1. Raster တန်းညှိခြင်း (Align raster)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="rastertools.html#raster-align-rasters">28.1.18.2. Raster များ တန်းညှိခြင်း (Align rasters)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="rastertools.html#raster-convert-map-to-raster">28.1.18.3. မြေပုံအား raster သို့ ပြောင်းလဲခြင်း (Convert map to raster)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="rastertools.html#nodata-cell-fill-nodata-cells">28.1.18.4. NoData cell များတွင် ထည့်သွင်းခြင်း (Fill NoData cells)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="rastertools.html#xyz-tile-directory">28.1.18.5. XYZ tile များဖန်တီးခြင်း (Directory ပုံစံ)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="rastertools.html#xyz-tile-mbtiles">28.1.18.6. XYZ tile များဖန်တီးခြင်း (MBTiles ပုံစံ)</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="vectoranalysis.html">28.1.19. Vector ဆန်းစစ်လေ့လာခြင်း (Vector analysis)</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="vectoranalysis.html#field-basic-statistics-for-fields">28.1.19.1. Field များအတွက် အခြေခံ ကိန်းဂဏန်းအချက်အလက်များ (Basic statistics for fields)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vectoranalysis.html#climb-along-line">28.1.19.2. မျဉ်းတစ်လျှောက် အမြင့်ပြောင်းလဲမှုများ တွက်ချက်ခြင်း (Climb along line)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vectoranalysis.html#polygon-point-count-points-in-polygon">28.1.19.3. Polygon အတွင်းရှိ point များကိုရေတွက်ခြင်း (Count points in polygon)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vectoranalysis.html#dbscan-dbscan-clustering">28.1.19.4. DBSCAN ဖြင့်စုဖွဲ့ခြင်း (DBSCAN clustering)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vectoranalysis.html#distance-matrix">28.1.19.5. အကွာအဝေး မက်ထရစ် (Distance matrix)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vectoranalysis.html#distance-to-nearest-hub-line-to-hub">28.1.19.6. ဗဟိုချက် သို့အကွာအဝေး (မျဉ်းမှ ဗဟိုချက် ဆီသို့) (Distance to nearest hub (line to hub))</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vectoranalysis.html#distance-to-nearest-hub-points">28.1.19.7. ဗဟိုချက် သို့အကွာအဝေး (အမှတ်များ) (Distance to nearest hub (points))</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vectoranalysis.html#join-by-lines-hub-lines">28.1.19.8. မျဉ်းများဖြင့်ဆက်ခြင်း (ဗဟိုချက်မျဉ်းများ) (Join by lines (hub lines))</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vectoranalysis.html#k-means-k-means-clustering">28.1.19.9. K-means နည်းလမ်းဖြင့် စုဖွဲ့ခြင်း (K-means clustering)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vectoranalysis.html#list-unique-values">28.1.19.10. သီးခြားကွဲပြားနေသောတန်ဖိုးများကို စာရင်းပြုစုခြင်း (List unique values)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vectoranalysis.html#mean-coordinate-s">28.1.19.11. ပျမ်းမျှ ကိုဩဒိနိတ် (Mean coordinate(s))</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vectoranalysis.html#nearest-neighbour-analysis">28.1.19.12. အနီးဆုံးအရာကို လေ့လာဆန်းစစ်မှု (Nearest neighbour analysis)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vectoranalysis.html#overlap-analysis">28.1.19.13. ထပ်နေမှုကို ဆန်းစစ်ခြင်း (Overlap analysis)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vectoranalysis.html#feature-shortest-line-between-features">28.1.19.14. Feature များအကြားရှိ အတိုဆုံးမျဉ်း (Shortest line between features)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vectoranalysis.html#st-dbscan-st-dbscan-clustering">28.1.19.15. ST-DBSCAN ဖြင့်စုဖွဲ့ခြင်း (ST-DBSCAN clustering)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vectoranalysis.html#statistics-by-categories">28.1.19.16. အမျိုးအစားဆိုင်ရာ ကိန်းဂဏန်းအချက်အလက်များ (Statistics by categories)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vectoranalysis.html#sum-line-lengths">28.1.19.17. မျဉ်းအလျားများပေါင်းခြင်း (Sum line lengths)</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="vectorcoverage.html">28.1.20. Vector လွှမ်းခြုံမှု (Vector coverage)</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="vectorcoverage.html#dissolve-dissolve-coverage">28.1.20.1. လွှမ်းခြုံမှုကို Dissolve လုပ်ခြင်း (Dissolve coverage)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vectorcoverage.html#simplify-coverage">28.1.20.2. လွှမ်းခြုံမှုကို ပေါ့ပါးရိုးရှင်းအောင်လုပ်ခြင်း (Simplify coverage)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vectorcoverage.html#coverage-validate-coverage">28.1.20.3. Coverage ကို အတည်ပြုခြင်း (Validate coverage)</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="vectorcreation.html">28.1.21. Vector ဖန်တီးခြင်း (Vector creation)</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="vectorcreation.html#array-of-offset-parallel-lines">28.1.21.1. အပြိုင်မျဉ်းများ Array of offset (parallel) lines</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vectorcreation.html#feature-array-of-translated-features">28.1.21.2. Feature များပွားဖြင်း (Array of translated features)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vectorcreation.html#grid-create-grid">28.1.21.3. Grid ဖန်တီးခြင်း (Create grid)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vectorcreation.html#point-layer-create-points-layer-from-table">28.1.21.4. ဇယားကို point layer အဖြစ်ဖန်တီးခြင်း (Create points layer from table)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vectorcreation.html#pixel-point-generate-points-pixel-centroids-along-line">28.1.21.5. မျဉ်းတစ်ခုဖြစ်သွားသည့် pixel များ၏အလယ်မှတ်များကို point များအဖြစ်ဖန်တီးခြင်း (Generate points (pixel centroids) along line)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vectorcreation.html#polygon-pixel-point-generate-points-pixel-centroids-inside-polygon">28.1.21.6. Polygon တစ်ခုအတွင်း ကျရောက်သည့် pixel များ၏အလယ်မှတ်များကို point များအဖြစ် ဖန်တီးခြင်း (Generate points (pixel centroids) inside polygon)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vectorcreation.html#import-geotagged-photos">28.1.21.7. တည်နေရာအချက်အလက်များပါဝင်သည့် ဓာတ်ပုံများကို ထည့်သွင်းခြင်း (Import geotagged photos)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vectorcreation.html#point-points-to-path">28.1.21.8. Point များမှ လိုင်းအဖြစ်သို့ (Points to path)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vectorcreation.html#point-random-points-along-line">28.1.21.9. မျဉ်းတစ်လျှောက်တွင် ကျပန်း point များဖန်တီးခြင်း (Random points along line)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vectorcreation.html#point-random-points-in-extent">28.1.21.10. မြေပုံနယ်ပယ်အတွင်း ကျပန်း point များဖန်တီးခြင်း (Random points in extent)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vectorcreation.html#layer-point-random-points-in-layer-bounds">28.1.21.11. Layer နယ်နိမိတ်အတွင်း ကျပန်း point များဖန်တီးခြင်း (Random points in layer bounds)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vectorcreation.html#polygon-point-random-points-in-polygons">28.1.21.12. Polygon များအတွင်း ကျပန်း point များဖန်တီးခြင်း (Random points in polygons)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vectorcreation.html#polygon-point-random-points-inside-polygons">28.1.21.13. Polygon များအတွင်း ကျပန်း point များဖန်တီးခြင်း (Random points inside polygons)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vectorcreation.html#line-point-random-points-on-lines">28.1.21.14. Line များပေါ်တွင် ကျပန်း point များဖန်တီးခြင်း (Random points on lines)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vectorcreation.html#raster-pixel-point-raster-pixels-to-points">28.1.21.15. Raster pixel များမှ point များသို့ ပြောင်းခြင်း (Raster pixels to points)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vectorcreation.html#raster-pixel-polygon-raster-pixels-to-polygons">28.1.21.16. Raster pixel များမှ polygon များသို့ ပြောင်းခြင်း (Raster pixels to polygons)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vectorcreation.html#regular-points">28.1.21.17. အကွာအဝေးညီ အမှတ်များ (Regular points)</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="vectorgeneral.html">28.1.22. Vector ဆိုင်ရာ အထွေထွေ (Vector general)</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="vectorgeneral.html#assign-projection">28.1.22.1. မြေပုံအရိပ်ချစနစ် သတ်မှတ်ခြင်း (Assign projection)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vectorgeneral.html#nominatim-geocoder-batch-nominatim-geocoder">28.1.22.2. လိပ်စာအစုလိုက်ကို တည်နေရာရှာပေးသည့် Nominatim geocoder (Batch Nominatim geocoder)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vectorgeneral.html#layer-spatial-bookmark-convert-layer-to-spatial-bookmarks">28.1.22.3. Layer ကို spatial bookmark များအဖြစ်ပြောင်းခြင်း (Convert layer to spatial bookmarks)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vectorgeneral.html#spatial-bookmark-layer-convert-spatial-bookmarks-to-layer">28.1.22.4. Spatial bookmark များကို layer အဖြစ် ပြောင်းလဲခြင်း (Convert spatial bookmarks to layer)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vectorgeneral.html#attribute-create-attribute-index">28.1.22.5. Attribute အညွှန်းစနစ်ဖန်တီးခြင်း (Create attribute index)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vectorgeneral.html#create-spatial-index">28.1.22.6. တည်နေရာဆိုင်ရာ အညွှန်းစနစ်ဖန်တီးခြင်း (Create spatial index)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vectorgeneral.html#shapefile-projection-define-shapefile-projection">28.1.22.7. Shapefile ၏ projection သတ်မှတ်ခြင်း (Define Shapefile projection)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vectorgeneral.html#delete-duplicate-geometries">28.1.22.8. ပုံတူဖြစ်ထပ်နေသော ဂျီဩမေတြီများကို ဖျက်ပေးခြင်း (Delete duplicate geometries)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vectorgeneral.html#attribute-delete-duplicates-by-attribute">28.1.22.9. Attribute တူနေသောအရာများကို ဖျက်ပေးခြင်း (Delete duplicates by attribute)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vectorgeneral.html#dataset-detect-dataset-changes">28.1.22.10. Dataset အပြောင်းအလဲများကို ရှာဖွေဖော်ထုတ်ခြင်း (Detect dataset changes)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vectorgeneral.html#drop-geometries">28.1.22.11. ဂျီဩမေတြီများ ချန်ထားခြင်း (Drop geometries)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vectorgeneral.html#sql-execute-sql">28.1.22.12. SQL လုပ်ဆောင်ခြင်း (Execute SQL)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vectorgeneral.html#layer-dxf-export-layers-to-dxf">28.1.22.13. Layer များကို DXF ဖိုင်အဖြစ် ထုတ်ယူခြင်း (Export layers to DXF)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vectorgeneral.html#feature-extract-selected-features">28.1.22.14. ရွေးချယ်ထားသော feature များကို ထုတ်ယူခြင်း (Extract selected features)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vectorgeneral.html#shapefile-encoding-extract-shapefile-encoding">28.1.22.15. Shapefile encoding ကို ထုတ်ယူခြင်း (Extract Shapefile encoding)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vectorgeneral.html#projection-find-projection">28.1.22.16. Projection ရှာဖွေခြင်း (Find projection)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vectorgeneral.html#flatten-relationship">28.1.22.17. ဆက်စပ်အချက်များကိုပေါင်းဝင်စေခြင်း (Flatten relationship)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vectorgeneral.html#field-attribute-join-attributes-by-field-value">28.1.22.18. Field တန်ဖိုးဖြင့် attribute များကို ချိတ်ဆက်ခြင်း (Join attributes by field value)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vectorgeneral.html#attribute-join-attributes-by-location">28.1.22.19. တည်နေရာအရ attribute များကို ချိတ်ဆက်ခြင်း (Join attributes by location)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vectorgeneral.html#attribute-join-attributes-by-location-summary">28.1.22.20. တည်နေရာအားဖြင့် attribute များကိုချိတ်ဆက်ခြင်း (အကျဉ်းချုပ်) (Join attributes by location (summary))</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vectorgeneral.html#attribute-join-attributes-by-nearest">28.1.22.21. နီးစပ်မှုဖြင့် attribute များကိုချိတ်ဆက်ခြင်း (Join attributes by nearest)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vectorgeneral.html#vector-layer-merge-vector-layers">28.1.22.22. Vector layer များကိုပေါင်းခြင်း (Merge vector layers)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vectorgeneral.html#expression-order-by-expression">28.1.22.23. Expression ဖြင့်အထက်အောက် စီခြင်း (Order by expression)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vectorgeneral.html#shapefile-repair-shapefile">28.1.22.24. Shapefile အပျက်အား ပြန်လည်ပြုပြင်ခြင်း (Repair Shapefile)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vectorgeneral.html#layer-projection-reproject-layer">28.1.22.25. Layer ကို projection ပြောင်းခြင်း (Reproject layer)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vectorgeneral.html#vector-feature-file-save-vector-features-to-file">28.1.22.26. Vector feature များကို File အဖြစ်သိမ်းဆည်းခြင်း (Save vector features to file)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vectorgeneral.html#layer-encoding-set-layer-encoding">28.1.22.27. Layer encoding ကိုသတ်မှတ်ခြင်း (Set layer encoding)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vectorgeneral.html#feature-split-features-by-character">28.1.22.28. သတ်မှတ်စာလုံးတစ်ခုဖြင့် feature များကို ပိုင်းခြားခြင်း (Split features by character)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vectorgeneral.html#vector-layer-split-vector-layer">28.1.22.29. Vector layer တွင် ပိုင်းခြားခြင်း (Split vector layer)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vectorgeneral.html#truncate-table">28.1.22.30. အလွှာတစ်ခုကိုရှင်းလင်းခြင်း (Truncate table)</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="vectorgeometry.html">28.1.23. Vector ဂျီဩမေတြီ (Vector geometry)</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="vectorgeometry.html#add-geometry-attributes">28.1.23.1. ဂျီဩမေတြီ အချက်အလက်များ ထည့်ခြင်း (Add geometry attributes)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vectorgeometry.html#affine-transform">28.1.23.2. ပုံမပျက်အသွင်ပြောင်းခြင်း (Affine transform)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vectorgeometry.html#aggregate">28.1.23.3. တူရာတူရာစုဖွဲ့ခြင်း (Aggregate)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vectorgeometry.html#boundary">28.1.23.4. နယ်နိမိတ် (Boundary)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vectorgeometry.html#bounding-boxes">28.1.23.5. လေးမျက်နှာအကျယ်အဝန်းနယ်များ (Bounding boxes)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vectorgeometry.html#buffer">28.1.23.6. ကြားခံဇုံ (Buffer)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vectorgeometry.html#centroids">28.1.23.7. အလယ်/ဗဟိုမှတ်များ (Centroids)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vectorgeometry.html#check-validity">28.1.23.8. အရည်အသွေးစစ်ဆေးခြင်း (Check validity)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vectorgeometry.html#collect-geometries">28.1.23.9. ဂျီဩမေတြီ များစုစည်းခြင်း (Collect geometries)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vectorgeometry.html#concave-hull">28.1.23.10. Concave hull</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vectorgeometry.html#convert-geometry-type">28.1.23.11. ဂျီဩမေတြီ အမျိုးအစားပြောင်းလဲခြင်း (Convert geometry type)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vectorgeometry.html#convert-to-curved-geometries">28.1.23.12. အကွေးဂျီဩမေတြီ များအဖြစ် ပြောင်းလဲခြင်း (Convert to curved geometries)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vectorgeometry.html#convex-hull">28.1.23.13. Convex hull</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vectorgeometry.html#layer-create-layer-from-extent">28.1.23.14. နယ်ပယ်အကျယ်အဝန်းကို layer အဖြစ်ဖန်တီးခြင်း (Create layer from extent)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vectorgeometry.html#point-layer-create-layer-from-point">28.1.23.15. Point မှ layer ဖန်တီးခြင်း (Create layer from point)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vectorgeometry.html#buffer-create-wedge-buffers">28.1.23.16. သပ်ပုံစံ buffer များ ဖန်တီးခြင်း (Create wedge buffers)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vectorgeometry.html#delaunay-delaunay-triangulation">28.1.23.17. Delaunay တြိဂံဖွဲ့ခြင်း (Delaunay triangulation)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vectorgeometry.html#delete-holes">28.1.23.18. အပေါက်များကို ဖျက်ခြင်း (Delete holes)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vectorgeometry.html#densify-by-count">28.1.23.19. အရေအတွက်များများထည့်ခြင်း (Densify by count)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vectorgeometry.html#densify-by-interval">28.1.23.20. ကြားအကွာအဝေးတိုင်းတွင်ထည့်ခြင်း (Densify by interval)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vectorgeometry.html#dissolve">28.1.23.21. ပေါင်းစည်းခြင်း (Dissolve)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vectorgeometry.html#drape-raster-z-drape-set-z-value-from-raster">28.1.23.22. Drape (Raster မှ အမြင့် Z တန်ဖိုးကိုသတ်မှတ်ခြင်း) (Drape (set Z value from raster)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vectorgeometry.html#m-z-drop-m-z-values">28.1.23.23. M/Z တန်ဖိုးများကို ချန်ထားခြင်း (Drop M/Z values)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vectorgeometry.html#polygon-eliminate-selected-polygons">28.1.23.24. ရွေးထားသော polygon များကို ဖယ်ရှားခြင်း (Eliminate selected polygons)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vectorgeometry.html#line-explode-lines">28.1.23.25. Line များကို အပိုင်းပိုင်း ခွဲထုတ်ခြင်း (Explode lines)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vectorgeometry.html#line-extend-lines">28.1.23.26. Line များကို ဆန့်ထုတ်ခြင်း (Extend lines)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vectorgeometry.html#m-extract-m-values">28.1.23.27. M တန်ဖိုးများ ထုတ်ယူခြင်း (Extract M values)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vectorgeometry.html#vertex-extract-specific-vertices">28.1.23.28. အလိုရှိရာ vertex များကို ထုတ်ယူခြင်း (Extract specific vertices)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vectorgeometry.html#vertex-extract-vertices">28.1.23.29. Vertex များကို ထုတ်ယူခြင်း (Extract vertices)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vectorgeometry.html#z-extract-z-values">28.1.23.30. အမြင့် Z တန်ဖိုးများကိုထုတ်ယူခြင်း (Extract Z values)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vectorgeometry.html#vertex-m-filter-vertices-by-m-value">28.1.23.31. Vertex များကို M တန်ဖိုးဖြင့် စစ်ထုတ်ခြင်း (Filter vertices by M value)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vectorgeometry.html#vertex-z-filter-vertices-by-z-value">28.1.23.32. Vertex များကို အမြင့် Z တန်ဖိုးဖြင့် စစ်ထုတ်ခြင်း (Filter vertices by Z value)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vectorgeometry.html#fix-geometries">28.1.23.33. ဂျီဩမေတြီများကိုပြင်ခြင်း (Fix geometries)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vectorgeometry.html#right-hand-rule-force-right-hand-rule">28.1.23.34. Right-hand-rule ကိုတွန်းအားပေးလုပ်ဆောင်ခြင်း (Force right-hand-rule)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vectorgeometry.html#meridian-geodesic-line-geodesic-line-split-at-antimeridian">28.1.23.35. Meridian မျဉ်း၏ ဆန့်ကျင်ဘက်အရပ်တွင် ပြတ်နေသော geodesic line (Geodesic line split at antimeridian)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vectorgeometry.html#expression-geometry-by-expression">28.1.23.36. Expression ဖြင့် ဂျီဩမေတြီပြုလုပ်ခြင်း (Geometry by expression)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vectorgeometry.html#interpolate-point-on-line">28.1.23.37. မျဉ်းပေါ်တွင်အမှတ်များကိုတွက်ချက်နေရာချထားခြင်း (Interpolate point on line)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vectorgeometry.html#n-keep-n-biggest-parts">28.1.23.38. N အကြီးဆုံး အစိတ်အပိုင်းများကို ဆက်လက်ထားရှိခြင်း (Keep N biggest parts)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vectorgeometry.html#line-line-substring">28.1.23.39. Line တစ်စိတ်တစ်ပိုင်း (Line substring)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vectorgeometry.html#line-polygon-lines-to-polygons">28.1.23.40. Line များမှ polygon များသို့ ပြောင်းခြင်း (Lines to polygons)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vectorgeometry.html#line-merge-lines">28.1.23.41. Line များကိုပေါင်းခြင်း (Merge lines)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vectorgeometry.html#minimum-bounding-geometry">28.1.23.42. အသေးဆုံး ဘောင်ခတ်ဂျီဩမေတြီ (Minimum bounding geometry)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vectorgeometry.html#minimum-enclosing-circles">28.1.23.43. အသေးဆုံး ဘောင်ခတ်စက်ဝိုင်းများ (Minimum enclosing circles)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vectorgeometry.html#multi-ring-buffer-constant-distance">28.1.23.44. ဇုံများစွာ ပါဝင်သော ကြားခံနယ် (ပုံသေအကွာအဝေးဖြင့်) (Multi-ring buffer (constant distance))</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vectorgeometry.html#multipart-to-singleparts">28.1.23.45. အစိတ်အပိုင်းအများမှတစ်ခုတည်းသို့ပြောင်းခြင်း (Multipart to singleparts)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vectorgeometry.html#offset-lines">28.1.23.46. အပြိုင်မျဉ်းများ (Offset lines)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vectorgeometry.html#box-oriented-minimum-bounding-box">28.1.23.47. အလိုက်သင့်လှည့်အသေးဆုံးဘောင် box (Oriented minimum bounding box)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vectorgeometry.html#orthogonalize">28.1.23.48. ထောင့်မှန်များဖြစ်အောင်ပြုလုပ်ခြင်း (Orthogonalize)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vectorgeometry.html#point-on-surface">28.1.23.49. မျက်နှာပြင်ပေါ်ရှိအမှတ် (Point on Surface)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vectorgeometry.html#point-points-along-geometry">28.1.23.50. ဂျီဩမေတြီ တစ်လျှောက်ရှိ point များ (Points along geometry)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vectorgeometry.html#point-points-displacement">28.1.23.51. Point များအရွေ့ (Points displacement)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vectorgeometry.html#pole-of-inaccessibility">28.1.23.52. မရောက်နိုင်သော ဝင်ရိုး (Pole of inaccessibility)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vectorgeometry.html#polygon-polygonize">28.1.23.53. Polygon အဖြစ်ပြောင်းလဲခြင်း (Polygonize)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vectorgeometry.html#polygon-line-polygons-to-lines">28.1.23.54. Polygon များမှ line များသို့ (Polygons to lines)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vectorgeometry.html#point-project-points-cartesian">28.1.23.55. Point နေရာချဖန်တီးခြင်း (Project points (Cartesian))</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vectorgeometry.html#promote-to-multipart">28.1.23.56. အစိတ်အပိုင်းများအဖြစ် ပြောင်းလဲခြင်း (Promote to multipart)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vectorgeometry.html#rectangles-ovals-diamonds">28.1.23.57. ထောင့်မှန်စတုဂံများ၊ ဘဲဉပုံများ၊ ဆနွင်းမကင်းပုံများ (Rectangles, ovals, diamonds)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vectorgeometry.html#remove-duplicate-vertices">28.1.23.58. ထပ်နေသော အဆစ်ထောင့်များကို ဖယ်ရှားခြင်း (Remove duplicate vertices)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vectorgeometry.html#remove-null-geometries">28.1.23.59. အကောင်အထည့်မဲ့ဂျီဩမေတြီများကိုဖယ်ရှားခြင်း (Remove null geometries)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vectorgeometry.html#line-reverse-line-direction">28.1.23.60. Line ဦးတည်ရာကိုပြောင်းပြန်လှည့်ခြင်း (Reverse line direction)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vectorgeometry.html#rotate">28.1.23.61. လှည့်ခြင်း (Rotate)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vectorgeometry.html#roundness">28.1.23.62. လုံးဝန်းမှု (Roundness)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vectorgeometry.html#segmentize-by-maximum-angle">28.1.23.63. အကြီးဆုံးထောင့်ဖြင့် မျဉ်းပိုင်းများဖန်တီးခြင်း (Segmentize by maximum angle)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vectorgeometry.html#segmentize-by-maximum-distance">28.1.23.64. အကြီးဆုံးအကွာအဝေးဖြင့် မျဉ်းပိုင်းများဖန်တီးခြင်း (Segmentize by maximum distance)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vectorgeometry.html#m-set-m-value">28.1.23.65. M တန်ဖိုးကို သတ်မှတ်ခြင်း (Set M value)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vectorgeometry.html#m-raster-set-m-value-from-raster">28.1.23.66. M တန်ဖိုး ကို Raster မှရယူသတ်မှတ်ခြင်း (Set M value from raster)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vectorgeometry.html#z-set-z-value">28.1.23.67. Z တန်ဖိုးကို သတ်မှတ်ခြင်း (Set Z value)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vectorgeometry.html#simplify">28.1.23.68. ပေါ့ပါးအောင်ပြုလုပ်ခြင်း (Simplify)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vectorgeometry.html#single-sided-buffer">28.1.23.69. တစ်ဖက်ရပ် ကြားခံဇုံ (Single sided buffer)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vectorgeometry.html#smooth">28.1.23.70. ချောမွေ့စေခြင်း (Smooth)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vectorgeometry.html#layer-snap-geometries-to-layer">28.1.23.71. ဂျီဩမေတြီများကို layer သို့ဆွဲကပ်ခြင်း (Snap geometries to layer)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vectorgeometry.html#point-grid-snap-points-to-grid">28.1.23.72. Point များကို grid သို့ဆွဲကပ်ခြင်း (Snap points to grid)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vectorgeometry.html#line-split-lines-by-maximum-length">28.1.23.73. အရှည်ဆုံးအလျားဖြင့် line များကိုခွဲထုတ်ခြင်း (Split lines by maximum length)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vectorgeometry.html#subdivide">28.1.23.74. Subdivide (ထပ်ဆင့်ပိုင်းခြားခြင်း)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vectorgeometry.html#x-y-swap-x-and-y-coordinates">28.1.23.75. X နှင့် Y ကိုဩဒိနိတ်များကို နေရာဖလှယ်ခြင်း (Swap X and Y coordinates)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vectorgeometry.html#tapered-buffers">28.1.23.76. အဖျားရှူးကြားခံဇုံများ (Tapered buffers)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vectorgeometry.html#tessellate">28.1.23.77. ပုစစ်ကွက်များဖန်တီးခြင်း (Tessellate)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vectorgeometry.html#transect">28.1.23.78. Transect လိုင်း</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vectorgeometry.html#translate">28.1.23.79. နေရာရွှေ့ခြင်း (Translate)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vectorgeometry.html#m-value-variable-width-buffer-by-m-value">28.1.23.80. M value သုံးပြီး ကြားခံနယ်များ ပြုလုပ်ခြင်း (Variable width buffer (by M value))</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vectorgeometry.html#voronoi-polygon">28.1.23.81. Voronoi polygon များ</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="vectoroverlay.html">28.1.24. Vector အလွှာထပ်တွက်ချက်ခြင်း (Vector overlay)</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="vectoroverlay.html#clip">28.1.24.1. ဖြတ်တောက်ခြင်း (Clip)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vectoroverlay.html#difference">28.1.24.2. ခြားနားချက် (Difference)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vectoroverlay.html#difference-multiple">28.1.24.3. ခြားနားချက် (အများ) (Difference(multiple))</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vectoroverlay.html#extract-clip-by-extent">28.1.24.4. နယ်ပယ်အကျယ်အဝန်းဖြင့် ထုတ်ယူ/ဖြတ်တောက်ခြင်း (Extract/clip by extent)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vectoroverlay.html#intersection">28.1.24.5. ထိဖြတ်ခြင်း (Intersection)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vectoroverlay.html#intersection-multiple">28.1.24.6. ထိဖြတ်ခြင်းများ (Intersection(multiple))</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vectoroverlay.html#line-intersections">28.1.24.7. မျဉ်း ထိဖြတ်ခြင်းများ (Line intersections)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vectoroverlay.html#split-with-lines">28.1.24.8. မျဉ်းများဖြင့် ပိုင်းခြားခြင်း (Split with lines)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vectoroverlay.html#symmetrical-difference">28.1.24.9. အချိုးညီ ခြားနားမှု (Symmetrical difference)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vectoroverlay.html#union">28.1.24.10. စုပေါင်းခြင်း (Union)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vectoroverlay.html#union-multiple">28.1.24.11. စုပေါင်းခြင်း (အများ) (Union (multiple))</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="vectorselection.html">28.1.25. Vector တွင်ရွေးချယ်ခြင်း (Vector selection)</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="vectorselection.html#attribute-extract-by-attribute">28.1.25.1. Attribute ဖြင့်ထုတ်ယူခြင်း (Extract by attribute)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vectorselection.html#expression-extract-by-expression">28.1.25.2. Expression ဖြင့် ထုတ်ယူခြင်း (Extract by expression)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vectorselection.html#extract-by-location">28.1.25.3. တည်နေရာဖြင့် ထုတ်ယူခြင်း (Extract by location)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vectorselection.html#extract-within-distance">28.1.25.4. အကွာအဝေးအတွင်းထုတ်ယူခြင်း (Extract within distance)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vectorselection.html#filter-by-geometry-type">28.1.25.5. ဂျီဩမေတြီ အမျိုးအစားဖြင့် စစ်ထုတ်ခြင်း (Filter by geometry type)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vectorselection.html#random-extract">28.1.25.6. ကျပန်းထုတ်ယူခြင်း (Random extract)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vectorselection.html#subset-random-extract-within-subsets">28.1.25.7. Subset များအတွင်း ကျပန်းထုတ်ယူခြင်း (Random extract within subsets)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vectorselection.html#random-selection">28.1.25.8. ကျပန်းရွေးချယ်ခြင်း (Random selection)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vectorselection.html#subset-random-selection-within-subsets">28.1.25.9. Subset များအတွင်း ကျပန်းရွေးချယ်ခြင်း (Random selection within subsets)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vectorselection.html#attribute-select-by-attribute">28.1.25.10. အချက်အလက် (attribute) ဖြင့် ရွေးချယ်ခြင်း (Select by attribute)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vectorselection.html#expression-select-by-expression">28.1.25.11. Expression ဖြင့် ရွေးချယ်ခြင်း (Select by expression)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vectorselection.html#select-by-location">28.1.25.12. တည်နေရာဖြင့် ရွေးချယ်ခြင်း (Select by location)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vectorselection.html#select-within-distance">28.1.25.13. အကွာအဝေးအတွင်း ရွေးချယ်ခြင်း (Select within distance)</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="vectortable.html">28.1.26. Vector ဇယား (Vector table)</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="vectortable.html#field-add-autoincremental-field">28.1.26.1. နံပါတ်စဉ်အလိုအလျောက်တိုးပေးသည့် field ထည့်ခြင်း (Add autoincremental field)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vectortable.html#field-add-field-to-attributes-table">28.1.26.2. အချက်အလက်ဇယားတွင် field အသစ်တစ်ခုထည့်ခြင်း (Add field to attributes table)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vectortable.html#field-add-unique-value-index-field">28.1.26.3. ထပ်တူမရှိအညွှန်းကိန်း field ထည့်ခြင်း (Add unique value index field)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vectortable.html#x-y-field-add-x-y-fields-to-layer">28.1.26.4. X/Y field များ ထည့်ခြင်း (Add X/Y fields to layer)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vectortable.html#python-field-advanced-python-field-calculator">28.1.26.5. အဆင့်မြင့် Python field ဂဏန်းတွက်စက် (Advanced Python field calculator)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vectortable.html#field-drop-field-s">28.1.26.6. Field (များ) ကို ချန်ထားခြင်း (Drop field(s))</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vectortable.html#hstore-field-explode-hstore-field">28.1.26.7. HStore Field ကို ခွဲထုတ်ခြင်း (Explode HStore Field)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vectortable.html#binary-field-extract-binary-field">28.1.26.8. Binary field ကို ထုတ်ယူခြင်း (Extract binary field)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vectortable.html#field-field-calculator">28.1.26.9. Field တွက်ချက်ရာ (Field calculator)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vectortable.html#field-refactor-fields">28.1.26.10. Field များပြန်လည်ပြုပြင်ခြင်း (Refactor fields)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vectortable.html#field-rename-field">28.1.26.11. Field အမည်ပြောင်းခြင်း (Rename field)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vectortable.html#field-retain-fields">28.1.26.12. Field များကို ဆက်လက်ထိန်းသိမ်းထားခြင်း (Retain fields)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vectortable.html#text-to-float">28.1.26.13. စာသားမှ ဒဿမဂဏန်းသို့ (Text to float)</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="vectortiles.html">28.1.27. Vector tile များ</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="vectortiles.html#vector-tile-download-download-vector-tiles">28.1.27.1. Vector tile များ download ရယူခြင်း (Download vector tiles)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vectortiles.html#vector-tile-mbtiles">28.1.27.2. Vector tile (MBTiles) များရေးသားခြင်း</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vectortiles.html#vector-tile-xyz">28.1.27.3. Vector tile (XYZ) များရေးသားခြင်း</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="../index.html" class="btn btn-neutral float-left" title="28. Processing ဆိုင်ရာ ထောက်ပံ့ပေးသူများနှင့် Algorithm များ (Processing providers and algorithms)" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="3dtiles.html" class="btn btn-neutral float-right" title="28.1.1. 3D Tile များ" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2002-now, QGIS project.
+      <span class="lastupdated">Last updated on 2025 Feb 19, 10:27 +0630.
+      </span></p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <!-- Transifex follows a particular logic to build target pages:
+Expected French translation link for https://docs.qgis.org/3.28/en/docs/user_manual/print_composer/overview_composer.html
+would return https://app.transifex.com/qgis/qgis-documentation/translate/#fr/aa6d8bc653526d38b295ca94bf8eee5e
+with the md5 value of "github#qgis/QGIS-Documentation#release_3.28#locale/en/LC_MESSAGES/docs/user_manual/print_composer/overview_composer.po"-->
+<!--Make sure that mismatching language codes between Transifex and Sphinx are converted-->
+
+
+  <div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      <span class="fa fa-info-circle"> QGIS Documentation </span>
+      v: 3.40
+      <span class="fa fa-caret-down"></span>
+    </span>
+
+    <div class="rst-other-versions">
+      <dl>
+        <dt>Languages</dt>
+        
+          <dd><a href="https://docs.qgis.org/3.40/en/docs/user_manual/processing_algs/qgis/index.html">en</a></dd>
+        
+      </dl>
+
+      <dl>
+        <dt>Versions</dt>
+        
+          <dd><a href="https://docs.qgis.org/testing/en/docs/user_manual/processing_algs/qgis/index.html">testing</a></dd>
+        
+          <dd><a href="https://docs.qgis.org/latest/en/docs/user_manual/processing_algs/qgis/index.html">latest</a></dd>
+        
+          <dd><a href="https://docs.qgis.org/3.40/en/docs/user_manual/processing_algs/qgis/index.html">3.40</a></dd>
+        
+          <dd><a href="https://docs.qgis.org/3.34/en/docs/user_manual/processing_algs/qgis/index.html">3.34</a></dd>
+        
+          <dd><a href="https://docs.qgis.org/3.28/en/docs/user_manual/processing_algs/qgis/index.html">3.28</a></dd>
+        
+          <dd><a href="https://docs.qgis.org/3.22/en/docs/user_manual/processing_algs/qgis/index.html">3.22</a></dd>
+        
+          <dd><a href="https://docs.qgis.org/3.16/en/docs/user_manual/processing_algs/qgis/index.html">3.16</a></dd>
+        
+          <dd><a href="https://docs.qgis.org/3.10/en/docs/user_manual/processing_algs/qgis/index.html">3.10</a></dd>
+        
+          <dd><a href="https://docs.qgis.org/3.4/en/docs/user_manual/processing_algs/qgis/index.html">3.4</a></dd>
+        
+          <dd><a href="https://docs.qgis.org/2.18/en/docs/user_manual/processing_algs/qgis/index.html">2.18</a></dd>
+        
+      </dl>
+
+       
+       <dl>
+        <dt>Downloads</dt>
+        
+          <dd><a href="https://docs.qgis.org/3.40/pdf">PDF</a></dd>
+        
+          <dd><a href="https://docs.qgis.org/3.40/zip">HTML</a></dd>
+        
+      </dl>
+      
+
+      
+       
+      <dl>
+        <dt>Contribute to Docs</dt>
+          <dd>
+            <a href="https://github.com/qgis/QGIS-Documentation/edit/master/docs/user_manual/processing_algs/qgis/index.rst" target="_blank" rel="noopener noreferrer">Edit on GitHub</a>
+          </dd>
+          
+          
+          <dd>
+            <a href="https://app.transifex.com/qgis/qgis-documentation/translate/#en/edf6ce5b59d387c73d71f531215f7d5a" target="_blank" rel="noopener noreferrer">Translate Page</a>
+          </dd>
+          
+          <dd>
+            <a href="https://github.com/qgis/QGIS-Documentation/issues" target="_blank" rel="noopener noreferrer">Report Issue</a>
+          </dd>
+      </dl>
+      
+
+      <dl>
+        <dt>On QGIS Project</dt>
+          <dd>
+            <a href="https://qgis.org" target="_blank" rel="noopener noreferrer">Home</a>
+          </dd>
+          <dd>
+            <a href="https://qgis.org/api/3.40" target="_blank" rel="noopener noreferrer">C++ API</a>
+          </dd>
+          <dd>
+            <a href="https://qgis.org/pyqgis/3.40" target="_blank" rel="noopener noreferrer">PyQGIS API</a>
+          </dd>
+          <dd>
+            <a href="https://github.com/qgis/QGIS/tree/release-3_40" target="_blank" rel="noopener noreferrer">Source</a>
+          </dd>
+      </dl>
+
+    </div>
+  </div><script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
