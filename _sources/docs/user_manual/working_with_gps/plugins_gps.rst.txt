@@ -1,0 +1,110 @@
+.. _gps_data:
+
+GNSS/GPS data များကိုမိတ်ဆက်ခြင်း (Introducing GNSS/GPS Data)
+=================================================================================
+
+.. only:: html
+
+   .. contents::
+      :local:
+
+.. _`whatsgps`:
+
+GPS ဆိုတာဘာလဲ
+------------------------
+
+GPS **Global Positioning System** ဆိုသည်မှာ GPS receiver ရှိသော မည်သူမဆို ကမ္ဘာကြီးရဲ့ မည်သည့်နေရာတွင်ရှိနေသည်ဖြစ်စေ ဂြိုလ်တုများကို အသုံးပြုပြီး ၎င်းတို့၏တိကျသော တည်နေရာကို ဖော်ပြပေးနိုင်သော စနစ်ဖြစ်ပါသည်။ GPS ကို လမ်းညွှန်ပြသရာတွင် ထောက်ကူပစ္စည်းအဖြစ် အသုံးပြုပါသည်။ ဥပမာ - လေယာဉ်၊ လှေ နှင့် တောင်တက်သူများ။ GPS receiver သည် ၎င်းရဲ့ လတ္တီကျု၊ လောင်ဂျီကျု နှင့် (တခါတရံ) အမြင့်တို့ကို တွက်ချက်ရန်အတွက် ဂြိုလ်တုများမှ အချက်ပြမှုကို ဖမ်းယူလုပ်ဆောင်ပါသည်။ Receiver အများစုသည် အောက်ပါအချက်အလက်များကို သိမ်းဆည်းထားနိုင်စွမ်းရှိပါသည်-
+
+* တည်နေရာများ (**waypoint** များဟုခေါ်ပါသည်)
+* စီစဉ်ထားသော **route (လမ်းကြောင်း)** တစ်ခုကိုဖြစ်ပေါ်စေသော တည်နေရာအဆက်များ
+* အချိန်နှင့်အမျှ receiver ၏ ရွှေ့လျားခဲ့သော **track (ခြေရာခံလမ်းကြောင်း)** မှတ်တမ်း
+
+Waypoint များ၊ route များ နှင့် track များတို့သည် GPS data ထဲတွင် အခြေခံ feature အမျိုးအစား ၃ မျိုးဖြစ်ပါသည်။ QGIS သည် waypoint များကို point layer များအဖြစ် ဖော်ပြပြီး routes နှင့် tracks များကို linestring layer များအဖြစ် ဖော်ပြပါသည်။
+
+.. note:: QGIS သည် GNSS receiver များနှင့်လည်း အလုပ်လုပ်နိုင်ပါသည်။ သို့သော် ဤ documentation တွင် GNSS အစား GPS ဆိုသည့် အသုံးအနှုန်းကို ဆက်လက်သုံးစွဲသွားပါမည်။
+
+
+.. _`label_loadgps`:
+
+GPS data များ ရွေ့ပြောင်းခြင်း/ခေါ်ယူထည့်သွင်းခြင်း (Transferring or loading GPS data)
+------------------------------------------------------------------------------------------------
+
+GPX file တစ်ခုထည့်သွင်းခြင်း (Loading a GPX file)
+......................................................
+
+GPS data များကိုသိမ်းဆည်းခြင်းအတွက် file format အမျိုးအစားများစွာရှိပါသည်။ QGIS မှ အသုံးပြုသော format မှာ GPX (GPS eXchange format) ဖြစ်ပြီး file တစ်ခုတည်းတွင် waypoint များ၊ route များ နှင့် track များပါဝင်သော ဖလှယ်နိုင်သည့် standard (စံ) format တစ်ခုဖြစ်ပါသည်။
+
+:file:`GPX` file တစ်ခုကို ခေါ်ယူထည့်သွင်းရန်အတွက်- 
+
+#. :guilabel:`Data Source Manager` dialog ထဲမှ :guilabel:`GPS` tab ကို ဖွင့်ပါ။ ဆိုလိုသည်မှာ-
+   * Toolbar ပေါ်ရှိ |dataSourceManager| :sup:`Open Data Source Manager` ခလုတ်ကိုနှိပ်ပြီး (သို့မဟုတ် :kbd:`Ctrl+L` ကိုနှိပ်ပါ) target tab ကို အသုံးပြုနိုင်ရန်ဖွင့်ပါ။
+   * သို့မဟုတ် :menuselection:`Layer --> Add Layer -->` |addGpsLayer|:menuselection:`Add GPX Layer...` ကိုရွေးချယ်ပါ။
+#. GPX file ကိုရွေးချယ်ရန် :guilabel:`GPX dataset` ရဲ့ဘေးရှိ :guilabel:`...` :sup:`Browse` ခလုတ်ကိုအသုံးပြုပါ
+#. File မှတဆင့် ခေါ်ယူထည့်သွင်းလိုသော :guilabel:`Feature types` (Feature အမျိုးအစား) ကိုရွေးချယ်ရန် check box (အမှန်ခြစ်ခြစ်ရသောနေရာများ) ကိုအသုံးပြုပါ။ Feature အမျိုးအစား တစ်မျိုးချင်းစီ (:guilabel:`Waypoints`၊ :guilabel:`Tracks` သို့မဟုတ် :guilabel:`Routes`) များကို သီးခြား layer တစ်ခုချင်းစီတွင် ခေါ်ယူထည့်သွင်းပါလိမ့်မည်။
+
+.. figure:: ../managing_data_source/img/gps_datasource.png
+   :align: center
+
+   GPS Data များခေါ်ယူထည့်သွင်းခြင်း dialog
+
+
+.. _load_from_device:
+
+Device တစ်ခုထဲသို့ ထည့်သွင်းခြင်း သို့မဟုတ် Device တစ်ခုမှ ထည့်သွင်းခြင်း (Loading to or from a device)
+............................................................................................................
+
+မတူညီသော GPS ကိရိယာအမျိုးအစားများနှင့် format များ အများအပြားရှိကြပါသည်။ QGIS သည် GPX ဖိုင်များကိုအသုံးပြုသောကြောင့် အခြား GPS ဖိုင် format များမှ GPX သို့ပြောင်းလဲပေးရန် နည်းလမ်းလိုအပ်ပါသည်။ QGIS တွင်  `GPSBabel <https://www.gpsbabel.org>`_ ဆိုသည့် အခမဲ့ program ကိုအသုံးပြုပြီး ထိုအရာကိုလုပ်ဆောင်နိုင်ပါသည်။ GPSBabel သည် Garmin သို့မဟုတ် magellan ကဲ့သို့ လူသုံးများသော GPS ကိရိယာများနှင့် Google Earth သို့မဟုတ် Basecamp ကဲ့သို့ mapping program များအကြား waypoint များ၊ track များနှင့် route များကို ပြောင်းလဲပေးနိုင်ပါသည်။ ရာချီသော GPS ကိရိယာများနှင့် program များကို ထောက်ပံ့ပေးထားပါသည်။ ၎င်းသည် သင့်ကွန်ပျူတာနှင့် GPS ကိရိယာအကြား GPS data များကိုလည်း ကူးပြောင်းပေးနိုင်ပါသည်။
+
+:menuselection:`Settings -->` |options| :menuselection:`Options -->`
+|gps| :menuselection:`GPS -->` |gps| :menuselection:`GPSBabel` အောက်တွင် သင့် GPS ကိရိယာအမျိုးအစားကိုသတ်မှတ်ပေးနိုင်ပြီး နောက်ပိုင်းတွင် :ref:`Processing GPS algorithms <gps_algorithms>` မှအသုံးပြုမည့် conversion parameter များကိုသတ်မှတ်ပေးနိုင်ပါသည်။
+
+.. figure:: ../introduction/img/options_gpsbabel.png
+   :align: center
+
+   GPS Babel settings
+
+#. ပထမဦးစွာ :guilabel:`Path to GPSBabel` binaries များကို သတ်မှတ်ပေးရပါမည်။
+#. ထို့နောက် သင့် ကိရိယာကို ထည့်သွင်းပါ။ |symbologyAdd| :sup:`Add new device`
+   သို့မဟုတ် |symbologyRemove| :sup:`Remove device` ခလုတ်ကိုအသုံးပြုပြီး ကိရိယာစာရင်းကို update လုပ်နိုင်ပါသည်။
+#. ကိရိယာတစ်ခုချင်းစီအတွက်-
+
+   * :guilabel:`Device name` တစ်ခုပေးပါ
+   * ကိရိယာနှင့်အပြန်အလှန်လုပ်ဆောင်ရာတွင် QGIS မှအသုံးပြုမည့် မတူညီသော :guilabel:`Commands` များကိုသတ်မှတ်ပေးပါ၊ ဥပမာ-
+
+     * :guilabel:`Waypoint download` - ကိရိယာမှ waypoint များဒေါင်းလုဒ် ပြုလုပ်ခြင်း
+     * :guilabel:`Waypoint upload` - ကိရိယာထဲသို့ waypoint များ ထည့်သွင်းခြင်း
+     * :guilabel:`Route download` - ကိရိယာမှ route များ ဒေါင်းလုဒ် ပြုလုပ်ခြင်း
+     * :guilabel:`Route upload` - ကိရိယာထဲသို့ route များ ထည့်သွင်းခြင်း
+     * :guilabel:`Track download` - ကိရိယာမှ track များ ဒေါင်းလုဒ် ပြုလုပ်ခြင်း
+     * :guilabel:`Track upload` - ကိရိယာထဲသို့ track များ ထည့်သွင်းခြင်း
+
+     များသောအားဖြင့် command များသည် GPSBabel command များဖြစ်သော်လည်း GPX ဖိုင်ဖန်တီးပေးနိုင်သော အခြား command line program တစ်ခုခုကိုလည်း အသုံးပြုနိုင်ပါသည်။ QGIS သည် command ကို run သောအခါ ``%type`` ၊ ``%in`` ၊ နှင့် ``%out`` keyword များကို အစားထိုးပေးပါလိမ့်မည်။
+
+     ဥပမာတစ်ခုအနေဖြင့်- ကိရိယာအမျိုးအစားတစ်ခုကို download command ``gpsbabel %type -i garmin -o gpx %in %out`` ဖြင့်ဖန်တီးပြီးနောက် ၎င်းကို port ``/dev/ttyS0`` မှ :file:`output.gpx` ဖိုင်သို့ waypoint များ download ပြုလုပ်ရန် အသုံးပြုပါက  QGIS သည် keyword များကို အစားထိုးပေးပြီး ``gpsbabel -w -i garmin -o gpx /dev/ttyS0 output.gpx`` command ကို run ပေးပါလိမ့်မည်။
+
+     သင်အသုံးပြုလိုသည့် သီးသန့် command line option များကို GPSBabel manual တွင် ဖတ်ရှုပါ။
+
+ကိရိယာအမျိုးအစားအသစ်တစ်ခုကို ဖန်တီးပြီးသည်နှင့် ၎င်းသည် GPS download နှင့် upload algorithm များလုပ်ဆောင်ရန်အတွက် ကိရိယာများစာရင်းထဲတွင် ပေါ်နေပါလိမ့်မည်။
+
+.. note::
+   GPS များတွင် data များကို coordinate system အမျိုးမျိုးဖြင့် သိမ်းဆည်းထားနိင်ပါသည်။ GPX file တစ်ခုကို (GPS သို့မဟုတ် web site မှ) download ရယူပြီး QGIS ထဲသို့ ခေါ်ယူထည့်သွင်းသောအခါ GPX file ထဲတွင် သိမ်းဆည်းထားသော data များသည် WGS 84 (latitude/longitude) ဖြစ်နေရန်လိုအပ်ပါသည်။ QGIS သည် ထိုကဲ့သို့ဖြစ်မည်ဟု မျှော်လင့်ထားပြီး ၎င်းသည် တရားဝင် GPX specification (သတ်မှတ်ချက်) ဖြစ်ပါသည်။ `GPX 1.1 Schema Documentation <https://www.topografix.com/GPX/1/1/>` တွင်ကြည့်ရှုပါ။
+
+
+.. Substitutions definitions - AVOID EDITING PAST THIS LINE
+   This will be automatically updated by the find_set_subst.py script.
+   If you need to create a new substitution manually,
+   please add it also to the substitutions.txt file in the
+   source folder.
+
+.. |addGpsLayer| image:: /static/common/mActionAddGpsLayer.png
+   :width: 1.5em
+.. |dataSourceManager| image:: /static/common/mActionDataSourceManager.png
+   :width: 1.5em
+.. |gps| image:: /static/common/mIconGps.png
+   :width: 1.5em
+.. |options| image:: /static/common/mActionOptions.png
+   :width: 1em
+.. |symbologyAdd| image:: /static/common/symbologyAdd.png
+   :width: 1.5em
+.. |symbologyRemove| image:: /static/common/symbologyRemove.png
+   :width: 1.5em

@@ -1,0 +1,283 @@
+.. index:: GPS tracking
+.. _`sec_gpstracking`:
+
+အချိန်နှင့်တစ်ပြေးညီ လမ်းကြောင်းဆွဲခြင်း (Live GPS tracking)
+========================================================================
+
+.. only:: html
+
+   .. contents::
+      :local:
+
+QGIS တွင် GPS receiver တစ်ခုဖြင့် ကွင်းမြေပုံရေးဆွဲခြင်းလုပ်ဆောင်နိုင်ပါသည်။ ထိုကဲ့သို့သော အချိန်နှင့်တစ်ပြေးညီ လမ်းကြောင်းရေးဆွဲခြင်းကို :ref:`GPS Toolbar <gps_toolbar>` ကိုအသုံးပြုပြီးလုပ်ဆောင်နိုင်ပါသည်။ QGIS နှင့် GPS receiver တို့မချိတ်ဆက်မီတွင် :ref:`device configuration <gps_options>` အချို့ကို လုပ်ဆောင်ရန် လိုအပ်နိုင်ပါသည်။
+
+.. _gps_toolbar:
+
+GPS toolbar
+-----------
+
+:guilabel:`GPS Toolbar` တွင် အချိန်နှင့်တပြေးညီလမ်းကြောင်းရေးဆွဲခြင်းကို ထိန်းချုပ်ရန် အဓိက tool များပါရှိပါသည်။ ၎င်းကို :menuselection:`View --> Toolbars --> GPS` မှ activate လုပ်နိုင်ပါသည်။ ၎င်းသည် project ၊ GPS ၊ နှင့် လက်ရှိ GPS track အခြေအနေကိုလိုက်ပြီး အဓိပ္ပါယ်ရှိသောအခါမှသာ action များကို လုပ်ဆောင်ပါသည်။ ကိရိယာကို QGIS မှ ရှာဖွေတွေ့ရှိသည်နှင့် အောက်ပါတို့ကို အပြန်အလှန်လုပ်ဆောင်နိုင်ပါလိမ့်မည်-
+
+* |gpsConnect| :sup:`Connect to GPS` (GPS သို့ချိတ်ဆက်ခြင်း)
+* |gpsDisconnect| :sup:`Disconnect from GPS` (GPS နှင့်အချိတ်အဆက်ဖြုတ်ခြင်း)
+* |recenter| :sup:`Recenter map on GPS location` - :ref:`အလိုအလျောက် အလယ်ဗဟိုပြန်လုပ်ခြင်း parameter <gps_recenter>` ကိုထည့်သွင်းမစဉ်းစားပဲ လက်ရှိ GPS တည်နေရာတွင် မြေပုံကိုချက်ချင်း ဗဟိုပြုပါလိမ့်မည်။
+
+* |gpsDestinationLayer| :sup:`Set destination layer for GPS digitized features` - Feature digitize ပြုလုပ်သောအခါ QGIS သည် Default အနေဖြင့် :guilabel:`active layer` ကိုကြည့်ပါလိမ့်မည်၊ ဆိုလိုသ်ညမှာ GPS digitizing tool များသည် :guilabel:`Layers` panel ထဲတွင် select လုပ်ထားသော layer တွင်သာလုပ်ဆောင်ပြီး ဖန်တီးထားသော feature များကို ၎င်း layer ထဲတွင် သိမ်းဆည်းပါလိမ့်မည်။ ဤအရာသည် အချို့သောအကြောင်းအရာများတွင် အသုံးဝင်နိုင်ပါသည်၊ ထို့အပြင် ၎င်းသည် မလိုအပ်သော layer များထဲတွင် feature များမတော်တဆ သိမ်းဆည်းမိခြင်းမဖြစ်စေရန် အခြားသော layer များနှင့်လည်း ဂရုတစိုက်အပြန်အလှန်လုပ်ဆောင်ရန်အတွက်လည်း ရည်ရွယ်ပါသည်။ ဤ option သည် အချိန်နှင့်တပြေးညီခြေရာခံခြင်းအတွင်း data သိမ်းဆည်းရန်အတွက် layer ကို ရှင်းရှင်းလင်းလင်းညွှန်ပြစေနိုင်ပါသည်၊ သင်လိုအပ်ချက်ပေါ်မူတည်ပြီး ပြောင်းလဲပေးနိုင်ပါသည်။ Tool များသည် ရွေးချယ်ထားသော layer အမျိုးအစားနှင့်လည်း လိုက်လျောညီထွေဖြစ်စေပါလိမ့်သည်။
+
+  Feature တစ်ခုကို ဖန်တီးသောအခါ GPS destination layer ကို အလိုအလျောက် တည်းဖြတ်ပြင်ဆင်နိုင်အောင် လုပ်ဆောင်ပေးပြီး အသုံးပြုသူကိုလည်း အကြောင်းကြားပေးပါသည်။
+
+* Feature ဖန်တီးခြင်းအတွက် action များ-
+
+  * |addTrackPoint| :sup:`Add vertex to GPS track using GPS current location` (GPS လက်ရှိတည်နေရာကိုအသုံးပြုပြီး GPS track တွင် vertex ထည့်သွင်းခြင်း)
+  * |capturePoint| :sup:`Create a new point feature at current GPS location` (လက်ရှိ GPS တည်နေရာတွင် point feature အသစ်တစ်ခုဖန်တီးခြင်း)
+  * |captureLine| :sup:`Create a new line feature using the current GPS track` (လက်ရှိ GPS track ကိုအသုံးပြုပြီး line feature အသစ်တစ်ခုဖန်တီးခြင်း)
+  * |capturePolygon| :sup:`Create a new polygon feature using the current GPS track` (လက်ရှိ GPS track ကိုအသုံးပြုပြီး polygon feature အသစ်တစ်ခုဖန်တီးခြင်း)
+  * |reset| :sup:`Reset track` (Track ကို အစမှပြန်စခြင်း)
+
+* |metadata| :sup:`Show GPS information` - :ref:`GPS Information
+  <gps_information_panel>` panel ကိုဖွင့်ပေးပါသည်
+
+* သင်ကြည့်လိုသော GPS အချက်အလက်များကို အလျင်အမြန်ကြည့်ရှုရန်အတွက် display box တစ်ခုတွင်-
+
+  * |unchecked| :sup:`Show location`
+  * |unchecked| :sup:`Show altitude (Geoid)`
+  * |unchecked| :sup:`Show altitude (WGS 84 ellipsoid)`
+  * |unchecked| :sup:`Show ground speed`
+  * |unchecked| :sup:`Show bearing`
+  * |unchecked| :sup:`Show total track length`
+  * |unchecked| :sup:`Show distance from start of track`
+
+.. _tracking_settings:
+
+* |options| :sup:`Settings` ခလုတ်ကိုနှိပ်လျှင် အသုံးများသော setting များပါဝင်သည့် drop-down menu တစ်ခုကို ပွင့်လာပါမည်၊ များသောအားဖြင့် ထို setting များကို session အလယ်ပိုင်းတွင် မွမ်းမံပြင်ဆင်ကြပါသည်-
+
+  * |unchecked| :guilabel:`Show location marker`
+  * |unchecked| :guilabel:`Show bearing line`
+  * |unchecked| :guilabel:`Rotate map to match GPS direction`
+
+  .. _gps_recenter:
+
+  * မြေပုံ recentering ကိုထိန်းချုပ်ရန် ရွေးချယ်စရာများမှာ-
+
+    * |radioButtonOff| :guilabel:`Always recenter map` - GPS တည်နေရာသည် မြေပုံမြင်ကွင်းအလယ်မှ အကွာအဝေးတစ်ခု (မြေပုံမြင်ကွင်း extent ၏ အချိုးတစ်ခုအနေဖြင့်) ရွေ့သွားသောအခါ မြေပုံကို အမြဲတမ်း recenter (ဗဟိုပြန်လုပ်) ပြုလုပ်မည်ဖြစ်သည်။
+    * |radioButtonOn| :guilabel:`Recenter map when leaving extent` - extent ကိုကျော်လွန်သောအခါ မြေပုံကို recenter ပြုလုပ်ပါမည်။
+    * |radioButtonOff| :guilabel:`Never recenter` - ဘယ်သောအခါ မြေပုံကို recenter မပြုလုပ်ပါ။
+
+  * |unchecked| :guilabel:`Automatically add track vertices` - GPS ကိရိယာမှ တည်နေရာအသစ်များ လက်ခံရရှိသည့်အခါတိုင်း track vertex များအလိုအလျောက်ထည့်သွင်းပါသည်။
+  * |unchecked| :guilabel:`Automatically save added features` - GPS တည်နေရာများမှ ဖန်တီးထားသော feature များကို ၎င်းတို့၏ targer layer များသို့ ချက်ချင်းပို့ဆောင်ပါသည် (လုပ်နေကျ layer edit အဆင့်ကိုကျော်လိုက်ပြီး)
+  * :guilabel:`Time stamp destination` - time fix သိမ်းဆည်းရန်အတွက် field ကို ချိန်ညှိရန်
+
+  .. _gps_logging:
+
+  * |unchecked| :guilabel:`Log to GeoPackage/SpatiaLite...` - အမှန်ခြစ်ထားသောအခါ အသုံးပြုသူအား ရှိနေပြီးသား GeoPackage/SpatiaLite ဖိုင်တစ်ခုကိုရွေးချယ်ရန် သို့မဟုတ် ဖိုင်နာမည်အသစ်တစ်ခုထည့်ပေးရန် မေးမြန်းပါလိမ့်မည်။ ``gps_points`` နှင့် ``gps_tracks`` ဇယားတစ်ခုကို ကြိုတင်သတ်မှတ်ထားသောဖွဲ့စည်းပုံဖြင့် ဖိုင်ထဲတွင် ဖန်တီးပေးပါလိမ့်မည်။
+
+    ဝင်ရောက်လာသော GPS message များအားလုံးကို GPS မှ အမြန်နှုန်း၊ လားရာ၊ အမြင့်နှင့် တိကျမှုအချက်အလက်များနှင့်အတူ ``gps_points`` layer တွင် မှတ်တမ်းတင်ပါလိမ့်မည်၊ 
+
+    GPS သည် အချိတ်အဆက်ပြုတ်သွားသောအခါ (သို့မဟုတ် QGIS ကိုပိတ်လိုက်သောအခါ) record လုပ်ထားသော GPS track တစ်ခုလုံးကို ``gps_tracks`` ဇယားထဲသို့ ထည့်သွင်းပေးပါလိမ့်မည် (track အလျား၊ စချိန်နှင့် ဆုံးချိန် ကဲ့သို့ တွက်ချက်ထားသောအချက်အလက်အချို့နှင့်အတူ)။
+
+  * |unchecked| :guilabel:`Log NMEA sentences...` - ကိရိယာမှ raw NMEA စာသားများအားလုံးကို text ဖိုင်တစ်ခုထဲသို့ မှတ်တမ်းသွင်းပေးပါသည်။
+  * |options| :guilabel:`GPS settings...` - GPS :ref:`global options
+    <gps_options>` dialog ကိုအသုံးပြုစေနိုင်ပါသည်။
+
+
+.. tip:: **တည်နေရာအချက်အလက်အကြောင်း အချိန်နှင့်တပြေးညီပြသသည့်ဘား**
+
+  GPS စက်တစ်လုံးကိုချိတ်ဆက်လိုက်ပြီး mouse cursor ကို map canvas ပေါ်တွင် ရွှေ့လိုက်သောအခါ mouse cursor မှ GPS တည်နေရာသို့ အကွာအဝေးနှင့် bearing (လားရာအညွှန်းထောင့်) ကို live (အချိန်နှင့်တပြေးညီ) message ဖြင့် ပြသပေးပါသည်။ Project အကွာဝေးနှင့် bearing အပြင်အဆင်များကို ဤမျက်နှာပြင်တွင် ပြသပေးပါသည်။
+  Touch screen အသုံးပြုနိုင်သော စက်များတွင် live status ကိုကြည့်ရန်အတွက် ထိပြီးဖိထားလိုက်ပါ။
+
+
+.. _gps_information_panel:
+
+GPS အချက်အလက်ပြ Panel (GPS Information Panel)
+---------------------------------------------------------------
+
+QGIS ထဲတွင် အချိန်နှင့်တပြေးညီခြေရာခံခြင်းတစ်ခုကို အပြည့်အဝစောင့်ကြည့်ရန်အတွက် :guilabel:`GPS Information Panel` ကိုဖွင့်ထားပေးရန်လိုအပ်ပါသည် (:menuselection:`View --> Panels -->` သို့မဟုတ် :kbd:`Ctrl+0` ကိုနှိပ်ပါ)။
+
+QGIS နှင့် plug တပ်ထားသော GPS ကိရိယာအကြား ချိတ်ဆက်မှုစတင်ရန် :guilabel:`GPS Information Panel` ၏ ညာဘက်အပေါ်ထောင့်ရှိ :guilabel:`Connect` ကိုနှိပ်ပါ၊ သို့မဟုတ် အချိတ်အဆက်ဖြုတ်ရန် :guilabel:`Disconnect` ကိုနှိပ်ပါ။
+
+Panel ၏ ဘယ်ဘက်အပေါ်တွင် အောက်ပါခလုတ်များရှိပါသည်-
+
+* |metadata| :sup:`Position` - GPS တည်နေရာနှင့် sensor များအကြောင်း အသေးစိတ်တိုက်ရိုက်ပြသမှု
+* |gpsTrackBarChart| :sup:`Signal` - ဂြိုလ်တုချိတ်ဆက်မှုများ၏ အချက်ပြမှုပြင်းအား (signal strength)
+* |options| :sup:`Settings` - Session တစ်ခုအတွင်း မွမ်းမံပြင်ဆင်ရန် လိုအပ်ကောင်းလိုအပ်နိုင်မည့် :ref:`live tracking options <tracking_settings>` drop-down menu 
+
+
+နေရာနှင့်အပိုအချက်အလက်များ (Position and additional attributes)
+......................................................................................................
+
+|metadata| :sup:`Position` tab ထဲတွင် GPS သည် ဂြိုလ်တုမှ အချက်ပြမှုများကို လက်ခံရယူနေလျှင် တည်နေရာ၏ လတ္တီကျု၊ လောင်ဂျီကျု နှင့် အမြင့်များကို ထပ်ပေါင်းအချက်အလက်များနှင့်အတူ တွေ့မြင်ရပါမည်။
+
+.. _figure_gps_position:
+
+.. figure:: img/gpstrack_main.png
+   :align: center
+
+   GPS လမ်းကြောင်းဆွဲခြင်းတည်နေရာနှင့် ထပ်ဆောင်းအချက်အလက်များ
+
+* :guilabel:`Latitude`
+* :guilabel:`Longitude`
+* :guilabel:`Altitude (Geoid)` - ပျမ်းမျှပင်လယ်ရေမျက်နှာပြင် အထက် သို့မဟုတ် အောက်ရှိ Altitude/elevation
+* :guilabel:`Altitude (WGS 84 ellipsoid)` - WGS-84 Earth ellipsoid အထက် သို့မဟုတ် အောက်ရှိ Altitude/elevation
+* :guilabel:`Geoidal separation` - WGS-84 Earth ellipsoid နှင့် ပျမ်းမျှပင်လယ်ရေမျက်နှာပြင် (geoid) အကြားခြားနားချက်၊ ``-`` သည် ပျမ်းမျှပင်လယ်ရေမျက်နှာပြင်သည် ellipsoid အောက် ရောက်သည်ဟု ဆိုလိုပါသည်။
+* :guilabel:`Time of fix`
+* :guilabel:`Speed` - မြေပြင်အမြန်နှုန်း
+* :guilabel:`Direction` - True north မှ သွားလာသည့်လားရာသို့ နာရီလက်တံအတိုင်း ဒီဂရီဖြင့်တိုင်းတာသော Bearing
+* :guilabel:`HDOP` - Horizontal dilution of precision (ရေပြင်ညီအတိုင်း တိကျမှု လျော့ကျခြင်း)
+* :guilabel:`VDOP` - Vertical dilution of precision (ဒေါင်လိုက်အတိုင်း တိကျမှု လျော့ကျခြင်း)
+* :guilabel:`PDOP` - Dilution of precision (တိကျမှု လျော့ကျခြင်း)
+* :guilabel:`H accuracy` - မီတာဖြင့် ရေပြင်ညီတိကျမှု
+* :guilabel:`V accuracy` - မီတာဖြင့် ဒေါင်လိုက်တိကျမှု
+* :guilabel:`3D accuracy` - မီတာဖြင့် 3D Root Mean Square (RMS)
+* :guilabel:`Mode` - GPS receiver configuration 2D/3D mode ၊ ``automatic`` သို့မဟုတ် ``manual`` ဖြစ်နိုင်ပါသည်
+* :guilabel:`Dimensions` - Position fix dimension ၊ ``2D`` ၊ ``3D`` သို့မဟုတ် ``No fix`` ဖြစ်နိုင်ပါသည်
+* :guilabel:`Quality` - တည်နေရာပြသမှု အရည်အသွေးအညွှန်း
+* :guilabel:`Status` - Position fix status ၊ ``Valid`` သို့မဟုတ် ``Invalid`` ဖြစ်နိုင်ပါသည်
+* :guilabel:`Satellites` - မူသေတည်နေရာရရှိရန်အတွက် အသုံးပြုသော ဂြိုလ်တုအရေအတွက်
+* :guilabel:`Total track length` - လက်ရှိ GPS track ၏ စုစုပေါင်းအကွာအဝေး
+* :guilabel:`Distance from start of track` - လက်ရှိ GPS track ရှိ ပထမဆုံး vertex မှ နောက်ဆုံး vertex သို့ တိုက်ရိုက်အကွာအဝေး
+
+
+အချက်ပြလှိုင်း (Signal)
+..............................
+
+|gpsTrackBarChart| :sup:`Signal` tab ထဲတွင် အချက်ပြလှိုင်းများ ထုတ်လွှင့်နေသော ဂြိုလ်တုများ၏ အချက်ပြမှုပြင်းအား (signal strength) ကို မြင်တွေ့နိုင်ပါသည်။
+
+.. _figure_gps_strength:
+
+.. figure:: img/gpstrack_strength.png
+   :align: center
+
+   GPS tracking အချက်ပြမှုပြင်းအား
+
+
+Connect to a Bluetooth GPS for live tracking (Live လမ်းကြောင်းခြေရာခံရန်အတွက် bluetooth GPS သို့ချိတ်ဆက်ခြင်း)
+------------------------------------------------------------------------------------------------------------------------------------
+
+ကွင်း data များကောက်ယူစုဆောင်းခြင်းအတွက် QGIS နှင့် bluetooth GPS ကိုချိတ်ဆက်နိုင်ပါသည်။ ထိုသို့လုပ်ဆောင်ရန် GPS Bluetooth device တစ်ခုနှင့် ကွန်ပျူတာတွင် Bluetooth receiver တစ်ခုလိုအပ်ပါသည်။
+
+ပထမဆုံးအနေခြင့် GPS device ကို ကွန်ပျူတာက သိအောင်လုပ်ပြီး ကွန်ပျူတာနှင့် ချိတ်ဆက်ရပါမည်။ GPS ကိုဖွင့်ပြီး notification area ထဲရှိ Bluetooth icon ကိုသွား၍ device အသစ်တစ်ခုကိုရှာပါ။
+
+အသုံးပြုနိုင်သောစာရင်းထဲတွင် မိမိ၏ GPS ပေါ်နေစေရန် Device ၏ ညာဘက်ခြမ်းတွင် ရွေးချယ်ခြင်း mask သည် device များအားလုံးရွေးချယ်ထားခြင်းကို သေချာအောင်လုပ်ဆောင်ပေးပါသည်။ နောက်တစ်ဆင့်တွင် serial connecion service ရရှိသင့်မည်ဖြစ်ပြီး ၎င်းကိုရွေးချယ်ကာ :guilabel:`Configure (စိတ်ကြိုက်ပြင်ဆင်ခြင်း)` ခလုတ်ကိုနှိပ်ပါ။
+
+Bluetooth property များဖြင့်ရလာသော GPS ချိတ်ဆက်မှုကိုသတ်မှတ်ပေးထားသော COM port အရေအတွက်ကို မှတ်သားထားပါ။
+
+GPS ကို ကွန်ပျူတာမှ သိရှိပြီးသည်နှင့် ချိတ်ဆက်ခြင်းလုပ်ဆောင်ပါ။ များသောအားဖြင့် ချိတ်ဆက်ရန်အသုံးပြုသော ဂဏန်းမှာ ``0000`` ဖြစ်ပါသည်။
+
+:guilabel:`GPS information` panel ကိုဖွင့်ပြီး |options| GPS options screen သို့ပြောင်းလဲပါ။ GPS ချိတ်ဆက်မှုအတွက် သတ်မှတ်ပေးထားသော COM port ကိုရွေးချယ်ပြီး :guilabel:`Connect (ချိတ်ဆက်ပါ)` ကို နှိပ်ပါ။ ခဏကြာပြီးနောက် မိမိ၏တည်နေရာကိုဖော်ပြနေသည့် cursor တည်နေရာတစ်ခု ပေါ်လာပါလိမ့်မည်။
+
+QGIS သည် GPS data များကိုလက်မခံနိုင်လျှင် GPS ကို ပိတ်ပြီးပြန်ဖွင့်သင့်ပါသည်။ ၅ စက္ကန့်မှ ၁၀ စက္ကန့်လောက်ထိ စောင့်ပြီး ထပ်မံချိတ်ဆက်ကြည့်ပါ။ များသောအားဖြင့် ဒီနည်းလမ်းဖြင့် ပြဿနာကိုဖြေရှင်းနိုင်ပါသည်။ ချိတ်ဆက်မှုပြဿနာထပ်မံရှိနေဆဲဆိုလျှင် ၎င်း GPS ချိတ်ဆက်နေသော တခြား Bluetooth device တစ်ခု အနီးအနားတွင် ရှိမရှိ စစ်ဆေးပြီး ချိတ်ဆက်မှုဖြုတ်ပစ်ပါ။
+
+QGIS ထဲတွင် GPS device များချိတ်ဆက်မှု ဥပမာများ (Examples of GPS devices connection in QGIS)
+------------------------------------------------------------------------------------------------------------------------------
+
+GPSMAP 60cs ကိုအသုံးပြုခြင်း (Using GPSMAP 60cs)
+....................................................................
+
+မိုက်ခရိုဆော့(ဖ်) ဝင်းဒိုး စနစ် (MS Windows)
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+၎င်းအလုပ်လုပ်ဆောင်ရန် အလွယ်ကူဆုံးနည်းလမ်းမှာ `GPSGate <https://gpsgate.com/gpsgate-splitter>` ဟုခေါ်သော middleware (freeware၊ not open) ကိုအသုံးပြုခြင်းဖြစ်ပါသည်။
+
+Program ကိုဖွင့်ပြီး GPS device များကိုရှာပါ (USB နှင့် bluetooth ၂ မျိုးလုံးအတွက် အလုပ်လုပ်ပါသည်)၊ ထို့နောက် QGIS ထဲတွင်-
+
+#. :menuselection:`Settings --> Options --> GPS` ထဲတွင် plug တပ်ထားသော ကိရိယာကို ရှာဖွေပါ။ |radioButtonOn| :guilabel:`Autodetect` mode ကိုအသုံးပြုနိုင်ပါသည်။
+#. :guilabel:`GPS Information` panel ထဲတွင် :guilabel:`Connect` ကိုနှိပ်ပါ။
+
+Ubuntu/Mint GNU/Linux
+^^^^^^^^^^^^^^^^^^^^^
+
+Window ကွန်ပျူတာများအတွက်ကဲ့သို့ အလွယ်ကူဆုံးနည်းလမ်းမှာ အလယ်ရှိ server တစ်ခုကို အသုံးပြုရန်ဖြစ်ပြီး ယခု OS များအတွက်တော့ GPSD ဖြစ်ပါသည်။ ထို့ကြောင့် - 
+
+#. Install the program
+
+   ::
+
+    sudo apt install gpsd
+
+#. ထို့နောက် ``garmin_gps`` kernel module ကိုခေါ်ယူထည့်သွင်းပါ။
+
+   ::
+
+    sudo modprobe garmin_gps
+
+#. ထို့နောက် unit ကိုချိတ်ဆက်ပါ။ Unit မှ အသုံးပြုနေသော တကယ့် device ကို ``dmesg`` ဖြင့်စစ်ဆေးပါ၊ ဥပမာ- ``/dev/ttyUSB0``။ 
+
+#. ထို့နောက် gpsd ကို စတင်ဖွင့်နိုင်ပါပြီ။
+
+   ::
+
+    gpsd /dev/ttyUSB0
+
+#. နောက်ဆုံးအဆင့်အဖြစ် QGIS live tracking tool နှင့်ချိတ်ဆက်ပါ။
+
+BTGP-38KM datalogger ကိုအသုံးပြုခြင်း (Bluetooth ပစ္စည်းများအတွက်သာ)
+......................................................................................
+
+Linux အတွက် GPSD ကို အသုံးပြုခြင်း သို့မဟုတ် Window အတွက် GPSGate သည် အားစိုက်ထုတ်ရန်မလိုအပ်ပါ။
+
+BlueMax GPS-4044 datalogger ကိုအသုံးပြုခြင်း (Bluetooth နှင့် USB ၂ မျိုးလုံးအတွက် အလုပ်လုပ်သည်)
+......................................................................................................
+
+မိုက်ခရိုဆော့(ဖ်)ဝင်းဒိုး စနစ် (MS Windows)
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+GPSGate သို့မဟုတ် ၎င်းမပါလျှင်ပင် live tracking သည် USB နှင့် Bluetooth ၂ မျိုးလုံးအတွက် အလုပ်လုပ်ပါသည်။ |radioButtonOn| :guilabel:`Autodetect` mode ကို အသုံးပြုပါ သို့မဟုတ် မှန်ကန်သော port ကို ညွှန်ပေးပါ။
+
+
+Ubuntu/Mint GNU/Linux
+^^^^^^^^^^^^^^^^^^^^^
+
+**USB အတွက် (For USB)**
+
+Live tracking သည် QGIS live tracking tool ကို device နှင့် တိုက်ရိုက်ချိတ်ဆက်ခြင်းဖြင့် GPSD အသုံးပြုပြီးသော်လည်းကောင်း သို့မဟုတ် GPSD မသုံးပဲသော်လည်းကောင်း  ၂ မျိုးလုံးနှင့် အလုပ်လုပ်ပါသည်။ (ဥပမာ- ``/dev/ttyACM3``)
+
+::
+
+  gpsd /dev/ttyACM3
+
+
+**Bluetooth အတွက် (For Bluetooth)**
+
+Live tracking သည် QGIS live tracking tool ကို device နှင့် တိုက်ရိုက်ချိတ်ဆက်ခြင်းဖြင့် GPSD အသုံးပြုပြီးသော်လည်းကောင်း သို့မဟုတ် GPSD မသုံးပဲသော်လည်းကောင်း  ၂ မျိုးလုံးနှင့် အလုပ်လုပ်ပါသည်။ (ဥပမာ- ``/dev/rfcomm0``)
+
+::
+
+  gpsd /dev/rfcomm0
+
+
+.. Substitutions definitions - AVOID EDITING PAST THIS LINE
+   This will be automatically updated by the find_set_subst.py script.
+   If you need to create a new substitution manually,
+   please add it also to the substitutions.txt file in the
+   source folder.
+
+.. |addTrackPoint| image:: /static/common/mActionAddTrackPoint.png
+   :width: 1.5em
+.. |captureLine| image:: /static/common/mActionCaptureLine.png
+   :width: 1.5em
+.. |capturePoint| image:: /static/common/mActionCapturePoint.png
+   :width: 1.5em
+.. |capturePolygon| image:: /static/common/mActionCapturePolygon.png
+   :width: 1.5em
+.. |gpsConnect| image:: /static/common/mIconGpsConnect.png
+   :width: 1.5em
+.. |gpsDestinationLayer| image:: /static/common/mIconGpsDestinationLayer.png
+   :width: 1.5em
+.. |gpsDisconnect| image:: /static/common/mIconGpsDisconnect.png
+   :width: 1.5em
+.. |gpsTrackBarChart| image:: /static/common/gpstrack_barchart.png
+   :width: 1.5em
+.. |metadata| image:: /static/common/metadata.png
+   :width: 1.5em
+.. |options| image:: /static/common/mActionOptions.png
+   :width: 1em
+.. |radioButtonOff| image:: /static/common/radiobuttonoff.png
+   :width: 1.5em
+.. |radioButtonOn| image:: /static/common/radiobuttonon.png
+   :width: 1.5em
+.. |recenter| image:: /static/common/mActionRecenter.png
+   :width: 1.5em
+.. |reset| image:: /static/common/mActionReset.png
+   :width: 1.5em
+.. |unchecked| image:: /static/common/unchecked.png
+   :width: 1.3em

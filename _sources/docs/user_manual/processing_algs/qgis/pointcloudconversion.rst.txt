@@ -1,0 +1,414 @@
+Point Cloud ပြောင်းလဲခြင်း (Point Cloud Conversion)
+========================================================================================
+
+.. only:: html
+
+   .. contents::
+      :local:
+      :depth: 1
+
+.. note:: QGIS သည် PDAL library version 2.5.0 သို့မဟုတ် version အသစ်ကို အသုံးပြုမှသာ ဤ algorithm များကို ရရှိနိုင်မည်ဖြစ်သည်။
+
+.. _pdalconvertformat:
+
+Format ပြောင်းလဲခြင်း (Convert format)
+--------------------------------------------------------
+
+Point cloud တစ်ခုအား မတူညီသော ဖိုင် format တစ်ခုသို့ပြောင်းလဲပေးပါသည်၊ ဥပမာ- compress (ချုံ့ထားသော) လုပ်ထားသော :file:`.LAZ` တစ်ခုကို ဖန်တီးပေးပါသည်။
+
+သတ်မှတ်ချက်များ (Parameters)
+........................................
+
+.. list-table::
+   :header-rows: 1
+   :widths: 20 20 20 40
+
+   * - အညွှန်း
+     - အမည်
+     - အမျိုးအစား
+     - ရှင်းလင်းဖော်ပြချက်
+   * - **Input layer** **(ထည့်သွင်းအသုံးပြုသော layer)**
+     - ``INPUT``
+     - [point cloud]
+     - ပြောင်းလဲမည့် input point cloud layer
+   * - **Converted** **(ပြောင်းလဲထားပြီးသော)**
+     - ``OUTPUT``
+     - [point cloud]
+
+       Default: ``[Save to temporary file]``
+     - Output အနေဖြင့်အသုံးပြုမည့် point cloud ဖိုင်ကို သတ်မှတ်ပါ။ အောက်ပါတို့ထဲမှ တစ်ခုခုဖြစ်ပါသည်-
+
+       .. include:: ../algs_include.rst
+          :start-after: **file_output_types**
+          :end-before: **end_file_output_types**
+
+ရလာဒ်များ (Outputs)
+...................................
+
+.. list-table::
+   :header-rows: 1
+   :widths: 20 20 20 40
+
+   * - အညွှန်း
+     - အမည်
+     - အမျိုးအစား
+     - ရှင်းလင်းဖော်ပြချက်
+   * - **Converted** **(ပြောင်းလဲထားပြီးသော)**
+     - ``OUTPUT``
+     - [point cloud]
+     - မွမ်းမံပြင်ဆင်ထားသော ဖိုင် format တစ်ခုဖြင့် output point cloud layer။ လက်ရှိ ရရှိနိုင်သော format များမှာ :file:`.LAS` ၊ :file:`.LAZ` ၊ :file:`.COPC.LAZ` နှင့် :file:`.VPC` တို့ဖြစ်ပါသည်။
+
+Python code
+...........
+
+**Algorithm ID**: ``pdal:convertformat``
+
+.. include:: ../algs_include.rst
+  :start-after: **algorithm_code_section**
+  :end-before: **end_algorithm_code_section**
+
+
+.. _pdalexportraster:
+
+Raster အဖြစ် ထုတ်ယူခြင်း (Export to raster)
+----------------------------------------------------------------
+
+Point cloud data အား 2D raster grid တစ်ခုအဖြစ်သို့ ထုတ်ယူပေးပါသည်၊ raster grid တွင် ပေးထားသော resolution အတိုင်း cell အရွယ်အစားရှိမည်ဖြစ်ပြီး သတ်မှတ်ပေးထားသော attribute မှ တန်ဖိုးများကို ထည့်သွင်းရေးသားပေးပါသည်။
+
+.. figure:: img/point_cloud_exportraster.png
+   :align: center
+
+   Point များ၏ Intensity attribute ကိုအသုံးပြုထားသော Raster output
+
+သတ်မှတ်ချက်များ (Parameters)
+..................................................
+
+အခြေခံသတ်မှတ်ချက်များ (Basic parameters)
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+.. list-table::
+   :header-rows: 1
+   :widths: 20 20 20 40
+
+   * - အညွှန်း
+     - အမည်
+     - အမျိုးအစား
+     - ရှင်းလင်းဖော်ပြချက်
+   * - **Input layer** **(ထည့်သွင်းအသုံးပြုသော layer)**
+     - ``INPUT``
+     - [point cloud]
+     - Export ထုတ်ယူမည့် input point cloud layer
+   * - **Attribute** **(အချက်အလက်များ)**
+     - ``ATTRIBUTE``
+     - [field] [enumeration]
+     - တန်ဖိုးများထုတ်ယူမည့် point cloud layer ၏ field တစ်ခု
+   * - **Resolution of the density raster** **(Density raster ၏ ကြည်လင်ပြတ်သားမှု)**
+     - ``RESOLUTION``
+     - [number]
+
+       Default: 1.0
+     - Output raster ၏ cell အရွယ်အစား
+   * - **Tile size for parallel runs** **(အပြိုင် run ခြင်းများအတွက် Tile အရွယ်အစား)**
+     - ``TILE_SIZE``
+     - [number]
+
+       Default: 1000
+     -
+   * - **Exported** **(ထုတ်ယူထားပြီးသော)**
+     - ``OUTPUT``
+     - [raster]
+
+       Default: ``[Save to temporary file]``
+     - Data များကိုထုတ်ယူမည့် raster ဖိုင်ကို သတ်မှတ်ပါ။ အောက်ပါတို့ထဲမှ တစ်ခုခုဖြစ်ပါသည်-
+
+       .. include:: ../algs_include.rst
+          :start-after: **file_output_types**
+          :end-before: **end_file_output_types**
+
+အဆင့်မြင့်သတ်မှတ်ချက်များ (Advanced parameters)
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+.. list-table::
+   :header-rows: 1
+   :widths: 20 20 20 40
+
+   * - အညွှန်း
+     - အမည်
+     - အမျိုးအစား
+     - ရှင်းလင်းဖော်ပြချက်
+   * - **Filter expression**
+
+       Optional (မဖြစ်မနေလုပ်ဆောင်ရန်မလိုပါ)
+     - ``FILTER_EXPRESSION``
+     - [expression]
+     - Point cloud data ထဲရှိ feature များအစုတစ်ခုကို ရွေးချယ်ရန်အတွက် :ref:`PDAL expression <pdal_expressions>` တစ်ခု။
+   * - **Cropping extent** **(ဖြတ်ထုတ်မည့် နယ်ပယ်အကျယ်အဝန်း)**
+
+       Optional (မဖြစ်မနေလုပ်ဆောင်ရန်မလိုပါ)
+     - ``FILTER_EXTENT``
+     - [extent]
+     - Point cloud data ထဲရှိ feature များအစုတစ်ခုကို ရွေးချယ်ရန်အတွက် မြေပုံ နယ်ပယ်အကျယ်အဝန်း (extent)။
+
+       .. include:: ../algs_include.rst
+          :start-after: **extent_options**
+          :end-before: **end_extent_options**
+
+   * - **X origin of a tile for parallel runs** **(အပြိုင် run ခြင်းများအတွက် tile တစ်ခု၏ X မူလအစ)**
+
+       Optional (မဖြစ်မနေလုပ်ဆောင်ရန်မလိုပါ)
+     - ``ORIGIN_X``
+     - [number]
+     -
+   * - **Y origin of a tile for parallel runs** **(အပြိုင် run ခြင်းများအတွက် tile တစ်ခု၏ Y မူလအစ)**
+
+       Optional (မဖြစ်မနေလုပ်ဆောင်ရန်မလိုပါ)
+     - ``ORIGIN_Y``
+     - [number]
+     -
+
+ရလာဒ်များ (Outputs)
+............................
+
+.. list-table::
+   :header-rows: 1
+   :widths: 20 20 20 40
+
+   * - အညွှန်း
+     - အမည်
+     - အမျိုးအစား
+     - ရှင်းလင်းဖော်ပြချက်
+   * - **Exported**
+     - ``OUTPUT``
+     - [raster]
+     - Point cloud layer ၏ feature များကို ထုတ်ယူထားသော output raster layer ။ လက်ရှိ ရရှိနိုင်သော format မှာ :file:`.TIF` ဖြစ်ပါသည်။
+
+Python code
+...........
+
+**Algorithm ID**: ``pdal:exportraster``
+
+.. include:: ../algs_include.rst
+  :start-after: **algorithm_code_section**
+  :end-before: **end_algorithm_code_section**
+
+.. _pdalexportrastertin:
+
+Raster အဖြစ်သို့ ထုတ်ယူခြင်း (Triangulation ကိုအသုံးပြု၍) (Export raster (using triangulation))
+---------------------------------------------------------------------------------------------------------
+
+Point များကို (triangulation) တြိဂံဖွဲ့ပြီးနောက် တြိဂံများမှ cell တန်ဖိုးများကို interpolate (သွယ်ဝိုက်တွက်ချက်) လုပ်ပြီး point cloud data များကို 2D raster grid တစ်ခုအဖြစ်သို့ export ထုတ်ပေးပါသည်။
+
+.. note:: ကြီးမားသော Dataset များအတွက် ဤ algorithm ကိုအသုံးပြုပါက နှေးကွေးစေနိုင်ပါသည်။ Point cloud သည် သိပ်သည်းမှုများပါက :ref:`pdalexportraster` algorithm အသုံးပြုပြီး မြေပြင် point များကို raster တစ်ခုအနေဖြင့် export ထုတ်ယူနိုင်ပါသည်။
+
+.. figure:: img/point_cloud_exportrastertin.png
+   :align: center
+
+   Point cloud triangulation နည်းဖြင့် ထုတ်ယူထားသော Terrain raster output
+
+သတ်မှတ်ချက်များ (Parameters)
+........................................
+
+အခြေခံသတ်မှတ်ချက်များ (Basic parameters)
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+.. list-table::
+   :header-rows: 1
+   :widths: 20 20 20 40
+
+   * - အညွှန်း
+     - အမည်
+     - အမျိုးအစား
+     - ရှင်းလင်းဖော်ပြချက်
+   * - **Input layer** **(ထည့်သွင်းအသုံးပြုသော layer)**
+     - ``INPUT``
+     - [point cloud]
+     - Export ထုတ်ယူမည့် input point cloud layer
+   * - **Resolution of the density raster** **(Density raster ၏ ကြည်လင်ပြတ်သားမှု)**
+     - ``RESOLUTION``
+     - [number]
+
+       Default: 1.0
+     - Output raster ၏ cell အရွယ်အစား
+   * - **Tile size for parallel runs** **(အပြိုင် run ခြင်းများအတွက် Tile အရွယ်အစား)**
+     - ``TILE_SIZE``
+     - [number]
+
+       Default: 1000
+     -
+   * - **Exported**
+     - ``OUTPUT``
+     - [raster]
+
+       Default: ``[Save to temporary file]``
+     - Data များကို export ထုတ်ယူမည့် raster ဖိုင်ကို သတ်မှတ်ပါ။ အောက်ပါတို့ထဲမှ တစ်ခုခုဖြစ်ပါသည်-
+
+       .. include:: ../algs_include.rst
+          :start-after: **file_output_types**
+          :end-before: **end_file_output_types**
+
+အဆင့်မြင့်သတ်မှတ်ချက်များ (Advanced parameters)
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+.. list-table::
+   :header-rows: 1
+   :widths: 20 20 20 40
+
+   * - အညွှန်း
+     - အမည်
+     - အမျိုးအစား
+     - ရှင်းလင်းဖော်ပြချက်
+   * - **Filter expression**
+
+       Optional (မဖြစ်မနေလုပ်ဆောင်ရန်မလိုပါ)
+     - ``FILTER_EXPRESSION``
+     - [expression]
+     - Point cloud data ထဲရှိ feature များအစုတစ်ခုကို ရွေးချယ်ရန်အတွက် :ref:`PDAL expression <pdal_expressions>` တစ်ခု။
+   * - **Cropping extent** **(ဖြတ်ထုတ်မည့် နယ်ပယ်အကျယ်အဝန်း)**
+
+       Optional (မဖြစ်မနေလုပ်ဆောင်ရန်မလိုပါ)
+     - ``FILTER_EXTENT``
+     - [extent]
+     - Point cloud data ထဲရှိ feature များအစုတစ်ခုကို ရွေးချယ်ရန်အတွက် မြေပုံ နယ်ပယ်အကျယ်အဝန်း (extent)။
+
+       .. include:: ../algs_include.rst
+          :start-after: **extent_options**
+          :end-before: **end_extent_options**
+
+   * - **X origin of a tile for parallel runs** **(အပြိုင် run ခြင်းများအတွက် tile တစ်ခု၏ X မူလအစ)**
+
+       Optional (မဖြစ်မနေလုပ်ဆောင်ရန်မလိုပါ)
+     - ``ORIGIN_X``
+     - [number]
+     -
+   * - **Y origin of a tile for parallel runs** **(အပြိုင် run ခြင်းများအတွက် tile တစ်ခု၏ Y မူလအစ)**
+
+       Optional (မဖြစ်မနေလုပ်ဆောင်ရန်မလိုပါ)
+     - ``ORIGIN_Y``
+     - [number]
+     -
+
+ရလာဒ်များ (Outputs)
+............................
+
+.. list-table::
+   :header-rows: 1
+   :widths: 20 20 20 40
+
+   * - အညွှန်း
+     - အမည်
+     - အမျိုးအစား
+     - ရှင်းလင်းဖော်ပြချက်
+   * - **Exported (using triangulation)**
+     - ``OUTPUT``
+     - [raster]
+     - Point cloud layer ၏ feature များကို ထုတ်ယူထားသော output raster layer ။ လက်ရှိ ရရှိနိုင်သော format မှာ :file:`.TIF` ဖြစ်ပါသည်။
+
+Python code
+...........
+
+**Algorithm ID**: ``pdal:exportrastertin``
+
+.. include:: ../algs_include.rst
+  :start-after: **algorithm_code_section**
+  :end-before: **end_algorithm_code_section**
+
+
+.. _pdalexportvector:
+
+Vector အဖြစ်သို့ ထုတ်ယူခြင်း (Export to vector)
+----------------------------------------------------------------
+
+Point cloud data များကို 3D point များနှင့် attribute အပိုများပါဝင်သော vector layer တစ်ခု (GeoPackage) အဖြစ်သို့ export ထုတ်ပေးပါသည်၊ 
+
+.. figure:: img/point_cloud_exportvector.png
+   :align: center
+
+   Point cloud (ground points) ကို vector layer တစ်ခုအဖြစ်သို့ export ထုတ်ယူခြင်း၊ elevation ပေါ်မူတည်ပြီး vector layer ကို စတိုင်လ်ပြင်ဆင်ထားပါသည်
+
+သတ်မှတ်ချက်များ (Parameters)
+..................................................
+
+အခြေခံသတ်မှတ်ချက်များ (Basic parameters)
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+.. list-table::
+   :header-rows: 1
+   :widths: 20 20 20 40
+
+   * - အညွှန်း
+     - အမည်
+     - အမျိုးအစား
+     - ရှင်းလင်းဖော်ပြချက်
+   * - **Input layer** **(ထည့်သွင်းအသုံးပြုသော layer)**
+     - ``INPUT``
+     - [point cloud]
+     - Export ထုတ်ယူမည့် input point cloud layer
+   * - **Attribute** **(အချက်အလက်)**
+
+       Optional (မဖြစ်မနေလုပ်ဆောင်ရန် မလိုအပ်ပါ)
+     - ``ATTRIBUTE``
+     - [field] [list]
+     - Point များဖြင့် export ထုတ်ယူမည့် point cloud layer ၏ တစ်ခု သို့မဟုတ် တစ်ခုထက်ပိုသော field များ
+   * - **Exported**
+     - ``OUTPUT``
+     - [vector]
+
+       Default: ``[Save to temporary file]``
+     - Data များကို export ထုတ်ယူထားသော vector ဖိုင်ကို သတ်မှတ်ပါ။ အောက်ပါတို့ထဲမှ တစ်ခုခုဖြစ်ပါသည်-
+
+       .. include:: ../algs_include.rst
+          :start-after: **file_output_types**
+          :end-before: **end_file_output_types**
+
+အဆင့်မြင့်သတ်မှတ်ချက်များ (Advanced parameters)
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+.. list-table::
+   :header-rows: 1
+   :widths: 20 20 20 40
+
+   * - အညွှန်း
+     - အမည်
+     - အမျိုးအစား
+     - ရှင်းလင်းဖော်ပြချက်
+   * - **Filter expression**
+
+       Optional (မဖြစ်မနေလုပ်ဆောင်ရန်မလိုပါ)
+     - ``FILTER_EXPRESSION``
+     - [expression]
+     - Point cloud data ထဲရှိ feature များအစုတစ်ခုကို ရွေးချယ်ရန်အတွက် :ref:`PDAL expression <pdal_expressions>` တစ်ခု။
+   * - **Cropping extent** **(ဖြတ်ထုတ်မည့် နယ်ပယ်အကျယ်အဝန်း)**
+
+       Optional (မဖြစ်မနေလုပ်ဆောင်ရန်မလိုပါ)
+     - ``FILTER_EXTENT``
+     - [extent]
+     - Point cloud data ထဲရှိ feature များအစုတစ်ခုကို ရွေးချယ်ရန်အတွက် မြေပုံ နယ်ပယ်အကျယ်အဝန်း (extent)။
+
+       .. include:: ../algs_include.rst
+          :start-after: **extent_options**
+          :end-before: **end_extent_options**
+
+ရလာဒ်များ (Outputs)
+...................................
+
+.. list-table::
+   :header-rows: 1
+   :widths: 20 20 20 40
+
+   * - အညွှန်း
+     - အမည်
+     - အမျိုးအစား
+     - ရှင်းလင်းဖော်ပြချက်
+   * - **Exported**
+     - ``OUTPUT``
+     - [vector]
+     - Point cloud layer ၏ feature များကို ထုတ်ယူထားသော output vector layer ။ လက်ရှိ ရရှိနိုင်သော format မှာ :file:`.GPKG` ဖြစ်ပါသည်။
+
+Python code
+...........
+
+**Algorithm ID**: ``pdal:exportvector``
+
+.. include:: ../algs_include.rst
+  :start-after: **algorithm_code_section**
+  :end-before: **end_algorithm_code_section**

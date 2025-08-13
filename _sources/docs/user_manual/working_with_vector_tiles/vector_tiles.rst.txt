@@ -1,0 +1,214 @@
+.. index:: Vector Tiles, vector tiles properties
+.. _`label_vector_tiles`:
+
+***************************************************************************
+Vector Tiles များနှင့်အလုပ်လုပ်ခြင်း (Working with Vector Tiles)
+***************************************************************************
+
+.. only:: html
+
+   .. contents::
+      :local:
+
+Vector Tile ဆိုသည်မှာ ဘယ်လိုအရာတွေလဲ (What are Vector Tiles?)
+========================================================================================
+
+Vector tile များဆိုသည်မှာ ဝက်ဘ်ဆိုဒ်ပေါ်တွင် Transfer (ကူးပြောင်းမှု) ပြုလုပ်ရန်အတွက် 
+ကြိုတင်ချမှတ်ထားသော စတုရန်းပုံစံဆန်ဆန် အကွက်များအတွင်း ပထဝီဝင်နှင့်ဆိုင်သော အချက်အလက်များကို 
+ထည့်သွင်းသော အရာများဖြစ်ပါသည်။ ကြိုတင် ပုံဖော်ပြသထားသော Raster map Tiles များနှင့် 
+Vector map Tiles များကို စုပေါင်းထားကြပါသည်။ Vector tile server သည် ကြိုတင် ပုံဖော်ပြသထားသော 
+မြေပုံကိုဖော်ပြပေးမည့်အစား Tile တစ်ခုချင်းစီရဲ့ နယ်နိမိတ်အတိုင်းဖြတ်ထုတ်ထားသော Vector map data များကို 
+ဖော်ပြပေးပါသည်။ ဖြတ်ထုတ်ထားသော Tiles များသည် ပိရမစ် ပုံစံအတိုင်း (Zoom-level တိုးလေလေ Tiles အရေအတွက်များလေလေ) 
+Vector tile Service ရဲ့ zoom-levels (မြင်ကွင်းအချုံ့အချဲ့) ကို ကိုယ်စားပြုပါသည်။
+ထိုပုံစံကိုအသုံးပြုသည့်အတွက် Un-tiled vector maps များနှင့် နှိုင်းယှဉ်ကြည့်တဲ့အခါ Data transfer လျော့နည်းပြီး ပိုမိုမြန်ဆန်လာပါသည်။
+လက်ရှိ မြင်နေရတဲ့ မြေပုံမြင်ကွင်းနှင့် လက်ရှိ Zoom-level အတွင်းမှာရှိသည့် Data များကိုသာ Transfer လုပ်ပေးရန် လိုအပ်ပါသည်။
+Tiled raster maps များနှင့် နှိုင်းယှဉ်ကြည့်တဲ့အခါမှာလည်း Vector data သည် Rendered (ပုံဖော်ပြသထားသော) bitmap ထက် များစွာသေးငယ်သောကြောင့် 
+Data transfer လုပ်ရာတွင် များစွာလျော့နည်းစေပါသည်။ Vector tiles များတွင် သတ်မှတ်ထားသည့် Styling information တွေမပါရှိသည့်အတွက် 
+Data များကို ကြည့်ရှုဖို့ရန်အတွက် QGIS တွင် Cartographic (မြေပုံဆွဲပြင်ဆင်ခြင်းနှင့်ဆိုင်သော) Style များ ပြင်ဆင်ပေးရန် လိုအပ်ပါသည်။
+
+.. _figure_vector_tiles_pyramidstructure:
+
+.. figure:: img/vector_tiles_pyramid_structure.png
+   :align: center
+
+   Zoom-levels အလိုက် Vector tiles များ၏ ပိရမစ်ပုံစံ တည်ဆောက်ပုံ
+
+
+အသုံးပြုနိုင်သည့် Format များ (Supported Formats)
+====================================================================
+
+Vector tiles များအတွက် အသုံးပြုနိုင်သည့် Format များမှာ-
+
+* XYZ Template များအသုံးပြုသည့် အွန်လိုင်း Source များ (HTTP/S) - ``type=xyz&url=http://example.com/{z}/{x}/{y}.pbf``
+* XYZ Template များအသုံးပြုသည့် ကွန်ပျူတာအတွင်းရှိ ဖိုင်များ - ဥပမာ ``type=xyz&url=file:///path/to/tiles/{z}/{x}/{y}.pbf``
+* ကွန်ပျူတာအတွင်းရှိ MBTiles (Tiles အစုများကို သိုလှောင်ထားသော file format) Database - ဥပမာ ``type=mbtiles&url=file:///path/to/file.mbtiles``
+
+Vector tiles dataset ကို QGIS အတွင်းသို့ ထည့်သွင်းရန် :guilabel:`Data Source Manager` dialog ထဲမှ |addVectorTileLayer| :guilabel:`Vector Tile` tab
+ကို အသုံးပြုပါ။ အသေးစိတ်သိရှိလိုပါက :ref:`vector_tiles` တွင် ဖတ်ရှုနိုင်ပါသည်။
+
+.. _vectortiles_properties:
+
+Vector Tiles Dataset ဂုဏ်သတ္တိများ (Vector Tiles Dataset Properties)
+=============================================================================================
+
+Vector tiles :guilabel:`Layer Properties` dialog ထဲတွင် အောက်ပါကဏ္ဍများပါဝင်ပါသည်-
+
+.. list-table::
+
+   * - |metadata| :ref:`Information <vectortilesinformationmenu>`
+     - |system| :ref:`Source <vectortilessourcemenu>`
+     - |symbology| :ref:`Symbology <vectortilesstylesmenu>`:sup:`[1]`
+   * - |labelingSingle| :ref:`Labels <vectortilesstylesmenu>`:sup:`[1]`
+     - |rendering| :ref:`Rendering <vectortilesrenderingmenu>`
+     - |editMetadata| :ref:`Metadata <vectortilesmetadatamenu>`
+
+:sup:`[1]` :ref:`Layer styling panel <layer_styling_panel>` ထဲတွင်လည်း တွေ့နိုင်ပါသည်။
+
+
+.. _vectortilesinformationmenu:
+
+သတင်းအချက်အလက်ဆိုင်ရာ ဂုဏ်သတ္တိများ (Information Properties)
+----------------------------------------------------------------------------------------
+
+:guilabel:`Information` tab သည် ဖတ်ရှုရုံသာ ဖြစ်ပြီး လက်ရှိအလွှာ၏ အကျဉ်းချုပ်အချက်အလက်နှင့် 
+Metadata ကို ခပ်မြန်မြန်ကြည့်ရှုနိုင်သည့် စိတ်ဝင်စားစရာနေရာတစ်ခုဖြစ်ပါသည်။ ကြည့်ရှုနိုင်သည့် အချက်အလက်များမှာ-
+
+* အလွှာဖန်တီးသူပေါ်မူတည်ပြီး - အမည်၊ URI၊ အရင်းအမြစ်ပုံစံနှင့် ဖိုင်လမ်းကြောင်း၊ Zoom-levels အရေအတွက်
+* စိတ်ကြိုက်ဂုဏ်သတ္တိများ- active project ထဲတွင် layer အကြောင်း အချက်အလက်အပိုများ သိမ်းဆည်းလေ့ရှိပါသည်။ နောက်ထပ်ဂုဏ်သတ္တိများကို PyQGIS ၊ အထူးသဖြင့် :pyqgis:`setCustomProperty() <qgis.core.QgsMapLayer.setCustomProperty>` နည်းလမ်းများမှ သီးခြားစီ ဖန်တီးနိုင်ပြီး စီမံခန့်ခွဲနိုင်ပါသည်။
+* Coordinate Reference System - အမည်၊ ယူနစ်များ၊ နည်းလမ်း၊ တိကျမှု၊ အကိုးအကား (ပုံသေအငြိမ်ဖြစ်သော (static) သို့မဟုတ် ပြောင်းလဲနိုင်သော (dynamic) ကိုဆိုလိုပါသည်)
+* :ref:`ဖြည့်သွင်းထားသည့် metadata <vectortilesmetadatamenu>` မှ ထုတ်ယူထားသော - အသုံးပြုခွင့်၊ အကျယ်အဝန်း၊ အချိတ်အဆက်များ (links)၊ အဆက်အသွယ်၊ data ၏သမိုင်းကြောင်း၊ အစရှိသည်....
+
+.. _vectortilessourcemenu:
+
+ရင်းမြစ်ဆိုင်ရာ ဂုဏ်သတ္တိများ (Source Properties)
+---------------------------------------------------
+
+|system| :guilabel:`Source` tab တွင် ရွေးချယ်ထားသော vector tile နှင့်ပတ်သက်သော အခြေခံသတင်းအချက်အလက်များကို ပြသပေးပါသည်၊ အောက်ပါတို့ပါဝင်ပါသည်-
+
+* :guilabel:`Layers Panel` ထဲတွင် ပြသမည့် :guilabel:`Layer name` ၊
+* :guilabel:`Coordinate Reference System` - layer ၏ :ref:`Coordinate Reference System (CRS) <layer_crs>` ကိုပြသပေးပါသည်။ Drop-down စာရင်းထဲတွင် လတ်တလော အသုံးပြုခဲ့သော CRS ကို ရွေးချယ်နိုင်ခြင်းဖြင့် သို့မဟုတ် |setProjection| :sup:`Select CRS` ခလုတ်ကို နှိပ်ခြင်းဖြင့် layer ၏ CRS ကိုပြောင်းလဲပေးနိုင်ပါသည် (:ref:`crs_selector` တွင်ကြည့်ပါ)။ Layer CRS မှားယွင်းနေမှသာ သို့မဟုတ် CRS သတ်မှတ်ထားခြင်းမရှိမှသာ ဤလုပ်ငန်းစဉ်ကို အသုံးပြုပါ။
+
+.. _figure_vector_tile_source:
+
+.. figure:: img/vector_tiles_source.png
+   :align: center
+
+   Vector Tiles ဂုဏ်သတ္တိများ - Source Dialog
+
+
+.. _vectortilesstylesmenu:
+
+မြေပုံသင်္ကေတ နှင့် အညွှန်း တို့၏ဂုဏ်သတ္တိများ (Symbology and Label Properties)
+---------------------------------------------------------------------------------------------
+
+.. _figure_vector_tile_symbology:
+
+.. figure:: img/vector_tiles_symbology.png
+   :align: center
+   :width: 100%
+
+   Vector Tile Layer Symbology
+
+စည်းမျဉ်းများ သတ်မှတ်ခြင်း (Setting rules)
+....................................................
+
+Vector tile များတွင် point ၊ line နှင့် polygon ဂျီဩမေတြီများပါဝင်သောကြောင့် သက်ဆိုင်ရာသင်္ကေတများ ရရှိနိုင်ပါသည်။ Cartographic (မြေပုံရေးဆွဲခြင်းဆိုင်ရာ) style (သင်္ကေတများနှင့်/သို့မဟုတ် အညွှန်းများ) ကိုအသုံးပြုရန် အောက်ပါအတိုင်းလုပ်ဆောင်နိုင်ပါသည်-
+
+* :ref:`Vector Tiles Connection <vector_tiles>` ဖန်တီးသောအခါ :guilabel:`Style URL` တစ်ခုကိုအသုံးပြုပါ။ Layer ကို QGIS ထဲသို့ထည့်သွင်းပြီးသောအခါ သင်္ကေတကို |symbology| :guilabel:`Symbology` tab ထဲတွင် ချက်ချင်ပြသပေးပါလိမ့်မည်။
+* သို့မဟုတ် layer properties ၏ သက်ဆိုင်ရာ tab များထဲတွင် ကိုယ်ပိုင် သင်္ကေတနှင့်အညွှန်းများ တည်ဆောက်ပါ။ Default အားဖြင့် QGIS သည် feature များ၏ဂျီဩမေတြီအမျိုးအစားပေါ်မူတည်ပြီး တူညီသောသင်္ကေတကို သတ်မှတ်ပေးပါသည်။
+
+In both cases, setting a style for a vector tile relies on a set of :ref:`rules <rule_based_rendering>`
+applied to the features, indicating:
+နည်းလမ်း ၂ ခုစလုံးတွင် vector tile တစ်ခုအတွက် style သတ်မှတ်ခြင်းသည် feature များတွင် အသုံးပြုထားသော :ref:`rules <rule_based_rendering>` များပေါ်တွင် မူတည်ပါသည်=
+
+* vector :ref:`symbol <symbol-selector>` သို့မဟုတ် :ref:`label <showlabels>` တစ်ခု
+* :guilabel:`Label` တစ်ခု၊ rule ကိုရှင်းလင်းအော်ဖော်ပြသည့် ခေါင်းစဉ်တစ်ခု
+* Rule အသုံးပြုသင့်သည့် သီးခြား :guilabel:`Layer` တစ်ခု၏နာမည်၊ rule အသုံးမပြုထားပါက ``(all layers)``
+* ပြသမည့် အပိုင်းအခြားအတွက် :guilabel:`Min. Zoom` နှင့် :guilabel:`Max. Zoom` ။ သင်္ကေတနှင့် အညွှန်းများသည် zoom level ပေါ်တွင် မူတည်နိုင်ပါသည်။ 
+* :guilabel:`Filter` တစ်ခု၊ style အသုံးပြုမည့် feature ကို သတ်မှတ်ဖော်ထုတ်ရန် QGIS expression တစ်ခု
+
+You can as well |symbologyRemove| :sup:`Remove selected rules` or |symbologyEdit| :sup:`Edit current rule`.
+|symbologyAdd| :sup:`Add rule` ခလုတ်နှိပ်ကာ သက်ဆိုင်ရာ feature ဂျီဩမေတြီအမျိုးအစားအလိုက် သင်္ကေတအမျိုးအစား (:guilabel:`Marker` ၊ :guilabel:`Line` ၊ :guilabel:`Fill`) ကိုရွေးချယ်ပြီး Rule တစ်ခုချင်းစီကို ထည့်သွင်းပါသည်။ |symbologyRemove| :sup:`Remove selected rules` (ရွေးချယ်ထားသော rule ကိုဖယ်ရှားခြင်း) သို့မဟုတ် |symbologyEdit| :sup:`Edit current rule` (လက်ရှိ rule ကို တည်းဖြတ်ခြင်း) ကိုလည်း လုပ်ဆောင်နိုင်ပါသည်။
+
+အောက်ခြေတွင် :guilabel:`Current Zoom` (လက်ရှိ zoom level) ကိုပြသထားပါသည်။ Dialog ၏ အပေါ်ရှိ |unchecked| :guilabel:`Visible rules only` option ကိုအမှန်ခြစ်ပြီး လက်ရှိ zoom level တွင်မြင်ရသော rule များကိုသာ filter လုပ်နိုင်ပါသည်။ ဤအရာသည် ရှုပ်ထွေးသော vector style များနှင့်အလုပ်လုပ်ရာတွင် ပိုမိုလွယ်ကူစေပြီး ပြဿနာဖြစ်နိုင်သော rule များကို တွေ့ရှိစေနိုင်ပါသည်။ |search| :guilabel:`Filter rules` text box တွင် :guilabel:`Label` ၊ :guilabel:`Layer` နှင့် :guilabel:`Filter` field များတွင်ရှာဖွေခြင်းဖြင့်လည်း rule တစ်ခုကို အလွယ်တကူ ရှာတွေ့နိုင်ပါသည်။
+
+:numref:`figure_vector_tile_symbology` ထဲတွင် OpenStreetMap ``landuse`` layer အတွက် style များကို သတ်မှတ်ပါသည်။ ပိုမိုကောင်းမွန်စွာမြင်ရနိုင်ရန် rule အများစုကို select မပြုလုပ်ထားပါ။
+
+Layer ပုံဖော်ပြသခြင်း (Layer rendering)
+.............................................
+
+Layer ၏ feature များအားလုံးတွင် ပြောင်းလဲပြုမူပေးသော option အချို့ကိုလည်း :guilabel:`Symbology` tab မှသတ်မှတ်ပေးနိုင်ပါသည်-
+
+* :guilabel:`Opacity` - မြေပုံမြင်ကွင်းထဲရှိ အောက်ခြေတွင်ရှိနေသော layer ကို မြင်ရအောင် ဤ tool ဖြင့်  ပြုလုပ်ပေးနိုင်ပါသည်။ သင်လိုအပ်သလို vector layer ၏ မြင်ရနိုင်မှုကို ချိန်ညှိရန် slider ကိုအသုံးပြုပါ။ Slider ၏ဘေးရှိ menu ထဲတွင် မြင်ရနိုင်မှု ရာခိုင်နှုန်းအတိအကျကိုလည်း သတ်မှတ်ပေးနိုင်ပါသည်။
+* :guilabel:`Blending mode` - ယခင်က graphic program များတွင်သာ သိရှိခဲ့ဖူးသော ဤ tool များဖြင့် ပုံဖော်ပြသမှု အထူးပြုလုပ်ချက် (special rendering effect) များကို လုပ်ဆောင်နိုင်ပါသည်။ အပေါ်အောက်ရှိနေသော layer များ၏ pixel များသည် :ref:`blend-modes` ထဲတွင်ဖော်ပြထားသော setting များအတိုင်း ရောနှောသွားမည်ဖြစ်သည်။
+
+စတိုင်လ်များ (Styles)
+........................
+
+Tab အများစု၏ အောက်ခြေတွင် တွေ့ရနိုင်သော :menuselection:`Styles -->` menu တွင် သိမ်းဆည်းခြင်း ၊ ထည့်သွင်းခြင်း၊ vector tile များတွင်အသုံးပြုသော style များပြောင်းလဲခြင်းအတွက် shortcut များပါရှိပါသည်။ Vector tile များတွင် QGIS မှ :guilabel:`QML` ဖိုင်များအဖြစ်သိမ်းဆည်းထားသော ၎င်းတို့၏ style များပါရှိနိုင်ပြီး အောက်ပါတို့အနေဖြင့် import လုပ်နိုင်ပါသည်-
+
+* :guilabel:`QML` ဖိုင်များ (:ref:`qgisstylefile`)
+* :guilabel:`MapBox GL Json` style configuration ဖိုင်များ
+
+:ref:`save_layer_property` တွင် အသေးစိတ်ကြည့်ရှုပါ။
+
+.. _vectortilesrenderingmenu:
+
+ပုံဖော်ပြသမှု ဂုဏ်သတ္တိများ (Rendering Properties)
+------------------------------------------------------------
+
+:guilabel:`Scale dependent visibility` (စကေးပေါ်မူတည်သည့် မြင်ရနိုင်မှု) အောက်တွင် :guilabel:`အများဆုံး (သူ့အောက်ဆိုရင် မြင်ရ)` နှင့် :guilabel:`အနည်းဆုံး (သူ့အောက်ဆိုရင် မမြင်ရ)` စကေးကို သတ်မှတ်ပေးနိုင်ပါသည်။ ၎င်းသည် mesh element များကိုမြင်ရနိုင်သော စကေးအပိုင်းအခြားကို သတ်မှတ်ပေးမည်ဖြစ်သည်။ ထိုစကေးအပိုင်းအခြားအတွင်း မဝင်လျှင် layer များကို မြင်ရမည်မဟုတ်ပါ။ 
+|mapIdentification| :sup:`Set to current canvas scale` (လက်ရှိမြေပုံ canvas စကေးအတိုင်းသတ်မှတ်ခြင်း) ခလုတ်ကိုနှိပ်ပြီး လက်ရှိမြေပုံ canvas စကေးကို မြင်ရနိုင်သည့် စကေးအပိုင်းအခြားအဖြစ်သတ်မှတ်ပေးနိုင်ပါသည်။ ပိုမိုသိရှိလိုသည်များအတွက် :ref:`label_scaledepend` တွင် ကြည့်ရှုပါ။
+
+.. _figure_vector_tile_rendering:
+
+.. figure:: img/vector_tiles_rendering.png
+   :align: center
+
+   Vector Tiles ဂုဏ်သတ္တိများ - Rendering Dialog
+
+
+.. index:: Metadata, Metadata editor, Keyword
+.. _vectortilesmetadatamenu:
+
+Metadata ဂုဏ်သတ္တိများ (Metadata Properties)
+----------------------------------------------------------------------------
+
+|editMetadata| :guilabel:`Metadata` tab တွင် layer နဲ့ပတ်သက်သည့် Metadata report ကို ဖန်တီးခြင်းနှင့် ပြင်ဆင်ခြင်းများ လုပ်ဆောင်နိုင်ပါသည်။ 
+ပိုမိုသိရှိလိုသည်များအတွက် :ref:`metadatamenu` တွင် ကြည့်ရှုပါ။
+
+
+.. Substitutions definitions - AVOID EDITING PAST THIS LINE
+   This will be automatically updated by the find_set_subst.py script.
+   If you need to create a new substitution manually,
+   please add it also to the substitutions.txt file in the
+   source folder.
+
+.. |addVectorTileLayer| image:: /static/common/mActionAddVectorTileLayer.png
+   :width: 1.5em
+.. |editMetadata| image:: /static/common/editmetadata.png
+   :width: 1.2em
+.. |labelingSingle| image:: /static/common/labelingSingle.png
+   :width: 1.5em
+.. |mapIdentification| image:: /static/common/mActionMapIdentification.png
+   :width: 1.5em
+.. |metadata| image:: /static/common/metadata.png
+   :width: 1.5em
+.. |rendering| image:: /static/common/rendering.png
+   :width: 1.5em
+.. |search| image:: /static/common/search.png
+   :width: 1.5em
+.. |setProjection| image:: /static/common/mActionSetProjection.png
+   :width: 1.5em
+.. |symbology| image:: /static/common/symbology.png
+   :width: 2em
+.. |symbologyAdd| image:: /static/common/symbologyAdd.png
+   :width: 1.5em
+.. |symbologyEdit| image:: /static/common/symbologyEdit.png
+   :width: 1.5em
+.. |symbologyRemove| image:: /static/common/symbologyRemove.png
+   :width: 1.5em
+.. |system| image:: /static/common/system.png
+   :width: 1.5em
+.. |unchecked| image:: /static/common/unchecked.png
+   :width: 1.3em

@@ -1,0 +1,296 @@
+.. _processing_algs_input_output:
+
+****************************************************************************************************************************************************
+Processing Algorithm များအတွက် Input နှင့် Output အမျိုးအစားများ (Input and output types for Processing Algorithms)
+****************************************************************************************************************************************************
+
+သက်ဆိုင်သော alg decorator ကိန်းသေများပါဝင်ပြီး processing ထဲတွင် လုပ်ဆောင်နိုင်သော Input နှင့် Output အမျိုးအစားများစာရင်းကို အောက်တွင် ဖော်ပြထားပါသည်။
+
+Input types (ထည့်သွင်းအသုံးပြုသည့်အချက်အလက် အမျိုးအစားများ)
+================================================================
+
+
+.. list-table::
+   :widths: 20 25 20 30
+   :header-rows: 1
+   :class: longtable
+
+   * - Input နာမည်
+     - Class
+     - Alg constant
+     - ရှင်းလင်းဖော်ပြချက်
+   * - Annotation (မှတ်စာ) layer
+     - :class:`QgsProcessingParameterAnnotationLayer <qgis.core.QgsProcessingParameterAnnotationLayer>`
+     - ``alg.ANNOTATION_LAYER``
+     - Annotation (မှတ်စာ) layer တစ်ခု
+   * - Area (ဧရိယာ)
+     - :class:`QgsProcessingParameterArea <qgis.core.QgsProcessingParameterArea>`
+     -
+     - ဧရိယာအတိုင်းအတာတစ်ခုကို ကိုယ်စားပြုသော ကိန်းဂဏန်း parameter တစ်ခု
+   * - Authentication Configuration (အစစ်အမှန်ဖြစ်ခြင်းဆိုင်ရာ ပြင်ဆင်သတ်မှတ်ခြင်း)
+     - :class:`QgsProcessingParameterAuthConfig <qgis.core.QgsProcessingParameterAuthConfig>`
+     - ``alg.AUTH_CFG``
+     - ပေးထားသော authentication configuration များမှ ရွေးချယ်နိုင်ပါသည် သို့မဟုတ် authentication configuration အသစ်ကို ဖန်တီးနိုင်ပါသည်။
+   * - Raster band
+     - :class:`QgsProcessingParameterBand <qgis.core.QgsProcessingParameterBand>`
+     - ``alg.BAND``
+     - Raster layer ၏ band တစ်ခု
+   * - Boolean (အမှန် သို့မဟုတ် အမှား)
+     - :class:`QgsProcessingParameterBoolean <qgis.core.QgsProcessingParameterBoolean>`
+     - ``alg.BOOL``
+     - Boolean တန်ဖိုး
+   * - Connection Name (ချိတ်ဆက်မှုနာမည်)
+     - :class:`QgsProcessingParameterProviderConnection <qgis.core.QgsProcessingParameterProviderConnection>`
+     -
+     - သီးခြား data ပံ့ပိုးသူတစ်ခုအတွက် register လုပ်ထားသော ချိတ်ဆက်မှုများမှ ရွေးချယ်ခြင်း
+   * - Color (အရောင်)
+     - :class:`QgsProcessingParameterColor <qgis.core.QgsProcessingParameterColor>`
+     - ``alg.COLOR``
+     - အရောင်တစ်မျိုး
+   * - Coordinate Operation (ကိုဩဒိနိတ် လုပ်ဆောင်ချက်)
+     - :class:`QgsProcessingParameterCoordinateOperation <qgis.core.QgsProcessingParameterCoordinateOperation>`
+     - ``alg.COORDINATE_OPERATION``
+     - Coordinate operation တစ်ခု (CRS transformation များအတွက်)
+   * - CRS
+     - :class:`QgsProcessingParameterCrs <qgis.core.QgsProcessingParameterCrs>`
+     - ``alg.CRS``
+     - Coordinate Reference System (ကိုဩဒိနိတ်ရည်ညွှန်းစနစ်) တစ်ခု
+   * - Database Schema
+     - :class:`QgsProcessingParameterDatabaseSchema <qgis.core.QgsProcessingParameterDatabaseSchema>`
+     - ``alg.DATABASE_SCHEMA``
+     - Database schema တစ်ခု
+   * - Database Table
+     - :class:`QgsProcessingParameterDatabaseTable <qgis.core.QgsProcessingParameterDatabaseTable>`
+     - ``alg.DATABASE_TABLE``
+     - Database ဇယားတစ်ခု
+   * - Date (ရက်စွဲ)
+     - :class:`ProcessingDateTimeParameterDataType.Date <qgis.core.Qgis.ProcessingDateTimeParameterDataType>`
+     - ``alg.DATE``
+     - ရက်စွဲသီးသန့်တစ်ခု
+   * - Datetime (ရက်စွဲအချိန်)
+     - :class:`ProcessingDateTimeParameterDataType.DateTime <qgis.core.Qgis.ProcessingDateTimeParameterDataType>`
+     - ``alg.DATETIME``
+     - Datetime တစ်ခု
+   * - Distance (အကွာအဝေး)
+     - :class:`QgsProcessingParameterDistance <qgis.core.QgsProcessingParameterDistance>`
+     - ``alg.DISTANCE``
+     - အကွာအဝေးတန်ဖိုးများအတွက် double အမျိုးအစား ကိန်းဂဏန်း parameter တစ်ခု
+   * - DXF Layers
+     - :class:`QgsProcessingParameterDxfLayers <qgis.core.QgsProcessingParameterDxfLayers>`
+     -
+     - DXF ဖိုင်အနေဖြင့် export ထုတ်ရန် vector layer များစာရင်း
+   * - Enum
+     - :class:`QgsProcessingParameterEnum <qgis.core.QgsProcessingParameterEnum>`
+     - ``alg.ENUM``
+     - ကြိုတင်သတ်မှတ်ထားသောတန်ဖိုးများအစုမှ ရွေးချယ်နိုင်သော enumeration (ရေတွက်မှု) တစ်ခု
+   * - Expression
+     - :class:`QgsProcessingParameterExpression <qgis.core.QgsProcessingParameterExpression>`
+     - ``alg.EXPRESSION``
+     - Expression တစ်ခု
+   * - Extent (နယ်ပယ်အကျယ်အဝန်း)
+     - :class:`QgsProcessingParameterExtent <qgis.core.QgsProcessingParameterExtent>`
+     - ``alg.EXTENT``
+     - အနည်းဆုံး x တန်ဖိုး၊ အများဆုံး x တန်ဖိုး၊ အနည်းဆုံး y တန်ဖိုး၊ အများဆုံး y တန်ဖိုး တို့ဖြင့်သတ်မှတ်ထားသော တည်နေရာအကျယ်အဝန်းတစ်ခု
+   * -
+     - :class:`QgsProcessingParameterField <qgis.core.QgsProcessingParameterField>`
+     - ``alg.FIELD``
+     - Vector layer တစ်ခု၏ attribute ဇယားထဲရှိ field တစ်ခု
+   * - Field Aggregates (Field အစုအပေါင်းများ)
+     - :class:`QgsProcessingParameterAggregate <qgis.core.QgsProcessingParameterAggregate>`
+     -
+     - “aggregate” configuration အတွက် parameter တစ်ခုဖြစ်ပြီး လိုချင်သော output field များ၊ အမျိုးအစားများနှင့် အသုံးပြုသည့် aggregate ၏ အဓိပ္ပါယ်သတ်မှတ်ချက်ပါဝင်ပါသည်။
+   * - Fields Mapper
+     - :class:`QgsProcessingParameterFieldMapping <qgis.core.QgsProcessingParameterFieldMapping>`
+     -
+     - “field mapping” configuration အတွက် parameter တစ်ခုဖြစ်ပြီး လိုချင်သော output field များ၊ အမျိုးအစားများနှင့် အသုံးပြုသည့် expression များ၏ အဓိပ္ပါယ်သတ်မှတ်ချက်ပါဝင်ပါသည်။
+   * - File/Folder
+     - :class:`QgsProcessingParameterFile <qgis.core.QgsProcessingParameterFile>`
+     - ``alg.FILE``
+     - ရှိပြီးသားဖိုင်တစ်ခု၏ ဖိုင်နာမည်
+   * -
+     - :class:`QgsProcessingParameterFileDestination <qgis.core.QgsProcessingParameterFileDestination>`
+     - ``alg.FILE_DEST``
+     - အသစ်ဖန်တီးထားသော output ဖိုင်အတွက် ဖိုင်နာမည်တစ်ခု
+   * -
+     - :class:`QgsProcessingParameterFolderDestination <qgis.core.QgsProcessingParameterFolderDestination>`
+     - ``alg.FOLDER_DEST``
+     - Folder တစ်ခု (သိမ်းဆည်းမည့် folder)
+   * - Geometry (ဂျီဩမေတြီ)
+     - :class:`QgsProcessingParameterGeometry <qgis.core.QgsProcessingParameterGeometry>`
+     - ``alg.GEOMETRY``
+     - ဂျီဩမေတြီ
+   * -
+     - :class:`ProcessingNumberParameterType.Integer <qgis.core.Qgis.ProcessingNumberParameterType>`
+     - ``alg.INT``
+     - Integer (ကိန်းပြည့်) တစ်ခု
+   * - Print Layout (ပုံထုတ်အပြင်အဆင်)
+     - :class:`QgsProcessingParameterLayout <qgis.core.QgsProcessingParameterLayout>`
+     - ``alg.LAYOUT``
+     - Layout တစ်ခု
+   * - Print Layout Item
+     - :class:`QgsProcessingParameterLayoutItem <qgis.core.QgsProcessingParameterLayoutItem>`
+     - ``alg.LAYOUT_ITEM``
+     - Layout item တစ်ခု
+   * - Map Layer (မြေပုံ layer)
+     - :class:`QgsProcessingParameterMapLayer <qgis.core.QgsProcessingParameterMapLayer>`
+     - ``alg.MAPLAYER``
+     - မြေပုံ layer တစ်ခု
+   * - Map Theme
+     - :class:`QgsProcessingParameterMapTheme <qgis.core.QgsProcessingParameterMapTheme>`
+     - ``alg.MAP_THEME``
+     - Project map theme တစ်ခု
+   * - Matrix
+     - :class:`QgsProcessingParameterMatrix <qgis.core.QgsProcessingParameterMatrix>`
+     - ``alg.MATRIX``
+     - Matrix တစ်ခု
+   * - Mesh Dataset Groups
+     - :class:`QgsProcessingParameterMeshDatasetGroups <qgis.core.QgsProcessingParameterMeshDatasetGroups>`
+     -
+     - Mesh layer dataset အုပ်စုများ
+   * - Mesh Dataset Time
+     - :class:`QgsProcessingParameterMeshDatasetTime <qgis.core.QgsProcessingParameterMeshDatasetTime>`
+     - 
+     - အချိန်သတ်မှတ်ချက်အရ mesh layer တစ်ခုမှ Dataset index
+   * - Mesh Layer
+     - :class:`QgsProcessingParameterMeshLayer <qgis.core.QgsProcessingParameterMeshLayer>`
+     - ``alg.MESH_LAYER``
+     - Mesh layer တစ်ခု
+   * - Multiple Input (Input အများအပြား)
+     - :class:`QgsProcessingParameterMultipleLayers <qgis.core.QgsProcessingParameterMultipleLayers>`
+     - ``alg.MULTILAYER``
+     - Layer များအစုတစ်ခု
+   * - Number (ကိန်းဂဏန်း)
+     - :class:`ProcessingNumberParameterType.Double <qgis.core.Qgis.ProcessingNumberParameterType>`
+     - ``alg.NUMBER``
+     - ကိန်းဂဏန်းတန်ဖိုးတစ်ခု
+   * - Point
+     - :class:`QgsProcessingParameterPoint <qgis.core.QgsProcessingParameterPoint>`
+     - ``alg.POINT``
+     - Point တစ်ခု
+   * - Point Cloud Attribute
+     - :class:`QgsProcessingParameterPointCloudAttribute <qgis.core.QgsProcessingParameterPointCloudAttribute>`
+     -
+     - Point cloud layer တစ်ခုမှ အချက်အလက်တစ်ခု
+   * -
+     - :class:`QgsProcessingParameterPointCloudDestination <qgis.core.QgsProcessingParameterPointCloudDestination>`
+     - ``alg.POINTCLOUD_LAYER_DEST``
+     - Point cloud layer အတွက် နေရာ parameter ၊ algorithm ဖြင့်ဖန်တီးထားသော point cloud layer တစ်ခုအတွက် တည်နေရာလမ်းကြောင်း ကိုသတ်မှတ်ခြင်းအတွက်။
+   * - Point Cloud Layer
+     - :class:`QgsProcessingParameterPointCloudLayer <qgis.core.QgsProcessingParameterPointCloudLayer>`
+     - ``alg.POINTCLOUD_LAYER``
+     - Point cloud layer တစ်ခု
+   * -
+     - :class:`QgsProcessingParameterProviderConnection <qgis.core.QgsProcessingParameterProviderConnection>`
+     - ``alg.PROVIDER_CONNECTION``
+     - Database provider တစ်ခုအတွက် ရရှိနိုင်သော ချိတ်ဆက်မှုတစ်ခု
+   * - Range (အပိုင်းအခြား)
+     - :class:`QgsProcessingParameterRange <qgis.core.QgsProcessingParameterRange>`
+     - ``alg.RANGE``
+     - ကိန်းဂဏန်းအပိုင်းအခြားတစ်ခု
+   * - Raster Layer
+     - :class:`QgsProcessingParameterRasterLayer <qgis.core.QgsProcessingParameterRasterLayer>`
+     - ``alg.RASTER_LAYER``
+     - Raster Layer တစ်ခု
+   * -
+     - :class:`QgsProcessingParameterRasterDestination <qgis.core.QgsProcessingParameterRasterDestination>`
+     - ``alg.RASTER_LAYER_DEST``
+     - Raster layer တစ်ခုအတွက် နေရာ parameter ၊ algorithm ဖြင့်ဖန်တီးထားသော raster layer တစ်ခုအတွက် တည်နေရာလမ်းကြောင်း ကိုသတ်မှတ်ခြင်းအတွက်။
+   * - Scale (စကေး)
+     - :class:`QgsProcessingParameterScale <qgis.core.QgsProcessingParameterScale>`
+     - ``alg.SCALE``
+     - မြေပုံ စကေးတစ်ခု
+   * -
+     - :class:`QgsProcessingParameterFeatureSink <qgis.core.QgsProcessingParameterFeatureSink>`
+     - ``alg.SINK``
+     - Feature sink တစ်ခု
+   * - String (စာသား)
+     - :class:`QgsProcessingParameterString <qgis.core.QgsProcessingParameterString>`
+     - ``alg.STRING``
+     - စာသားတစ်ခု
+   * - TIN Creation Layers (TIN ဖန်တီးခြင်း layer များ)
+     - :class:`QgsProcessingParameterTinInputLayers <qgis.core.QgsProcessingParameterTinInputLayers>`
+     -
+     - Vertex များ နှင့်/သို့မဟုတ် break line (အဖြတ်မျဉ်းများ) များဖြင့် TIN တစ်ခုဖန်တီးရန် layer များစွာ ရွေးချယ်ခြင်း
+   * - Time
+     - :class:`ProcessingDateTimeParameterDataType.Time <qgis.core.Qgis.ProcessingDateTimeParameterDataType>`
+     - ``alg.TIME``
+     - အချိန်သီးသန့်
+   * - Vector Features
+     - :class:`QgsProcessingParameterFeatureSource <qgis.core.QgsProcessingParameterFeatureSource>`
+     - ``alg.SOURCE``
+     - Feature ရင်းမြစ်တစ်ခု
+   * - Vector Layer
+     - :class:`QgsProcessingParameterVectorLayer <qgis.core.QgsProcessingParameterVectorLayer>`
+     - ``alg.VECTOR_LAYER``
+     - Vector Layer တစ်ခု
+   * -
+     - :class:`QgsProcessingParameterVectorDestination <qgis.core.QgsProcessingParameterVectorDestination>`
+     - ``alg.VECTOR_LAYER_DEST``
+     - Vector layer တစ်ခုအတွက် နေရာ parameter ၊ algorithm ဖြင့်ဖန်တီးထားသော vector layer တစ်ခုအတွက် တည်နေရာလမ်းကြောင်း ကိုသတ်မှတ်ခြင်းအတွက်။
+   * - Vector Tile Writer Layers
+     - :class:`QgsProcessingParameterVectorTileDestination <qgis.core.QgsProcessingParameterVectorTileDestination>`
+     -
+     - Vector tile layer တစ်ခုအတွက် နေရာ parameter ၊ algorithm ဖြင့်ဖန်တီးထားသော vector tile layer တစ်ခုအတွက် တည်နေရာလမ်းကြောင်း ကိုသတ်မှတ်ခြင်းအတွက်။
+   * - Volume
+     - :class:`QgsProcessingParameterVolume <qgis.core.QgsProcessingParameterVolume>`
+     -
+     - ထုထည်အတိုင်းအတာတစ်ခုအတွက် ကိုယ်စားပြုသော ကိန်းဂဏန်း parameter တစ်ခု
+
+
+Output types (ရလာဒ်အမျိုးအစားများ)
+====================================
+
+.. list-table::
+   :widths: 47 24 29
+   :header-rows: 1
+   :class: longtable
+
+   * - Class
+     - Alg constant
+     - ရှင်းလင်းဖော်ပြချက်
+   * - :class:`QgsProcessingOutputBoolean <qgis.core.QgsProcessingOutputBoolean>`
+     - ``alg.BOOL``
+     - အမှား/အမှန် တန်ဖိုးတစ်ခု
+   * - :class:`QgsProcessingOutputNumber <qgis.core.QgsProcessingOutputNumber>`
+     - ``alg.DISTANCE``
+     - အကွာအဝေးတန်ဖိုးများအတွက် ဒဿမကိန်းဂဏန်း parameter တစ်ခု
+   * - :class:`QgsProcessingOutputFile <qgis.core.QgsProcessingOutputFile>`
+     - ``alg.FILE``
+     - ရှိပြီးသားဖိုင်တစ်ခု၏ ဖိုင်နာမည်တစ်ခု
+   * - :class:`QgsProcessingOutputFolder <qgis.core.QgsProcessingOutputFolder>`
+     - ``alg.FOLDER``
+     - Folder တစ်ခု
+   * - :class:`QgsProcessingOutputHtml <qgis.core.QgsProcessingOutputHtml>`
+     - ``alg.HTML``
+     - HTML
+   * - :class:`QgsProcessingOutputNumber <qgis.core.QgsProcessingOutputNumber>`
+     - ``alg.INT``
+     - ကိန်းပြည့်တစ်ခု
+   * - :class:`QgsProcessingOutputLayerDefinition <qgis.core.QgsProcessingOutputLayerDefinition>`
+     - ``alg.LAYERDEF``
+     - Layer အဓိပ္ပါယ်ဖွင့်ဆိုချက်တစ်ခု
+   * - :class:`QgsProcessingOutputMapLayer <qgis.core.QgsProcessingOutputMapLayer>`
+     - ``alg.MAPLAYER``
+     - မြေပုံ layer တစ်ခု
+   * - :class:`QgsProcessingOutputMultipleLayers <qgis.core.QgsProcessingOutputMultipleLayers>`
+     - ``alg.MULTILAYER``
+     - Layer အစုတစ်ခု
+   * - :class:`QgsProcessingOutputNumber <qgis.core.QgsProcessingOutputNumber>`
+     - ``alg.NUMBER``
+     - ကိန်းဂဏန်းတန်ဖိုး တစ်ခု
+   * - :class:`QgsProcessingOutputPointCloudLayer <qgis.core.QgsProcessingOutputPointCloudLayer>`
+     - ``alg.POINTCLOUD_LAYER``
+     - Point cloud layer တစ်ခု
+   * - :class:`QgsProcessingOutputRasterLayer <qgis.core.QgsProcessingOutputRasterLayer>`
+     - ``alg.RASTER_LAYER``
+     - Raster layer တစ်ခု
+   * - :class:`QgsProcessingOutputString <qgis.core.QgsProcessingOutputString>`
+     - ``alg.STRING``
+     - စာသားတစ်ခု
+   * - :class:`QgsProcessingOutputVectorLayer <qgis.core.QgsProcessingOutputVectorLayer>`
+     - ``alg.VECTOR_LAYER``
+     - Vector layer တစ်ခု
+   * - :class:`QgsProcessingOutputVectorTileLayer <qgis.core.QgsProcessingOutputVectorTileLayer>`
+     -
+     - Vector tile layer တစ်ခု
+

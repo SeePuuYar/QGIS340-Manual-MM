@@ -1,0 +1,219 @@
+Vector လွှမ်းခြုံမှု (Vector coverage)
+=============================================
+
+.. only:: html
+
+   .. contents::
+      :local:
+      :depth: 1
+
+
+.. _qgiscoverageunion:
+
+လွှမ်းခြုံမှုကို Dissolve လုပ်ခြင်း (Dissolve coverage)
+--------------------------------------------------------------------
+
+Coverage တစ်ခု (အနားအစွန်း ဂျီဩမေတြီများ အတိအကျတစ်ထပ်တည်းဖြစ်နေသော polygon feature များအစုတစ်ခုအနေဖြင့် ကိုယ်စားပြုသော) တွင် ဂျီဩမေတြီများကို dissolve (attribute တူရာများကို ပေါင်းစည်း) ပြုလုပ်ပေးပါသည်။ ၎င်းသည် စံ Dissolve tool များနှင့် နှိုင်းယှဉ်ပါက ဤ feature များကို ပေါင်းစည်းရန်အတွက် ပိုမိုကောင်းမွန်သော နည်းတစ်ခုဖြစ်ပါသည်။
+
+.. seealso:: :ref:`qgisdissolve`
+
+သတ်မှတ်ချက်များ (Parameters)
+..................................................
+
+.. list-table::
+   :header-rows: 1
+   :widths: 20 20 20 40
+
+   * - အညွှန်း
+     - အမည်
+     - အမျိုးအစား
+     - ရှင်းလင်းဖော်ပြချက်
+   * - **Input layer** **(ထည့်သွင်းအသုံးပြုသော layer)**
+     - ``INPUT``
+     - [vector: polygon]
+     - Input polygon vector layer
+   * - **Dissolved**
+     - ``OUTPUT``
+     - [vector: polygon]
+
+       Default: ``[Create temporary layer]``
+     - Output vector layer ကိုသတ်မှတ်ပါ။ အောက်ပါတို့ထဲမှ တစ်ခုခုဖြစ်ပါသည်-
+
+       .. include:: ../algs_include.rst
+          :start-after: **layer_output_types**
+          :end-before: **end_layer_output_types**
+
+ရလာဒ်များ (Outputs)
+...................................
+
+.. list-table::
+   :header-rows: 1
+   :widths: 20 20 20 40
+
+   * - အညွှန်း
+     - အမည်
+     - အမျိုးအစား
+     - ရှင်းလင်းဖော်ပြချက်
+   * - **Dissolved**
+     - ``OUTPUT``
+     - [vector: polygon]
+     - Dissolve လုပ်ထားသော ဂျီဩမေတြီများပါဝင်သော output polygon vector layer ။
+
+Python code
+...........
+
+**Algorithm ID**: ``native:coverageunion``
+
+.. include:: ../algs_include.rst
+  :start-after: **algorithm_code_section**
+  :end-before: **end_algorithm_code_section**
+
+
+.. _qgiscoveragesimplify:
+
+လွှမ်းခြုံမှုကို ပေါ့ပါးရိုးရှင်းအောင်လုပ်ခြင်း (Simplify coverage)
+--------------------------------------------------------------------
+
+Coverage တစ်ခု (အနားအစွန်း ဂျီဩမေတြီများ အတိအကျတစ်ထပ်တည်းဖြစ်နေသော polygon feature များအစုတစ်ခုအနေဖြင့် ကိုယ်စားပြုသော) တွင် အနားအစွန်းများ၌ Visvalingam–Whyatt simplification တစ်ခုကို ပြုလုပ်ပါသည်၊ ထည့်သွင်းလိုက်သော tolerance (လက်ခံနိုင်စွမ်း) အချိုးအစားအတိုင်း ရှုပ်ထွေးမှုကို လျှော့ချပေးပြီး ဆီလျော်မှုရှိသော coverage ကိုဆက်လက်ထိန်းထားပေးပါသည် (ဆိုလိုသည်မှာ- simplification လုပ်ပြီးပါက မည်သည့်အနားအစွန်းမှ ဖြတ်ခြင်း သို့မဟုတ် ထိခြင်း မျိုးမရှိတော့ပါ)။ ဂျီဩမေတြီများကို ဘယ်သောအခါမှ ဖယ်ရှားလိမ့်မည်မဟုတ်ပါ၊ သို့သော် ၎င်းတို့ကို တြိဂံတစ်ခုသာသာအထိ simplify လုပ်ခြင်း ခံရနိုင်ပါသည်။ အချို့သော ဂျီဩမေတြီများ (ထပ်တလဲလဲမဟုတ်သည့် point များ အလွန်နည်းပါးစွာပါရှိသော polygon များကဲ့သို့) ကိုလည်း မပြောင်းလဲဘဲ ပြန်လည်ထုတ်ပေးပါလိမ့်မည်။
+
+Input dataset သည် overlap (ထပ်နေမှု) များကြောင့် valid coverage တစ်ခုမဟုတ်ပါက ၎င်းကို simplify ဆက်လုပ်ပေးပါလိမ့်မည်၊ သို့သော် အနားအစွန်းများတစ်ခုနှင့်တစ်ခုဖြတ်ခြင်း ကဲ့သို့ ဆီလျော်မှုမရှိသော topology သည် invalid အနေဖြင့်ဆက်ရှိနေပါလိမ့်မည်။
+
+**GEOS version >= 3.12 နှင့်အထက်လိုအပ်ပါသည်**
+
+.. seealso:: :ref:`qgissimplifygeometries` ၊ :ref:`qgissmoothgeometry`
+
+သတ်မှတ်ချက်များ (Parameters)
+........................................
+
+.. list-table::
+   :header-rows: 1
+   :widths: 20 20 20 40
+
+   * - အညွှန်း
+     - အမည်
+     - အမျိုးအစား
+     - ရှင်းလင်းဖော်ပြချက်
+   * - **Input layer** **(ထည့်သွင်းအသုံးပြုသော layer)**
+     - ``INPUT``
+     - [vector: polygon]
+     - Input polygon vector layer
+   * - **Tolerance** **(လက်ခံနိုင်စွမ်း)**
+     - ``TOLERANCE``
+     - [number]
+
+       Default: 0.0
+     - Merge လုပ်မည့် အစဉ်လိုက် vertex နှစ်ခုအကြား အများဆုံးအကွာအဝေး (ရွေးချယ်သည့် ယူနစ်အတိုင်း)
+   * - **Preserve boundary** **(နယ်နိမိတ်ကို ဆက်ထိန်းထားခြင်း)**
+     - ``PRESERVE_BOUNDARY``
+     - [number]
+
+       Default: False
+     - ဖွင့်ပေးထားပါက coverage ၏ အပြင်ဘက်အစွန်းများကို simplify မလုပ်ပဲ ဆက်လက်ထိန်းထားပေးပါလိမ့်မည်။
+   * - **Simplified**
+     - ``OUTPUT``
+     - [vector: polygon]
+
+       Default: ``[Create temporary layer]``
+     - Output vector layer ကိုသတ်မှတ်ပါ။ အောက်ပါတို့ထဲမှ တစ်ခုခုဖြစ်ပါသည်-
+
+       .. include:: ../algs_include.rst
+          :start-after: **layer_output_types**
+          :end-before: **end_layer_output_types**
+
+ရလာဒ်များ (Outputs)
+...................................
+
+.. list-table::
+   :header-rows: 1
+   :widths: 20 20 20 40
+
+   * - အညွှန်း
+     - အမည်
+     - အမျိုးအစား
+     - ရှင်းလင်းဖော်ပြချက်
+   * - **Simplified**
+     - ``OUTPUT``
+     - [vector: polygon]
+     - Vertex အရေအတွက် နည်းသော output polygon vector layer
+
+Python code
+...........
+
+**Algorithm ID**: ``native:coveragesimplify``
+
+.. include:: ../algs_include.rst
+  :start-after: **algorithm_code_section**
+  :end-before: **end_algorithm_code_section**
+
+
+.. _qgiscoveragevalidate:
+
+Coverage ကို အတည်ပြုခြင်း (Validate coverage)
+--------------------------------------------------------------------
+
+အတိအကျတစ်ထပ်တည်းဖြစ်နေသော အနားအစွန်းများမရှိသည့် နေရာများကို ရှာဖွေရန် coverage တစ်ခု (အနားအစွန်း ဂျီဩမေတြီများ အတိအကျတစ်ထပ်တည်းဖြစ်နေသော polygon feature များအစုတစ်ခုအနေဖြင့် ကိုယ်စားပြုသော) ကို ခွဲခြမ်းစိတ်ဖြာပေးပါသည်။ ထပ်နေသော polygon များ သို့မဟုတ် သတ်မှတ်ထားသော ကွက်လပ်အကျယ် (gap width) ထက်ငယ်သော gap များရှိသော polygon များသည် invalid ဖြစ်သော အရာများဖြစ်ပါသည်။
+
+**Requires version of GEOS >= 3.12**
+
+.. seealso:: :ref:`qgischeckvalidity`
+
+သတ်မှတ်ချက်များ (Parameters)
+..................................................
+
+.. list-table::
+   :header-rows: 1
+   :widths: 20 20 20 40
+
+   * - အညွှန်း
+     - အမည်
+     - အမျိုးအစား
+     - ရှင်းလင်းဖော်ပြချက်
+   * - **Input layer** **(ထည့်သွင်းအသုံးပြုသော layer)**
+     - ``INPUT``
+     - [vector: polygon]
+     - Input polygon vector layer
+   * - **Gap width** **(ကွက်လပ်အကျယ်)**
+     - ``GAP_WIDTH``
+     - [number]
+
+       Default: 0.0
+     - ရှာဖွေဖော်ထုတ်ရန် အများဆုံး gap အကျယ်
+   * - **Invalid edges** **(ဆီလျော်မှုမရှိသော အနားအစွန်းများ)**
+     - ``INVALID_EDGES``
+     - [vector: line]
+
+       Default: ``[Create temporary layer]``
+     - Output vector layer ကိုသတ်မှတ်ပါ။ အောက်ပါတို့မှ တစ်ခုခုဖြစ်ပါသည်-
+
+       .. include:: ../algs_include.rst
+          :start-after: **layer_output_types_skip**
+          :end-before: **end_layer_output_types_skip**
+
+ရလာဒ်များ (Outputs)
+...................................
+
+.. list-table::
+   :header-rows: 1
+   :widths: 20 20 20 40
+
+   * - အညွှန်း
+     - အမည်
+     - အမျိုးအစား
+     - ရှင်းလင်းဖော်ပြချက်
+   * - **Invalid edges** **(ဆီလျော်မှုမရှိသော အနားအစွန်းများ)**
+     - ``OUTPUT``
+     - [vector: line]
+     - Valid မဖြစ်သော polygon တစ်ခုချင်းစီအတွက် error edge များကိုပြသပေးသော output line vector layer 
+   * - **Validity result** **(ဆီလျော်မှုရှိ/မရှိ ရလာဒ်)**
+     - ``IS_VALID``
+     - [boolean]
+     - Coverage သည် valid ဖြစ်/မဖြစ်ကို ပြန်ထုတ်ပေးပါသည်။
+
+Python code
+...........
+
+**Algorithm ID**: ``native:coveragevalidate``
+
+.. include:: ../algs_include.rst
+  :start-after: **algorithm_code_section**
+  :end-before: **end_algorithm_code_section**

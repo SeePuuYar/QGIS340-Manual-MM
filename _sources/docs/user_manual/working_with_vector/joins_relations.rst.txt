@@ -1,0 +1,490 @@
+.. index:: Joins, Relations
+.. _sec_joins_relations:
+
+*********************************************************************************************************************************
+Layer များအကြား Data များချိတ်ဆက်ခြင်းနှင့် တည်းဖြတ်ခြင်း (Connecting and Editing Data Across Layers)
+*********************************************************************************************************************************
+
+.. only:: html
+
+   .. contents::
+      :local:
+
+Layer အမျိုးမျိုးမှ data များကို ချိတ်ဆက်နိုင်စွမ်းသည် GIS software ၏ လုပ်ဆောင်ချက်များထဲမှ တစ်ခုဖြစ်ပါသည်။ ထိုသို့သော ချိတ်ဆက်မှုမျိုးသည် feature များအကြား spatial relationship (တည်နေရာဆက်နွယ်ချက်) အပေါ်အခြေခံနိုင်သလို ၎င်းတို့၏ တူညီသော attribute များပေါ်တွင် အခြေခံနိုင်ပါသည်။ QGIS တွင် အဆိုပါ လုပ်ဆောင်ချက်များကို ကိုင်တွယ်ရန် tool များပါရှိပါသည်၊ ဥပမာ-
+
+* ချိတ်ဆက်မှု၏ရလာဒ်တစ်ခုအနေဖြင့် layer အသစ်တစ်ခုကို ဖန်တီးပေးနိုင်သော Processing algorithm များ- :ref:`qgisjoinattributesbylocation` ၊ :ref:`qgisjoinbynearest` ၊ :ref:`qgisjoinattributestable` ၊...
+* :ref:`DB Manager <dbmanager>` မှ layer အသစ်တစ်ခုဖန်တီးရန် သို့မဟုတ် :ref:`virtual layer <vector_virtual_layers>` တစ်ခုအနေဖြင့် ဖန်တီးရန် SQL query များ
+* :ref:`Joins properties <sec_joins>` သို့မဟုတ် :ref:`relations settings <vector_relations>` - ကိုက်ညီမှုရှိသော attribute အချို့ပေါ်မူတည်ပြီး layer တစ်ခုထဲရှိ feature များ၏ attibute များကို အခြား layer တစ်ခုထဲရှိ feature attribute များနှင့် ယာယီတိုးချဲ့ပေးပါသည်။ 
+
+  Joins နှင့် relations များသည် database နည်းပညာသဘောတရားများဖြစ်ပြီး ၎င်းတို့၏အကြောင်းအရာများကို ပေါင်းစပ်ခြင်းဖြင့် ဇယားများထဲတွင် သိမ်းဆည်းထားသော data များကို အကောင်းဆုံးရယူရန်ဖြစ်သည်။ အယူအဆမှာ layer (ဇယား) အမျိုးမျိုး မှ feature (row) များသည် တစ်ခုနှင့်တစ်ခု ဆက်စပ်နိုင်ပါသည်။ တစ်ခုနှင့်တစ်ခု ကိုက်ညီသော row အရေအတွက်သည် မည်သည့်တန်ဖိုးမဆိုဖြစ်နိုင်ပါသည် (သုည ၊ တစ် ၊ အများ)။
+
+
+.. index:: Joins, Foreign key
+.. _`sec_joins`:
+
+Joining features between two layers
+====================================
+
+QGIS ထဲရှိ **Joins** သည် လက်ရှိ layer ၏ feature များကို အခြားထည့်သွင်းထားသော vector layer မှ feature များနှင့် ဆက်စပ်ပေးနိုင်ပါသည်။ တည်နေရာဆိုင်ရာအချက်အလက် ပါဝင်ခြင်းနှင့် ဂျီဩမေတြီအမျိုးအစားသည် အရေးမကြီးပါ။ Join သည် one-to-one relationship ပုံစံဖြင့် layer များထဲတွင် ဘုံတူညီသော attribute တစ်ခုပေါ်တွင် အခြေခံပါသည်။
+
+Layer တစ်ခုတွင် join တစ်ခုဖန်တီးရန် (အောက်တွင် ``target layer`` အဖြစ် သတ်မှတ်ထားပါသည်)-
+
+#. Layer :menuselection:`Properties -->` |join| :guilabel:`Joins` tab သို့သွားပါ
+#. |symbologyAdd| :sup:`Add new join` ခလုတ်ကိုနှိပ်ပါ။ :guilabel:`Add vector join` dialog ပေါ်လာပါမည်။
+#. Target vector layer နှင့်ချိတ်ဆက်လိုသော :guilabel:`Join layer` ကိုရွေးချယ်ပါ
+#. :guilabel:`Join field` (``join layer`` မှ) နှင့် :guilabel:`Target field` (``target layer`` မှ) ကိုသတ်မှတ်ပါ။ ၎င်းတို့သည် layer နှစ်ခုလုံးတွင် တူညီသော feature ကိုရှာဖွေရာတွင် အသုံးပြုသော field များဖြစ်ပါသည်၊ ထို့ကြောင့် ၎င်းတို့သည် တူညီသောတန်ဖိုးများရှိသင့်ပါသည်။
+#. :guilabel:`OK` ကိုနှိပ်ပါ၊ ရွေးချယ်ထားသော parameter အကျဉ်းချုပ်တစ်ခုကို :guilabel:`Join` panel ထဲသို့ ထည့်သွင်းပေးပါမည်။
+
+.. _figure_joins:
+
+.. figure:: img/join_attributes.png
+   :align: center
+
+   Vector layer တစ်ခုတွင် attribute ဇယားတစ်ခု ချိတ်ဆက်ခြင်း
+
+အထက်ဖော်ပြပါအဆင့်များသည် join တစ်ခုကို ဖန်တီးပေးမည်ဖြစ်ပြီး၊ join layer ထဲရှိ **ပထမဆုံး ကိုက်ညီသော feature** ၏ attribute များ **အားလုံး** ကို target layer ၏ feature တွင် ပေါင်းထည့်ပေးမည်ဖြစ်သည်။ Join လုပ်ငန်းစဉ်တစ်ခုအတွင်း feature များကို တွဲရာတွင် အောက်ပါ logic ကိုအသုံးပြုပါသည်-
+
+* Target layer ထဲရှိ feature များအားလုံးကို ကိုက်ညီမှု ရှိရှိ မရှိရှိ ပြန်ထုတ်ပေးပါသည်
+* Target field တွင် ပုံတူပွား တန်ဖိုးများပါဝင်နေပါက အဆိုပါ feature များတွင် join layer မှ တူညီသော feature ကို သတ်မှတ်ပေးပါသည်။
+* Join field တွင် ကိုက်ညီသောတန်ဖိုးများ ပုံတူပွား ပါဝင်နေပါက ပထမဆုံး ရယူသည့် feature ကိုသာ ရွေးချယ်မည်ဖြစ်ပါသည်။
+
+.. note:: QGIS ထဲရှိ Join သည် ကိုက်ညီမှုရှိသော field တစ်ခုပေါ်တွင် အခြေခံပါသည်၊ ထို့ကြောင့် ကိုက်ညီမှုရှိနိုင်သော field များထဲရှိ တန်ဖိုးများသည် unique ဖြစ်ရန် လိုအပ်ပါသည်။
+
+QGIS တွင် join ကိုပြင်ဆင်ရန် နောက်ထပ်ရွေးချယ်စရာအချို့ပါဝင်ပါသည်-
+
+* |checkbox| :guilabel:`Cache join layer in virtual memory` - ရှာဖွေမှုနှုန်းမြန်ဆန်စေရန် join လုပ်ထားသော layer မှ memory တွင် တန်ဖိုးများကို သိမ်းဆည်းနိုင်စေပါသည် (ဂျီဩမေတြီများ မပါဝင်ပဲ)
+* ရှာဖွေမှုနှုန်းမြန်ဆန်စေရန် |unchecked| :guilabel:`Create attribute index on the join field` ကိုအမှန်ခြစ်ထားပါ
+* |unchecked| :guilabel:`Dynamic form` - :guilabel:`Target field` ပေါ်မူတည်ပြီး join field များကို synchronize လုပ်ပေးပါသည်။ ဤနည်းဖြင့် join field များအတွက် constraint (ကန့်သတ်ချက်) များကိုလည်း မှန်မှန်ကန်ကန် update လုပ်ပေးမည်ဖြစ်သည်။ ၎င်းကို default အားဖြင့် ပိတ်ထားမည်ဖြစ်ပါသည်၊ အဘယ်ကြောင့်ဆိုသော် feature များစွာပါဝင်နေပါက ၎င်းသည် အချိန်အလွန်ကြာမြင့်စေနိုင်သောကြောင့်ဖြစ်သည်။ 
+* Target layer သည် edit mode တွင်ရှိပါက ၎င်းတို့၏ အခြေအနေကို သိရှိနိုင်စေရန်အတွက် attribute ဇယားထဲတွင် field များဘေး၌ icon အချို့ကို ပြသပေးပါလိမ့်မည်-
+
+  * |joinNotEditable| - join layer ကို edit လုပ်နိုင်ရန် သတ်မှတ်မထားပါ။ Target attribute table မှ join feature များကို edit လုပ်လိုပါက |checkbox| :guilabel:`Editable join layer` ကို အမှန်ခြစ်ထားရပါမည်။
+  * |joinedLayerNotEditable| - join layer ကို edit ပြုလုပ်နိုင်စေရန် ကောင်းစွာသတ်မှတ်ထားပြီးဖြစ်ပါသည်၊ သို့သော် ၎င်း၏လက်ရှိ အခြေအနေသည် ဖတ်ရှုနိုင်ရုံသာ (read only) ဖြစ်ပါသည်။
+  * |joinHasNotUpsertOnEdit| - join layer ကို edit ပြုလုပ်နိုင်သော်လည်း synchronization mechanisms များကို ဖွင့်မထားသေးပါ။ Target layer ထဲတွင် feature တစ်ခုကိုဖန်တီးသောအခါ join layer ထဲတွင် feature တစ်ခုကိုအလိုအလျှောက်ပေါင်းထည့်လိုပါက |checkbox| :guilabel:`Upsert on edit` ကိုအမှန်ခြစ်ထားရပါမည်။ Join feature များကို အလိုအလျှောက်ဖျက်ပစ်လိုပါက |checkbox| :guilabel:`Delete cascade` ကိုဖွင့်ထားပေးနိုင်ပါသည်။
+* |unchecked| :guilabel:`Joined fields` - join လုပ်ထားသော layer မှ field များအားလုံးကို ထည့်သွင်းမည့်အစား subset တစ်ခုကို သတ်မှတ်ပေးနိုင်ပါသည်။
+* နာမည်တူနေခြင်းများမဖြစ်စေရန် join လုပ်ထားသော field များအတွက် |unchecked| :guilabel:`Custom field name prefix` ကိုလုပ်ထားနိုင်ပါသည်။
+
+
+.. index:: Relations, Foreign key
+.. _vector_relations:
+
+Layer များစွာအကြား ဆက်နွယ်မှုများကို သတ်မှတ်ခြင်း (Setting relations between multiple layers)
+===========================================================================================================================
+
+Relation များသည် Layer နှစ်ခု၏ feature များအကြား one-to-one ချိတ်ဆက်မှုတစ်ခုသတ်မှတ်ပေးသော join များနှင့်မတူပဲ နှစ်ခု သို့မဟုတ် နှစ်ခုထက်ပိုသော layer များတွင် feature များစွာအကြား အပြန်အလှန်ချိန်ဆက်မှုများကို ဖန်တီးပေးပါသည်။ ထို့ကြောင့် Relation များသည် project အဆင့် setting များဖြစ်ပြီး :menuselection:`Project --> Properties -->` |relations| :guilabel:`Relations` tab ထဲတွင် သတ်မှတ်ပေးပါသည်။ ထိုထဲတွင် အောက်ပါတို့ကို လုပ်ဆောင်နိုင်ပါသည်-
+
+* |symbologyAdd| :guilabel:`Add relation` - အမျိုးအစားသည် အောက်ပါတို့ဖြစ်နိုင်ပါသည်-
+
+  * :ref:`one to many relation <one_to_many_relation>`
+  * :ref:`many to many relation <many_to_many_relation>`
+  * :ref:`polymorphic relation <polymorphic_relation>` - Action drop-down menu ထဲရှိ သီးသန့် tool များဖြင့် ထည့်သွင်းခြင်း သို့မဟုတ် တည်းဖြတ်ခြင်း လုပ်ဆောင်နိုင်ပါသည်။
+
+  .. note:: Non-polymorphic relation တစ်ခုကို ဖန်တီးပြီးသည်နှင့် ၎င်းကို edit လုပ်ရန် ရိုးရှင်းသောနည်း ယခုထိမရှိသေးပါ။ Click နှစ်ချက်နှိပ်ပြီး နာမည်ကိုသာ edit လုပ်နိုင်ပါသည်။ အဆိုပါ relation တစ်ခု၏ အခြားမည်သည့် parameter အတွက်မဆိုပြင်ဆင်လိုပါက ၎င်းကို ဖယ်ရှားပြီး ပြန်လည်ဖန်တီးရပါလိမ့်မည်။
+
+* |symbologyAdd| :guilabel:`Discover relations` - QGIS သည် ပံ့ပိုးပေးထားသော database format များ (PostgreSQL ၊ GeoPackage ၊ ESRI File Geodatabase ၊...) မှ ရှိပြီးသား relation များကို ရှာဖွေနိုင်ပါသည်။ ၎င်းသည် Relation အဓိပ္ပါယ်သတ်မှတ်ချက်ကို လွယ်ကူစေသည့် နည်းလမ်းကောင်းတစ်ခုဖြစ်နိုင်ပါသည်။
+* |symbologyRemove| :guilabel:`Remove relation`
+
+.. _figure_relations:
+
+.. figure:: ../introduction/img/project_relations.png
+   :align: center
+
+   Relations tab
+
+.. TODO: Update and fill the dialog with examples of the different types of relations
+
+
+.. _one_to_many_relation:
+
+တစ်ခု-မှ-အများ ဆက်သွယ်ချက်များ (One to many (1-N) relations)
+------------------------------------------------------------------------------------------------------------
+
+ဥပမာအနေဖြင့် အချို့သော attribute များ၏အမည်၊ ဒေသအမျိုးအစား (region type) နှင့် သီးသန့်အိုင်ဒီ (unique id) (primary key အဖြစ် လုပ်ဆောင်သည့်) ရှိသော ဒေသအားလုံး၏ alaska (polygon)ဖြင့် layerတစ်ခု ကိုပေးထားသည်။
+
+ထို့နောက် ဒေသများတွင်ရှိသော လေဆိပ်များအကြောင်း အချက်အလက်ပါသည့် အခြားအမှတ် (point) layer သို့မဟုတ် ဇယားကို ရရှိပြီး ၎င်းတို့ကိုလည်း ခြေရာခံနိုင်ပါသည်။ ၎င်းတို့ကို ဒေသ layer တွင် ထည့်သွင်းလိုပါက၊ ဒေသအများစုတွင် လေဆိပ်များစွာရှိသောကြောင့် foreign (ပြင်ပ) key များကို အသုံးပြု၍ တစ်ခုနှင့်အများ ဆက်စပ်မှုတစ်ခုကို ဖန်တီးရန် လိုအပ်ပါသည်။
+
+.. _figure_relations_map:
+
+.. figure:: img/regions_with_airports.png
+   :align: center
+
+   လေဆိပ်များ ပါဝင်သော Alaska ဒေသ 
+
+Layer များနှင့် key များ
+...............................
+
+QGIS တွင် ဇယားတစ်ခုနှင့် vector layer အကြား ကွာခြားချက်မရှိပါ။ အခြေခံအားဖြင့်၊ vector layerသည် ဂျီသြမေတြီပါသော ဇယားတစ်ခုဖြစ်သည်။ ထို့ကြောင့် ဇယားကို vector layer အဖြစ် ထည့်သွင်းနိုင်သည်။ 1-N ဆက်သွယ်ချက်ကို သရုပ်ပြရန် foreign key field (``fk_region``) ပါဝင်သော :file:`regions`(‌ဒေသများ) shapefile နှင့် :file:`airports` (လေဆိပ်) shapefile ကို region layer များအတွင်းသို့ ထည့်သွင်းပါ။ ဆိုလိုသည်မှာ ဒေသတစ်ခုချင်းစီတွင် လေဆိပ်များစွာ (တစ်ခုနှင့် အများ ဆက်သွယ်ချက်) ရှိနိုင်သော်လည်း လေဆိပ်တစ်ခုချင်းစီသည် ဒေသတစ်ခုစီနှင့်သာသက်ဆိုင်သည်။
+
+Airport များကို ဖော်ပြသော attribute များအပြင် airports layer တွင် foreign key ကဲ့သို့ ဆောင်ရွက်သော အခြား ``fk_region`` field ရှိပါသည် (Database တစ်ခုရှိပါက ကန့်သတ်ချက်ကို သတ်မှတ်နိုင်ပါသည်)။ ဤ ``fk_region`` field တွင် region တစ်ခု၏ id တစ်ခု အမြဲပါဝင်ပါလိမ့်မည်။ ၎င်းသည် သက်ဆိုင်ရာဒေသကို ညွှန်ပြသည့်အရာကဲ့သို့ဖြစ်သည်။
+
+Editing အတွက် စိတ်ကြိုက် edit form တစ်ခုကို ဒီဇိုင်းပြုလုပ်နိုင်စေရန် layer များအကြား relation ကို QGIS သို့ပြောပြပေးရမည်ဖြစ်ပြီး QGIS သည် ဆက်လက်လုပ်ဆောင်သွားပါမည်။ ၎င်းသည် မတူညီသော provider များနှင့် ဆောင်ရွက်နိုင်သည် (ထို့ကြောင့် ၎င်းကို shapefile နှင့် csv ဖိုင်များဖြင့်လည်း သုံးနိုင်သည်)။
+
+1-N ဆက်သွယ်ချက်ကို သတ်မှတ်ခြင်း (Defining 1-N relations)
+........................................................................................
+
+Layer များကြားရှိ ဆက်သွယ်ချက်ကို QGIS ထဲ ထည့်သွင်းရန် ပထမဆုံးလုပ်ဆောင်ရပါမည်။ ၄င်းကို :menuselection:`Project --> Properties...` ထဲတွင်လုပ်ဆောင်နိုင်ပါသည်။ :guilabel:`Relations` tab ကိုဖွင့်ပြီး |symbologyAdd| :guilabel:`Add Relation` (ဆက်သွယ်ချက် ထည့်သွင်းခြင်း) ကိုနှိပ်ပါ။
+
+* **Name (အမည်)** ကို ခေါင်းစဥ်အဖြစ် အသုံးပြုသည်။ ၎င်းသည် ဖတ်နိုင်သော စာကြောင်းဖြစ်သင့်ပြီး ၎င်းသည် ဆက်သွယ်ချက်ကို မည့်သည့်အတွက် အသုံးပြုကြောင်းကို ဖော်ပြသင့်သည်။ ဤကိစ္စတွင် **လေယာဥ်ကွင်း ဆက်သွယ်ချက်** ဟုသာခေါ်ဆိုပါမည်။
+* **Referenced layer (Parent)** သည် ပင်မ (parent) layer အဖြစ် ယူဆထားသည်။ Primary key တစ်ခုဖြစ်သောကြောင့် ဤနေရာတွင် ``regions (ဒေသများ)`` layer ဖြစ်သည်။ ကိုးကားခံသည့် layer ၏ primary key ကို သတ်မှတ်ရန်လိုအပ်သည်။ ထို့ကြောင့် ၎င်းသည် ``ID`` ဖြစ်သည်။
+* **Referenced layer (Child)** ကိုလည်း အပွား (child) layer အဖြစ် မှတ်ယူသည်။ ၄င်းပေါ်တွင် foreign key field ပါရှိသည်။ ဤအခြေအနေတွင် ၄င်းသည် ``airports (လေဆိပ်များ)`` layer ဖြစ်သည်။ ဤ layer အတွက် အခြား layer သို့ညွှန်ပြသည့် ကိုးကားချက်ရယူသည့် field ကို ပေါင်းထည့်ရန်လိုအပ်သည်။ ထို့ကြောင့် ၎င်းသည် ``fk_region`` ဖြစ်သည်။
+
+  .. note:: တစ်ခါတစ်ရံတွင် layer တစ်ခုရှိ feature များကို သီးခြားခွဲခြားသတ်မှတ်ရန် field တစ်ခုထက်ပို၍ လိုအပ်သည်။ ထိုသို့သော layer တစ်ခုနှင့် ဆက်သွယ်ချက်တစ်ခုဖန်တီးရန် **ပေါင်းစပ်ထားသော (composite) key** လိုအပ်သည်။ ၄င်းသည် ကိုက်ညီသော field အတွဲတစ်ခုထက် ပိုပါသည်။ ကိုအသုံးပြုပါ။ များစွာသော အတွဲများလိုအပ်သလိုထည့်ရန် |symbologyAdd| :sup:`Add new field pair as part of a composite foreign key` (ပေါင်းစပ်ထားသော foreign key အစိတ်အပိုင်းအဖြစ် field အတွဲသစ်ကို ပေါင်းထည့်ခြင်း) ခလုတ် ကိုနှိပ်ပါ။
+
+* **Id** ကို အတွင်းပိုင်း ရည်ရွယ်ချက်များအတွက် အသုံးပြုမည်ဖြစ်ပြီး သီးသန့်ဖြစ်ရပါမည်။ ၄င်းကို :ref:`custom forms <customize_form>` ပြုလုပ်ရန် လိုအပ်နိုင်ပါသည်။ ၎င်းကို ကွက်လပ်အနေဖြင့် ထားခဲ့ပါက တစ်ခုကို ထုတ်ပေးမည်ဖြစ်သော်လည်း ကိုင်တွယ်ရပိုမိုလွယ်ကူစေရန် ကိုယ်တိုင် သတ်မှတ်ပေးနိုင်ပါသည်။
+* **Relationship strength (ဆက်သွယ်ချက် ခိုင်မာမှုအား)** သည် parent နှင့် child layer ကြား ဆက်သွယ်ချက်၏ ခိုင်မာမှုကို သတ်မှတ်သည်။ ပုံသေ :guilabel:`Association` (အဖွဲ့) အမျိုးအစားသည် parent layer သည် child layer ကို *ရိုးရှင်းစွာ* ချိတ်ဆက်ခြင်းဖြစ်ပြီး :guilabel:`Composition` (ဖွဲ့စည်းမှု) အမျိုးအစားသည် parent layer များကို ပွားလိုက်လျှင် child feature များကိုပါ ပွားပေးနိုင်ပြီး feature တစ်ခုကို ဖျက်လိုက်လျှင် child feature များပါ ပျက်သွားမည်ဖြစ်သည်။ ရလာဒ်တွင် အဆင့်များ အားလုံးကို အစီစဥ်တကျ လုပ်ဆောင်သွားမည်ဖြစ်သည်။ (ဆိုလိုသည်မှာ အပွား၏ အပွား ....များကို ဖျက်လိုက်ခြင်းဖြစ်သည်)
+
+.. _figure_relations_manager:
+
+.. figure:: img/regions_airports_mapping.png
+   :align: center
+
+   ဒေသများနှင့် လေဆိပ် layer များကြား ဆက်စပ်မှုကို ထည့်သွင်းခြင်း
+
+:guilabel:`Relations`(ဆက်သွယ်ချက်) tab မှ |symbologyAdd|:guilabel:`Discover Relation` (ဆက်သွယ်ချက် ရှာဖွေခြင်း) ခလုတ်ကို နှိပ်ခြင်းအားဖြင့် ထည့်သွင်းထားသော layer များ၏ provider များထံမှရရှိနိုင်သော ဆက်သွယ်ချက်များကို များကိုရယူနိုင်သည်။ Layer များကို PostgreSQL သို့မဟုတ် SpatiaLite ပုံစံကဲ့သို့ provider များတွင် သိမ်းဆည်းထားနိုင်သည်။
+
+.. index:: Feature form, Linked forms, Embedded form
+
+1-N ဆက်သွယ်ချက်အတွက် ဖောင်များ (Forms for 1-N relations)
+............................................................................................
+
+ယခုအခါ QGIS သည် ဆက်သွယ်ချက်များကိုသိရှိသွားမည်ဖြစ်ပြီး ၎င်းကို ထုတ်လုပ်သည့်ပုံစံများကို ပိုမိုကောင်းမွန်စေရန်အတွက် အသုံးပြုမည်ဖြစ်သည်။ ပုံသေပုံစံနည်းလမ်း (အလိုအလျောက်ထုတ်လုပ်ထားသော) ကိုမပြောင်းလဲသောကြောင့် ပုံစံတွင် widget (အထားအသိုနေရာပုံစံ) အသစ်တစ်ခု ထပ်ထည့်ပါမည်။ မြေပုံရည်ညွှန်းချက်ထဲရှိ ဒေသ layer ကို ရွေးပြီး identify tool ကို အသုံးပြုနိုင်ပါသည်။ အပြင်အဆင် (setting) များပေါ်မူတည်၍ ပုံစံသည် တိုက်ရိုက်ဖွင့်လာနိုင်သည် သို့မဟုတ် လုပ်ဆောင်ချက်များအောက်ရှိ identification dialog တွင် ၎င်းကိုဖွင့်ရန် ရွေးချယ်ရမည်ဖြစ်သည်။
+
+.. _figure_embedded_form:
+
+.. figure:: img/airport_relation_dataview.png
+   :align: center
+
+   လေဆိပ်များနှင့် ဆက်စပ်သော ဒေသများ Identification dialog
+
+မြင်တွေ့ရသည့်အတိုင်း ဒေသအတွက် သတ်မှတ်ထားသော လေဆိပ်များအားလုံးကို ဇယားတစ်ခုတွင် ပြသထားသည်။ ခလုတ်တချို့လည်း ပါဝင်ပါသည်။ ၄င်းတို့ကို အတိုချုပ် သုံးသပ်ကြည့်ပါက-
+
+* |toggleEditing| ခလုတ်သည် ပြင်ဆင်ခြင်း (edit) mode ကို အဖွင့်အပိတ်လုပ်ရန်ဖြစ်သည်။ ဒေသ layer မှ feature တစ်ခု၏ feature form တွင် ရှိနေသော်လည်း ၎င်းသည် လေဆိပ် layer ၏ edit mode ကို အဖွင့်အပိတ်လုပ်သွားနိုင်သည်ကို သတိပြုပါ။ သို့သော် ဇယားသည် လေဆိပ် layer ၏ feature များကို ကိုယ်စားပြုသည်။
+* |saveEdits| ခလုတ်သည် အပွား layer (လေဆိပ်) ရှိ ပြင်ဆင်ချက်များအားလုံးကို သိမ်းဆည်းရန်အတွက် ဖြစ်သည်။
+* |capturePoint| ခလုတ်သည် မြေပုံ canvas ရှိ လေဆိပ် ဂျီဩမေတြီကို digitize ပြုလုပ်နိုင်ပြီး feature အသစ်ကို လက်ရှိဒေသသို့ default အနေဖြင့် သတ်မှတ်ပေးသည်။ Icon သည် ဂျီသြမေတြီ အမျိုးအစားအလိုက် ပြောင်းလဲသွားမည်ကို သတိပြုပါ။
+* |newTableRow| ခလုတ်သည် လေဆိပ် layer attribute ဇယားတွင်မှတ်တမ်းအသစ်တစ်ခုကို ပေါင်းထည့်ပြီး feature အသစ်ကို လက်ရှိဒေသသို့ default အနေဖြင့် သတ်မှတ်ပေးသည်။ ဂျီသြမေတြီကို :guilabel:`Add part` (အပိုင်းများ ပေါင်းထည့်ခြင်း) digitize ပြုလုပ်သည့်ကိရိယာ ဖြင့် နောက်ပိုင်းတွင် ရေးဆွဲနိုင်သည်။
+* |duplicateFeature| ခလုတ်သည် child layer အတွင်း တစ်ခု သို့မဟုတ် တစ်ခုထက်ပိုသော child feature များကို ကူးယူပြီး ထည့်နိုင်သည်။ ၎င်းတို့ကို နောက်ပိုင်းတွင် မတူညီသော parent feature တစ်ခု အဖြစ်လုပ်ဆောင်နိုင်သည် သို့မဟုတ် ၎င်းတို့၏ attribute များကို ပြုပြင်မွမ်းမံနိုင်သည်။
+* |deleteSelectedFeatures| ခလုတ်သည် ရွေးချယ်ထားသော လေဆိပ်(များ)ကို အပြီးတိုင် ဖျက်ပစ်သည်။
+* |link| သင်္ကေတသည် လက်ရှိဒေသအတွက် သတ်မှတ်ပေးမည့် လက်ရှိလေဆိပ်ကို ရွေးချယ်နိုင်သည့် dialog အသစ်ကို ဖွင့်ပေးသည်။ ၎င်းသည် မှားယွင်းသောဒေသတွင် လေဆိပ်ကို မတော်တဆ ဖန်တီးမိပါက အဆင်ပြေစေရန်ဆောင်ရွက်ပေးသည်။
+* |unlink| သင်္ကေတသည် ရွေးချယ်ထားသော လေဆိပ်(များ)ကို လက်ရှိဒေသမှ ချိတ်ဆက်မှုဖြုတ်ပေးနိုင်ပြီး သတ်မှတ်မှုများမပါရှိစေတော့ပါ (Foreign key ကို NULL ဟုသတ်မှတ်လိုက်သည်)။
+* |zoomToSelected| ခလုတ်ကို အသုံးပြု၍ ရွေးချယ်ထားသော child feature များသို့ မြေပုံကို ချဲ့ကြည့်နိုင်သည်။
+* ခလုတ်နှစ်ခုဖြစ်သော |formView| နှင့် |openTable| သည် သက်ဆိုင်ရာ child feature များ၏ :ref:`table
+  view and form view <attribute_table_view>` (table view နှင့် form view) အကြား ကူးပြောင်းပေးသည်။
+
+ဒေသ feature များအတွက် :ref:`Drag and Drop Designer <customize_form>` ကိုအသုံးပြုပါက မည်သည့် tool များ အသုံးပြုနိုင်သည်ကို ရွေးချယ်နိုင်ပါသည်။ :guilabel:`Force hide form on add feature` option (ပေါင်းထည့်ထားသော feature ပေါ်တွင် form ကို ဖျောက်ထားပေးခြင်း) ကို အသုံးပြု၍ feature အသစ်တစ်ခုကို ထည့်သွင်းသည့်အခါ form အသစ်တစ်ခုဖွင့်မည်/မဖွင့်မည်ကို ဆုံးဖြတ်နိုင်သည်။ ဤ option သည် null မဟုတ်သော attribute များသည် သင့်တော်သော မူလတန်ဖိုးတစ်ခုကို ယူရမည်ဆိုသည့် သဘောသက်ရောက်သည်ကိုသတိပြုပါ။
+
+.. _figure_select_relation_tools:
+
+.. figure:: img/airport_relation_formproperties.png
+   :align: center
+
+   ဒေသများ-လေဆိပ်များဆိုင်ရာ ဆက်စပ်မှု tool များကို ပြင်ဆင်သတ်မှတ်ရန်အတွက် Drag and Drop Designer
+
+အထက်ဖော်ပြပါ ဥပမာတွင် ကိုးကားချက်ရယူသည့် layer တွင် ဂျီသြမေတြီများ ရှိသည်။ (ထို့ကြောင့် ၎င်းသည် အက္ခရာဂဏန်း ဇယားတစ်ခုမျှသာမဟုတ်ပါ) ထို့ကြောင့် အထက်ဖော်ပြပါအဆင့်များသည် သက်ဆိုင်ရာ ဂျီဩမေတြီ feature မရှိသော layer attribute table တွင် entry (ထည့်သွင်းခြင်း) တစ်ခုကို ဖန်တီးပေးလိမ့်မည်ဖြစ်သည်။ ဂျီသြမေတြီကို ထည့်ရန်-
+
+#. ကိုးကားချက်ရယူသည့် layer အတွက် |openTable| :menuselection:`Open Attribute Table` (attribute ဇယား ဖွင့်ခြင်း) ကိုရွေးပါ။
+#. ကိုးကားခံသည့် layer ၏ feature form အတွင်း ယခင်က ထည့်သွင်းထားသည့် မှတ်တမ်းကို ရွေးပါ။
+#. ရွေးချယ်ထားသော attribute ဇယားမှတ်တမ်းတွင် ဂျီသြမေတြီတစ်ခုကို ပူးတွဲရန် |addPart| :sup:`Add Part` (အပိုင်း ပေါင်းထည့်ခြင်း) digitize ပြုလုပ်နိုင်သော tool ကိုသုံးပါ။
+
+အကယ်၍ လေဆိပ်ဇယားပေါ်တွင် လုပ်ဆောင်နေပါက ``fk_region`` field အတွက် ဆက်သွယ်မှု အကိုးအကား widget သည် အလိုအလျောက် သတ်မှတ်သွားမည်ဖြစ်သည်။ (``fk_region`` field သည် ဆက်သွယ်ချက်ကို ဖန်တီးရန် အသုံးပြုသည့် field ဖြစ်သည်) :ref:`Relation Reference widget <configure_field>` (ဆက်သွယ်မှု အကိုးအကား widget) တွင် ကြည့်ရှုပါ။
+
+.. Todo: It could be nice that those advanced widgets get a description one day
+
+လေဆိပ် form တွင် |formView| ခလုတ်ကို ``fk_region`` field ၏ ညာဘက်ခြမ်းတွင် တွေ့နိုင်ပါသည်။ ခလုတ်ကို နှိပ်လိုက်ပါက ဒေသ layer ၏ form ကို ဖွင့်ပေးမည်ဖြစ်သည်။ ဤ widgetသည် ချိတ်ဆက်ထားသော parent feature များ၏ form များကို လွယ်ကူလျင်မြန်စွာ ဖွင့်စေနိုင်ပါသည်။
+
+.. _figure_linked_forms:
+
+.. figure:: img/airport_attributes.png
+   :align: center
+
+   ဒေသများ နှင့် ဆက်စပ်သော လေဆိပ် Identification dialog
+
+ဆက်သွယ်မှု အကိုးအကား widget တွင် child layer တစ်ခုအတွင်း parent layer ၏ form ကို ထည့်သွင်းနိုင်ပါသည်။ ၎င်းကို လေဆိပ် layer ၏  :menuselection:`Properties --> Attributes Form`(attribute ပုံစံ) menu တွင် ရနိုင်သည်။ ``fk_region`` field ကိုရွေးချယ်ပါ ထို့နောက် ``Show embedded form`` ‌ကို အမှန်ခြစ်ပါ။
+
+Feature dialog ကို ကြည့်ရှုပါက၊ ဒေသ၏ form သည် လေဆိပ်များ form တွင် ထည့်သွင်းထားပြီး လက်ရှိလေဆိပ်ကို အခြားဒေသသို့ သတ်မှတ်ပေးနိုင်သည့် combobox (ခလုတ်များစွာပါဝင်သော box) တစ်ခုပါရှိမည်ကို တွေ့ရပါမည်။
+
+.. _figure_linked_forms_embedded:
+
+.. figure:: img/airport_attributes_expanded.png
+   :align: center
+
+ထို့အပြင် အကယ်၍ လေဆိပ် layer ၏ edit mode ကို အဖွင့်အပိတ်ပြုလုပ်ပါက ``fk_region`` field တွင်
+အလိုအလျှောက်ဆောင်ရွက်သည့် လုပ်ဆောင်ချက်လည်း ပါရှိသည်- စာရိုက်နေစဉ်တွင် ဒေသ layer ``id`` field ၏ တန်ဖိုးအားလုံးကို မြင်တွေ့ရမည်ဖြစ်သည်။ အကယ်၍ လေဆိပ် layer ၏ :menuselection:`Properties --> Attributes Form`(attribute များ ပုံစံ) menu တွင် ``Allow adding new features`` (feature အသစ်များ ပေါင်းထည့်ခြင်းကို ခွင့်ပြုခြင်း) ကိုရွေးချယ်ပါက |symbologyAdd| ခလုတ်ကို အသုံးပြု၍ ဒေသ layer အတွက် polygon တစ်ခုကို digitize လုပ်နိုင်သည်။
+
+Child layer များ၏ attribute များအပေါ် အခြေခံ၍ parent layer ၏ feature များကို ရွေးချယ်ရန်အတွက် 
+:ref:`select_by_value` tool  တွင်လည်း child layer ကို အသုံးပြုနိုင်သည်။
+
+:numref:`figure_select_by_value` တွင် လေဆိပ်များ၏ပျမ်းမျှအမြင့်ပေသည် ပင်လယ်ရေမျက်နှာပြင်အထက်
+မီတာ 500 ထက်ကြီးသောဒေသအားလုံးကိုရွေးချယ်ထားသည်။
+
+Form ထဲတွင် မတူညီသော ပေါင်းစပ်လုပ်ဆောင်ချက်များစွာကို တွေ့ရပါမည်။
+
+.. _figure_select_by_value:
+
+.. figure:: img/relation_select_by_value.png
+   :align: center
+
+   Child တန်ဖိုးများဖြင့် parent feature များကို ရွေးချယ်ခြင်း
+
+
+.. index:: Many-to-many relation; Relation
+.. _many_to_many_relation:
+
+အများနှင့် အများ (N-M) ဆက်သွယ်ချက်များ (Many-to-many (N-M) relations)
+----------------------------------------------------------------------------------------------------------------
+
+N-M ဆက်သွယ်ချက်သည် ဇယားနှစ်ခုကြားတွင် အများနှင့်အများ ဆက်သွယ်ချက်ဖြစ်သည်။ ဥပမာအားဖြင့် ``airports(လေဆိပ်)`` နှင့်  ``airlines(လေကြောင်းလိုင်းများ)`` layerများ- လေဆိပ်တစ်ခုသည် လေကြောင်းလိုင်းကုမ္ပဏီအများအပြားကို လက်ခံရရှိပြီး လေကြောင်းလိုင်းကုမ္ပဏီတစ်ခုသည် လေဆိပ်အများအပြားသို့ ပျံသန်းသွားပါသည်။
+
+ဤ SQL ကုဒ်သည် *တည်နေရာများ* ဟုအမည်ပေးထားသော PostgreSQL/PostGIS schema ရှိ N-M ဆက်သွယ်ချက်အတွက် လိုအပ်သော ဇယားသုံးခုကို ဖန်တီးပေးပါသည်။ PostGIS အတွက် :menuselection:`Database --> DB Manager…` သို့မဟုတ် `pgAdmin <https://www.pgadmin.org>`_ ကဲ့သို့သော ပြင်ပ tool များကို အသုံးပြု၍ code ကို လုပ်ဆောင်နိုင်သည်။ လေဆိပ်ဇယားတွင် ``airports(လေဆိပ်)`` layer ကို သိမ်းဆည်းထားပြီး လေကြောင်းလိုင်းများ ဇယားတွင် ``airlines(လေကြောင်းလိုင်းများ)``  layer ကို သိမ်းဆည်းထားသည်။ ဇယားနှစ်ခုစလုံးတွင် ရှင်းလင်းစေရန်အတွက် field အနည်းငယ်ကို အသုံးပြုထားသည်။ *လှည့်ကွက်ရှိသော* အပိုင်းသည် ``airports_airlines(လေဆိပ်_လေကြောင်းလိုင်းများ)`` ဇယားဖြစ်သည်။ ၎င်းကို လေဆိပ်အားလုံးအတွက် လေကြောင်းလိုင်းအားလုံးကို စာရင်းပြုစုရန် လိုအပ်ပါသည် (သို့မဟုတ် အပြန်အလှန်အားဖြင့်)။ ထိုသို့သောဇယားမျိုးကို *ဆုံချက် ဇယား (pivot table)* ဟုခေါ်သည်။ ဤဇယားရှိ *ကန့်သတ်ချက်များ* သည် လေဆိပ်တစ်ခုအား ၎င်းတို့၏ layer များတွင် လေဆိပ်တစ်ခုနှင့် လေကြောင်းလိုင်းတစ်ခု ရှိပြီးသားဖြစ်မှသာလျှင် ထိုနှစ်ခုကို ချိတ်ဆက်နိုင်မည်ဖြစ်သည်။
+
+.. code-block:: sql
+
+   CREATE SCHEMA locations;
+
+   CREATE TABLE locations.airports
+   (
+      id serial NOT NULL,
+      geom geometry(Point, 4326) NOT NULL,
+      airport_name text NOT NULL,
+      CONSTRAINT airports_pkey PRIMARY KEY (id)
+   );
+
+   CREATE INDEX airports_geom_idx ON locations.airports USING gist (geom);
+
+   CREATE TABLE locations.airlines
+   (
+      id serial NOT NULL,
+      geom geometry(Point, 4326) NOT NULL,
+      airline_name text NOT NULL,
+      CONSTRAINT airlines_pkey PRIMARY KEY (id)
+   );
+
+   CREATE INDEX airlines_geom_idx ON locations.airlines USING gist (geom);
+
+   CREATE TABLE locations.airports_airlines
+   (
+      id serial NOT NULL,
+      airport_fk integer NOT NULL,
+      airline_fk integer NOT NULL,
+      CONSTRAINT airports_airlines_pkey PRIMARY KEY (id),
+      CONSTRAINT airports_airlines_airport_fk_fkey FOREIGN KEY (airport_fk)
+         REFERENCES locations.airports (id)
+         ON DELETE CASCADE
+         ON UPDATE CASCADE
+         DEFERRABLE INITIALLY DEFERRED,
+      CONSTRAINT airports_airlines_airline_fk_fkey FOREIGN KEY (airline_fk)
+         REFERENCES locations.airlines (id)
+         ON DELETE CASCADE
+         ON UPDATE CASCADE
+         DEFERRABLE INITIALLY DEFERRED
+    );
+
+PostgreSQL အစား GeoPackage ကိုသုံးနိုင်သည်။ ဤကိစ္စတွင် :menuselection:`Database --> DB Manager…` ကိုအသုံးပြု၍ ဇယားသုံးခုကို ကိုယ်တိုင်ဖန်တီးနိုင်သည်။ GeoPackage တွင် schema (အစီအစဥ်များ) များ မပါရှိသောကြောင့် *တည်နေရာများ* prefix (‌ရှေ့အစ) ကို မလိုအပ်ပါ။
+
+``airports_airlines(လေဆိပ်_လေကြောင်းလိုင်း)`` ဇယားရှိ foreign key ကန့်သတ်ချက်များကို :menuselection:`Table --> Create Table…` သို့မဟုတ် :menuselection:`Table --> Edit Table…` ကို အသုံးပြု၍ ဖန်တီးမရနိုင်သောကြောင့် ၎င်းတို့ကို :menuselection:`Database --> SQL Window…` ကို အသုံးပြု၍ ဖန်တီးသင့်ပါသည်။ GeoPackage သည် *ADD CONSTRAINT* ထုတ်ပြန်ချက်များကို မပံ့ပိုးနိုင်သောကြောင့် ``airports_airlines(လေဆိပ်_လေကြောင်းလိုင်း)`` ဇယားကို ဖော်ပြပါအဆင့်နှစ်ဆင့်ဖြင့် ဖန်တီးသင့်သည်-
+
+#. :menuselection:`Table --> Create Table…` ကို အသုံးပြု၍ ဇယားကို ``id`` field ဖြင့်သာ သတ်မှတ်ပါ။
+#. :menuselection:`Database --> SQL Window…` ကို အသုံးပြု၍ ဤ SQL ကုဒ်ကို ရိုက်ထည့်ပြီး လုပ်ဆောင်ပါ-
+
+   .. code-block:: sql
+
+      ALTER TABLE airports_airlines
+         ADD COLUMN airport_fk INTEGER
+         REFERENCES airports (id)
+         ON DELETE CASCADE
+         ON UPDATE CASCADE
+         DEFERRABLE INITIALLY DEFERRED;
+
+      ALTER TABLE airports_airlines
+         ADD COLUMN airline_fk INTEGER
+         REFERENCES airlines (id)
+         ON DELETE CASCADE
+         ON UPDATE CASCADE
+         DEFERRABLE INITIALLY DEFERRED;
+
+ထို့နောက် QGIS ထဲတွင် အထက်တွင်ဖော်ပြခဲ့သည့်အတိုင်း :ref:`one-to-many relations <one_to_many_relation>` နှစ်ခုကို သတ်မှတ်သင့်သည်-
+
+* a relation between ``airlines`` table and the pivot table;
+* and a second one between ``airports`` table and the pivot table.
+* ``airlines`` (လေကြောင်းလိုင်းများ) ဇယားနှင့် pivot ဇယား ကြားဆက်သွယ်ချက် နှင့်
+* ``airports`` (လေဆိပ်များ) ဇယားနှင့် pivot ဇယား ကြား ဒုတိယဆက်သွယ်ချက်တစ်ခု
+
+ပိုမိုလွယ်ကူသော နည်းလမ်းမှာ (PostgreSQL တစ်ခုတည်းအတွက်သာ) :menuselection:`Project --> Properties --> Relations` ထဲရှိ :guilabel:`Discover Relations` ကို အသုံးပြုခြင်းဖြစ်သည်။ QGIS သည် database အတွင်းရှိ ဆက်သွယ်ချက်အားလုံးကို အလိုအလျှောက် ဖတ်ရှုသွားမည်ဖြစ်ပြီး လိုအပ်သော နှစ်ခုကို ရွေးချယ်ပေးရန်သာ လိုအပ်ပါသည်။ ပထမဆုံး QGIS project တွင် ဇယားသုံးခုကို ထည့်ပေးရန် သတိပြုပါ။
+
+.. _figure_setup_relations:
+
+.. figure:: img/airports_airlines_relation.png
+   :align: center
+
+   ဆက်သွယ်ချက်များနှင့် အလိုအလျှောက်ရှာဖွေမှု
+
+``airport(လေဆိပ်)`` တစ်ခုသို့မဟုတ် ``airline(လေကြောင်းလိုင်း)`` တစ်ခုကို ဖယ်ရှားလိုပါက QGIS သည် ``airports_airlines (လေဆိပ်_လေကြောင်းလိုင်း)`` ဇယားရှိ ဆက်စပ်မှတ်တမ်း(များ)ကို ဖယ်ရှားမည်မဟုတ်ပါ။ လက်ရှိနမူနာတွင်ရှိသကဲ့သို့ pivot ဇယားဖန်တီးမှုတွင် မှန်ကန်သော *ကန့်သတ်ချက်များ* ကို သတ်မှတ်ပါက ၄င်းလုပ်ဆောင်ချက်ကို database မှ လုပ်ဆောင်မည်ဖြစ်သည်။
+
+.. note:: **N-M ဆက်သွယ်ချက်ကို အလိုအလျောက် ကူးပြောင်းခြင်း (transaction) အဖွဲ့ နှင့် ပေါင်းစပ်ခြင်း**
+
+  ထိုသို့သောအခြေအနေတွင်အလုပ်လုပ်သောအခါ :menuselection:`Project Properties--> Data Sources -->` တွင်‌ transaction mode ကို ဖွင့်ပေးသင့်သည်။ QGIS သည် ဇယားအားလုံး (လေကြောင်းလိုင်းများ၊ လေဆိပ်များနှင့် pivot ဇယားများ) တွင် row (များ) ကို ထည့်ခြင်း သို့မဟုတ် update လုပ်ခြင်းများ လုပ်ဆောင်နိုင်ပါသည်။
+
+နောက်ဆုံးတွင် ``airports(လေဆိပ်များ)`` နှင့် ``airlines(လေကြောင်းလိုင်းများ)`` layer များအတွက် :menuselection:`Layer Properties --> Attributes Form` တွင် မှန်ကန်သော cardinality (အစုအဖွဲ့) ကို ရွေးချယ်ရပါမည်။ ပထမတစ်ခုအတွက် **လေကြောင်းလိုင်းများ (id)** ကိုရွေးချယ်သင့်ပြီး ဒုတိယတစ်ခုအတွက် 
+**လေဆိပ် (id)** ကို ရွေးချယ်သင့်သည်။
+
+.. _figure_cardinality:
+
+.. figure:: img/airports_airlines_relation_formproperties.png
+   :align: center
+
+   ဆက်သွယ်ချက် cardinality (အစုအဖွဲ့)ကို သတ်မှတ်ခြင်း 
+
+ယခုအခါ form အခွဲများတွင် :guilabel:`Add child feature` သို့မဟုတ် :guilabel:`Link existing child feature` ကို အသုံးပြု၍ လေဆိပ်တစ်ခုနှင့် လေကြောင်းလိုင်းတစ်ခု (သို့မဟုတ် လေကြောင်းလိုင်းတစ်ခု နှင့် လေဆိပ်တစ်ခု ချိတ်ဆက်နိုင်ပြီဖြစ်ပါသည်။ ``airports_airlines (လေဆိပ်_လေကြောင်းလိုင်း)`` ဇယားတွင် မှတ်တမ်းတစ်ခု အလိုအလျောက် ထည့်သွင်းသွားမည်ဖြစ်သည်။
+
+.. _figure_relationship_working:
+
+.. figure:: img/add_airport_airline.png
+   :align: center
+
+   လေဆိပ်များနှင့် လေကြောင်းလိုင်းများ အကြား N-M ဆက်သွယ်ချက်
+
+.. note:: **အများမှ တစ်ခုဆက်သွယ်ချက်** cardinality (အစုအဖွဲ့)ကို အသုံးပြုခြင်း။
+
+  တစ်ခါတစ်ရံ N-M ဆက်သွယ်ချက်တွင် pivot ဇယားကို  ဖျောက်ထားခြင်းသည် မသင့်လျော်ပါ။ အဓိကအကြောင်းမှာ ဆက်သွယ်ချက် တစ်ခုတည်ဆောက်သည့်အခါ ဆက်သွယ်ချက်ထဲတွင် တန်ဖိုးများသာရှိနိုင်သော attribute များရှိနေသောကြောင့်ဖြစ်သည်။ အကယ်၍ ဇယားများသည် layer များတွင် ဂျီသြမေတြီ field တစ်ခုပါရှိလျှင် pivot ဇယားရှိ foreign key feild များအတွက် :guilabel:`On map identification` option (:menuselection:`Layer Properties --> Attributes Form --> Available widgets --> Fields`) ကို ဖွင့်ပေးနိုင်ပါသည်။
+
+.. note:: **Pivot ဇယား မူလ key**
+
+  Pivot ဇယားရှိ primary key တွင် field ပေါင်းများစွာ အသုံးပြုခြင်းကို ရှောင်ပါ။ QGIS သည် primary key တစ်ခုတည်းကို ယူဆသောကြောင့် ``constraint airports_airlines_pkey primary key (airport_fk, airline_fk)`` ကဲ့သို့ ကန့်သတ်ချက်တစ်ခုသည် လုပ်ဆောင်နိုင်မည်မဟုတ်ပါ။
+
+
+.. index:: Polymorphic relation; Relation
+.. _polymorphic_relation:
+
+ပုံစံမျိုးစုံဖြင့် ဆက်သွယ်ချက်များ (Polymorphic relations)
+------------------------------------------------------------------------------------
+
+ရည်ရွယ်ချက်
+..................
+
+Polymorphic ဆက်သွယ်ချက်သည် 1-N ဆက်သွယ်ချက်၏ အထူးကိစ္စရပ်ဖြစ်ပြီး၊ တစ်ခုတည်းသော ကိုးကားချက်ရယူသည့် (စာရွက်စာတမ်း) layer (referencing layer) တစ်ခုတွင် ကိုးကားခံသည့် layer များစွာ (multiple referenced layer) အတွက် feature များပါရှိသည်။ ၄င်းသည် ပုံမှန်ဆက်သွယ်ချက်နှင့် မတူညီပဲ ကိုးကားခံသည့် layer တစ်ခုစီအတွက် မတူညီသော ကိုးကားချက်ရယူသည့် layer လိုအပ်သည်။ ကိုးကားချက်ရယူသည့် (စာရွက်စာတမ်း) layer တွင် ထပ်တိုး ``layer_field`` column ပေါင်းထည့်ခြင်းဖြင့် ကိုးကားချက်ရယူသည့် (စာရွက်စာတမ်း) layer တစ်ခုကိုရရှိနိုင်သည်။ ၄င်းသည် ကိုးကားခံသည့် layer ကို ခွဲခြားနိုင်ရန် အချက်အလက်များကို သိမ်းဆည်းထားသည်။ ၎င်း၏ အရိုးရှင်းဆုံးပုံစံတွင် ကိုးကားချက်ရယူသည့် (စာရွက်စာတမ်း) layer သည် ထို field ထဲသို့ ကိုးကားခံသည့် layer ၏အမည်ကို ပေါင်းထည့်လိုက်ပါသည်။
+
+ပိုမိုတိတိကျကျဆိုရလျှင် polymorphic ဆက်သွယ်ချက်သည် dynamically (ပုံသေမဟုတ်စွာ) သတ်မှတ်ထားသော ကိုးကားခံသည့် layer ရှိသော်လည်း တူညီသော ကိုးကားချက်ရယူသည့် layer များပါရှိသော ပုံမှန်ဆက်သွယ်ချက်များ အစုတစ်ခုဖြစ်သည်။ Layer ၏ polymorphic setting အား expression တစ်ခုကို အသုံးပြုခြင်းဖြင့် ဖြေရှင်းပါသည်။ ၎င်းသည် ဇယားအမည်၊ layer id၊ layer အမည်ကဲ့သို့သော ကိုးကားခံသည့် layer ၏ ဂုဏ်သတ္တိအချို့နှင့် ကိုက်ညီမှုရှိရန် လိုအပ်သည်။
+
+ပန်းခြံသို့ သွားပြီး မြင်တွေ့ရသော ``plants(အပင်)`` နှင့်  ``animals(တိရစ္ဆာန်)`` အမျိုးမျိုးကို ဓါတ်ပုံရိုက်မည်ဟု မှန်းဆကြည့်ပါ။ အပင် သို့မဟုတ် တိရိစ္ဆာန်တစ်ခုစီတွင် ၎င်းနှင့်ဆက်စပ်သော ဓါတ်ပုံများစွာပါရှိသည်၊ ထို့ကြောင့် ဓါတ်ပုံများကို သိမ်းဆည်းရန် ပုံမှန် 1:N ဆက်သွယ်ချက်ကို အသုံးပြုမယ်ဆိုပါက ``animal_images(တိရစ္ဆာန်_ဓါတ်ပုံများ)`` နှင့် ``plant_images(အပင်_ဓါတ်ပုံများ)`` သီးခြားဇယားနှစ်ခု လိုအပ်ပါမည်။ ၄င်းသည် ဇယား ၂ ခုအတွက် ပြဿနာတစ်ခုမဟုတ်သော်လည်း မှိုများ၊ ငှက်များ စသည်တို့အတွက် သီးခြားဓာတ်ပုံရိုက်လိုသည်ဆိုပါက ပြဿနာတစ်ခုဖြစ်နိုင်ပါသည်။
+
+Polymorphic ဆက်သွယ်ချက်သည် ကိုးကားချက်ရယူသည့် feature အားလုံးကို ``documents(စာရွက်စာတမ်းများ)`` ဇယားတစ်ခုတည်းတွင် သိမ်းဆည်းထားသောကြောင့် ဤပြဿနာကို ဖြေရှင်းပေးပါသည်။ Feature တစ်ခုစီအတွက် ကိုးကားခံသည့် layer ကို ``referenced_layer`` field တွင် သိမ်းဆည်းထားပြီး ``referenced_fk`` field တွင် ကိုးကားခံသည့် feature id ကို သိမ်းဆည်းထားသည်။
+
+Polymorphic ဆက်သွယ်ချက်များကို သတ်မှတ်ခြင်း (Defining polymorphic relations)
+........................................................................................................................
+
+ပထမဦးစွာ layer များအကြား polymorphic ဆက်သွယ်ချက်များကို QGIS မှသိစေရန် ဆောင်ရွက်ပါ။ ၄င်းကို :menuselection:`Project --> Properties...` တွင် လုပ်ဆောင်နိုင်သည်။ :guilabel:`Relations`(ဆက်သွယ်ချက်) tab ကိုဖွင့်ပြီး |symbologyAdd| :guilabel:`Add Relation`(ဆက်သွယ်ချက်ပေါင်းထည့်ခြင်း) ခလုတ်ဘေးရှိ အောက်မြှားလေးကို နှိပ်ပါ။ ထို့အခါ အသစ်ပေါ်လာသော dropdown မှ :guilabel:`Add Polymorphic Relation` (polymorphic ဆက်သွယ်ချက် ပေါင်းထည့်ခြင်း) option ကို ရွေးချယ်နိုင်သည်။
+
+.. _figure_define_polymorphic_relation:
+
+.. figure:: img/polymorphic_relation_properties.png
+   :align: center
+
+   ``documents(စာရွက်စာတမ်းများ) `` layer ကို ကိုးကားချက်ရယူသည့် layer အဖြစ်အသုံးပြုပြီး ``animals(တိရစ္ဆာန်များ)`` နှင့် ``plants(အပင်များ)`` layer များကို ကိုးကားခံသည့် layer အဖြစ် အသုံးပြု၍ polymorphic ဆက်သွယ်ချက်တစ်ခုကို ထည့်သွင်းခြင်း
+
+
+* **Id**  ကို အတွင်းပိုင်း ရည်ရွယ်ချက်များအတွက် အသုံးပြုမည်ဖြစ်ပြီး သီးသန့်ဖြစ်ရပါမည်။ ၄င်းကို :ref:`custom forms <customize_form>` တည်ဆောက်ရာတွင် လိုအပ်ပါသည်။ ၄င်းကို ကွက်လပ်ထားရှိခဲ့ပါက Id တစ်ခုကို ထုတ်ပေးမည်ဖြစ်သော်လည်း လုပ်ဆောင်ရလွယ်ကူစေရန် မိမိကိုယ်တိုင် သတ်မှတ်ပေးနိုင်ပါသည်။
+
+* **Referencing Layer (child) (ကိုးကားချက်ရယူသည့် layer)** ကို child layer အဖြစ် ယူဆသည်။ ၄င်းပေါ်တွင် foreign field ရှိသည်။ ယခုကိစ္စတွင် ၄င်းသည် ``documents(စာရွက်စာတမ်းများ)`` layer ဖြစ်သည်။ ဤ layer အတွက် အခြား layer သို့ညွှန်ပြသည့် ကိုးကားချက်ရယူသည့် field တစ်ခုကို ပေါင်းထည့်ရန်လိုအပ်သည်၊ ထို့ကြောင့် ၎င်းသည် ``referenced_fk`` ဖြစ်သည်။
+
+  .. note:: တစ်ခါတစ်ရံတွင်၊ layer တစ်ခုရှိ feature များကို သီးခြားခွဲခြားသတ်မှတ်ရန် field တစ်ခုထက်ပို၍ လိုအပ်ပါသည်။ ထိုသို့သော layer တစ်ခုနှင့် ဆက်သွယ်ချက်တစ်ခုဖန်တီးခြင်းသည် ကိုက်ညီသော field တစ်စုံ ထက်ပိုသော **composite key** တစ်ခု လိုအပ်သည်။ လိုအပ်သလို အတွဲများထည့်ရန် |symbologyAdd| :sup:`Add new field pair as part of a composite foreign key` ခလုတ်ကို အသုံးပြုပါ။
+
+* **Layer Field** သည် layer expression ၏ ရလာဒ်ကို သိမ်းဆည်းထားသည့် ကိုးကားချက်ရယူသည့်ဇယားရှိ field ဖြစ်သည်။ ၄င်းသည် feature နှင့်ဆိုင်သော ကိုးကားချက်ရယူသည့်ဇယားဖြစ်သည်။ ဤ ဥပမာတွင် ၄င်းသည် ``referenced_layer`` field ဖြစ်လိမ့်မည်။
+
+* **Layer expression** သည် layer ၏ သီးသန့် ခွဲခြားဖော်ထုတ်ပေးသည့်အရာ (unique identifier) တစ်ခုကို အကဲဖြတ်သည်။ ၄င်းသည် layer အမည်  ``@layer_name``၊ layer id  ``@layer_id``၊ layer ၏ ဇယားအမည် ``decode_uri(@layer, 'table')`` သို့မဟုတ် layer တစ်ခုကို သီးသန့် ခွဲခြားဖော်ထုတ်ပေးနိုင်သော မည်သည့်အရာမဆို ဖြစ်နိုင်သည်။
+
+* **Relationship strength (ဆက်သွယ်ချက် ခိုင်မာမှုအား)** သည် parent နှင့် child layer ကြား ဆက်သွယ်ချက်၏ ခိုင်မာမှုကို သတ်မှတ်သည်။ ပုံသေ :guilabel:`Association` (အဖွဲ့) အမျိုးအစားသည် parent layer သည် child layer ကို *ရိုးရှင်းစွာ* ချိတ်ဆက်ခြင်းဖြစ်ပြီး :guilabel:`Composition` (ဖွဲ့စည်းမှု) အမျိုးအစားသည် parent layer များကို ပွားလိုက်လျှင် child feature များကိုပါ ပွားပေးနိုင်ပြီး feature တစ်ခုကို ဖျက်လိုက်လျှင် child feature များပါ ပျက်သွားမည်ဖြစ်သည်။ ရလာဒ်တွင် အဆင့်များ အားလုံးကို အစီစဥ်တကျ လုပ်ဆောင်သွားမည်ဖြစ်သည်။ (ဆိုလိုသည်မှာ အပွား၏ အပွား ....များကို ဖျက်လိုက်ခြင်းဖြစ်သည်)
+
+* **Referenced Layers (ကိုးကားခံသည့် layer များ)** ကိုလည်း ပင်မ layer များအဖြစ် ယူဆကြပြီး၊ ညွှန်ပြထားသော primary key ပါရှိသော layer များဖြစ်သောကြောင့် ဤနေရာတွင် ၎င်းတို့သည် ``plants(အပင်များ)`` နှင့် ``animals(တိရစ္ဆာန်များ)`` layer များဖြစ်ပါမည်။ Dropdown မှ ကိုးကားခံသည့် layer များ၏ primary key ကို သတ်မှတ်ရန်လိုအပ်ပါသည်၊ ထို့ကြောင့်၎င်းသည် ``fid`` ဖြစ်သည်။ မှန်ကန်သော primary key တစ်ခုသတ်မှတ်ချက်သည် ကိုးကားခံသည့် layer အားလုံးတွင် ထိုအမည်ဖြင့် field တစ်ခုရှိရန် လိုအပ်သည်ကို သတိပြုပါ။ ထိုကဲ့သို့သော field မရှိလျှင် polymorphic ဆက်သွယ်ချက်တစ်ခုကို သိမ်းဆည်းနိုင်မည်မဟုတ်ပါ။
+
+ထည့်သွင်းပြီးသည်နှင့် polymorphic ဆက်သွယ်ချက်ကို :guilabel:`Edit Polymorphic Relation` (polymorphic ဆက်သွယ်ချက် ပြင်ဆင်ခြင်း) menu ထည့်သွင်းမှုမှတစ်ဆင့် ပြင်ဆင်တည်းဖြတ်နိုင်သည်။
+
+.. _figure_list_polymorphic_relations:
+
+.. figure:: img/polymorphic_relations.png
+   :align: center
+
+   အသစ်ဖန်တီးထားသော polymorphic ဆက်သွယ်ချက်နှင့် တိရိစ္ဆာန်များနှင့် အပင်များအတွက် ၄င်း၏ child ဆက်သွယ်ချက်များကို အကြိုကြည့်ရှုခြင်း
+
+
+အထက်ဖော်ပြပါ ဥပမာသည် အောက်ပါ database schema ကို အသုံးပြုထားသည်-
+
+.. code-block:: sql
+
+   CREATE SCHEMA park;
+
+   CREATE TABLE park.animals
+   (
+      fid serial NOT NULL,
+      geom geometry(Point, 4326) NOT NULL,
+      animal_species text NOT NULL,
+      CONSTRAINT animals_pkey PRIMARY KEY (fid)
+   );
+
+   CREATE INDEX animals_geom_idx ON park.animals USING gist (geom);
+
+   CREATE TABLE park.plants
+   (
+      fid serial NOT NULL,
+      geom geometry(Point, 4326) NOT NULL,
+      plant_species text NOT NULL,
+      CONSTRAINT plants_pkey PRIMARY KEY (fid)
+   );
+
+   CREATE INDEX plants_geom_idx ON park.plants USING gist (geom);
+
+   CREATE TABLE park.documents
+   (
+      fid serial NOT NULL,
+      referenced_layer text NOT NULL,
+      referenced_fk integer NOT NULL,
+      image_filename text NOT NULL,
+      CONSTRAINT documents_pkey PRIMARY KEY (fid)
+   );
+
+
+.. Substitutions definitions - AVOID EDITING PAST THIS LINE
+   This will be automatically updated by the find_set_subst.py script.
+   If you need to create a new substitution manually,
+   please add it also to the substitutions.txt file in the
+   source folder.
+
+.. |addPart| image:: /static/common/mActionAddPart.png
+   :width: 1.5em
+.. |capturePoint| image:: /static/common/mActionCapturePoint.png
+   :width: 1.5em
+.. |checkbox| image:: /static/common/checkbox.png
+   :width: 1.3em
+.. |deleteSelectedFeatures| image:: /static/common/mActionDeleteSelectedFeatures.png
+   :width: 1.5em
+.. |duplicateFeature| image:: /static/common/mActionDuplicateFeature.png
+   :width: 1.5em
+.. |formView| image:: /static/common/mActionFormView.png
+   :width: 1.2em
+.. |join| image:: /static/common/join.png
+   :width: 2em
+.. |joinHasNotUpsertOnEdit| image:: /static/common/mIconJoinHasNotUpsertOnEdit.png
+   :width: 1.5em
+.. |joinNotEditable| image:: /static/common/mIconJoinNotEditable.png
+   :width: 1.5em
+.. |joinedLayerNotEditable| image:: /static/common/mIconJoinedLayerNotEditable.png
+   :width: 1.5em
+.. |link| image:: /static/common/mActionLink.png
+   :width: 1.5em
+.. |newTableRow| image:: /static/common/mActionNewTableRow.png
+   :width: 1.5em
+.. |openTable| image:: /static/common/mActionOpenTable.png
+   :width: 1.5em
+.. |relations| image:: /static/common/relations.png
+   :width: 1.5em
+.. |saveEdits| image:: /static/common/mActionSaveEdits.png
+   :width: 1.5em
+.. |symbologyAdd| image:: /static/common/symbologyAdd.png
+   :width: 1.5em
+.. |symbologyRemove| image:: /static/common/symbologyRemove.png
+   :width: 1.5em
+.. |toggleEditing| image:: /static/common/mActionToggleEditing.png
+   :width: 1.5em
+.. |unchecked| image:: /static/common/unchecked.png
+   :width: 1.3em
+.. |unlink| image:: /static/common/mActionUnlink.png
+   :width: 1.5em
+.. |zoomToSelected| image:: /static/common/mActionZoomToSelected.png
+   :width: 1.5em

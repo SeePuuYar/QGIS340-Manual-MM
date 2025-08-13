@@ -1,0 +1,182 @@
+.. index:: 3D Tiles, 3d tiles properties
+.. _`label_3d_tiles`:
+
+***************************************************************************
+3D Tile များဖြင့် အလုပ်လုပ်ခြင်း (Working with 3D Tiles)
+***************************************************************************
+
+.. only:: html
+
+   .. contents::
+      :local:
+
+3D Tile ဆိုသည်မှာ ဘယ်လိုအရာတွေလဲ (What are 3D Tiles?)
+========================================================================================
+
+3D tile များသည် အကြီးစား 3D ပထဝီဝင်ဆိုင်ရာ dataset များကို တိုက်ရိုက်ကြည့်ရှုခြင်းနှင့် ပုံဖော်ပြသခြင်းများအတွက် သတ်မှတ်ချက်များဖြစ်ပါသည်။ ၎င်းတို့သည် 3D အကြောင်းအရာများကို ထိထိရောက်ရောက် စီမံနိုင်ရန်နှင့် ပြသနိုင်ရန်အတွက် hierarchical structure (အစဉ်လိုက်စီထားသော ဖွဲ့စည်းပုံ) တစ်ခုကိုအသုံးပြုပြီး အသေးစိတ် level များကို ဆီလျော်အောင်ပြောင်းလဲပြသပေးသောကြောင့် စွမ်းဆောင်ရည်ကို ကောင်းမွန်စေပါသည်။ ဤနည်းပညာကို မြို့ပြစီမံကိန်း၊ ဗိသုကာပညာ၊ သရုပ်သကန်ဖန်တီးခြင်း (simulation) ၊ ဂိမ်းများ နှင့် virtual reality (VR) များတွင် တွင်ကျယ်စွာ အသုံးပြုပြီး ရှုပ်ထွေးသော ပထဝီဝင်ဆိုင်ရာ data များကို ပုံဖော်ကြည့်ရှုရန်အတွက် စံဖြစ်ပြီး အပြန်အလှန်လုပ်ဆောင်နိုင်သော ဖြေရှင်းနည်းတစ်ခုဖြစ်ပါသည်။
+
+.. _figure_3d_tiles_example:
+
+.. figure:: img/3d_tiles.png
+   :align: center
+
+   3D tiles ဥပမာ
+
+
+QGIS တွင် လက်ရှိ 3D tile format ၂ မျိုးအသုံးပြုနိုင်ပါသည်-
+
+* `Cesium 3D tiles <https://cesium.com/why-cesium/3d-tiles/>`_ များကို အဆောက်အဦများ သို့မဟုတ် မြို့တစ်မြို့လုံး၏ ရှုပ်ထွေးသော 3D model များအတွက် အဓိက အသုံးပြုပါသည်။ အဆိုပါ dataset များကို Cesium Ion သို့မဟုတ် Google (*Photorealistic 3D Tiles*) ကဲ့သို့ cloud-based platform များမှ ပံ့ပိုးပေးထားနိုင်ပါသည်။
+* `Quantized Mesh tiles <https://github.com/CesiumGS/quantized-mesh>`_ များကို မြေမျက်နှာသွင်ပြင် အနိမ့်အမြင့် data အတွက် အသုံးပြုပါသည်။
+
+ဤ data ရင်းမြစ်များကို QGIS ထဲသို့ ထည့်သွင်းနည်းကို :ref:`3d_tiles` တွင်ကြည့်ရှုပါ။
+
+.. _3dtiles_properties:
+
+3D Tiles ဂုဏ်သတ္တိများ (3D Tiles Properties)
+============================================================================
+
+3D tiles :guilabel:`Layer Properties` dialog တွင် အောက်ပါကဏ္ဍများပါဝင်ပါသည်-
+
+.. list-table::
+
+   * - |metadata| :ref:`Information <3dtilesinformationmenu>`
+     - |system| :ref:`Source <3dtilessourcemenu>`
+     - |symbology| :ref:`Symbology <3dtilessymbologymenu>`:sup:`[1]`
+   * - |3d| :ref:`3D View <3dtiles3dviewmenu>`:sup:`[1]`
+     - |rendering| :ref:`Rendering <3dtilesrenderingmenu>`
+     - |elevationscale| :ref:`Elevation <3dtileselevationmenu>`:sup:`[1]`
+   * - |editMetadata| :ref:`Metadata <3dtilesmetadatamenu>`
+     -
+     -
+
+
+:sup:`[1]` သည် :ref:`Layer styling panel <layer_styling_panel>` တွင်လည်း ရရှိနိုင်ပါသည်။
+
+
+.. _3dtilesinformationmenu:
+
+သတင်းအချက်အလက်ဂုဏ်သတ္တိများ (Information Properties)
+----------------------------------------------------------------------------------------
+
+:guilabel:`Information` tab သည် ဖတ်ရှုရုံသာ ဖြစ်ပြီး လက်ရှိအလွှာ၏ အကျဉ်းချုပ်အချက်အလက်နှင့် 
+Metadata ကို ခပ်မြန်မြန်ကြည့်ရှုနိုင်သည့် စိတ်ဝင်စားစရာနေရာတစ်ခုဖြစ်ပါသည်။ ကြည့်ရှုနိုင်သည့် အချက်အလက်များမှာ-
+
+* အလွှာဖန်တီးသူပေါ်မူတည်ပြီး - အမည်၊ URI၊ အရင်းအမြစ်ပုံစံနှင့် ဖိုင်လမ်းကြောင်း၊ Zoom-levels အရေအတွက်
+* စိတ်ကြိုက်ဂုဏ်သတ္တိများ- active project ထဲတွင် layer အကြောင်း အချက်အလက်အပိုများ သိမ်းဆည်းလေ့ရှိပါသည်။ နောက်ထပ်ဂုဏ်သတ္တိများကို PyQGIS ၊ အထူးသဖြင့် :pyqgis:`setCustomProperty() <qgis.core.QgsMapLayer.setCustomProperty>` နည်းလမ်းများမှ သီးခြားစီ ဖန်တီးနိုင်ပြီး စီမံခန့်ခွဲနိုင်ပါသည်။
+* Coordinate Reference System - အမည်၊ ယူနစ်များ၊ နည်းလမ်း၊ တိကျမှု၊ အကိုးအကား (ပုံသေအငြိမ်ဖြစ်သော (static) သို့မဟုတ် ပြောင်းလဲနိုင်သော (dynamic) ကိုဆိုလိုပါသည်)
+* :ref:`ဖြည့်သွင်းထားသည့် metadata <vectortilesmetadatamenu>` မှ ထုတ်ယူထားသော - အသုံးပြုခွင့်၊ အကျယ်အဝန်း၊ အချိတ်အဆက်များ (links)၊ အဆက်အသွယ်၊ data ၏သမိုင်းကြောင်း၊ အစရှိသည်....
+
+.. _3dtilessourcemenu:
+
+ရင်းမြစ်ဆိုင်ရာ ဂုဏ်သတ္တိများ (Source Properties)
+-------------------------------------------------------------------------------------
+
+|system| :guilabel:`Source` tab တွင် ရွေးချယ်ထားသော 3D tile နှင့်ပတ်သက်သော အခြေခံသတင်းအချက်အလက်များကို ပြသပေးပါသည်၊ အောက်ပါတို့ပါဝင်ပါသည်-
+
+* :guilabel:`Layers Panel` ထဲတွင် ပြသမည့် :guilabel:`Layer name` ၊
+* :guilabel:`Coordinate Reference System` - layer ၏ :ref:`Coordinate Reference System (CRS) <layer_crs>` ကိုပြသပေးပါသည်။ Drop-down စာရင်းထဲတွင် လတ်တလော အသုံးပြုခဲ့သော CRS ကို ရွေးချယ်နိုင်ခြင်းဖြင့် သို့မဟုတ် |setProjection| :sup:`Select CRS` ခလုတ်ကို နှိပ်ခြင်းဖြင့် layer ၏ CRS ကိုပြောင်းလဲပေးနိုင်ပါသည် (:ref:`crs_selector` တွင်ကြည့်ပါ)။ Layer CRS မှားယွင်းနေမှသာ သို့မဟုတ် CRS သတ်မှတ်ထားခြင်းမရှိမှသာ ဤလုပ်ငန်းစဉ်ကို အသုံးပြုပါ။
+
+.. _3dtilessymbologymenu:
+
+သင်္ကေတ ဂုဏ်သတ္တိများ (Symbology Properties)
+--------------------------------------------------------------------------------
+
+.. _figure_3d_tiles_symbology:
+
+.. figure:: img/3d_tiles_symbology.png
+   :align: center
+
+   3D Tile Layer Symbology
+
+Default အားဖြင့် texture အသုံးပြုပြီး layer ကိုစတိုင်ပြုလုပ်ပါသည်၊ သို့သော် scene ၏နောက်ကွယ်ရှိ wirefram mesh ကိုကြည့်ရှုနိုင်ရန် drop-down menu ထဲရှိ :guilabel:`Wireframe` ကိုရွေးချယ်ပြီး ၎င်းစတိုင်ကို ပြောင်းလဲပေးနိုင်ပါသည်။ ထို့အပြင် vector polygon များနှင့်ဆင်တူသော mesh fill နှင့် line သင်္ကေတများကိုလည်း ပြောင်းလဲပေးနိုင်ပါသည်။ |checkbox| :guilabel:`Use texture colors` ကို အမှန်ခြစ်ပါက mesh element တစ်ခုချင်းကို texture အပြည့်အစုံ၏ ပျမ်းမျှတန်ဖိုးဖြင့် ပုံဖော်ပြသပေးပါလိမ့်မည်။ ဤနည်းလမ်းသည် ကြီးမားသော dataset များနှင့်လုပ်ဆောင်ပြီး data ကို မြန်မြန်ခြုံငုံကြည့်ရှုလိုပါက ကောင်းမွန်သောရွေးချယ်စရာတစ်ခုဖြစ်ပါသည်။
+
+.. _figure_3d_tiles_textured_and_wireframe:
+
+.. figure:: img/3d_tiles_textured_and_wireframe.png
+   :align: center
+
+   3D Tiles - textured နှင့် wireframe 
+
+Data ကိုကြည့်ရှုရန် |new3DMap| :guilabel:`New 3D map view` ကိုဖွင့်နိုင်ပါသည်။
+
+.. _figure_3d_tiles_map_view:
+
+.. figure:: img/3d_tiles_map_view.png
+   :align: center
+
+   3D Map View  
+
+:guilabel:`Symbology` tab တွင် layer ၏ feature များအားလုံးပေါ်တွင် အမြဲသက်ရောက်မည့် ရွေးချယ်စရာအချို့ကိုလည်း သတ်မှတ်ပေးနိုင်ပါသည်-
+
+* :guilabel:`Maximum error` (အများဆုံးအမှား) - ဤ parameter သည် 3D model ထဲတွင် ပြသသော အသေးစိတ် level ကို ဆုံးဖြတ်ပေးပါသည်။ Point cloud နှင့်အလားတူပင် 3D tile များတွင် ပုံဖော်ပြသခြင်းအတွက် လိုအပ်သည်ထက်ပိုသော အချက်အလက်များ ပိုမိုပါဝင်လေ့ရှိပါသည်။ ဤ setting ကို ချိန်ညှိခြင်းဖြင့် ပြသခြင်း သိပ်သည်းမှု (display density) နှင့် ပုံဖော်ပြသမှုနှုန်း (rendering speed) အကြား မျှခြေကို ထိန်းချုပ်နိုင်ပါသည်။ တန်ဖိုးအကြီးတစ်ခု (ဥပမာ- 5 mm) သည် element များအကြား သိသာသော gap များရှိစေနိုင်ပြီး တန်ဖိုးအသေးတစ်ခု (ဥပမာ- 0.1 mm) သည် အသေးစိတ်အချက်အလက်အများအပြားကို ပုံဖော်ပြသပေးကာ rendering process ကို နှေးကွေးသွားစေနိုင်ပါသည်။ သင်၏ သီးသန့်လိုအပ်ချက်များအတိုင်း setting တွင် မတူညီသော ယူနစ်များကို ရွေးချယ်ပေးနိုင်ပါသည်။
+* :guilabel:`Opacity` (အလင်းပိတ်နှုန်း) - Map canvas ထဲရှိ အောက်တွင်ရှိနေသော layer ကို မြင်ရစေရန် ဒီ tool ကို အသုံးပြုနိုင်ပါသည်။ မိမိကြည့်လိုသော မြင်ရနိုင်မှု အတိုင်းအတာအထိ slider ကို ရွှေ့ကြည့်ပါ။ မြင်ရနိုင်စွမ်း ရာခိုင်နှုန်းအတိအကျ သတ်မှတ်ပေးလိုလျှင် slider ၏ဘေးရှိ menu တွင် သတ်မှတ်ပေးနိုင်ပါသည်။ 
+* :guilabel:`Blending mode` (ရောစပ်ခြင်း) - ဤ tool ကိုအသုံးပြုပြီး အထူး rendering effect များကိုလုပ်ဆောင်နိုင်ပါသည်။ အထက်နှင့်အောက် ထပ်နေသော layer များ၏ pixel များကို :ref:`blend-modes` တွင်ဖော်ပြထားသော setting များဖြင့် ရောစပ်လိုက်ပါသည်။
+
+.. _3dtiles3dviewmenu:
+
+3D မြင်ကွင်းဂုဏ်သတ္တိများ (3D View Properties)
+------------------------------------------------------------------------------------------
+
+* :guilabel:`Maximum screen space error` သည် terrain tile များကို ပိုမိုအသေးစိတ်သောအရာများဖြင့် နေရာလဲလှယ်ရန်အတွက် threshold (သတ်မှတ်ချက်) ကိုဆုံးဖြတ်ပေးပါသည် (အပြန်အလှန်အားဖြင့် ပိုမိုအသေးစိတ်သောအရာများကို terrain tile များဖြင့် နေရာလဲလှယ်ခြင်း) - ဆိုလိုသည်မှာ 3D မြင်ကွင်းသည် အရည်အသွေးမြင့် tile များကို မည်မျှကြာကြာ အသုံးပြုမည်ကို ဆုံးဖြတ်ပေးပါသည်။ နံပါတ် အနိမ့်သည် မြင်ကွင်းတွင် ပိုမိုအသေးစိတ်ပြသပြီး rendering ကိုပိုမိုရှုပ်ထွေးလာစေပါသည်။
+
+* |unchecked| :guilabel:`Show bounding boxes` သည် terrain tile များ၏ 3D လေးမျက်နှာအကျယ်အဝန်းနယ်များ (bounding box) ကို ပြသပေးပါသည် (terrain ပြဿနာများကို ဖြေရှင်းခြင်းအတွက် အသုံးဝင်ပါသည်)။
+
+
+.. _3dtilesrenderingmenu:
+
+ပုံဖော်ပြသခြင်းဆိုင်ရာ ဂုဏ်သတ္တိများ (Rendering Properties)
+----------------------------------------------------------------------------------------------------
+
+:guilabel:`Scale dependent visibility` (စကေးပေါ်မူတည်သည့် မြင်ရနိုင်မှု) အောက်တွင် :guilabel:`အများဆုံး (သူ့အောက်ဆိုရင် မြင်ရ)` နှင့် :guilabel:`အနည်းဆုံး (သူ့အောက်ဆိုရင် မမြင်ရ)` စကေးကို သတ်မှတ်ပေးနိုင်ပါသည်။ ၎င်းသည် mesh element များကိုမြင်ရနိုင်သော စကေးအပိုင်းအခြားကို သတ်မှတ်ပေးမည်ဖြစ်သည်။ ထိုစကေးအပိုင်းအခြားအတွင်း မဝင်လျှင် layer များကို မြင်ရမည်မဟုတ်ပါ။ 
+|mapIdentification| :sup:`Set to current canvas scale` (လက်ရှိမြေပုံ canvas စကေးအတိုင်းသတ်မှတ်ခြင်း) ခလုတ်ကိုနှိပ်ပြီး လက်ရှိမြေပုံ canvas စကေးကို မြင်ရနိုင်သည့် စကေးအပိုင်းအခြားအဖြစ်သတ်မှတ်ပေးနိုင်ပါသည်။ ပိုမိုသိရှိလိုသည်များအတွက် :ref:`label_scaledepend` တွင် ကြည့်ရှုပါ။
+
+.. _3dtileselevationmenu:
+
+မြေပြင်အနိမ့်အမြင့်ဆိုင်ရာ ဂုဏ်သတ္တိများ (Elevation Properties)
+--------------------------------------------------------------------------------
+
+|elevationscale| :guilabel:`Elevation` tab တွင် :ref:`3D map view <label_3dmapview>` တစ်ခုအတွင်း layer elevation ဂုဏ်သတ္တိများကို ထိန်းချုပ်နိုင်ရန် ရွေးချယ်စရာများပါဝင်ပါသည်။ အထူးသဖြင့် အောက်ပါကို သတ်မှတ်ပေးနိုင်ပါသည်-
+
+* :guilabel:`Elevation Surface` - 3D layer vertex များ၏ Z တန်ဖိုးများကို terrain elevation (မြေမျက်နှာသွင်ပြင် အနိမ့်အမြင့်) အဖြစ် မည်ကဲ့သို့ အဓိပ္ပါယ်ဖော်သင့်သည်ကို ဆုံးဖြတ်ပေးပါသည်။ :guilabel:`Scale` factor တစ်ခု နှင့် :guilabel:`Offset` တစ်ခုကို အသုံးပြုပေးနိုင်ပါသည်။
+
+.. index:: Metadata, Metadata editor, Keyword
+.. _3dtilesmetadatamenu:
+
+Metadata ဂုဏ်သတ္တိများ (Metadata Properties)
+-----------------------------------------------------------------------------------------------
+
+|editMetadata| :guilabel:`Metadata` tab တွင် layer နဲ့ပတ်သက်သည့် Metadata report ကို ဖန်တီးခြင်းနှင့် ပြင်ဆင်ခြင်းများ လုပ်ဆောင်နိုင်ပါသည်။ 
+ပိုမိုသိရှိလိုသည်များအတွက် :ref:`metadatamenu` တွင် ကြည့်ရှုပါ။
+
+
+
+.. Substitutions definitions - AVOID EDITING PAST THIS LINE
+   This will be automatically updated by the find_set_subst.py script.
+   If you need to create a new substitution manually,
+   please add it also to the substitutions.txt file in the
+   source folder.
+
+.. |3d| image:: /static/common/3d.png
+   :width: 1.5em
+.. |checkbox| image:: /static/common/checkbox.png
+   :width: 1.3em
+.. |editMetadata| image:: /static/common/editmetadata.png
+   :width: 1.2em
+.. |elevationscale| image:: /static/common/elevationscale.png
+   :width: 1.5em
+.. |mapIdentification| image:: /static/common/mActionMapIdentification.png
+   :width: 1.5em
+.. |metadata| image:: /static/common/metadata.png
+   :width: 1.5em
+.. |new3DMap| image:: /static/common/mActionNew3DMap.png
+   :width: 1.5em
+.. |rendering| image:: /static/common/rendering.png
+   :width: 1.5em
+.. |setProjection| image:: /static/common/mActionSetProjection.png
+   :width: 1.5em
+.. |symbology| image:: /static/common/symbology.png
+   :width: 2em
+.. |system| image:: /static/common/system.png
+   :width: 1.5em
+.. |unchecked| image:: /static/common/unchecked.png
+   :width: 1.3em

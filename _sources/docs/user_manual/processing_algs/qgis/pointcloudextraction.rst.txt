@@ -1,0 +1,317 @@
+Point Cloud ထဲမှ ဆွဲထုတ်ခြင်း (Point Cloud Extraction)
+========================================================================================
+
+.. only:: html
+
+   .. contents::
+      :local:
+      :depth: 1
+
+.. note:: QGIS သည် PDAL library version 2.5.0 သို့မဟုတ် version အသစ်ကို အသုံးပြုမှသာ ဤ algorithm များကို ရရှိနိုင်မည်ဖြစ်သည်။
+
+.. _pdalboundary:
+
+နယ်နိမိတ် (Boundary)
+--------------------------------
+
+Point cloud layer နယ်နိမိတ်ပါဝင်သော polygon ဖိုင်တစ်ခုကို ထုတ်ပေးပါသည်။ ၎င်းတွင် အပေါက်များ ပါဝင်နိုင်ပြီး multi-part (အစိတ်အပိုင်းများစွာပါသော) polygon တစ်ခုဖြစ်နိုင်ပါသည်။
+
+.. figure:: img/point_cloud_boundary.png
+   :align: center
+
+   Input point cloud layer တစ်ခုမှ မြင့်သော vegetation နှင့် အဆောက်အဦ polygon များ ထုတ်ယူခြင်း
+
+သတ်မှတ်ချက်များ (Parameters)
+..................................................
+
+အခြေခံသတ်မှတ်ချက်များ (Basic parameters)
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+.. list-table::
+   :header-rows: 1
+   :widths: 20 20 20 40
+
+   * - အညွှန်း
+     - အမည်
+     - အမျိုးအစား
+     - ရှင်းလင်းဖော်ပြချက်
+   * - **Input layer** **(ထည့်သွင်းအသုံးပြုသော layer)**
+     - ``INPUT``
+     - [point cloud]
+     - နယ်နိမိတ်တွက်ချက်မည့် input point cloud layer
+   * - **Resolution of cells used to calculate boundary** **(နယ်နိမိတ်တွက်ချက်ရန်အသုံးပြုသည့် cell များ၏ resolution)**
+
+       Optional (မဖြစ်မနေလုပ်ဆောင်ရန် မလိုအပ်ပါ)
+     - ``RESOLUTION``
+     - [number]
+     - နယ်နိမိတ်တွက်ချက်ရန်အသုံးပြုသည့် cell များ၏ resolution
+   * - **Minimal number of points in a cell to consider cell occupied** **(Cell တစ်ခုထဲရှိ အနည်းဆုံး point အရေအတွက်)**
+
+       Optional (မဖြစ်မနေလုပ်ဆောင်ရန် မလိုအပ်ပါ)
+     - ``THRESHOLD``
+     - [number]
+     - Cell တစ်ခုထဲရှိ အနည်းဆုံး point အရေအတွက်
+   * - **Boundary**
+     - ``OUTPUT``
+     - [vector: polygon]
+
+       Default: ``[Save to temporary file]``
+     - Output အနေဖြင့်အသုံးပြုမည့် point cloud ဖိုင်ကို သတ်မှတ်ပါ။ အောက်ပါတို့မှ တစ်ခုခုဖြစ်ပါသည်-
+
+       .. include:: ../algs_include.rst
+          :start-after: **file_output_types**
+          :end-before: **end_file_output_types**
+
+အဆင့်မြင့်သတ်မှတ်ချက်များ (Advanced parameters)
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+.. list-table::
+   :header-rows: 1
+   :widths: 20 20 20 40
+
+   * - အညွှန်း
+     - အမည်
+     - အမျိုးအစား
+     - ရှင်းလင်းဖော်ပြချက်
+   * - **Filter expression**
+
+       Optional (မဖြစ်မနေလုပ်ဆောင်ရန်မလိုပါ)
+     - ``FILTER_EXPRESSION``
+     - [expression]
+     - Point cloud data ထဲရှိ feature များအစုတစ်ခုကို ရွေးချယ်ရန်အတွက် :ref:`PDAL expression <pdal_expressions>` တစ်ခု။
+   * - **Cropping extent** **(ဖြတ်ထုတ်မည့် နယ်ပယ်အကျယ်အဝန်း)**
+
+       Optional (မဖြစ်မနေလုပ်ဆောင်ရန်မလိုပါ)
+     - ``FILTER_EXTENT``
+     - [extent]
+     - Point cloud data ထဲရှိ feature များအစုတစ်ခုကို ရွေးချယ်ရန်အတွက် မြေပုံ နယ်ပယ်အကျယ်အဝန်း (extent)။
+
+       .. include:: ../algs_include.rst
+          :start-after: **extent_options**
+          :end-before: **end_extent_options**
+
+ရလာဒ်များ (Outputs)
+...................................
+
+.. list-table::
+   :header-rows: 1
+   :widths: 20 20 20 40
+
+   * - အညွှန်း
+     - အမည်
+     - အမျိုးအစား
+     - ရှင်းလင်းဖော်ပြချက်
+   * - **Boundary**
+     - ``OUTPUT``
+     - [vector: polygon]
+     - Point cloud နယ်နိမိတ်ပါဝင်သော output polygon vector layer ။ လက်ရှိ ရရှိနိုင်သော format မှ :file:`.GPKG` ဖြစ်ပါသည်။
+
+Python code
+...........
+
+**Algorithm ID**: ``pdal:boundary``
+
+.. include:: ../algs_include.rst
+  :start-after: **algorithm_code_section**
+  :end-before: **end_algorithm_code_section**
+
+
+.. _pdaldensity:
+
+သိပ်သည်းမှု (Density)
+----------------------------
+
+Raster cell တစ်ခုချင်းစီအတွင်းရှိ point အရေအတွက်ပေါ်မူတည်သော raster ဖိုင်တစ်ခုကိုထုတ်ပေးပါသည်- point cloud dataset များ၏ အရည်အသွေးစစ်ဆေးခြင်းအတွက် အသုံးဝင်ပါသည်။
+
+.. figure:: img/point_cloud_density.png
+   :align: center
+
+   Raster တစ်ခုအနေဖြင့် Point density (2x2 မီတာတစ်ခုစီရှိ point အရေအတွက်)
+
+သတ်မှတ်ချက်များ (Parameters)
+........................................
+
+အခြေခံသတ်မှတ်ချက်များ (Basic parameters)
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+.. list-table::
+   :header-rows: 1
+   :widths: 20 20 20 40
+
+   * - အညွှန်း
+     - အမည်
+     - အမျိုးအစား
+     - ရှင်းလင်းဖော်ပြချက်
+   * - **Input layer** **(ထည့်သွင်းအသုံးပြုသော layer)**
+     - ``INPUT``
+     - [point cloud]
+     - Exprot ထုတ်ယူမည့် input point cloud layer
+   * - **Resolution of the density raster** **(သိပ်သည်းမှုပြ raster ၏ ကြည်လင်ပြတ်သားမှု)**
+     - ``RESOLUTION``
+     - [number]
+
+       Default: 1.0
+     - Output raster ၏ Cell အရွယ်အစား
+   * - **Tile size for parallel runs** **(အပြိုင် run ခြင်းများအတွက် Tile အရွယ်အစား)**
+     - ``TILE_SIZE``
+     - [number]
+
+       Default: 1000
+     - Parallel run ခြင်းများအတွက် data ကို ပိုင်းဖြတ်မည့် tile အရွယ်အစား
+   * - **Density** **(သိပ်သည်းမှု)**
+     - ``OUTPUT``
+     - [raster]
+
+       Default: ``[Save to temporary file]``
+     - Data ကို export ထုတ်ယူမည့် raster ဖိုင်ကို သတ်မှတ်ပါ။ အောက်ပါတို့ထဲမှ တစ်ခုခုဖြစ်ပါသည်-
+
+       .. include:: ../algs_include.rst
+          :start-after: **file_output_types**
+          :end-before: **end_file_output_types**
+
+အဆင့်မြင့်သတ်မှတ်ချက်များ (Advanced parameters)
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+.. list-table::
+   :header-rows: 1
+   :widths: 20 20 20 40
+
+   * - အညွှန်း
+     - အမည်
+     - အမျိုးအစား
+     - ရှင်းလင်းဖော်ပြချက်
+   * - **Filter expression**
+
+       Optional (မဖြစ်မနေလုပ်ဆောင်ရန်မလိုပါ)
+     - ``FILTER_EXPRESSION``
+     - [expression]
+     - Point cloud data ထဲရှိ feature များအစုတစ်ခုကို ရွေးချယ်ရန်အတွက် :ref:`PDAL expression <pdal_expressions>` တစ်ခု။
+   * - **Cropping extent** **(ဖြတ်ထုတ်မည့် နယ်ပယ်အကျယ်အဝန်း)**
+
+       Optional (မဖြစ်မနေလုပ်ဆောင်ရန်မလိုပါ)
+     - ``FILTER_EXTENT``
+     - [extent]
+     - Point cloud data ထဲရှိ feature များအစုတစ်ခုကို ရွေးချယ်ရန်အတွက် မြေပုံ နယ်ပယ်အကျယ်အဝန်း (extent)။
+
+       .. include:: ../algs_include.rst
+          :start-after: **extent_options**
+          :end-before: **end_extent_options**
+
+   * - **X origin of a tile for parallel runs** **(အပြိုင် run ခြင်းများအတွက် tile တစ်ခု၏ X မူလအစ)**
+
+       Optional (မဖြစ်မနေလုပ်ဆောင်ရန်မလိုပါ)
+     - ``ORIGIN_X``
+     - [number]
+     -
+   * - **Y origin of a tile for parallel runs** **(အပြိုင် run ခြင်းများအတွက် tile တစ်ခု၏ Y မူလအစ)**
+
+       Optional (မဖြစ်မနေလုပ်ဆောင်ရန်မလိုပါ)
+     - ``ORIGIN_Y``
+     - [number]
+     -
+
+ရလာဒ်များ (Outputs)
+............................
+
+.. list-table::
+   :header-rows: 1
+   :widths: 20 20 20 40
+
+   * - အညွှန်း
+     - အမည်
+     - အမျိုးအစား
+     - ရှင်းလင်းဖော်ပြချက်
+   * - **Density**
+     - ``OUTPUT``
+     - [raster]
+     - Cell တစ်ခုချင်းစီအတွင်းရှိ point အရေအတွက်များ ပါဝင်သော output raster layer ။ လက်ရှိ ရရှိနိုင်သော format မှာ :file:`.TIF` ဖြစ်ပါသည်။
+
+
+Python code
+...........
+
+**Algorithm ID**: ``pdal:density``
+
+.. include:: ../algs_include.rst
+  :start-after: **algorithm_code_section**
+  :end-before: **end_algorithm_code_section**
+
+.. _pdalfilter:
+
+စစ်ထုတ်ခြင်း (Filter)
+------------------------------
+
+PDAL expression နှင့်ကိုက်ညီသော သို့မဟုတ် cropping rectangle အတွင်းကျရောက်သော input point cloud မှ point များကို ဆွဲထုတ်ပေးပါသည်။
+
+.. figure:: img/point_cloud_filter.png
+   :align: center
+
+   Input point cloud layer တစ်ခုမှ မြင့်သော vegeataion class ကို filter လုပ်ခြင်း
+
+သတ်မှတ်ချက်များ (Parameters)
+..................................................
+
+.. list-table::
+   :header-rows: 1
+   :widths: 20 20 20 40
+
+   * - အညွှန်း
+     - အမည်
+     - အမျိုးအစား
+     - ရှင်းလင်းဖော်ပြချက်
+   * - **Input layer** **(ထည့်သွင်းအသုံးပြုသော layer)**
+     - ``INPUT``
+     - [point cloud]
+     - Export ထုတ်ယူမည့် input point cloud layer
+   * - **Filter expression**
+
+       Optional (မဖြစ်မနေလုပ်ဆောင်ရန်မလိုပါ)
+     - ``FILTER_EXPRESSION``
+     - [expression]
+     - Point cloud data ထဲရှိ feature များအစုတစ်ခုကို ရွေးချယ်ရန်အတွက် :ref:`PDAL expression <pdal_expressions>` တစ်ခု။
+   * - **Cropping extent** **(ဖြတ်ထုတ်မည့် နယ်ပယ်အကျယ်အဝန်း)**
+
+       Optional (မဖြစ်မနေလုပ်ဆောင်ရန်မလိုပါ)
+     - ``FILTER_EXTENT``
+     - [extent]
+     - Point cloud data ထဲရှိ feature များအစုတစ်ခုကို ရွေးချယ်ရန်အတွက် မြေပုံ နယ်ပယ်အကျယ်အဝန်း (extent)။
+
+       .. include:: ../algs_include.rst
+          :start-after: **extent_options**
+          :end-before: **end_extent_options**
+
+   * - **Filtered**
+     - ``OUTPUT``
+     - [point cloud]
+
+       Default: ``[Save to temporary file]``
+     - Data များကို export ထုတ်ယူရန် point cloud ဖိုင်ကိုသတ်မှတ်ပါ။ အောက်ပါတို့ထဲမှ တစ်ခုခုဖြစ်ပါသည်-
+
+       .. include:: ../algs_include.rst
+          :start-after: **file_output_types**
+          :end-before: **end_file_output_types**
+
+ရလာဒ်များ (Outputs)
+............................
+
+.. list-table::
+   :header-rows: 1
+   :widths: 20 20 20 40
+
+   * - အညွှန်း
+     - အမည်
+     - အမျိုးအစား
+     - ရှင်းလင်းဖော်ပြချက်
+   * - **Filtered**
+     - ``OUTPUT``
+     - [point cloud]
+     - Input point cloud layer ၏ filter လုပ်ထားသော feature များပါဝင်သည့် output point cloud layer ။ လက်ရှိ ရရှိနိုင်သော format များမှာ :file:`.LAS` ၊ :file:`.LAZ` ၊ :file:`.COPC.LAZ` နှင့် :file:`.VPC` တို့ဖြစ်ပါသည်။
+
+Python code
+...........
+
+**Algorithm ID**: ``pdal:filter``
+
+.. include:: ../algs_include.rst
+  :start-after: **algorithm_code_section**
+  :end-before: **end_algorithm_code_section**

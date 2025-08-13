@@ -1,0 +1,241 @@
+File ကိရိယာများ (File tools)
+=============================================
+
+.. only:: html
+
+   .. contents::
+      :local:
+      :depth: 1
+
+.. _qgisfiledownloader:
+
+HTTP(S) မှတဆင့် ဖိုင်ကို ဒေါင်းလုဒ် ပြုလုပ်ခြင်း (Download file via HTTP(S))
+------------------------------------------------------------------------------------
+
+Downloads a URL to the file system with an HTTP(S) GET or POST request.
+HTTP(S) GET သို့မဟုတ် POST request တစ်ခုဖြင့် URL တစ်ခုကို ဖိုင်စနစ်ထဲသို့ download ပြုလုပ်ပေးပါသည်။
+
+သတ်မှတ်ချက်များ (Parameters)
+........................................
+
+အခြေခံသတ်မှတ်ချက်များ (Basic parameters)
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+.. list-table::
+   :header-rows: 1
+   :widths: 20 20 20 40
+
+   * - အညွှန်း
+     - အမည်
+     - အမျိုးအစား
+     - ရှင်းလင်းဖော်ပြချက်
+   * - **URL**
+     - ``URL``
+     - [string]
+     - Download ပြုလုပ်မည့် file ၏ URL
+   * - **File destination** (**File တည်နေရာ**)
+     - ``OUTPUT``
+     - [string]
+
+       Default: ``[Save to temporary file] ([ယာယီ file အဖြစ်သိမ်းဆည်းပါ])``  
+     - File တည်နေရာ သီးခြားသတ်မှတ်ချက်။ အောက်ပါတို့ထဲမှ တစ်ခုခုဖြစ်ပါသည်-
+
+       .. include:: ../algs_include.rst
+          :start-after: **file_output_types**
+          :end-before: **end_file_output_types**
+
+အဆင့်မြင့်သတ်မှတ်ချက်များ (Advanced parameters)
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+.. list-table::
+   :header-rows: 1
+   :widths: 20 20 20 40
+
+   * - အညွှန်း
+     - အမည်
+     - အမျိုးအစား
+     - ရှင်းလင်းဖော်ပြချက်
+   * - **Method** (**နည်းလမ်း**)
+     - ``METHOD``
+     - [enumeration]
+
+       Default: 0
+     - တောင်းဆိုမှုအတွက် အသုံးပြုမည့် HTTP နည်းလမ်း။ ရွေးချယ်စရာများမှာ-
+       * 0 --- GET
+       * 1 --- POST
+   * - **Data**
+
+       Optional
+     - ``DATA``
+     - [string]
+     - တောင်းဆိုမှုသည် POST တစ်ခုဖြစ်လျှင် ပေါင်းထည့်မည့် data
+
+ရလာဒ်များ (Outputs)
+............................
+
+.. list-table::
+   :header-rows: 1
+   :widths: 20 20 20 40
+
+   * - အညွှန်း
+     - အမည်
+     - အမျိုးအစား
+     - ရှင်းလင်းဖော်ပြချက်
+   * - **File destination**
+     - ``OUTPUT``
+     - [string]
+     - Download ပြုလုပ်ပြီးသော file ၏တည်နေရာ
+
+Python code
+...........
+
+**Algorithm ID**: ``qgis:filedownloader``
+
+.. include:: ../algs_include.rst
+  :start-after: **algorithm_code_section**
+  :end-before: **end_algorithm_code_section**
+
+
+.. _qgishttprequest:
+
+HTTP(S) POST/GET request
+------------------------
+
+HTTP(S) POST/GET request တစ်ခုကိုလုပ်ဆောင်ပေးပြီး HTTP status code နှင့် အကြောင်းပြန်သော data ကို ပြန်ထုတ်ပေးပါသည်။ Error (အမှား) တစ်ခုဖြစ်ပွားပါက error code နှင့် message (စာတို) ကိုပြန်ထုတ်ပေးပါလိမ့်မည်။ Optional အနေဖြင့် ရလာဒ်ကို ကွန်ပျူတာ disk ပေါ်ရှိ ဖိုင်တစ်ခုတွင် ရေးသားနိုင်ပါသည်။ Default အားဖြင့် algorithm သည် error များကို သတိပေးပါလိမ့်မည်။ Optional အနေဖြင့် HTTP error များကို failure (မအောင်မြင်မှု) များအနေဖြင့် သတ်မှတ်ရန် algorithm ကို သတ်မှတ်ပေးနိုင်ပါသည်။
+
+သတ်မှတ်ချက်များ (Parameters)
+........................................
+
+.. list-table::
+   :header-rows: 1
+   :widths: 20 20 20 40
+
+   * - အညွှန်း
+     - အမည်
+     - အမျိုးအစား
+     - ရှင်းလင်းဖော်ပြချက်
+   * - **URL or file path** **(URL သို့မဟုတ် ဖိုင်လမ်းကြောင်း)**
+     - ``URL``
+     - [string]
+     - ဖွင့်မည့်ဖိုင်၏ URL သို့မဟုတ် ဖိုင်လမ်းကြောင်း
+   * - **Method** **(နည်းလမ်း)**
+     - ``METHOD``
+     - [enumeration]
+
+       Default: 0
+     - Request အတွက်အသုံးပြုမည့် HTTP နည်းလမ်း။ ရွေးချယ်စရာများမှာ-
+
+       * 0 --- GET
+       * 1 --- POST
+   * - **POST Data**
+
+       Optional (မဖြစ်မနေလုပ်ဆောင်ရန်မလိုပါ)
+     - ``DATA``
+     - [string]
+
+     - Request သည် POST ဖြစ်ပါက body ထဲတွင် ထည့်သွင်းမည့် data
+   * - **Authentication**
+
+       Optional (မဖြစ်မနေလုပ်ဆောင်ရန်မလိုပါ)
+     - ``AUTH_CONFIG``
+     - [authconfig]
+
+       Default: No authentication
+     - အထောက်အထားစိစစ်ခြင်း သတ်မှတ်မှုတစ်ခု
+   * - **Consider HTTP errors as failures** **(HTTP error များကို failure များအနေဖြင့် မှတ်ယူခြင်း)**
+     - ``FAIL_ON_ERROR``
+     - [boolean]
+
+       Default: False
+     - True ဟုသတ်မှတ်ထားပါက HTTP error တစ်ခုတွေ့လျှင် algorithm သည် လုပ်ဆောင်မှုမအောင်မြင်ဖြစ်ပါလိမ့်မည်။
+   * - **File destination**
+
+       Optional (မဖြစ်မနေလုပ်ဆောင်ရန်မလိုပါ)
+     - ``OUTPUT``
+     - [string]
+
+       Default: ``[Skip Output]``
+     - ရလာဒ်ကို စာသားတစ်ခုအနေဖြင့် ပြန်ထုတ်ပေးမည့်အစား ဖိုင်တစ်ခုတွင် ရေးသားနိုင်ပါသည်။ ဖိုင်တည်နေရာသတ်မှတ်ချက်ဖြစ်ပြီး အောက်ပါတို့ထဲမှတစ်ခုခုဖြစ်ပါသည်-
+
+       .. include:: ../algs_include.rst
+          :start-after: **file_output_types_skip**
+          :end-before: **end_file_output_types_skip**
+
+ရလာဒ်များ (Outputs)
+............................
+
+.. list-table::
+   :header-rows: 1
+   :widths: 20 20 20 40
+
+   * - အညွှန်း
+     - အမည်
+     - အမျိုးအစား
+     - ရှင်းလင်းဖော်ပြချက်
+   * - **File destination**
+     - ``OUTPUT``
+     - [file]
+     - ပြန်ထုတ်ပေးသောရလာဒ်များပါဝင်သော ဒေါင်းလုဒ်ပြုလုပ်ထားသောဖိုင်
+   * - **HTTP Status**
+     - ``STATUS_CODE``
+     - [string]
+     - HTTP Status
+   * - **Network error code**
+     - ``ERROR_CODE``
+     - [string]
+     - လုပ်ဆောင်မှုမအောင်မြင်သောအခါပြသမည့် error code (404 HTTP Status တွင်ကဲ့သို့)
+   * - **Network error message**
+     - ``ERROR_MESSAGE``
+     - [string]
+     - လုပ်ဆောင်မှုမအောင်မြင်ပါက ပြသမည့် error message စာသားတစ်ခု
+   * - **Result data**
+     - ``RESULT_DATA``
+     - [string]
+     - လုပ်ဆောင်မှုအောင်မြင်ပါက ရလာဒ် data ပါဝင်သော စာသားတစ်ခု
+
+Python code
+...........
+
+**Algorithm ID**: ``native:httprequest``
+
+.. include:: ../algs_include.rst
+  :start-after: **algorithm_code_section**
+  :end-before: **end_algorithm_code_section**
+
+
+.. _qgisopenurl:
+
+ဖိုင် သို့မဟုတ် URL ကိုဖွင့်ခြင်း (Open file or URL)
+--------------------------------------------------------------------------------
+
+ဖိုင်များကို ၎င်းတို့၏ဆက်စပ် default application တွင် ဖွင့်ပေးပါသည်၊ သို့မဟုတ် URL များကို အသုံးပြုသူ၏ default web browser ထဲတွင် ဖွင့်ပေးပါသည်။
+
+သတ်မှတ်ချက်များ (Parameters)
+........................................
+
+.. list-table::
+   :header-rows: 1
+   :widths: 20 20 20 40
+
+   * - အညွှန်း
+     - အမည်
+     - အမျိုးအစား
+     - ရှင်းလင်းဖော်ပြချက်
+   * - **URL or file path**
+     - ``URL``
+     - [string]
+     - ဖွင့်မည့် URL သို့မဟုတ် ဖိုင်လမ်းကြောင်း
+
+ရလာဒ်များ (Outputs)
+............................
+
+Algorithm တွင် output မရှိပါ။
+
+Python code
+...........
+
+**Algorithm ID**: ``native:openurl``
+
+.. include:: ../algs_include.rst
+  :start-after: **algorithm_code_section**
+  :end-before: **end_algorithm_code_section**

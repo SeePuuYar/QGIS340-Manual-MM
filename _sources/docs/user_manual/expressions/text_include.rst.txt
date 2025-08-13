@@ -1,0 +1,21 @@
+:orphan:
+
+ထည့်သွင်းရန်အတွက် စာသားများ (Texts For Include)
+================================================
+
+.. functions_group_toc
+.. Used to display local TOC for expression functions groups
+  in columns within a collapsible widget, only on html build
+
+.. only:: html
+
+  .. admonition:: Function များစာရင်းကို ပြသပါ/ဖျောက်ထားပါ
+     :class: dropdown
+
+     .. only:: html
+
+      .. contents::
+         :local:
+         :class: toc_columns
+
+.. end_functions_group_toc

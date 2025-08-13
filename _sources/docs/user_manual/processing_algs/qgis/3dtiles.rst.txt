@@ -1,0 +1,146 @@
+3D Tile များ
+=====================
+
+.. only:: html
+
+   .. contents::
+      :local:
+      :depth: 1
+
+
+.. _qgisb3dmtogltf:
+
+B3DM မှ GLTF သို့ ပြောင်းလဲခြင်း (Convert B3DM to GLTF)
+--------------------------------------------------------------------------------
+
+ဖိုင်များကို :file:`.B3DM` format မှ :file:`.GLTF` သို့မဟုတ် :file:`.GLB` format သို့ပြောင်းလဲပေးပါသည်။
+
+သတ်မှတ်ချက်များ (Parameters)
+........................................
+
+.. list-table::
+   :header-rows: 1
+   :widths: 20 20 20 40
+   :class: longtable
+
+   * - အညွှန်း
+     - အမည်
+     - အမျိုးအစား
+     - ရှင်းလင်းဖော်ပြချက်
+   * - **Input B3DM**
+     - ``INPUT``
+     - [3D Tile]
+     - ပြောင်းလဲမည့် input ဖိုင်
+   * - **Output file**
+     - ``OUTPUT``
+     - [3D Tile]
+
+       Default: ``[Save to temporary file]``
+     - Output 3D ဖိုင်ကိုသတ်မှတ်ပါ။ အောက်ပါတို့ထဲမှ တစ်ခုခုဖြစ်ပါသည်-
+
+       .. include:: ../algs_include.rst
+          :start-after: **file_output_types**
+          :end-before: **end_file_output_types**
+
+ရလာဒ်များ (Outputs)
+...................................
+
+.. list-table::
+   :header-rows: 1
+   :widths: 20 20 20 40
+
+   * - အညွှန်း
+     - အမည်
+     - အမျိုးအစား
+     - ရှင်းလင်းဖော်ပြချက်
+   * - **Output file**
+     - ``OUTPUT``
+     - [3D Tile]
+     - :file:`.GLTF` format ဖြင့် output layer
+
+Python code
+...........
+
+**Algorithm ID**: ``native:b3dmtogltf``
+
+.. include:: ../algs_include.rst
+  :start-after: **algorithm_code_section**
+  :end-before: **end_algorithm_code_section**
+
+
+.. _qgisgltftovector:
+
+GLTF မှ vector feature များသို့ ပြောင်းလဲခြင်း (Convert GLTF to vector features)
+---------------------------------------------------------------------------------------------
+
+:file:`.GLTF` သို့မဟုတ် :file:`.GLB` ဖိုင်အကြောင်းအရာများကို စံ vector layer format များသို့ ပြောင်းလဲပေးပါသည်။
+
+သတ်မှတ်ချက်များ (Parameters)
+........................................
+
+.. list-table::
+   :header-rows: 1
+   :widths: 20 20 20 40
+   :class: longtable
+
+   * - အညွှန်း
+     - အမည်
+     - အမျိုးအစား
+     - ရှင်းလင်းဖော်ပြချက်
+   * - **Input GLTF**
+     - ``INPUT``
+     - [3D Tile]
+     - ပြောင်းလဲမည့် input ဖိုင်
+   * - **Output polygons**
+
+       Optional (မဖြစ်မနေလုပ်ဆောင်ရန် မလိုအပ်ပါ)
+     - ``OUTPUT_POLYGONS``
+     - [vector: polygon]
+
+       Default: ``[Create temporary layer]``
+     - Polygon feature များကိုသိမ်းဆည်းရန် output vector layer ကိုသတ်မှတ်ပါ။‌ ‌အောက်ပါတို့ထဲမှ တစ်ခုခုဖြစ်ပါသည်-
+
+       .. include:: ../algs_include.rst
+          :start-after: **layer_output_types_skip**
+          :end-before: **end_layer_output_types_skip**
+   * - **Output lines**
+
+       Optional (မဖြစ်မနေလုပ်ဆောင်ရန် မလိုအပ်ပါ)
+     - ``OUTPUT_LINES``
+     - [vector: line]
+
+       Default: ``[Create temporary layer]``
+     - Line feature များကိုသိမ်းဆည်းရန် output vector layer ကိုသတ်မှတ်ပါ။‌ ‌အောက်ပါတို့ထဲမှ တစ်ခုခုဖြစ်ပါသည်-
+
+       .. include:: ../algs_include.rst
+          :start-after: **layer_output_types_skip**
+          :end-before: **end_layer_output_types_skip**
+
+ရလာဒ်များ (Outputs)
+............................
+
+.. list-table::
+   :header-rows: 1
+   :widths: 20 20 20 40
+
+   * - အညွှန်း
+     - အမည်
+     - အမျိုးအစား
+     - ရှင်းလင်းဖော်ပြချက်
+   * - **Output polygons**
+     - ``OUTPUT_POLYGONS``
+     - [vector: polygon]
+     - Input layer ထဲရှိ polygon feature များကို သိမ်းဆည်းထားသော vector layer တစ်ခု။
+   * - **Output lines**
+     - ``OUTPUT_LINES``
+     - [vector: line]
+     - Input layer ထဲရှိ line feature များကို သိမ်းဆည်းထားသော vector layer တစ်ခု။
+
+Python code
+...........
+
+**Algorithm ID**: ``native:gltftovector``
+
+.. include:: ../algs_include.rst
+  :start-after: **algorithm_code_section**
+  :end-before: **end_algorithm_code_section**
